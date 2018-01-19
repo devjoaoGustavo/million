@@ -1,13 +1,17 @@
-# README
+# MILLION
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple personal expenses manager.
 
 Things you may want to cover:
 
 * Ruby version
+  - 2.5.0
+
+* Rails version
+  - 5.1.4
 
 * System dependencies
+  - Postgresql 9.4+
 
 * Configuration
 

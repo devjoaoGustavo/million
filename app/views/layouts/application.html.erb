@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Million</title>
-    <%= csrf_meta_tags %>
+    <head>
+        <title>Million</title>
+        <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    </head>
 
-  <body>
-    <%= yield %>
-  </body>
+    <body>
+        <div id="user_header">
+            <% if logged_in? %>
+                <%= link_to 'Logout', logout_path, method: :delete %>
+            <% else %>
+                <%= link_to 'Sign up', signup_path %>
+                <%= link_to 'Log in', login_path %>
+            <% end %>
+        </div>
+        <% if flash[:notice].present? %>
+            <div class="notice">
+                <%= content_tag :span, flash[:notice] %>
+            </div>
+        <% elsif flash[:alert].present? %>
+            <div class="alert">
+                <%= content_tag :span, flash[:alert] %>
+            </div>
+        <% end %>
+        <%= yield %>
+    </body>
 </html>

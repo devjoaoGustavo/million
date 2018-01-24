@@ -1,0 +1,16 @@
+<h1>Sign in</h1>
+
+<%= form_tag sessions_path do %>
+    <div class="field">
+        <%= label_tag :access %><br>
+        <%= text_field_tag :access, params[:access] %>
+    </div>
+
+    <div class="field">
+        <%= label_tag :password %><br>
+        <%= password_field_tag :password, params[:password] %>
+    </div>
+    <div class="actions">
+        <%= submit_tag "Let's go" %>
+    </div>
+<% end %>

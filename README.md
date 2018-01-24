@@ -1,6 +1,6 @@
 # MILLION
 
-A simple personal expenses manager.
+A simple personal patrimonial manager.
 
 Things you may want to cover:
 

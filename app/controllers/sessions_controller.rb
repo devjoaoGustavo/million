@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_path, notice: 'Logged in!'
     else
-      flash.now[:alert] = 'username, email or password incorrect'
+      flash.now[:alert] = 'username, email or password incorrect or not active'
       render :new
     end
   end
@@ -19,8 +19,8 @@ class SessionsController < ApplicationController
 
   def retrieve_user
     User
-      .where(email: params[:access])
-      .or(User.where(username: params[:access]))
+      .where(email: params[:access], active: true)
+      .or(User.where(username: params[:access], active: true))
       .first
   end
 end

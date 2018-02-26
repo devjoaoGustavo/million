@@ -1,18 +1,24 @@
+# frozen_string_literal: true
+
 class SessionsController < ApplicationController
+  def new
+    render layout: 'access'
+  end
+
   def create
     user = retrieve_user
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: 'Logged in!'
+      redirect_to root_path, notice: 'Acesso iniciado. É bom te ver por aqui!'
     else
-      flash.now[:alert] = 'username, email or password incorrect or not active'
-      render :new
+      flash.now[:alert] = 'Verifique se os dados de acesso estão corretos ou se o usuário está ativo'
+      render :new,  layout: 'access'
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, notice: 'logged out successfully'
+    redirect_to root_url, notice: 'Acesso finalizado com successo. Até logo!'
   end
 
   private

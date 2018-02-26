@@ -1,16 +1,17 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
+    render layout: 'access'
   end
 
   def create
     @user = User.new(allowed_params)
     if @user.save
       UserMailer.welcome_email(@user).deliver_now
-      redirect_to root_path, notice: "You're signed up! We send you an email with a link for activate your account!"
+      redirect_to root_path, notice: 'Acabei de te cadastrar. Te enviarei um email com um link para a ativação da seu conta!'
     else
-      flash.now[:alert] = 'Something wrong. try again'
-      render :new
+      flash.now[:alert] = 'Algo deu errado. Tente novamente'
+      render :new, layout: 'access'
     end
   end
 
@@ -18,9 +19,9 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.activate!
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "You're in!"
+      redirect_to root_path, notice: " Você está dentro. Bom te ter por aqui!"
     else
-      redirect_to login_path, alert: 'Something went wrong while activating your account, try to login, please.'
+      redirect_to login_path, alert: 'Algo deu errado durante a ativação de sua conta. Tente fazer um login, por favor.'
     end
   end
 

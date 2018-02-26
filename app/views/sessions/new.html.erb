@@ -1,16 +1,28 @@
-<h1>Sign in</h1>
-
-<%= form_tag sessions_path do %>
-    <div class="field">
-        <%= label_tag :access %><br>
-        <%= text_field_tag :access, params[:access] %>
+<div class="ls-login-box">
+    <div class="ls-login-logo">
+        <h1>Acesso Million</h1>
     </div>
 
-    <div class="field">
-        <%= label_tag :password %><br>
-        <%= password_field_tag :password, params[:password] %>
-    </div>
-    <div class="actions">
-        <%= submit_tag "Let's go" %>
-    </div>
-<% end %>
+    <%= form_tag sessions_path, class: 'ls-form ls-login-form' do %>
+        <fieldset>
+            <div class="ls-label">
+                <%= content_tag :b, 'Usuário', class: 'ls-label-text ls-hidden-accessible' %>
+                <%= text_field_tag :access, params[:access], class: 'ls-login-bg-user ls-field-lg', placeholder: 'Usuário', autofocus: true %>
+            </div>
+
+            <div class="field">
+                <%= content_tag :b, 'Senha', class: 'ls-label-text ls-hidden-accessible' %>
+                <div class="ls-prefix-group ls-field-lg">
+                    <%= password_field_tag :password, params[:password], class: 'ls-login-bg-password', placeholder: 'Senha' %>
+                    <%= link_to "", "#", class: 'ls-label-text-prefix ls-toggle-pass ls-ico-eye', 'data-target': '#password' %>
+                </div>
+            </div>
+            <%= submit_tag "Entrar", class: 'ls-btn-primary ls-btn-block ls-btn-lg' %>
+            <p class="ls-txt-center ls-login-signup">
+                Ainda não possui cadastro no Million?
+                <%= link_to 'Cadastre-se agora', signup_path %> ou
+                <%= link_to 'volte ao início', root_path %>
+            </p>
+        </fieldset>
+    <% end %>
+</div>

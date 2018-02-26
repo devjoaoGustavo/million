@@ -4,7 +4,8 @@
         <title>Million</title>
         <meta charset="utf-8">
         <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
-        <meta name="viewport" content="O melhor e mais simples gerenciador pessoal de finanças.">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <meta name="description" content="O melhor e mais simples gerenciador pessoal de finanças.">
         <link rel="icon" sizes="192x192" href="/locawebstyle/assets/images/ico-boilerplate.png">
         <link rel="apple-touch-icon" href="/locawebstyle/assets/images/ico-boilerplate.png">
         <%= csrf_meta_tags %>
@@ -13,25 +14,73 @@
     </head>
 
     <body>
-        <div class="ls-topbar">
-            <!-- Barra de Notificações -->
-            <div class="ls-notification-topbar">
-                <!-- Dropdown com detalhes da conta de usuário -->
+        <div id="app">
+            <div class="ls-topbar">
+                <!-- Barra de Notificações -->
+                <div class="ls-notification-topbar">
+                    <!-- Dropdown com detalhes da conta de usuário -->
+                    <% if logged_in? %>
+                        <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
+                            <a href="#" class="ls-ico-user">
+                                <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>
+                            </a>
+                            <nav class="ls-dropdown-nav ls-user-menu">
+                                <ul>
+                                    <li><%= link_to 'Sair', logout_path, method: :delete %></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    <% else %>
+                        <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
+                            <a href="#" class="ls-ico-user">
+                            </a>
+                            <nav class="ls-dropdown-nav ls-user-menu">
+                                <ul>
+                                    <li><%= link_to 'Cadastre-se', signup_path %></li>
+                                    <li><%= link_to 'Entre', login_path %></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    <% end %>
+                </div>
+
+                <span class="ls-show-sidebar ls-ico-menu"></span>
+
+                <!-- Nome do produto/marca -->
+                <h1 class="ls-brand-name">
+                    <%= link_to 'Million', root_path, class: 'ls-ico-chart-bar-up' %>
+                </h1>
+            </div>
+
+            <main class="ls-main">
+                <div class="container-fluid">
+                    <% if @welcome.present? %>
+                        <welcome :params="<%= @welcome %>"></welcome>
+                    <% end %>
+                    <alert
+                        :is-alert="<%= flash[:alert].present? %>"
+                        :is-notice="<%= flash[:notice].present? %>"
+                        :message="<%= (flash[:notice] || flash[:alert]).to_json %>">
+                    </alert>
+
+                    <%= yield %>
+                </div>
+            </main>
+
+            <aside class="ls-sidebar">
                 <% if logged_in? %>
-                    <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
+                    <div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">
                         <a href="#" class="ls-ico-user">
                             <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>
                         </a>
-                        <nav class="ls-dropdown-nav ls-user-menu">
-                            <ul>
-                                <li><%= link_to 'Sair', logout_path, method: :delete %></li>
-                            </ul>
+                        <nav class="ls-dropdown-nav ls-user-menu" aria-hidden="true">
+                            <ul></ul>
+                            <%= link_to 'Sair', logout_path, method: :delete, class: 'ls-btn-logout', role: 'combobox', 'aria-expanded': 'false' %>
                         </nav>
                     </div>
                 <% else %>
                     <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-                        <a href="#" class="ls-ico-user">
-                        </a>
+                        <a href="#" class="ls-ico-user"></a>
                         <nav class="ls-dropdown-nav ls-user-menu">
                             <ul>
                                 <li><%= link_to 'Cadastre-se', signup_path %></li>
@@ -40,61 +89,13 @@
                         </nav>
                     </div>
                 <% end %>
-            </div>
-
-            <span class="ls-show-sidebar ls-ico-menu"></span>
-
-            <!-- Nome do produto/marca -->
-            <h1 class="ls-brand-name">
-                <%= link_to 'Million', root_path, class: 'ls-ico-chart-bar-up' %>
-            </h1>
+            </aside>
         </div>
-
-        <main class="ls-main">
-            <div class="container">
-                <% if flash[:notice].present? %>
-                    <div class="ls-alert-success  ls-dismissable">
-                        <span data-ls-module="dismiss" class="ls-dismiss">&times;</span>
-                        <%= flash[:notice] %>
-                    </div>
-                <% elsif flash[:alert].present? %>
-                    <div class="ls-alert-danger  ls-dismissable">
-                        <span data-ls-module="dismiss" class="ls-dismiss">&times;</span>
-                        <%= flash[:alert] %>
-                    </div>
-                <% end %>
-
-                <%= yield %>
-            </div>
-        </main>
-
-        <aside class="ls-sidebar">
-            <% if logged_in? %>
-                <div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">
-                    <a href="#" class="ls-ico-user">
-                        <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>
-                    </a>
-                    <nav class="ls-dropdown-nav ls-user-menu" aria-hidden="true">
-                        <ul></ul>
-                        <%= link_to 'Sair', logout_path, method: :delete, class: 'ls-btn-logout', role: 'combobox', 'aria-expanded': 'false' %>
-                    </nav>
-                </div>
-            <% else %>
-                <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-                    <a href="#" class="ls-ico-user"></a>
-                    <nav class="ls-dropdown-nav ls-user-menu">
-                        <ul>
-                            <li><%= link_to 'Cadastre-se', signup_path %></li>
-                            <li><%= link_to 'Entre', login_path %></li>
-                        </ul>
-                    </nav>
-                </div>
-            <% end %>
-        </aside>
     </body>
 
     <footer>
         <%= javascript_include_tag 'application' %>
         <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script>
+        <%= javascript_pack_tag 'application' %>
     </footer>
 </html>

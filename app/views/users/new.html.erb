@@ -2,17 +2,7 @@
     <div class="ls-login-logo">
         <h2>Cadastro Million</h2>
     </div>
-    <%= form_for @user, class: 'ls-form ls-login-form' do |f| %>
-        <% if @user.errors.any? %>
-            <div class="error_messages">
-                <h2>The form has some irregularities</h2>
-                <ul>
-                    <% @user.errors.full_messages.each do |message| %>
-                        <%= content_tag :li, message %>
-                    <% end %>
-                </ul>
-            </div>
-        <% end %>
+    <%= form_for @user, class: 'ls-form ls-login-form', validate: true do |f| %>
 
         <fieldset>
             <div class="ls-label">

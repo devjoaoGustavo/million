@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       UserMailer.welcome_email(@user).deliver_now
       redirect_to root_path, notice: 'Acabei de te cadastrar. Te enviarei um email com um link para a ativação da seu conta!'
     else
-      flash.now[:alert] = 'Algo deu errado. Tente novamente'
+      flash.now[:alert] = 'Verifique os dados e tente novamente'
       render :new, layout: 'access'
     end
   end

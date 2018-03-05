@@ -54,8 +54,8 @@
 
             <main class="ls-main">
                 <div class="container-fluid">
-                    <% if @welcome.present? %>
-                        <welcome :params="<%= @welcome %>"></welcome>
+                    <% if @intro.present? %>
+                        <intro :params="<%= @intro %>"></intro>
                     <% end %>
                     <alert
                         :is-alert="<%= flash[:alert].present? %>"
@@ -69,12 +69,19 @@
 
             <aside class="ls-sidebar">
                 <% if logged_in? %>
+                    <nav class="ls-menu">
+                        <ul>
+                            <li><%= link_to 'Despesas', expenses_path(current_user), class: 'ls-ico-cart' %></li>
+                        </ul>
+                    </nav>
                     <div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">
                         <a href="#" class="ls-ico-user">
                             <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>
                         </a>
                         <nav class="ls-dropdown-nav ls-user-menu" aria-hidden="true">
-                            <ul></ul>
+                            <ul>
+                                <li><%= link_to 'Despesas', expenses_path(current_user), class: 'ls-ico-cart' %></li>
+                            </ul>
                             <%= link_to 'Sair', logout_path, method: :delete, class: 'ls-btn-logout', role: 'combobox', 'aria-expanded': 'false' %>
                         </nav>
                     </div>

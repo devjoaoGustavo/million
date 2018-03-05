@@ -1,0 +1,6 @@
+<tr>
+    <td><%= entries.category.name %></td>
+    <td><%= entries.description %></td>
+    <td><%= number_to_currency(entries.amount) %></td>
+    <td><%= entries.entry_date.strftime('%d/%m/%Y') %></td>
+</tr>

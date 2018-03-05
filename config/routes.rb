@@ -9,4 +9,7 @@ Rails.application.routes.draw do
   resources :sessions, only: %i[create]
   get    '/login',  to: 'sessions#new',     as: 'login'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
+
+  get  '/users/:user_id/expenses', to: 'entries#expenses', as: 'expenses'
+  post '/users/:user_id/expenses', to: 'entries#create',   as: 'entries'
 end

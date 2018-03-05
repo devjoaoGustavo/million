@@ -1,0 +1,29 @@
+<h2>Cadastrar nova</h2>
+<div class="ls-box-filter">
+    <%= form_for @new_entry, validate: true, html: { class: 'ls-form ls-form-horizontal row' } do |f| %>
+        <fieldset>
+            <%= f.hidden_field :kind, value: @new_entry.kind %>
+            <label class="ls-label col-md-3 col-xs-12">
+                <%= content_tag :b, 'Categoria', class: 'ls-label-text ls-hidden-accessible' %>
+                <div class="ls-custom-select">
+                    <%= f.collection_select :category_id, Category.ordered, :id, :name, prompt: 'Selecione um envelope...', class: 'ls-field-sm' %>
+                </div>
+            </label>
+            <label class="ls-label col-md-3 col-xs-12">
+                <%= content_tag :b, 'Descrição', class: 'ls-label-text ls-hidden-accessible' %>
+                <%= f.text_field :description, placeholder: 'Descrição' %>
+            </label>
+            <label class="ls-label col-md-3 col-xs-12">
+                <%= content_tag :b, 'Valor', class: 'ls-label-text ls-hidden-accessible' %>
+                <%= f.text_field :amount, class: 'ls-mask-money', placeholder: 'Valor (ex.: 1.234,56)' %>
+            </label>
+            <label class="ls-label col-md-2 col-xs-12">
+                <%= content_tag :b, 'data', class: 'ls-label-text ls-hidden-accessible' %>
+                <%= f.text_field :entry_date, class: 'datepicker', placeholder: 'data (ex.: 04/03/2018)' %>
+            </label>
+            <label class="ls-label col-md-1 col-xs-12">
+            <%= f.submit 'Salvar', class: 'ls-btn ls-no-margin ls-float-right' %>
+            </label>
+        </fieldset>
+    <% end %>
+</div>

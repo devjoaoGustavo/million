@@ -7,13 +7,13 @@
 
 import Vue from 'vue/dist/vue.esm'
 
-import Welcome from '../components/welcome.vue'
+import Intro from '../components/intro.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
       el: '#app',
       components: {
-          'welcome': Welcome
+          'intro': Intro
       }
   })
 

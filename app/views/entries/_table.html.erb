@@ -1,0 +1,13 @@
+<table class="ls-table">
+    <thead>
+        <tr>
+            <th class="ls-ico-envelop ls-txt-center">Envelope</th>
+            <th class="ls-ico-pencil2 ls-txt-center hidden-xs">Descrição</th>
+            <th class="ls-ico-origins ls-txt-center">Valor</th>
+            <th class="ls-ico-calendar ls-txt-center">Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= render partial: 'entries', collection: @expenses %>
+    </tbody>
+</table>

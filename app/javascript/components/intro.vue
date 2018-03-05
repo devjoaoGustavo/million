@@ -1,6 +1,6 @@
 <template>
   <div v-if="params.message != '' || params.message != null">
-    <h1 class="ls-title-intro ls-ico-home">{{ params.message || message }}</h1>
+    <h1 class="ls-title-intro" v-bind:class="params.icoClass">{{ params.message || message }}</h1>
   </div>
 </template>
 

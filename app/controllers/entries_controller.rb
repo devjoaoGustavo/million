@@ -1,24 +1,53 @@
 # frozen_string_literal: true
 
 class EntriesController < ApplicationController
+  def index
+    intro(kind: 'Painel', ico_class: 'ls-ico-dashboard')
+    @expenses = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    @revenues = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+  end
+
   def expenses
     new_entry('expense')
     intro(kind: 'Despesas', ico_class: 'ls-ico-cart')
-    @expenses = Entry.where(kind: :expense).order(entry_date: :desc)
+    @entries = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+  end
+
+  def revenues
+    new_entry('revenue')
+    intro(kind: 'Receitas', ico_class: 'ls-ico-chart-bar-up')
+    @entries = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
   end
 
   def create
     entry = Entry.new(entry_params)
     if entry.save
       flash[:notice] = 'Adicionada nova entrada'
-      redirect_to expenses_path(entry.user_id) if entry.expense?
+        return redirect_to expenses_path(entry.user_id) if entry.expense?
+        redirect_to revenues_path(entry.user_id)
     else
-      flash.now[:alert] = 'Algo errado'
+      flash.now[:alert] = 'Ops, algo está errado'
       new_entry(entry.kind)
       intro(kind:      entry.expense? ? 'Despesas' : 'Receitas',
             ico_class: 'ls-ico-stats')
       render :expenses
     end
+  end
+
+  def destroy
+    entry = Entry.find params[:id]
+    entry.destroy!
+
+    flash[:notice] = 'Entrada apagada permanentemente!'
+    if entry.expense?
+      redirect_to expenses_path(entry.user_id)
+    else
+      redirect_to revenues_path(entry.user_id)
+    end
+  rescue
+    flash.now['alert'] = 'Algo deu errado. Tente deletar a entrada novamente'
+    return render :expenses if entry.expense?
+    render :revenues
   end
 
   private

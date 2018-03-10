@@ -1,6 +1,16 @@
 <tr>
-    <td><%= entries.category.name %></td>
-    <td><%= entries.description %></td>
-    <td><%= number_to_currency(entries.amount) %></td>
-    <td><%= entries.entry_date.strftime('%d/%m/%Y') %></td>
+    <td class="ls-txt-center"><%= entries.category.name %></td>
+    <td class="ls-txt-center"><%= entries.description %></td>
+    <td class="ls-txt-center"><%= number_to_currency(entries.amount) %></td>
+    <td class="ls-txt-center"><%= entries.entry_date.strftime('%d/%m/%Y') %></td>
+    <td class="ls-txt-center">
+        <%= link_to 'apagar', '#', class: 'ls-btn-sm ls-btn-primary-danger ls-ico-remove',
+                                   'data-custom-class': 'ls-color-danger',
+                                   'data-title':        'Confirmar deleção?',
+                                   'data-content':      link_to('Sim', delete_entry_path(entries),
+                                                                class: 'ls-btn-sm ls-btn-primary-danger',
+                                                                method: :delete),
+                                   'data-ls-module':    'popover',
+                                   'data-placement':    'left' %>
+    </td>
 </tr>

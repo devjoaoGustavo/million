@@ -19,4 +19,12 @@ class Entry < ApplicationRecord
       errors.add(:amount, 'Fomato de data inválido')
     end
   end
+
+  def amount
+    sprintf("%.2f", super).gsub('.', ',') if super.present?
+  end
+
+  def entry_date
+    I18n.l(super, format: '%d/%m/%Y') if super.present?
+  end
 end

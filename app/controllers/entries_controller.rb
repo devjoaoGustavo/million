@@ -9,14 +9,39 @@ class EntriesController < ApplicationController
 
   def expenses
     new_entry('expense')
+    @categories = Category.ordered
     intro(kind: 'Despesas', ico_class: 'ls-ico-cart')
     @entries = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
   end
 
   def revenues
     new_entry('revenue')
+    @categories = Category.ordered
     intro(kind: 'Receitas', ico_class: 'ls-ico-chart-bar-up')
     @entries = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+  end
+
+  def show
+    @entry = Entry.find params[:id]
+    intro(kind: 'Detalhes de ' + (@entry.expense? ? 'despesa' : 'receita'), ico_class: (@entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'))
+  end
+
+  def edit
+    @entry = Entry.find params[:id]
+    @categories = Category.ordered
+    intro(kind: 'Edição de ' + (@entry.expense? ? 'despesa' : 'receita'), ico_class: (@entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'))
+  end
+
+  def update
+    @entry = Entry.find params[:id]
+    if @entry.update_attributes!(entry_params)
+      flash[:notice] = (@entry.expense? ? 'despesa' : 'receita') + ' alterada com sucesso'
+      redirect_to @entry
+    else
+      flash[:alert] = 'Algo deu errado'
+      @categories = Category.ordered
+      render :edit
+    end
   end
 
   def create
@@ -53,7 +78,7 @@ class EntriesController < ApplicationController
   private
 
   def new_entry(kind)
-    @new_entry = Entry.new(kind: kind)
+    @entry = Entry.new(kind: kind)
   end
 
   def intro(kind:, ico_class:)
@@ -63,7 +88,7 @@ class EntriesController < ApplicationController
   def entry_params
     params.require(:entry)
       .permit(:category_id, :description, :entry_date, :kind)
-      .merge(user_id: params[:user_id])
+      .merge(user_id: params[:user_id] || current_user.id)
       .merge(amount: parse_amount(params.dig(:entry, :amount)))
   end
 

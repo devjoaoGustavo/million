@@ -2,7 +2,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_raven_context
 
+  rescue_from ExpiredSessionError, with: :redirect_to_login
+
   private
+
+  def redirect_to_login
+    flash[:notice] = 'Sessão expirada. Faça o login novamente'
+    redirect_to login_path
+  end
 
   def set_raven_context
     Raven.user_context(id: session[:user_id])

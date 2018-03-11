@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class EntriesController < ApplicationController
+  before_action :validate_session!
+
   def index
     intro(kind: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
     @expenses = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
@@ -83,6 +85,10 @@ class EntriesController < ApplicationController
   end
 
   private
+
+  def validate_session!
+    raise ExpiredSessionError if current_user.blank?
+  end
 
   def new_entry(kind)
     @entry = Entry.new(kind: kind)

@@ -32,6 +32,7 @@
   { name: 'Saúde',                   description: 'Gastos com medicamentos e afins' },
   { name: 'Gastos extras',           description: 'Gastos com produtos e/ou serviços diversos' },
   { name: 'Imprevistos',             description: 'Gastos não planejados' },
+  { name: 'Saldo',                   description: 'Valor de ajuste' },
   { name: 'Cartão de crédito',       description: 'Fatura de cartão de crédito' }
 ].each do |params|
   Category.find_or_create_by(params)

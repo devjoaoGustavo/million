@@ -3,7 +3,7 @@
         <h2 class="ls-title-3">Resumo do dia</h2>
         <p class="ls-float-right ls-float-none-xs ls-small-info">Lançamentos do dia <strong><%= I18n.l(Date.today) %></strong></p>
     </header>
-    <% if @today_expenses.empty? && @today_revenues.empty? %>
+    <% if @today_expense.zero? && @today_revenue.zero? %>
         <p class="ls-no-data">Ainda não há entradas hoje</p>
     <% else %>
         <div id="sending-stats" class="row">
@@ -13,12 +13,8 @@
                         <h6 class="ls-title-4">SALDO</h6>
                     </div>
                     <div class="ls-box-body">
-                        <strong>
-                            <%=
-                                number_to_currency(
-                                    @today_revenues.map(&:amount).reduce(&:+).to_f - @today_expenses.map(&:amount).reduce(&:+).to_f
-                                )
-                            %>
+                        <strong class="<%= @today_color_class %>">
+                            <%= number_to_currency(@today_balance) %>
                         </strong>
                     </div>
                 </div>
@@ -30,7 +26,7 @@
                     </div>
                     <div class="ls-box-body">
                         <strong>
-                            <%= number_to_currency(@today_expenses.map(&:amount).reduce(&:+).to_f) %>
+                            <%= number_to_currency(@today_expense) %>
                         </strong>
                     </div>
                 </div>
@@ -42,7 +38,7 @@
                     </div>
                     <div class="ls-box-body">
                         <strong>
-                            <%= number_to_currency(@today_revenues.map(&:amount).reduce(&:+).to_f) %>
+                            <%= number_to_currency(@today_revenue) %>
                         </strong>
                     </div>
                 </div>

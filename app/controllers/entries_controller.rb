@@ -5,10 +5,15 @@ class EntriesController < ApplicationController
 
   def index
     intro(kind: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
-    @expenses = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
-    @revenues = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
-    @today_expenses = @expenses.where(entry_date: DateTime.now.at_beginning_of_day..DateTime.now)
-    @today_revenues = @revenues.where(entry_date: DateTime.now.at_beginning_of_day..DateTime.now)
+    @expenses            = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    @revenues            = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    @balance             = @revenues.map(&:amount).reduce(&:+).to_f - @expenses.map(&:amount).reduce(&:+).to_f
+    @color_class         = (@balance == 0.0) ? 'ls-color-theme' : ((@balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
+
+    @today_expense       = @expenses.where(entry_date: DateTime.now.at_beginning_of_day..DateTime.now).map(&:amount).reduce(&:+).to_f
+    @today_revenue       = @revenues.where(entry_date: DateTime.now.at_beginning_of_day..DateTime.now).map(&:amount).reduce(&:+).to_f
+    @today_balance       = @today_revenue - @today_expense
+    @today_color_class   = (@today_balance == 0.0) ? 'ls-color-theme' : ((@today_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
   end
 
   def expenses

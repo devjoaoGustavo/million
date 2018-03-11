@@ -7,8 +7,8 @@ class EntriesController < ApplicationController
     intro(kind: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
     @expenses = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
     @revenues = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
-    @today_expenses = @expenses.where(entry_date: Date.today)
-    @today_revenues = @revenues.where(entry_date: Date.today)
+    @today_expenses = @expenses.where(entry_date: DateTime.now.at_beginning_of_day..DateTime.now)
+    @today_revenues = @revenues.where(entry_date: DateTime.now.at_beginning_of_day..DateTime.now)
   end
 
   def expenses

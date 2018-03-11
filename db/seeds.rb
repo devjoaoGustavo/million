@@ -33,6 +33,8 @@
   { name: 'Gastos extras',           description: 'Gastos com produtos e/ou serviços diversos' },
   { name: 'Imprevistos',             description: 'Gastos não planejados' },
   { name: 'Saldo',                   description: 'Valor de ajuste' },
+  { name: 'Presentes',               description: 'Gastos ou recebimentos de presentes' },
+  { name: 'Impostos e taxas',        description: 'Gastos comm impostos e taxas genéricos (ex.: ISS, renovação de documentos, etc.)' },
   { name: 'Cartão de crédito',       description: 'Fatura de cartão de crédito' }
 ].each do |params|
   Category.find_or_create_by(params)

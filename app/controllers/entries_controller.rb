@@ -5,6 +5,8 @@ class EntriesController < ApplicationController
     intro(kind: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
     @expenses = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
     @revenues = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    @today_expenses = @expenses.where(entry_date: Date.today)
+    @today_revenues = @revenues.where(entry_date: Date.today)
   end
 
   def expenses

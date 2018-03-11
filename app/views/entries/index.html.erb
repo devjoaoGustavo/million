@@ -15,7 +15,7 @@
                     <strong>
                         <%=
                         number_to_currency(
-                            (@revenues.map(&:amount).map(&:to_f).reduce(&:+) || 0.0) - (@expenses.map(&:amount).map(&:to_f).reduce(&:+) || 0.0)
+                            (@revenues.map(&:amount).reduce(&:+) || 0.0) - (@expenses.map(&:amount).reduce(&:+) || 0.0)
                         )
                         %>
                     </strong>
@@ -30,7 +30,7 @@
                 <div class="ls-box-body">
                     <strong>
                         <%=
-                        number_to_currency(@expenses.map(&:amount).map(&:to_f).reduce(&:+) || 0.0)
+                        number_to_currency(@expenses.map(&:amount).reduce(&:+) || 0.0)
                         %>
                     </strong>
                 </div>
@@ -48,7 +48,7 @@
                 <div class="ls-box-body">
                     <strong>
                         <%=
-                        number_to_currency(@revenues.map(&:amount).map(&:to_f).reduce(&:+) || 0.0)
+                        number_to_currency(@revenues.map(&:amount).reduce(&:+) || 0.0)
                         %>
                     </strong>
                 </div>

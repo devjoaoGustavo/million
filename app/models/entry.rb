@@ -20,8 +20,8 @@ class Entry < ApplicationRecord
     end
   end
 
-  def amount
-    sprintf("%.2f", super).gsub('.', ',') if super.present?
+  def currency
+    sprintf("%.2f", amount).gsub('.', ',') if amount.present?
   end
 
   def entry_date

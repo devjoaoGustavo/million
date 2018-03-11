@@ -28,7 +28,11 @@
   { name: 'Salário',                 description: 'Restante ou todo o salário devido do mês, recebido no início do mês subsequente' },
   { name: 'Transporte',              description: 'Gastos com transportes públicos ou aluguéis de veículos' },
   { name: 'Venda de passivos',       description: 'Dinheiro recebido pela venda de algum bem' },
-  { name: 'Vestuário',               description: 'Gastos com roupas' }
+  { name: 'Vestuário',               description: 'Gastos com roupas' },
+  { name: 'Saúde',                   description: 'Gastos com medicamentos e afins' },
+  { name: 'Gastos extras',           description: 'Gastos com produtos e/ou serviços diversos' },
+  { name: 'Imprevistos',             description: 'Gastos não planejados' },
+  { name: 'Cartão de crédito',       description: 'Fatura de cartão de crédito' }
 ].each do |params|
   Category.find_or_create_by(params)
 end

@@ -39,5 +39,11 @@ module Million
 
     config.i18n.available_locales = :'pt-BR'
     config.i18n.default_locale = :'pt-BR'
+
+    config.filter_parameters << :password
+
+    Raven.configure do |cfg|
+      cfg.dsn = ENV['SENTRY_DSN']
+    end
   end
 end

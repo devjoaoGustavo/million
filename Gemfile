@@ -20,6 +20,7 @@ gem 'jbuilder',     '~> 2.5'
 gem 'bcrypt',       '~> 3.1.7'
 gem 'webpacker',    '~> 3.2.2'
 gem 'foreman'
+gem "sentry-raven"
 
 gem 'client_side_validations', '~> 11.1'
 

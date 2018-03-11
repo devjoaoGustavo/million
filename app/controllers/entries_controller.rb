@@ -2,7 +2,7 @@
 
 class EntriesController < ApplicationController
   def index
-    intro(kind: 'Painel', ico_class: 'ls-ico-dashboard')
+    intro(kind: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
     @expenses = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
     @revenues = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
   end
@@ -10,26 +10,30 @@ class EntriesController < ApplicationController
   def expenses
     new_entry('expense')
     @categories = Category.ordered
-    intro(kind: 'Despesas', ico_class: 'ls-ico-cart')
+    intro(kind: 'Despesas', ico_class: 'ls-ico-cart', href: entries_path(current_user.id))
     @entries = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
   end
 
   def revenues
     new_entry('revenue')
     @categories = Category.ordered
-    intro(kind: 'Receitas', ico_class: 'ls-ico-chart-bar-up')
+    intro(kind: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: entries_path(current_user.id))
     @entries = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
   end
 
   def show
     @entry = Entry.find params[:id]
-    intro(kind: 'Detalhes de ' + (@entry.expense? ? 'despesa' : 'receita'), ico_class: (@entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'))
+    intro(kind:      'Detalhes de ' + (@entry.expense? ? 'despesa' : 'receita'),
+          ico_class: (@entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'),
+          href:      (@entry.expense? ? expenses_path(current_user.id) : revenues_path(current_user.id)))
   end
 
   def edit
     @entry = Entry.find params[:id]
     @categories = Category.ordered
-    intro(kind: 'Edição de ' + (@entry.expense? ? 'despesa' : 'receita'), ico_class: (@entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'))
+    intro(kind:      'Edição de ' + (@entry.expense? ? 'despesa' : 'receita'),
+          ico_class: (@entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'),
+          href:      entry_path(@entry.id))
   end
 
   def update
@@ -54,7 +58,8 @@ class EntriesController < ApplicationController
       flash.now[:alert] = 'Ops, algo está errado'
       new_entry(entry.kind)
       intro(kind:      entry.expense? ? 'Despesas' : 'Receitas',
-            ico_class: 'ls-ico-stats')
+            ico_class: 'ls-ico-stats',
+            href:      entry.expense? ? expenses_path(current_user.id) : revenues_path(current_user.id))
       render :expenses
     end
   end
@@ -81,15 +86,15 @@ class EntriesController < ApplicationController
     @entry = Entry.new(kind: kind)
   end
 
-  def intro(kind:, ico_class:)
-    @intro = { message: kind, icoClass: ico_class }.to_json
+  def intro(kind:, ico_class:, href:)
+    @intro = { message: kind, icoClass: ico_class, href: href }.to_json
   end
 
   def entry_params
     params.require(:entry)
       .permit(:category_id, :description, :entry_date, :kind)
       .merge(user_id: params[:user_id] || current_user.id)
-      .merge(amount: parse_amount(params.dig(:entry, :amount)))
+      .merge(amount: parse_amount(params.dig(:entry, :currency)))
   end
 
   def parse_amount(input)

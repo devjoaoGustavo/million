@@ -1,0 +1,21 @@
+<div class="ls-login-box">
+    <div class="ls-login-logo">
+        <h2>Recuperação de senha</h2>
+    </div>
+    <%= form_tag '/recover', class: 'ls-form ls-login-form' do |f| %>
+        <fieldset>
+            <div class="ls-label">
+                <%= content_tag :b, 'Email', class: 'ls-label-text ls-hidden-accessible' %>
+                <%= email_field_tag :email, '' , placeholder: 'Digite o email cadastrado' %>
+            </div>
+
+            <%= submit_tag "Recuperar", class: 'ls-btn-primary ls-btn-block ls-btn-lg' %>
+
+            <p class="ls-txt-center ls-login-signup">
+                Se lembrou de sua senha Million?<br>
+                <%= link_to 'Entre aqui', login_path %> ou
+                <%= link_to 'volte ao início', root_path %>
+            </p>
+        </fieldset>
+    <% end %>
+</div>

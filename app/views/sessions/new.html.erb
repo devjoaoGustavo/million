@@ -17,7 +17,8 @@
                     <%= link_to "", "#", class: 'ls-label-text-prefix ls-toggle-pass ls-ico-eye', 'data-target': '#password' %>
                 </div>
             </div>
-            <%= submit_tag "Entrar", class: 'ls-btn-primary ls-btn-block ls-btn-lg' %>
+            <%= submit_tag "Entrar", class: 'ls-btn-primary ls-btn-block ls-btn-lg ls-xs-margin-bottom' %>
+            <p class="ls-txt-center"><small><%= link_to 'Esqueci minha senha', recover_password_path %></small></p>
             <p class="ls-txt-center ls-login-signup">
                 Ainda não possui cadastro no Million?
                 <%= link_to 'Cadastre-se agora', signup_path %> ou

@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   root 'home#home'
 
   resources :users, only: %i[create]
-  get '/signup', to: 'users#new', as: 'signup'
-  get '/users/:id/confirmation', to: 'users#confirm', as: 'confirmation'
+  get  '/signup',                 to: 'users#new',               as: 'signup'
+  get  '/users/:id/confirmation', to: 'users#confirm',           as: 'confirmation'
+  get  '/recover',                to: 'users#recover',           as: 'recover_password'
+  post '/recover',                to: 'users#send_email_for_recover'
+  get  '/users/:id/redefine',     to: 'users#redefine_password', as: 'redefine_password'
+  put  '/users/:id/redefine',     to: 'users#redefine',          as: 'redefine'
 
   resources :sessions, only: %i[create]
   get    '/login',  to: 'sessions#new',     as: 'login'

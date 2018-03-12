@@ -66,6 +66,7 @@ class EntriesController < ApplicationController
     else
       flash.now[:alert] = 'Ops, algo está errado'
       new_entry(entry.kind)
+      @categories = Category.ordered
       intro(kind:      entry.expense? ? 'Despesas' : 'Receitas',
             ico_class: 'ls-ico-stats',
             href:      entry.expense? ? expenses_path(current_user.id) : revenues_path(current_user.id))

@@ -3,13 +3,13 @@ module HomeHelper
     content_tag :h1 do
       if logged_in?
         <<-MSG
-          Welcome,
+          Bem-vind@,
           #{current_user.presentation_name}.
-          It is a pleasure have you with us.
-          I am Million, your patrimonial manager!
+          É uma grande alegria ter você aqui conosco.
+          Este é o Million, seu gerenciador pessoal de finanças!
         MSG
       else
-        "Welcome to Million, your patrimonial manager!"
+        "Bem-vind@ ao Million, seu gerenciador pessoal de finanças!"
       end
     end
   end

@@ -37,8 +37,9 @@ module Million
       g.orm :active_record, primary_key_type: :uuid
     end
 
-    config.i18n.available_locales = :'pt-BR'
-    config.i18n.default_locale = :'pt-BR'
+    config.i18n.available_locales = 'pt-BR'
+    config.i18n.default_locale = 'pt-BR'
+    config.time_zone = 'Brasilia'
 
     config.filter_parameters << :password
 

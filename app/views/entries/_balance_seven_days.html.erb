@@ -1,10 +1,12 @@
 <div class="ls-box ls-board-box">
     <header class="ls-info-header">
-        <h2 class="ls-title-3">Resumo do dia</h2>
-        <p class="ls-float-right ls-float-none-xs ls-small-info">Lançamentos do dia <strong><%= DateTime.current.strftime('%d/%m/%Y') %></strong></p>
+        <h2 class="ls-title-3">Resumo dos últimos sete dias</h2>
+        <p class="ls-float-right ls-float-none-xs ls-small-info">
+            Lançamentos de <strong><%= 7.days.ago.strftime('%d/%m/%Y') %></strong> até <strong><%= DateTime.current.strftime('%d/%m/%Y') %></strong>
+        </p>
     </header>
-    <% if @today_expense.zero? && @today_revenue.zero? %>
-        <p class="ls-no-data">Ainda não há entradas hoje</p>
+    <% if @seven_days_expense.zero? && @seven_days_revenue.zero? %>
+        <p class="ls-no-data">Não foram feitas entradas nos últimos sete dias</p>
     <% else %>
         <div id="sending-stats" class="row">
             <div class="col-sm-6 col-md-3">
@@ -13,8 +15,8 @@
                         <h6 class="ls-title-4">SALDO</h6>
                     </div>
                     <div class="ls-box-body">
-                        <strong class="<%= @today_color_class %>">
-                            <%= number_to_currency(@today_balance) %>
+                        <strong class="<%= @seven_days_color_class %>">
+                            <%= number_to_currency(@seven_days_balance) %>
                         </strong>
                     </div>
                 </div>
@@ -26,7 +28,7 @@
                     </div>
                     <div class="ls-box-body">
                         <strong>
-                            <%= number_to_currency(@today_expense) %>
+                            <%= number_to_currency(@seven_days_expense) %>
                         </strong>
                     </div>
                 </div>
@@ -38,7 +40,7 @@
                     </div>
                     <div class="ls-box-body">
                         <strong>
-                            <%= number_to_currency(@today_revenue) %>
+                            <%= number_to_currency(@seven_days_revenue) %>
                         </strong>
                     </div>
                 </div>

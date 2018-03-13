@@ -5,15 +5,25 @@ class EntriesController < ApplicationController
 
   def index
     intro(kind: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
-    @expenses            = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
-    @revenues            = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
-    @balance             = @revenues.map(&:amount).reduce(&:+).to_f - @expenses.map(&:amount).reduce(&:+).to_f
-    @color_class         = (@balance == 0.0) ? 'ls-color-theme' : ((@balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
+    @expenses    = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    @revenues    = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    @balance     = @revenues.map(&:amount).reduce(&:+).to_f - @expenses.map(&:amount).reduce(&:+).to_f
+    @color_class = (@balance == 0.0) ? 'ls-color-theme' : ((@balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
 
-    @today_expense       = @expenses.where(entry_date: DateTime.now.at_beginning_of_day..DateTime.now).map(&:amount).reduce(&:+).to_f
-    @today_revenue       = @revenues.where(entry_date: DateTime.now.at_beginning_of_day..DateTime.now).map(&:amount).reduce(&:+).to_f
-    @today_balance       = @today_revenue - @today_expense
-    @today_color_class   = (@today_balance == 0.0) ? 'ls-color-theme' : ((@today_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
+    @month_expense     = @expenses.where(entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
+    @month_revenue     = @revenues.where(entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
+    @month_balance     = @month_revenue - @month_expense
+    @month_color_class = (@month_balance == 0.0) ? 'ls-color-theme' : ((@month_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
+
+    @seven_days_expense     = @expenses.where(entry_date: 7.days.ago.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
+    @seven_days_revenue     = @revenues.where(entry_date: 7.days.ago.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
+    @seven_days_balance     = @seven_days_revenue - @seven_days_expense
+    @seven_days_color_class = (@seven_days_balance == 0.0) ? 'ls-color-theme' : ((@seven_days_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
+
+    @today_expense     = @expenses.where(entry_date: DateTime.current.at_beginning_of_day.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
+    @today_revenue     = @revenues.where(entry_date: DateTime.current.at_beginning_of_day.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
+    @today_balance     = @today_revenue - @today_expense
+    @today_color_class = (@today_balance == 0.0) ? 'ls-color-theme' : ((@today_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
   end
 
   def expenses

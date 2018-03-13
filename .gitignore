@@ -23,4 +23,6 @@
 yarn-debug.log*
 .yarn-integrity
 Procfile
+yarn.lock
 .env
+.DS_Store

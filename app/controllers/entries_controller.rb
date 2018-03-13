@@ -15,8 +15,8 @@ class EntriesController < ApplicationController
     @month_balance     = @month_revenue - @month_expense
     @month_color_class = (@month_balance == 0.0) ? 'ls-color-theme' : ((@month_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
 
-    @seven_days_expense     = @expenses.where(entry_date: 7.days.ago.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
-    @seven_days_revenue     = @revenues.where(entry_date: 7.days.ago.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
+    @seven_days_expense     = @expenses.where(entry_date: (DateTime.current - 7).at_beginning_of_day.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
+    @seven_days_revenue     = @revenues.where(entry_date: (DateTime.current - 7).at_beginning_of_day.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
     @seven_days_balance     = @seven_days_revenue - @seven_days_expense
     @seven_days_color_class = (@seven_days_balance == 0.0) ? 'ls-color-theme' : ((@seven_days_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
 

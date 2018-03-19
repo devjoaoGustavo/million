@@ -5,12 +5,12 @@
             <% if @entry.persisted? %>
                 <div class="ls-label col-md-12 col-xs-12 ls-md-margin-bottom">
                     <div data-ls-module="switchButton" class="ls-switch-btn">
-                        <%= f.check_box :kind, {}, 'revenue', 'expense' %>
-                        <label class="ls-switch-label" for="entry_kind" name="label_entry_kind" ls-switch-off="Despesa" ls-switch-on="Receita"><span></span></label>
+                        <%= f.check_box :type, {}, 'Entry::Revenue', 'Entry::Expense' %>
+                        <label class="ls-switch-label" for="entry_type" name="label_entry_type" ls-switch-off="Despesa" ls-switch-on="Receita"><span></span></label>
                     </div>
                 </div>
             <% else %>
-                <%= f.hidden_field :kind, value: @entry.kind %>
+                <%= f.hidden_field :type, value: @entry.type %>
             <% end %>
             <label class="ls-label col-md-3 col-xs-12">
                 <%= content_tag :b, 'Categoria', class: 'ls-label-text ls-hidden-accessible' %>

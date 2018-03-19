@@ -20,12 +20,13 @@ gem 'jbuilder',     '~> 2.5'
 gem 'bcrypt',       '~> 3.1.7'
 gem 'webpacker',    '~> 3.2.2'
 gem 'foreman'
-gem "sentry-raven"
+gem 'sentry-raven'
 
 gem 'client_side_validations', '~> 11.1'
+gem 'draper'
 
 group :development, :test do
-  gem 'byebug',   platforms: [:mri, :mingw, :x64_mingw]
+  gem 'pry-byebug'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
 end

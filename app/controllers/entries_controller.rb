@@ -4,9 +4,9 @@ class EntriesController < ApplicationController
   before_action :validate_session!
 
   def index
-    intro(kind: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
-    @expenses    = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
-    @revenues    = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    intro(message: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
+    @expenses    = Entry::Expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    @revenues    = Entry::Revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
     @balance     = @revenues.map(&:amount).reduce(&:+).to_f - @expenses.map(&:amount).reduce(&:+).to_f
     @color_class = (@balance == 0.0) ? 'ls-color-theme' : ((@balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
 
@@ -27,36 +27,36 @@ class EntriesController < ApplicationController
   end
 
   def expenses
-    new_entry('expense')
+    new_entry('Entry::Expense')
     @categories = Category.ordered
-    intro(kind: 'Despesas', ico_class: 'ls-ico-cart', href: entries_path(current_user.id))
-    @entries = Entry.expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: dashboard_path(current_user.id))
+    @entries = Entry::Expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
   end
 
   def revenues
-    new_entry('revenue')
+    new_entry('Entry::Revenue')
     @categories = Category.ordered
-    intro(kind: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: entries_path(current_user.id))
-    @entries = Entry.revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    intro(message: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: dashboard_path(current_user.id))
+    @entries = Entry::Revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
   end
 
   def show
-    @entry = Entry.find params[:id]
-    intro(kind:      'Detalhes de ' + (@entry.expense? ? 'despesa' : 'receita'),
+    @entry = find_entry
+    intro(message:   'Detalhes de ' + (@entry.expense? ? 'despesa' : 'receita'),
           ico_class: (@entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'),
           href:      (@entry.expense? ? expenses_path(current_user.id) : revenues_path(current_user.id)))
   end
 
   def edit
-    @entry = Entry.find params[:id]
+    @entry = find_entry
     @categories = Category.ordered
-    intro(kind:      'Edição de ' + (@entry.expense? ? 'despesa' : 'receita'),
+    intro(message:   'Edição de ' + (@entry.expense? ? 'despesa' : 'receita'),
           ico_class: (@entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'),
           href:      entry_path(@entry.id))
   end
 
   def update
-    @entry = Entry.find params[:id]
+    @entry = find_entry
     if @entry.update_attributes!(entry_params)
       flash[:notice] = (@entry.expense? ? 'despesa' : 'receita') + ' alterada com sucesso'
       redirect_to @entry
@@ -75,9 +75,9 @@ class EntriesController < ApplicationController
         redirect_to revenues_path(entry.user_id)
     else
       flash.now[:alert] = 'Ops, algo está errado'
-      new_entry(entry.kind)
+      new_entry(entry.type)
       @categories = Category.ordered
-      intro(kind:      entry.expense? ? 'Despesas' : 'Receitas',
+      intro(message:   entry.expense? ? 'Despesas' : 'Receitas',
             ico_class: 'ls-ico-stats',
             href:      entry.expense? ? expenses_path(current_user.id) : revenues_path(current_user.id))
       render :expenses
@@ -85,7 +85,7 @@ class EntriesController < ApplicationController
   end
 
   def destroy
-    entry = Entry.find params[:id]
+    entry = find_entry
     entry.destroy!
 
     flash[:notice] = 'Entrada apagada permanentemente!'
@@ -102,23 +102,28 @@ class EntriesController < ApplicationController
 
   private
 
+  def find_entry
+    Entry.find_by(user_id: current_user.id, id: params[:id])
+  end
+
   def validate_session!
     raise ExpiredSessionError if current_user.blank?
   end
 
-  def new_entry(kind)
-    @entry = Entry.new(kind: kind)
+  def new_entry(type)
+    @entry = Entry.new(type: type)
   end
 
-  def intro(kind:, ico_class:, href:)
-    @intro = { message: kind, icoClass: ico_class, href: href }.to_json
+  def intro(message:, ico_class:, href:)
+    @intro = { message: message, icoClass: ico_class, href: href }.to_json
   end
 
   def entry_params
-    params.require(:entry)
-      .permit(:category_id, :description, :entry_date, :kind)
+    key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
+    params.require(key)
+      .permit(:category_id, :description, :entry_date, :type)
       .merge(user_id: params[:user_id] || current_user.id)
-      .merge(amount: parse_amount(params.dig(:entry, :currency)))
+      .merge(amount: parse_amount(params.dig(key, :currency)))
   end
 
   def parse_amount(input)

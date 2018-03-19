@@ -71,9 +71,9 @@
                 <% if logged_in? %>
                     <nav class="ls-menu hidden-xs">
                         <ul>
-                            <li><%= link_to 'Painel',   entries_path(current_user),  class: 'ls-ico-dashboard',    'aria-label': 'Painel inicial' %></li>
-                            <li><%= link_to 'Despesas', expenses_path(current_user), class: 'ls-ico-cart',         'aria-label': 'Painel de despesas' %></li>
-                            <li><%= link_to 'Receitas', revenues_path(current_user), class: 'ls-ico-chart-bar-up', 'aria-label': 'Painel de receitas' %></li>
+                            <li><%= link_to 'Painel',   dashboard_path(current_user), class: 'ls-ico-dashboard',    'aria-label': 'Painel inicial' %></li>
+                            <li><%= link_to 'Despesas', expenses_path(current_user),  class: 'ls-ico-cart',         'aria-label': 'Painel de despesas' %></li>
+                            <li><%= link_to 'Receitas', revenues_path(current_user),  class: 'ls-ico-chart-bar-up', 'aria-label': 'Painel de receitas' %></li>
                         </ul>
                     </nav>
                     <div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">
@@ -82,9 +82,9 @@
                         </a>
                         <nav class="ls-dropdown-nav ls-user-menu" aria-hidden="true">
                             <ul>
-                                <li><%= link_to 'Painel',   entries_path(current_user),  class: 'ls-ico-dashboard',    'aria-label': 'Painel inicial' %></li>
-                                <li><%= link_to 'Despesas', expenses_path(current_user), class: 'ls-ico-cart',         'aria-label': 'Painel de despesas' %></li>
-                                <li><%= link_to 'Receitas', revenues_path(current_user), class: 'ls-ico-chart-bar-up', 'aria-label': 'Painel de receitas' %></li>
+                                <li><%= link_to 'Painel',   dashboard_path(current_user), class: 'ls-ico-dashboard',    'aria-label': 'Painel inicial' %></li>
+                                <li><%= link_to 'Despesas', expenses_path(current_user),  class: 'ls-ico-cart',         'aria-label': 'Painel de despesas' %></li>
+                                <li><%= link_to 'Receitas', revenues_path(current_user),  class: 'ls-ico-chart-bar-up', 'aria-label': 'Painel de receitas' %></li>
                             </ul>
                             <%= link_to 'Sair', logout_path, method: :delete, class: 'ls-btn-logout', role: 'combobox', 'aria-expanded': 'false' %>
                         </nav>

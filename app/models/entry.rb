@@ -8,17 +8,20 @@ class Entry < ApplicationRecord
   has_many :entries_tags, class_name: EntryTag.to_s
   has_many :tags, through: :entries_tags
 
-  validates :kind, :amount, presence: true
+  validates :type, :amount, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 0.00 }
   validate :validate_amount_format
 
-  string_enum kind: %w{revenue expense}
+  string_enum type: %w{Entry::Revenue Entry::Expense}
 
   def validate_amount_format
     if amount.to_s.match("(([0-9]{1,3}[\.]*)*[0-9]{1,3}([\,][0-9]{1,2})*)").nil?
       errors.add(:amount, 'Fomato de data inválido')
     end
   end
+
+  alias :expense? :'Entry::Expense?'
+  alias :revenue? :'Entry::Revenue?'
 
   def currency
     sprintf("%.2f", amount).gsub('.', ',') if amount.present?

@@ -13,6 +13,7 @@ import Intro from '../components/intro.vue'
 import Alert from '../components/alert.vue'
 import ExpenseDiary from '../components/expense_diary.vue'
 import RevenueDiary from '../components/revenue_diary.vue'
+import BalanceChart from '../components/graphs/balance.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = new Vue({
@@ -21,7 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'intro': Intro,
             'alert': Alert,
             'expense_diary': ExpenseDiary,
-            'revenue_diary': RevenueDiary
+            'revenue_diary': RevenueDiary,
+            'balance-chart': BalanceChart
         }
     })
 

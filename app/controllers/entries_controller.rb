@@ -37,6 +37,14 @@ class EntriesController < ApplicationController
                       .group_by(&:entry_date)
                       .map { |k, v| {date: k, amount: sprintf("%.2f", v.sum(&:amount)) } }
                       .sort_by { |a| a[:date] }.to_json
+
+    @balance_params = { size: JSON.parse(@chart_size), chartId: 'balance-chart' }.to_json
+    @balance_data = Entry.where(user_id: current_user.id).group_by(&:entry_date).map do |k, v|
+      total_expense_of_day = v.reject(&:revenue?).sum(&:amount)
+      total_revenue_of_day = v.reject(&:expense?).sum(&:amount)
+
+      {date: k, amount: sprintf("%.2f", (total_revenue_of_day - total_expense_of_day))}
+    end.sort_by { |hash| hash[:date] }.to_json
   end
 
   def expenses

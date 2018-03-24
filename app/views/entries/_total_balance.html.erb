@@ -1,6 +1,6 @@
 <div class="ls-box ls-board-box">
     <header class="ls-info-header">
-        <h2 class="ls-title-3">Resumo total</h2>
+        <h2 class="ls-title-3">Saldo Total</h2>
         <p class="ls-float-right ls-float-none-xs ls-small-info">
             Aqui poderia ter um texto motivacional para <strong><%= current_user.presentation_name %></strong>
         </p>
@@ -17,44 +17,16 @@
                     <div class="ls-box-body">
                         <strong class="<%= @color_class %>"><%= number_to_currency(@balance) %></strong>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="ls-box">
-                    <div class="ls-box-head">
-                        <h6 class="ls-title-4 ls-ico-cart">DESPESAS</h6>
-                    </div>
-                    <div class="ls-box-body">
-                        <strong>
-                            <%=
-                            number_to_currency(@expenses.map(&:amount).reduce(&:+).to_f)
-                            %>
-                        </strong>
-                    </div>
                     <div class="ls-box-footer">
-                        <%= link_to 'Ver todas', expenses_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
+                        <%= link_to 'Ver receitas', revenues_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
+                        'aria-label': 'Abrir todas as receitas' %>
+                        <%= link_to 'Ver despesas', expenses_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
                         'aria-label': 'Abrir todas as despesas' %>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="ls-box">
-                    <div class="ls-box-head">
-                        <h6 class="ls-title-4 ls-ico-chart-bar-up">RECEITAS</h6>
-                    </div>
-                    <div class="ls-box-body">
-                        <strong>
-                            <%=
-                            number_to_currency(@revenues.map(&:amount).reduce(&:+).to_f)
-                            %>
-                        </strong>
-                    </div>
-                    <div class="ls-box-footer">
-                        <%= link_to 'Ver todas', revenues_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
-                        'aria-label': 'Abrir todas as receitas' %>
-                    </div>
-                </div>
-            </div>
         </div>
+
+        <%= render 'entries/graphs/balance' %>
     <% end %>
 </div>

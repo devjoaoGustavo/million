@@ -11,6 +11,7 @@
         <%= csrf_meta_tags %>
         <%= stylesheet_link_tag 'application', media: 'all' %>
         <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css">
+        <%= javascript_include_tag 'application' %>
     </head>
 
     <body>
@@ -105,7 +106,6 @@
     </body>
 
     <footer>
-        <%= javascript_include_tag 'application' %>
         <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script>
         <%= javascript_pack_tag 'application' %>
     </footer>

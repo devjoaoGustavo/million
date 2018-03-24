@@ -1,0 +1,9 @@
+<div class="ls-box ls-board-box">
+    <div class="ls-info-header">
+        <h2 class="ls-title-3">Despesas diárias</h2>
+        <p class="ls-float-right ls-float-none-xs ls-small-info">
+            Total diário das despesas desde de <strong><%= DateTime.current.at_beginning_of_month.strftime("%d/%m/%Y") %></strong>
+        </p>
+    </div>
+    <expense_diary :params="<%= @chart_size  %>" :data="<%= @expense_data %>"></expense_diary>
+</div>

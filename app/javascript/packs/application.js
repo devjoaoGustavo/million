@@ -11,13 +11,17 @@ import Vue from 'vue/dist/vue.esm'
 
 import Intro from '../components/intro.vue'
 import Alert from '../components/alert.vue'
+import ExpenseDiary from '../components/expense_diary.vue'
+import RevenueDiary from '../components/revenue_diary.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = new Vue({
         el: '#app',
         components: {
             'intro': Intro,
-            'alert': Alert
+            'alert': Alert,
+            'expense_diary': ExpenseDiary,
+            'revenue_diary': RevenueDiary
         }
     })
 

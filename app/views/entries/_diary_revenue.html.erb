@@ -1,0 +1,9 @@
+<div class="ls-box ls-board-box">
+    <div class="ls-info-header">
+        <h2 class="ls-title-3">Receitas diárias</h2>
+        <p class="ls-float-right ls-float-none-xs ls-small-info">
+            Total diário das receitas desde de <strong><%= DateTime.current.at_beginning_of_month.strftime("%d/%m/%Y") %></strong>
+        </p>
+    </div>
+    <revenue_diary :params="<%= @chart_size  %>" :data="<%= @revenue_data %>"></revenue_diary>
+</div>

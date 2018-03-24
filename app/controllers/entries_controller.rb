@@ -24,6 +24,19 @@ class EntriesController < ApplicationController
     @today_revenue     = @revenues.where(entry_date: DateTime.current.at_beginning_of_day.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
     @today_balance     = @today_revenue - @today_expense
     @today_color_class = (@today_balance == 0.0) ? 'ls-color-theme' : ((@today_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
+
+    @chart_size = { width: 640, height: 400 }.to_json
+    collection = @expenses.where(entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc)
+    @expense_data = collection
+                    .group_by(&:entry_date)
+                    .map { |k, v| {date: k, amount: sprintf("%.2f", v.sum(&:amount)) } }
+                    .sort_by { |a| a[:date] }.to_json
+
+    collection = @revenues.where(entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc)
+    @revenue_data = collection
+                      .group_by(&:entry_date)
+                      .map { |k, v| {date: k, amount: sprintf("%.2f", v.sum(&:amount)) } }
+                      .sort_by { |a| a[:date] }.to_json
   end
 
   def expenses

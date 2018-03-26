@@ -24,11 +24,11 @@ export default {
         "startDuration": 1,
         "graphs":        [
           {
-            "balloonText": "[[date]]: <b>[[amount]]</b>",
+            "balloonText": "[[date]]: <b>[[revenue]]</b>",
             "fillAlphas": 0.8,
             "lineAlpha": 0.2,
             "type":       "column",
-            "valueField": "amount"
+            "valueField": "revenue"
           }
         ],
         "chartCursor": {

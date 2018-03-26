@@ -66,6 +66,22 @@
 
                     <%= yield %>
                 </div>
+
+                <footer class="ls-footer">
+                    <nav class="ls-footer-menu">
+                        <h2 class="ls-title-footer">CONTATO</h2>
+                        <ul class="ls-footer-list">
+                            <li><a class="bg-customer-support"
+                                   href="#"
+                                   data-ls-module="popover"
+                                   data-title="Escreva para"
+                                   data-content="<p><a href='mailto:dev.joaogustavo@gmail.com'>João Gustavo de Paula</a></li>">Críticas e sugestões</a></li>
+                        </ul>
+                    </nav>
+                    <div class="ls-footer-info">
+                        <p class="ls-copy-right">Hobbyright © 2018-2018 Million personal finance manager.</p>
+                    </div>
+                </footer>
             </main>
 
             <aside class="ls-sidebar">
@@ -105,8 +121,6 @@
         </div>
     </body>
 
-    <footer>
-        <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script>
-        <%= javascript_pack_tag 'application' %>
-    </footer>
+    <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script>
+    <%= javascript_pack_tag 'application' %>
 </html>

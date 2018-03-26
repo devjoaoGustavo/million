@@ -14,6 +14,7 @@ import Alert from '../components/alert.vue'
 import ExpenseDiary from '../components/expense_diary.vue'
 import RevenueDiary from '../components/revenue_diary.vue'
 import BalanceChart from '../components/graphs/balance.vue'
+import CategoryChart from '../components/graphs/category.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = new Vue({
@@ -23,7 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'alert': Alert,
             'expense_diary': ExpenseDiary,
             'revenue_diary': RevenueDiary,
-            'balance-chart': BalanceChart
+            'balance-chart': BalanceChart,
+            'category-chart': CategoryChart
         }
     })
 

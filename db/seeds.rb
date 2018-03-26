@@ -35,7 +35,9 @@
   { name: 'Saldo',                   description: 'Valor de ajuste' },
   { name: 'Presentes',               description: 'Gastos ou recebimentos de presentes' },
   { name: 'Impostos e taxas',        description: 'Gastos comm impostos e taxas genéricos (ex.: ISS, renovação de documentos, etc.)' },
-  { name: 'Cartão de crédito',       description: 'Fatura de cartão de crédito' }
+  { name: 'Cartão de crédito',       description: 'Fatura de cartão de crédito' },
+  { name: 'Higiene pessoal',         description: 'Lançamentos relativos a gastos com higiene pessoal' },
+  { name: 'Limpeza',                 description: 'Lançamentos relativos a gastos com limpeza em geral' }
 ].each do |params|
   Category.find_or_create_by(params)
 end

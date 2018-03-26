@@ -25,26 +25,20 @@ class EntriesController < ApplicationController
     @today_balance     = @today_revenue - @today_expense
     @today_color_class = (@today_balance == 0.0) ? 'ls-color-theme' : ((@today_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
 
-    @chart_size = { width: 640, height: 400 }.to_json
-    collection = @expenses.where(entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc)
-    @expense_data = collection
-                    .group_by(&:entry_date)
-                    .map { |k, v| {date: k, amount: sprintf("%.2f", v.sum(&:amount)) } }
-                    .sort_by { |a| a[:date] }.to_json
+    @expense_params = { size: { height: 300 }, chartId: 'expense-by-category' }.to_json
+    @expense_data = Entry::Expense.where(user_id: current_user.id,
+                                         entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc).group_by(&:category_id).map do |k, v|
+      expense_of_category = v.sum(&:amount)
 
-    collection = @revenues.where(entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc)
-    @revenue_data = collection
-                      .group_by(&:entry_date)
-                      .map { |k, v| {date: k, amount: sprintf("%.2f", v.sum(&:amount)) } }
-                      .sort_by { |a| a[:date] }.to_json
+      { category: Category.find(k).name, amount: sprintf("%.2f", expense_of_category) }
+    end.to_json
+    @revenue_params = { size: { height: 300 }, chartId: 'revenue-by-category' }.to_json
+    @revenue_data = Entry::Revenue.where(user_id: current_user.id,
+                                         entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc).group_by(&:category_id).map do |k, v|
+      expense_of_category = v.sum(&:amount)
 
-    @balance_params = { size: JSON.parse(@chart_size), chartId: 'balance-chart' }.to_json
-    @balance_data = Entry.where(user_id: current_user.id).group_by(&:entry_date).map do |k, v|
-      total_expense_of_day = v.reject(&:revenue?).sum(&:amount)
-      total_revenue_of_day = v.reject(&:expense?).sum(&:amount)
-
-      {date: k, amount: sprintf("%.2f", (total_revenue_of_day - total_expense_of_day))}
-    end.sort_by { |hash| hash[:date] }.to_json
+      { category: Category.find(k).name, amount: sprintf("%.2f", expense_of_category) }
+    end.to_json
   end
 
   def expenses

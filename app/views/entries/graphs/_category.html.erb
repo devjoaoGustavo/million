@@ -10,7 +10,7 @@
             <div class="ls-box-head">
                 <h6 class="ls-title-4">DESPESAS</h6>
             </div>
-            <category-chart :params="<%= @expense_params %>" :data="<%= @expense_data %>"></category-chart>
+            <pie-chart :params="<%= @expense_params %>" :data="<%= @expense_data %>"></pie-chart>
             <div class="ls-box-footer">
                 <%= link_to 'Ver todas', expenses_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
                 'aria-label': 'Abrir todas as despesas' %>
@@ -22,7 +22,7 @@
             <div class="ls-box-head">
                 <h6 class="ls-title-4">RECEITAS</h6>
             </div>
-            <category-chart :params="<%= @revenue_params %>" :data="<%= @revenue_data %>"></category-chart>
+            <pie-chart :params="<%= @revenue_params %>" :data="<%= @revenue_data %>"></pie-chart>
             <div class="ls-box-footer">
                 <%= link_to 'Ver todas', revenues_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
                 'aria-label': 'Abrir todas as receitas' %>

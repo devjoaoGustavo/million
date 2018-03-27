@@ -1,5 +1,5 @@
 <template>
-  <div id="expense_diary" v-on="makeChart()" v-bind:style="'width: 100%; ' + 'height: ' + params.height + 'px;'"></div>
+  <div v-bind:id="params.chartId" v-on="makeChart(data)" v-bind:style="'width: 100%; ' + 'height: ' + params.size.height + 'px;'"></div>
 </template>
 
 <script>
@@ -9,12 +9,13 @@ export default {
     data: Array
   },
   methods: {
-    makeChart: function() {
-      AmCharts.makeChart("expense_diary", {
+    makeChart: function(data) {
+      AmCharts.makeChart(this.$props.params.chartId, {
         "type":          "serial",
         "theme":         "light",
-        "categoryField": "date",
-        "dataProvider":  this.$props.data,
+        "color":         "#000000",
+        "categoryField": "category",
+        "dataProvider":  data,
         "valueAxes": [ {
           "gridColor": "#FFFFFF",
           "gridAlpha": 0.2,
@@ -24,11 +25,11 @@ export default {
         "startDuration": 1,
         "graphs":        [
           {
-            "balloonText": "[[date]]: <b>[[expense]]</b>",
+            "balloonText": "[[category]]: <b>[[amount]]</b>",
             "fillAlphas": 0.8,
             "lineAlpha": 0.2,
             "type":       "column",
-            "valueField": "expense"
+            "valueField": "amount"
           }
         ],
         "chartCursor": {

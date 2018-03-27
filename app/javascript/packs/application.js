@@ -15,6 +15,7 @@ import ExpenseDiary from '../components/expense_diary.vue'
 import RevenueDiary from '../components/revenue_diary.vue'
 import BalanceChart from '../components/graphs/balance.vue'
 import CategoryChart from '../components/graphs/category.vue'
+import PieChart from '../components/graphs/pie.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
     const app = new Vue({
@@ -22,10 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
         components: {
             'intro': Intro,
             'alert': Alert,
-            'expense_diary': ExpenseDiary,
-            'revenue_diary': RevenueDiary,
+            'expense-diary': ExpenseDiary,
+            'revenue-diary': RevenueDiary,
             'balance-chart': BalanceChart,
-            'category-chart': CategoryChart
+            'category-chart': CategoryChart,
+            'pie-chart': PieChart
         }
     })
 

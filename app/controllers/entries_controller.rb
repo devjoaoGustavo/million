@@ -2,6 +2,10 @@
 
 class EntriesController < ApplicationController
   before_action :validate_session!
+  before_action :load_expenses, only: [:expenses]
+  before_action :load_revenues, only: [:revenues]
+  before_action :load_categories, only: [:revenues, :expenses, :edit, :create, :update]
+  rescue_from InvalidCurrencyFormat, with: :invalid_currency_format
 
   def index
     intro(message: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
@@ -43,16 +47,12 @@ class EntriesController < ApplicationController
 
   def expenses
     new_entry('Entry::Expense')
-    @categories = Category.ordered
     intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: dashboard_path(current_user.id))
-    @entries = Entry::Expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
   end
 
   def revenues
     new_entry('Entry::Revenue')
-    @categories = Category.ordered
     intro(message: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: dashboard_path(current_user.id))
-    @entries = Entry::Revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
   end
 
   def show
@@ -64,7 +64,6 @@ class EntriesController < ApplicationController
 
   def edit
     @entry = find_entry
-    @categories = Category.ordered
     intro(message:   'Edição de ' + (@entry.expense? ? 'despesa' : 'receita'),
           ico_class: (@entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'),
           href:      entry_path(@entry.id))
@@ -76,26 +75,28 @@ class EntriesController < ApplicationController
       flash[:notice] = (@entry.expense? ? 'despesa' : 'receita') + ' alterada com sucesso'
       redirect_to @entry
     else
-      flash[:alert] = 'Algo deu errado'
-      @categories = Category.ordered
+      flash[:alert] = 'A entrada não foi alterada. Verifique os valores e tente novamente'
       render :edit
     end
   end
 
   def create
-    entry = Entry.new(entry_params)
-    if entry.save
+    @entry = Entry.new(entry_params)
+    if @entry.save
       flash[:notice] = 'Adicionada nova entrada'
-        return redirect_to expenses_path(entry.user_id) if entry.expense?
-        redirect_to revenues_path(entry.user_id)
+      return redirect_to expenses_path(current_user.id) if @entry.expense?
+      redirect_to revenues_path(current_user.id)
     else
-      flash.now[:alert] = 'Ops, algo está errado'
-      new_entry(entry.type)
-      @categories = Category.ordered
-      intro(message:   entry.expense? ? 'Despesas' : 'Receitas',
-            ico_class: 'ls-ico-stats',
-            href:      entry.expense? ? expenses_path(current_user.id) : revenues_path(current_user.id))
-      render :expenses
+      flash.now[:alert] = 'A entrada não foi salva. Verifique os valores e tente novamente'
+      if @entry.expense?
+        intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: expenses_path(current_user.id))
+        load_expenses
+        render :expenses
+      else
+        intro(message: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: revenues_path(current_user.id))
+        load_revenues
+        render :revenues
+      end
     end
   end
 
@@ -117,6 +118,33 @@ class EntriesController < ApplicationController
 
   private
 
+  def invalid_currency_format
+    flash.now[:alert] = 'O valor informado possui formato inválido ou está vazio. Verifique e tente novamente'
+    if params.key? :entry_expense
+      build_expense_from_params.validate
+      load_expenses
+      intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: expenses_path(current_user.id))
+      render :expenses
+    else
+      build_revenue_from_params.validate
+      load_revenues
+      intro(message: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: revenues_path(current_user.id))
+      render :revenues
+    end
+  end
+
+  def load_expenses
+    @entries = Entry::Expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+  end
+
+  def load_revenues
+    @entries = Entry::Revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+  end
+
+  def load_categories
+    @categories = Category.ordered
+  end
+
   def find_entry
     Entry.find_by(user_id: current_user.id, id: params[:id])
   end
@@ -133,6 +161,24 @@ class EntriesController < ApplicationController
     @intro = { message: message, icoClass: ico_class, href: href }.to_json
   end
 
+  def build_expense_from_params
+    @entry = Entry::Expense.new(
+      category_id: params.dig(:entry_expense, :category_id),
+      description: params.dig(:entry_expense, :description),
+      amount:      params.dig(:entry_expense, :currency),
+      entry_date:  params.dig(:entry_expense, :entry_date),
+    )
+  end
+
+  def build_revenue_from_params
+    @entry = Entry::Revenue.new(
+      category_id: params.dig(:entry_revenue, :category_id),
+      description: params.dig(:entry_revenue, :description),
+      amount:      params.dig(:entry_revenue, :currency),
+      entry_date:  params.dig(:entry_revenue, :entry_date),
+    )
+  end
+
   def entry_params
     key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
     params.require(key)
@@ -143,5 +189,7 @@ class EntriesController < ApplicationController
 
   def parse_amount(input)
     BigDecimal(input.gsub('.', '').gsub(',', '.')).to_f
+  rescue
+    raise InvalidCurrencyFormat
   end
 end

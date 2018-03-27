@@ -17,7 +17,6 @@ export default {
         "marginLeft": 40,
         "autoMarginOffset": 20,
         "mouseWheelZoomEnabled": true,
-        "dataDateFormat": "DD/MM/YYYY",
         "valueAxes": [{
           "id": "v1",
           "axisAlpha": 0,
@@ -76,11 +75,11 @@ export default {
           "offset": 50,
           "scroolBarHeight": 10
         },
-        "categoryField": "date",
+        "categoryField": "category",
         "categoryAxis": {
-          "parseDates": false,
           "dashLength": 1,
-          "minorGridEnabled": true
+          "minorGridEnabled": true,
+          "labelRotation": 60
         },
         "export": {
           "enabled": true

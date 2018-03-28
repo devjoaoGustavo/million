@@ -37,6 +37,7 @@
   { name: 'Impostos e taxas',        description: 'Gastos comm impostos e taxas genéricos (ex.: ISS, renovação de documentos, etc.)' },
   { name: 'Cartão de crédito',       description: 'Fatura de cartão de crédito' },
   { name: 'Higiene pessoal',         description: 'Lançamentos relativos a gastos com higiene pessoal' },
+  { name: 'Educação',                description: 'Lançamentos relativos a gastos com cursos, escolas e formações em geral' },
   { name: 'Limpeza',                 description: 'Lançamentos relativos a gastos com limpeza em geral' }
 ].each do |params|
   Category.find_or_create_by(params)

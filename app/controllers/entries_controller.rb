@@ -1,48 +1,72 @@
 # frozen_string_literal: true
 
 class EntriesController < ApplicationController
+  include Timing
   before_action :validate_session!
   before_action :load_expenses, only: [:expenses]
   before_action :load_revenues, only: [:revenues]
-  before_action :load_categories, only: [:revenues, :expenses, :edit, :create, :update]
+  before_action :load_categories, only: [:revenues, :expenses, :edit, :create, :update, :search]
   rescue_from InvalidCurrencyFormat, with: :invalid_currency_format
 
   def index
     intro(message: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
-    @expenses    = Entry::Expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
-    @revenues    = Entry::Revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
-    @balance     = @revenues.map(&:amount).reduce(&:+).to_f - @expenses.map(&:amount).reduce(&:+).to_f
-    @color_class = (@balance == 0.0) ? 'ls-color-theme' : ((@balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
+    @expenses    = Entry::Expense.by_user(current_user.id)
+    @revenues    = Entry::Revenue.by_user(current_user.id)
+    @balance     = (@revenues.sum(&:amount) - @expenses.sum(&:amount)).to_f
+    @color_class = css_color_class(@balance)
 
-    @month_expense     = @expenses.where(entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
-    @month_revenue     = @revenues.where(entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
+    @month_expense     = @expenses.where(entry_date: this_month).sum(&:amount).to_f
+    @month_revenue     = @revenues.where(entry_date: this_month).sum(&:amount).to_f
     @month_balance     = @month_revenue - @month_expense
-    @month_color_class = (@month_balance == 0.0) ? 'ls-color-theme' : ((@month_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
+    @month_color_class = css_color_class(@month_balance)
 
-    @seven_days_expense     = @expenses.where(entry_date: (DateTime.current - 7).at_beginning_of_day.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
-    @seven_days_revenue     = @revenues.where(entry_date: (DateTime.current - 7).at_beginning_of_day.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
+    @seven_days_expense     = @expenses.where(entry_date: last_days(7)).sum(&:amount).to_f
+    @seven_days_revenue     = @revenues.where(entry_date: last_days(7)).sum(&:amount).to_f
     @seven_days_balance     = @seven_days_revenue - @seven_days_expense
-    @seven_days_color_class = (@seven_days_balance == 0.0) ? 'ls-color-theme' : ((@seven_days_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
+    @seven_days_color_class = css_color_class(@seven_days_balance)
 
-    @today_expense     = @expenses.where(entry_date: DateTime.current.at_beginning_of_day.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
-    @today_revenue     = @revenues.where(entry_date: DateTime.current.at_beginning_of_day.utc..Time.current.utc).map(&:amount).reduce(&:+).to_f
+    @today_expense     = @expenses.where(entry_date: today).sum(&:amount).to_f
+    @today_revenue     = @revenues.where(entry_date: today).sum(&:amount).to_f
     @today_balance     = @today_revenue - @today_expense
-    @today_color_class = (@today_balance == 0.0) ? 'ls-color-theme' : ((@today_balance < 0.0) ? 'ls-color-danger' : 'ls-color-success')
+    @today_color_class = css_color_class(@today_balance)
 
-    @expense_params = { size: { height: 300 }, chartId: 'expense-by-category' }.to_json
-    @expense_data = Entry::Expense.where(user_id: current_user.id,
-                                         entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc).group_by(&:category_id).map do |k, v|
-      expense_of_category = v.sum(&:amount)
+    size = { height: 500 }
+    @expense_params = { size: size, chartId: 'expense-by-category' }.to_json
+    @expense_data = Entry::Expense.amount_by_category(user_id: current_user.id, period: this_month)
 
-      { category: Category.find(k).name, amount: sprintf("%.2f", expense_of_category) }
-    end.to_json
-    @revenue_params = { size: { height: 300 }, chartId: 'revenue-by-category' }.to_json
-    @revenue_data = Entry::Revenue.where(user_id: current_user.id,
-                                         entry_date: DateTime.current.at_beginning_of_month.utc..Time.current.utc).group_by(&:category_id).map do |k, v|
-      expense_of_category = v.sum(&:amount)
+    @revenue_params = { size: size, chartId: 'revenue-by-category' }.to_json
+    @revenue_data = Entry::Revenue.amount_by_category(user_id: current_user.id, period: this_month)
+  end
 
-      { category: Category.find(k).name, amount: sprintf("%.2f", expense_of_category) }
-    end.to_json
+  def search
+    new_entry(params[:type])
+    filters = {}.tap do |f|
+      f[:category_id] = params[:category_id] if params[:category_id].present?
+      f[:entry_date]  = search_range
+    end
+    @entries = Entry.where(user_id: current_user.id, type: params[:type], **filters)
+
+    if @entry.expense?
+      intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: dashboard_path(current_user.id))
+      render :expenses
+    else
+      intro(message: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: dashboard_path(current_user.id))
+      render :revenues
+    end
+  end
+
+  def search_range
+    (initial_date || (DateTime.current - 90.years))..(final_date || (DateTime.current + 90.years))
+  end
+
+  def initial_date
+    return if params[:date_from].blank?
+    DateTime.parse(params[:date_from])
+  end
+
+  def final_date
+    return if params[:date_to].blank?
+    DateTime.parse(params[:date_to]).at_end_of_day
   end
 
   def expenses
@@ -134,11 +158,11 @@ class EntriesController < ApplicationController
   end
 
   def load_expenses
-    @entries = Entry::Expense.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    @entries = Entry::Expense.by_user(current_user.id)
   end
 
   def load_revenues
-    @entries = Entry::Revenue.where(user_id: current_user.id).order(entry_date: :desc, created_at: :desc)
+    @entries = Entry::Revenue.by_user(current_user.id)
   end
 
   def load_categories
@@ -191,5 +215,11 @@ class EntriesController < ApplicationController
     BigDecimal(input.gsub('.', '').gsub(',', '.')).to_f
   rescue
     raise InvalidCurrencyFormat
+  end
+
+  def css_color_class(amount)
+    return 'ls-color-theme' if amount.zero?
+    return 'ls-color-danger' if amount < 0.0
+    'ls-color-success'
   end
 end

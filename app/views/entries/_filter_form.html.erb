@@ -1,0 +1,38 @@
+<div data-ls-module="collapse" data-target="#entry-search" class="ls-collapse">
+  <a href="#" class="ls-collapse-header">
+    <h3 class="ls-collapse-title">Filtre suas entradas</h3>
+  </a>
+  <div id="entry-search" class="ls-collapse-body">
+    <div class="ls-box-filter">
+      <%= form_tag path, method: :get, class: 'ls-form ls-form-inline' do %>
+        <%= hidden_field_tag :type, entry_type %>
+        <label class="ls-label col-sm-3 col-md-3">
+          <%= content_tag :b, 'Envelope', class: 'ls-label-text' %>
+          <div class="ls-custom-select">
+            <%= select_tag :category_id,
+              options_for_select(@categories.pluck(:name, :id)),
+              prompt: 'Todos os envelopes...',
+              class: 'ls-field-sm' %>
+          </div>
+        </label>
+        <label class="ls-label col-sm-3 col-md-3">
+          <%= content_tag :span, 'de', id: 'entry_filter_from', class: 'ls-label-text', 'data-ls-module': 'popover',
+            'data-content': 'Escolha o período e clique em filtrar' %>
+
+          <%= text_field_tag :date_from, '', class: 'datepicker ls-daterange', placeholder: 'dd/mm/aaaa',
+            id: 'datepicker1', 'data-ls-daterange': '#daterange2' %>
+        </label>
+        <label class="ls-label col-sm-3 col-md-3">
+          <%= content_tag :span, 'até', id: 'entry_filter_to', class: 'ls-label-text', 'data-ls-module': 'popover',
+            'data-content': 'Clique em filtrar para visualizar o resultado' %>
+
+          <%= text_field_tag :date_to, '', class: 'datepicker ls-daterange', placeholder: 'dd/mm/aaaa',
+            id: 'daterange2' %>
+        </label>
+        <label class="ls-label col-sm-3 col-md-3">
+          <%= submit_tag 'Filtrar', class: 'ls-btn-primary' %>
+        </label>
+      <% end %>
+    </div>
+  </div>
+</div>

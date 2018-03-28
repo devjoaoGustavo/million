@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get    '/login',  to: 'sessions#new',     as: 'login'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
 
+  get   '/users/:user_id/search',   to: 'entries#search',   as: 'search'
+
   get   '/users/:user_id/expenses', to: 'entries#expenses', as: 'expenses'
   get   '/users/:user_id/revenues', to: 'entries#revenues', as: 'revenues'
   post  '/users/:user_id/revenues', to: 'entries#create',   as: 'entry_revenues'

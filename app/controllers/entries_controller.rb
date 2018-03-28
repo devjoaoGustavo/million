@@ -45,6 +45,7 @@ class EntriesController < ApplicationController
       f[:entry_date]  = search_range
     end
     @entries = Entry.where(user_id: current_user.id, type: params[:type], **filters)
+      .order(entry_date: :desc, created_at: :desc)
 
     if @entry.expense?
       intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: dashboard_path(current_user.id))

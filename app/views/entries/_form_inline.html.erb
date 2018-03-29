@@ -1,38 +1,44 @@
-<h2><%= form_title %></h2>
-<div class="ls-box-filter">
-    <%= form_for @entry, validate: true, html: { class: 'ls-form ls-form-horizontal row' } do |f| %>
-        <fieldset>
-            <% if @entry.persisted? %>
-                <div class="ls-label col-md-12 col-xs-12 ls-md-margin-bottom">
-                    <div data-ls-module="switchButton" class="ls-switch-btn">
-                        <%= f.check_box :type, {}, 'Entry::Revenue', 'Entry::Expense' %>
-                        <label class="ls-switch-label" for="entry_type" name="label_entry_type" ls-switch-off="Despesa" ls-switch-on="Receita"><span></span></label>
-                    </div>
-                </div>
-            <% else %>
-                <%= f.hidden_field :type, value: @entry.type %>
+<div data-ls-module="collapse" data-target="#entry-form" class="ls-collapse">
+    <a href="#" class="ls-collapse-header">
+        <h3 class="ls-collapse-title"><%= form_title %></h3>
+    </a>
+    <div id="entry-form" class="ls-collapse-body">
+        <div class="ls-box-filter">
+            <%= form_for @entry, validate: true, html: { class: 'ls-form ls-form-horizontal row' } do |f| %>
+                <fieldset>
+                    <% if @entry.persisted? %>
+                        <div class="ls-label col-md-12 col-xs-12 ls-md-margin-bottom">
+                            <div data-ls-module="switchButton" class="ls-switch-btn">
+                                <%= f.check_box :type, {}, 'Entry::Revenue', 'Entry::Expense' %>
+                                <label class="ls-switch-label" for="entry_type" name="label_entry_type" ls-switch-off="Despesa" ls-switch-on="Receita"><span></span></label>
+                            </div>
+                        </div>
+                    <% else %>
+                        <%= f.hidden_field :type, value: @entry.type %>
+                    <% end %>
+                    <label class="ls-label col-md-3 col-xs-12">
+                        <%= content_tag :b, 'Categoria', class: 'ls-label-text ls-hidden-accessible' %>
+                        <div class="ls-custom-select">
+                            <%= f.collection_select :category_id, @categories, :id, :name, prompt: 'Selecione um envelope...', class: 'ls-field-sm' %>
+                        </div>
+                    </label>
+                    <label class="ls-label col-md-3 col-xs-12">
+                        <%= content_tag :b, 'Descrição', class: 'ls-label-text ls-hidden-accessible' %>
+                        <%= f.text_field :description, placeholder: 'Descrição' %>
+                    </label>
+                    <label class="ls-label col-md-3 col-xs-12">
+                        <%= content_tag :b, 'Valor', class: 'ls-label-text ls-hidden-accessible' %>
+                        <%= f.text_field :currency, placeholder: 'Valor (ex.: 1.234,56)' %>
+                    </label>
+                    <label class="ls-label col-md-2 col-xs-12">
+                        <%= content_tag :b, 'data', class: 'ls-label-text ls-hidden-accessible' %>
+                        <%= f.text_field :entry_date, class: 'datepicker', placeholder: 'data (ex.: 04/03/2018)' %>
+                    </label>
+                    <label class="ls-label col-md-1 col-xs-12">
+                        <%= f.submit 'Salvar', class: 'ls-btn ls-no-margin ls-float-right' %>
+                    </label>
+                </fieldset>
             <% end %>
-            <label class="ls-label col-md-3 col-xs-12">
-                <%= content_tag :b, 'Categoria', class: 'ls-label-text ls-hidden-accessible' %>
-                <div class="ls-custom-select">
-                    <%= f.collection_select :category_id, @categories, :id, :name, prompt: 'Selecione um envelope...', class: 'ls-field-sm' %>
-                </div>
-            </label>
-            <label class="ls-label col-md-3 col-xs-12">
-                <%= content_tag :b, 'Descrição', class: 'ls-label-text ls-hidden-accessible' %>
-                <%= f.text_field :description, placeholder: 'Descrição' %>
-            </label>
-            <label class="ls-label col-md-3 col-xs-12">
-                <%= content_tag :b, 'Valor', class: 'ls-label-text ls-hidden-accessible' %>
-                <%= f.text_field :currency, placeholder: 'Valor (ex.: 1.234,56)' %>
-            </label>
-            <label class="ls-label col-md-2 col-xs-12">
-                <%= content_tag :b, 'data', class: 'ls-label-text ls-hidden-accessible' %>
-                <%= f.text_field :entry_date, class: 'datepicker', placeholder: 'data (ex.: 04/03/2018)' %>
-            </label>
-            <label class="ls-label col-md-1 col-xs-12">
-                <%= f.submit 'Salvar', class: 'ls-btn ls-no-margin ls-float-right' %>
-            </label>
-        </fieldset>
-    <% end %>
+        </div>
+    </div>
 </div>

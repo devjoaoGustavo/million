@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Entry
+class Entry < ApplicationRecord
   class Destroyer
     def call(params = {})
       Entry.transaction do

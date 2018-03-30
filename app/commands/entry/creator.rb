@@ -1,4 +1,4 @@
-class Entry
+class Entry < ApplicationRecord
   class Creator
     def call(params = {})
       Entry.transaction do

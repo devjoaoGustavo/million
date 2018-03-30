@@ -87,6 +87,14 @@ class EntriesController < ApplicationController
           href:      (@entry.expense? ? expenses_path(current_user.id) : revenues_path(current_user.id)))
   end
 
+  def installments
+    entry    = find_entry
+    @entries = entry.installments
+    intro(message:   'Parcelas de ' + entry.description,
+          ico_class: (entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'),
+          href:      (entry.expense? ? expenses_path(current_user.id) : revenues_path(current_user.id)))
+  end
+
   def edit
     @entry = find_entry
     intro(message:   @entry.expense? ? 'Despesas' : 'Receitas',
@@ -106,8 +114,9 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = Entry.new(entry_params)
-    if @entry.save
+    @entry = creator.call(entry_params)
+
+    if @entry.persisted?
       flash[:notice] = 'Adicionada nova entrada'
       return redirect_to expenses_path(current_user.id) if @entry.expense?
       redirect_to revenues_path(current_user.id)
@@ -126,8 +135,7 @@ class EntriesController < ApplicationController
   end
 
   def destroy
-    entry = find_entry
-    entry.destroy!
+    entry = destroyer.call(destroy_params)
 
     flash[:notice] = 'Entrada apagada permanentemente!'
     if entry.expense?
@@ -207,20 +215,27 @@ class EntriesController < ApplicationController
   def entry_params
     key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
     params.require(key)
-      .permit(:category_id, :description, :entry_date, :type)
-      .merge(user_id: params[:user_id] || current_user.id)
-      .merge(amount: parse_amount(params.dig(key, :currency)))
+      .permit(:category_id, :description, :entry_date, :type, :installments)
+      .merge(user_id: current_user.id)
+      .merge(amount: params.dig(key, :currency))
+      .merge(installments: params[:installments])
   end
 
-  def parse_amount(input)
-    BigDecimal(input.gsub('.', '').gsub(',', '.')).to_f
-  rescue
-    raise InvalidCurrencyFormat
+  def destroy_params
+    params.permit(:mode, :id).merge(user_id: current_user.id)
   end
 
   def css_color_class(amount)
     return 'ls-color-theme' if amount.zero?
     return 'ls-color-danger' if amount < 0.0
     'ls-color-success'
+  end
+
+  def creator
+    Entry::Creator.new
+  end
+
+  def destroyer
+    Entry::Destroyer.new
   end
 end

@@ -6,6 +6,9 @@
       class="ls-tooltip-top"
       aria-label="Ver detalhes da <%= entries.expense? ? 'despesa' : 'receita' %>" >
       <%= number_to_currency(entries.amount) %>
+      <% if entries.installments? %>
+        <%= content_tag :span, entries.installment_label, class: 'ls-tag' %>
+      <% end %>
     </a>
   </td>
   <td class="ls-txt-center"><%= entries.entry_date %></td>

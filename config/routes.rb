@@ -23,8 +23,9 @@ Rails.application.routes.draw do
   patch '/entries/:id',             to: 'entries#update',   as: 'entry_revenue'
   patch '/entries/:id',             to: 'entries#update',   as: 'entry_expense'
 
-  get    '/entries/:id',            to: 'entries#show',    as: 'entry'
-  get    '/entries/:id/edit',       to: 'entries#edit',    as: 'edit_entry'
-  get    '/users/:user_id/entries', to: 'entries#index',   as: 'dashboard'
-  delete '/entries/:id',            to: 'entries#destroy', as: 'delete_entry'
+  get    '/entries/:id',              to: 'entries#show',         as: 'entry'
+  get    '/entries/:id/installments', to: 'entries#installments', as: 'installments'
+  get    '/entries/:id/edit',         to: 'entries#edit',         as: 'edit_entry'
+  get    '/users/:user_id/entries',   to: 'entries#index',        as: 'dashboard'
+  delete '/entries/:id',              to: 'entries#destroy',      as: 'delete_entry'
 end

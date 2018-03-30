@@ -1,29 +1,42 @@
 <%= content_tag(:h3, 'Edição', class: 'ls-title-4') if @entry.persisted? %>
 <div class="ls-box-filter">
-  <%= form_for @entry, validate: true, html: { class: 'ls-form ls-form-horizontal row' } do |f| %>
+  <%= form_for @entry, validate: true, html: { class: 'ls-form ls-form-horizontal' } do |f| %>
     <fieldset>
-      <%= f.hidden_field :type, value: @entry.type %>
-      <label class="ls-label col-md-3 col-xs-12">
-        <%= content_tag :b, 'Categoria', class: 'ls-label-text ls-hidden-accessible' %>
-        <div class="ls-custom-select">
-          <%= f.collection_select :category_id, @categories, :id, :name, prompt: 'Selecione um envelope...', class: 'ls-field-sm' %>
+      <div class="row">
+        <%= f.hidden_field :type, value: @entry.type %>
+        <label class="ls-label col-md-3 col-xs-12">
+          <%= content_tag :b, 'Categoria', class: 'ls-label-text ls-hidden-accessible' %>
+          <div class="ls-custom-select">
+            <%= f.collection_select :category_id, @categories, :id, :name, prompt: 'Selecione um envelope...', class: 'ls-field-sm' %>
+          </div>
+        </label>
+        <label class="ls-label col-md-3 col-xs-12">
+          <%= content_tag :b, 'Descrição', class: 'ls-label-text ls-hidden-accessible' %>
+          <%= f.text_field :description, placeholder: 'Descrição' %>
+        </label>
+        <label class="ls-label col-md-2 col-xs-12">
+          <%= content_tag :b, 'Valor', class: 'ls-label-text ls-hidden-accessible' %>
+          <%= f.text_field :currency, placeholder: 'Valor (ex.: 1.234,56)' %>
+        </label>
+        <label class="ls-label col-md-2 col-xs-12">
+          <div class="ls-prefix-group">
+            <%= content_tag :b, 'data', class: 'ls-label-text ls-hidden-accessible' %>
+            <%= f.text_field :entry_date, id: 'entry_entry_date', class: 'datepicker', placeholder: 'data (ex.: 04/03/2018)' %>
+            <a href="#" class="ls-label-text-prefix ls-ico-calendar" data-trigger-calendar="#entry_entry_date"></a>
         </div>
-      </label>
-      <label class="ls-label col-md-3 col-xs-12">
-        <%= content_tag :b, 'Descrição', class: 'ls-label-text ls-hidden-accessible' %>
-        <%= f.text_field :description, placeholder: 'Descrição' %>
-      </label>
-      <label class="ls-label col-md-3 col-xs-12">
-        <%= content_tag :b, 'Valor', class: 'ls-label-text ls-hidden-accessible' %>
-        <%= f.text_field :currency, placeholder: 'Valor (ex.: 1.234,56)' %>
-      </label>
-      <label class="ls-label col-md-2 col-xs-12">
-        <%= content_tag :b, 'data', class: 'ls-label-text ls-hidden-accessible' %>
-        <%= f.text_field :entry_date, class: 'datepicker', placeholder: 'data (ex.: 04/03/2018)' %>
-      </label>
-      <label class="ls-label col-md-1 col-xs-12">
-        <%= f.submit 'Salvar', class: 'ls-btn ls-no-margin ls-float-right' %>
-      </label>
+        </label>
+        <div class="ls-form ls-form-inline col-md-2 col-xs-6 row">
+          <label class="ls-label col-md-12 col-xs-12 ls-no-padding-right">
+            <%= content_tag :b, 'Parcelas', class: 'ls-label-text ls-color-theme' %>
+            <%= number_field_tag :installments, '1', class: 'ls-txt-center', step: 1, max: 720, min: 1 %>
+          </label>
+        </div>
+      </div>
+      <div class="row">
+        <label class="ls-label col-md-2 col-xs-12">
+          <%= f.submit 'Salvar', class: 'ls-btn ls-btn-primary ls-md-margin-top' %>
+        </label>
+      </div>
     </fieldset>
   <% end %>
 </div>

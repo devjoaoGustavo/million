@@ -8,6 +8,10 @@ class Entry < ApplicationRecord
   has_many :entries_tags, class_name: EntryTag.to_s
   has_many :tags, through: :entries_tags
 
+  # Relation for deal with installment entries
+  # Useful when there are more than one entry to form an entire expense or revenue
+  has_one :next_entry, class_name: self.name
+
   validates :type, :amount, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 0.00 }
   validate :validate_amount_format
@@ -50,5 +54,44 @@ class Entry < ApplicationRecord
     in_range(user_id, period).group_by(&:category_id).map do |k, v|
       { category: Category.find(k).name, amount: v.sum(&:amount) }
     end.to_json
+  end
+
+  # Methods for deal with installment entries
+  def next_entry?
+    next_entry.present?
+  end
+
+  def installments?
+    installments.count > 1
+  end
+
+  def installment_label
+    sprintf("%d/%d", number, installments.count)
+  end
+
+  def previous_entry
+    return if entry_id.blank?
+    self.class.find_by(id: entry_id)
+  end
+
+  def entries_forward
+    ([self] << next_entry&.entries_forward)
+      .compact
+      .flatten
+  end
+
+  def entries_backward
+    [previous_entry]
+      .unshift(previous_entry&.entries_backward)
+      .compact
+      .flatten
+  end
+
+  def number
+    entries_backward.size + 1
+  end
+
+  def installments
+    entries_backward + entries_forward
   end
 end

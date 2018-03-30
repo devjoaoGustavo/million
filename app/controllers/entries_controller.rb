@@ -89,8 +89,8 @@ class EntriesController < ApplicationController
 
   def edit
     @entry = find_entry
-    intro(message:   'Edição de ' + (@entry.expense? ? 'despesa' : 'receita'),
-          ico_class: (@entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'),
+    intro(message:   @entry.expense? ? 'Despesas' : 'Receitas',
+          ico_class: @entry.expense? ? 'ls-ico-cart' : 'ls-ico-chart-bar-up',
           href:      entry_path(@entry.id))
   end
 

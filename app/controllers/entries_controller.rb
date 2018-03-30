@@ -103,8 +103,9 @@ class EntriesController < ApplicationController
   end
 
   def update
-    @entry = find_entry
-    if @entry.update_attributes!(entry_params)
+    @entry = updater.call(update_params)
+
+    if @entry.errors.empty?
       flash[:notice] = (@entry.expense? ? 'despesa' : 'receita') + ' alterada com sucesso'
       redirect_to @entry
     else
@@ -114,7 +115,7 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = creator.call(entry_params)
+    @entry = creator.call(create_params)
 
     if @entry.persisted?
       flash[:notice] = 'Adicionada nova entrada'
@@ -212,13 +213,22 @@ class EntriesController < ApplicationController
     )
   end
 
-  def entry_params
+  def create_params
     key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
     params.require(key)
-      .permit(:category_id, :description, :entry_date, :type, :installments)
+      .permit(:category_id, :description, :entry_date, :type)
       .merge(user_id: current_user.id)
       .merge(amount: params.dig(key, :currency))
       .merge(installments: params[:installments])
+  end
+
+  def update_params
+    key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
+    params.require(key)
+      .permit(:category_id, :description, :entry_date)
+      .merge(id: params[:id])
+      .merge(user_id: current_user.id)
+      .merge(amount: params.dig(key, :currency))
   end
 
   def destroy_params
@@ -233,6 +243,10 @@ class EntriesController < ApplicationController
 
   def creator
     Entry::Creator.new
+  end
+
+  def updater
+    Entry::Updater.new
   end
 
   def destroyer

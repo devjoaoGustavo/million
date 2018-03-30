@@ -23,14 +23,16 @@
             <%= content_tag :b, 'data', class: 'ls-label-text ls-hidden-accessible' %>
             <%= f.text_field :entry_date, id: 'entry_entry_date', class: 'datepicker', placeholder: 'data (ex.: 04/03/2018)' %>
             <a href="#" class="ls-label-text-prefix ls-ico-calendar" data-trigger-calendar="#entry_entry_date"></a>
-        </div>
+          </div>
         </label>
-        <div class="ls-form ls-form-inline col-md-2 col-xs-6 row">
-          <label class="ls-label col-md-12 col-xs-12 ls-no-padding-right">
-            <%= content_tag :b, 'Parcelas', class: 'ls-label-text ls-color-theme' %>
-            <%= number_field_tag :installments, '1', class: 'ls-txt-center', step: 1, max: 720, min: 1 %>
-          </label>
-        </div>
+        <% unless @entry.persisted? %>
+          <div class="ls-form ls-form-inline col-md-2 col-xs-6 row">
+            <label class="ls-label col-md-12 col-xs-12 ls-no-padding-right">
+              <%= content_tag :b, 'Parcelas', class: 'ls-label-text ls-color-theme' %>
+              <%= number_field_tag :installments, '1', class: 'ls-txt-center', step: 1, max: 720, min: 1 %>
+            </label>
+          </div>
+        <% end %>
       </div>
       <div class="row">
         <label class="ls-label col-md-2 col-xs-12">

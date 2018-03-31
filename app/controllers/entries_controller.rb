@@ -57,17 +57,17 @@ class EntriesController < ApplicationController
   end
 
   def search_range
-    (initial_date || (DateTime.current - 90.years))..(final_date || (DateTime.current + 90.years))
+    (initial_date || (Time.current - 90.years))..(final_date || (Time.current.utc + 90.years))
   end
 
   def initial_date
     return if params[:date_from].blank?
-    DateTime.parse(params[:date_from])
+    Time.parse(params[:date_from])
   end
 
   def final_date
     return if params[:date_to].blank?
-    DateTime.parse(params[:date_to]).at_end_of_day
+    Time.parse(params[:date_to]).at_end_of_day.utc
   end
 
   def expenses

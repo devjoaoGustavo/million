@@ -28,6 +28,7 @@ gem 'draper'
 group :development, :test do
   gem 'pry-byebug'
   gem 'capybara', '~> 2.13'
+  gem 'rspec-rails', '~> 3.7'
   gem 'selenium-webdriver'
 end
 

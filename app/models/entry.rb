@@ -21,7 +21,7 @@ class Entry < ApplicationRecord
   end
   scope :by_user, ->(user_id) do
     where(user_id: user_id)
-      .where('entry_date <= ?', Time.current.utc)
+      .where('entry_date <= ?', DateTime.current.at_end_of_day)
       .order(entry_date: :desc, created_at: :desc)
   end
 

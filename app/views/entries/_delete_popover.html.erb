@@ -1,0 +1,10 @@
+<ul class="ls-no-list-style">
+  <li><%= link_to('Confirmar', delete_entry_path(entry), class: 'ls-btn-xs ls-btn-danger', method: :delete) %><br></li>
+  <% if entry.installments? %>
+  <hr class="ls-xs-margin-bottom ls-sm-margin-top">
+    <li class="ls-title-6">O que deseja fazer com as demais parcelas?</li>
+  <hr class="ls-xs-margin-top ls-xs-margin-bottom">
+    <li><%= link_to('Apagar próximas', delete_entry_path(entry, mode: 'forward'), class: 'ls-btn-xs ls-btn-danger', method: :delete) %><br></li>
+    <li><%= link_to('Apagar todas', delete_entry_path(entry, mode: 'all'), class: 'ls-btn-xs ls-btn-primary-danger', method: :delete) %></li>
+  <% end %>
+</ul>

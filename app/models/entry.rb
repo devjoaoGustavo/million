@@ -20,7 +20,9 @@ class Entry < ApplicationRecord
       .order(entry_date: :desc, created_at: :desc)
   end
   scope :by_user, ->(user_id) do
-    where(user_id: user_id).order(entry_date: :desc, created_at: :desc)
+    where(user_id: user_id)
+      .where('entry_date <= ?', Time.current.utc)
+      .order(entry_date: :desc, created_at: :desc)
   end
 
   string_enum type: %w{Entry::Revenue Entry::Expense}

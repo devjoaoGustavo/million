@@ -6,8 +6,8 @@
         <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <meta name="description" content="O melhor e mais simples gerenciador pessoal de finanças.">
-        <link rel="icon" sizes="192x192" href="/locawebstyle/assets/images/ico-boilerplate.png">
-        <link rel="apple-touch-icon" href="/locawebstyle/assets/images/ico-boilerplate.png">
+        <link rel="icon" href="<%= image_url('million-logo.png') %>">
+        <link rel="apple-touch-icon" href="<%= image_url('million-logo.png') %>">
         <%= csrf_meta_tags %>
         <%= stylesheet_link_tag 'application', media: 'all' %>
         <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css">
@@ -48,8 +48,10 @@
                 <span class="ls-show-sidebar ls-ico-menu"></span>
 
                 <!-- Nome do produto/marca -->
-                <h1 class="ls-brand-name">
-                    <%= link_to 'Million', root_path, class: 'ls-ico-chart-bar-up' %>
+                <h1 class="ls-brand-name ls-xs-space">
+                  <%= link_to root_path, class: 'ls-display-block' do %>
+                  <image src="<%= image_url('million-logo.svg') %>">
+                <% end %>
                 </h1>
             </div>
 

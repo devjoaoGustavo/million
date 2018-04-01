@@ -1,17 +1,154 @@
-<div class="ls-box ls-box-board ls-txt-justify">
-    <header class="ls-info-header">
-        <h2 class="ls-title-3 ls-ico-bullhorn">Manifesto</h2>
-    </header>
-    <p class="ls-text-xl">Million é um gerenciador pessoal de finanças simples e eficiente. Com ele, você terá uma visão geral de todas as suas despesas e todas as suas receitas de forma clara.</p>
-    <p class="ls-text-xl">O objetivo do Million é ajudar você a se educar na gestão de suas finanças e a se planejar, fazendo com que alcance cada uma de suas metas.</p>
-    <p class="ls-text-xl">Nesta versão inicial, o Million te permite adicionar suas despesas e receitas, e visualizar seus saldos de algumas diferentes maneiras, mas trabalhamos constantemente em nosso painel, e logo teremos muitas novidades.</p>
-    <p class="ls-text-xl">Em breve, você também poderá cadastrar orçamentos, dando a cada envelope (categoria de receita ou despesa) um valor previsto de gastos ou recebimentos. Com estes orçamentos, e com a visão em tempo real de seu saldo, você verá com clareza para onde está indo seu dinheiro.</p>
-    <p class="ls-text-xl">Ainda uma nova funcionalidade, na qual estamos trabalhando, é o cadastro de objetivos, que te permitirá estabelecer metas, e acompanhar seu progresso a cada novo lançamento de receita ou despesa.</p>
-    <p class="ls-text-xl">Nós da equipe Million acreditamos que a educação financeira é uma ferramenta que nos protege de diversos imprevistos do dia a dia, e nos torna capazes de realizar muitos de nossos sonhos.</p>
-    <p class="ls-text-xl">Venha fazer parte desta geração.</p>
+<!DOCTYPE HTML>
+<!--
+Urban by TEMPLATED
+templated.co @templatedco
+Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+  <head>
+    <title>Million</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <%# <link rel="stylesheet" href="assets/css/main.css" /> %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+  </head>
+  <body>
 
-    <p class="ls-text-xl">Equipe <strong>Million</strong></p>
-    <div class="ls-box-footer ls-txt-center">
-        <%= link_to 'Cadastre-se', signup_path, class: 'ls-btn-primary ls-ico-users', 'data-ls-module': 'popover', 'data-trigger': 'hover', 'data-title': 'Junte-se a nós!', 'aria-label': 'Faça seu cadastro e junte-se a nós' %>
+    <!-- Header -->
+    <header id="header" class="alt">
+      <div class="logo">
+        <%= link_to root_path do %>
+          <?xml version="1.0" ?>
+          <svg id="Layer_1"
+            style="enable-background:new 0 0 512 512;"
+            version="1.1"
+            width="50"
+            height="50"
+            viewBox="0 0 512 512"
+            xml:space="preserve"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <style type="text/css">
+              .st0{
+                fill:none;
+                stroke:#FFFFFF;
+                stroke-width:14;
+                stroke-linecap:round;
+                stroke-linejoin:round;
+                stroke-miterlimit:10;
+              }
+            </style>
+            <g>
+              <path class="st0" d="M247.9,109c0.2,0,0.5,0,0.7,0"/>
+              <path class="st0" d="M276.9,108.6c39.6-0.4,79.3-0.8,120.1-0.8c22.1,0,40,12.2,46.6,32.1c1.7,5,2.5,10.6,2.5,15.9   c0.2,66.1,0.2,132.1,0.1,198.2c0,27.4-20.8,48-48.5,48c-45.2,0.1-84.3,2.1-129.5,2.1c-51.2,0-102.4,0-153.6,0   c-23.8,0-42.5-14.6-47.8-37.2c-0.3-1.4-0.8-2.9-1.1-4.3c0-3.6,0-7.2,0-10.9"/>
+              <path class="st0" d="M65.7,321.9c0-56.9,0-113.7,0-170.6c1.4-4.4,2.2-9,4.2-13.2c8-17.2,21.7-26.5,40.6-28.1c1.5-0.1,3-0.1,4.5-0.1   c35,0,69.3-0.3,103.3-0.6"/>
+              <path class="st0" d="M130.7,358.7c12.4-11.5,23.4-24.1,34.1-36.9"/>
+              <path class="st0" d="M179,304.8c10.7-12.7,21.6-25.3,33.9-36.9c1.4-1.3,2.9-2.7,4.4-4c8.3,7.4,24.8,20.5,32.8,27.7   c6.5,5.9,14.4,8,18.2,0c5-10.3,19-54,25.1-74.6c1.2,1.1,2.2,2,3.2,3c27.9,36,68,103.7,89.8,137.4"/>
+            </g>
+          </svg>
+        <% end %>
+      </div>
+      <a href="#menu">Menu</a>
+    </header>
+
+    <!-- Nav -->
+    <nav id="menu">
+      <ul class="links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="generic.html">Generic</a></li>
+        <li><a href="elements.html">Elements</a></li>
+      </ul>
+    </nav>
+
+    <!-- Banner -->
+    <section id="banner">
+      <div class="inner">
+        <header>
+          <h1>Este é Million</h1>
+          <p>Um gerenciador pessoal de finanças simples e eficiente.<br>
+            Com ele, você tem uma visão geral de suas receitas e despesas de forma clara.</p>
+        </header>
+        <a href="#main" class="button big scrolly">Saiba mais</a>
+      </div>
+    </section>
+
+    <!-- Main -->
+    <div id="main">
+
+      <!-- Section -->
+      <section class="wrapper style1">
+        <div class="inner">
+          <!-- 2 Columns -->
+          <div class="flex flex-2">
+            <div class="col col1">
+              <div class="image round fit">
+                <a href="generic.html" class="link"><img src="<%= image_url('pic01.jpg') %>" alt="" /></a>
+              </div>
+            </div>
+            <div class="col col2">
+              <h3>Onde queremos chegar?</h3>
+              <p>O objetivo do Million é ajudar você a se educar na gestão de suas finanças e a se planejar, fazendo com que alcance cada uma de suas metas.</p>
+              <%= link_to 'Cadastre-se', signup_path, class: 'button' %>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section -->
+      <section class="wrapper style2">
+        <div class="inner">
+          <div class="flex flex-2">
+            <div class="col col2">
+              <h3>A que pé estamos?</h3>
+              <p>Nesta versão inicial, o <strong>Million</strong> te permite adicionar suas receitas e despesas, únicas ou parceladas, e visualizar os saldos de diferentes maneiras.
+                Mas não paramos por aqui. Estamos trabalhando constantemente em nosso painel, afim de tornar esta a melhor experiência financeira de sua vida, e em breve teremos muitas novidades para você.</p>
+              <p>Logo você também poderá cadastrar orçamentos, dando a cada <strong>envelope</strong> (categoria de receita ou despesa) um valor previsto de gastos ou ganhos.
+                Com estes orçamentos, e com a visão em tempo real de seu saldo, você verá com clareza para onde está indo seu dinheiro.</p>
+              <%= link_to 'Cadastre-se', signup_path, class: 'button' %>
+            </div>
+            <div class="col col1 first">
+              <div class="image round fit">
+                <a href="generic.html" class="link"><img src="<%= image_url('pic02.jpg') %>" alt="" /></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section -->
+      <section class="wrapper style1">
+        <div class="inner">
+          <header class="align-center">
+            <h2>Bora ficar rico, meu povo!</h2>
+            <p>Nós da equipe <strong>Million</strong> acreditamos que a educação financeira é a ferramenta que nos protege de inúmeros imprevistos do dia a dia,<br>e nos torna capazes de realizar muitos de nossos sonhos.</p>
+            <p>Venha fazer parte desta geração!</p>
+          </header>
+        </div>
+      </section>
+
     </div>
-</div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="copyright">
+        <ul class="icons">
+          <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+          <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+          <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+          <li><a href="#" class="icon fa-snapchat"><span class="label">Snapchat</span></a></li>
+        </ul>
+        <p>&copy; Untitled. All rights reserved. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.</p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <%= javascript_include_tag 'application' %>
+    <%# <script src="assets/js/jquery.min.js"></script> %>
+    <%# <script src="assets/js/jquery.scrolly.min.js"></script> %>
+    <%# <script src="assets/js/jquery.scrollex.min.js"></script> %>
+    <%# <script src="assets/js/skel.min.js"></script> %>
+    <%# <script src="assets/js/util.js"></script> %>
+    <%# <script src="assets/js/main.js"></script> %>
+
+  </body>
+</html>

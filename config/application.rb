@@ -33,6 +33,8 @@ module Million
       user_name: ENV['SMTP_USER_NAME']
     }
 
+    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end

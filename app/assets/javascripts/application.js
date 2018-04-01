@@ -12,6 +12,7 @@
 //
 //= require rails-ujs
 //= require jquery
+//= require skel.min
 //= require_tree .
 //= require rails.validations
 //= require amcharts3

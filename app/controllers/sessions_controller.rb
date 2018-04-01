@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, notice: 'Acesso finalizado com successo. Até logo!'
+    redirect_to root_url
   end
 
   private

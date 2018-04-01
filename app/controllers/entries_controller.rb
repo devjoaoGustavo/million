@@ -30,12 +30,12 @@ class EntriesController < ApplicationController
     @today_balance     = @today_revenue - @today_expense
     @today_color_class = css_color_class(@today_balance)
 
-    size = { height: 500 }
+    size = { height: 400 }
     @expense_params = { size: size, chartId: 'expense-by-category' }.to_json
-    @expense_data = Entry::Expense.amount_by_category(user_id: current_user.id, period: this_month)
+    @expense_data = Entry::Expense.amount_by_category(user_id: current_user.id, period: this_month).to_json
 
     @revenue_params = { size: size, chartId: 'revenue-by-category' }.to_json
-    @revenue_data = Entry::Revenue.amount_by_category(user_id: current_user.id, period: this_month)
+    @revenue_data = Entry::Revenue.amount_by_category(user_id: current_user.id, period: this_month).to_json
   end
 
   def search

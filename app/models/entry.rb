@@ -55,7 +55,7 @@ class Entry < ApplicationRecord
   def self.amount_by_category(user_id:, period:)
     in_range(user_id, period).group_by(&:category_id).map do |k, v|
       { category: Category.find(k).name, amount: v.sum(&:amount) }
-    end.to_json
+    end
   end
 
   # Methods for deal with installment entries

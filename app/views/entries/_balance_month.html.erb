@@ -9,40 +9,38 @@
         <p class="ls-no-data">Ainda não há entradas neste mês</p>
     <% else %>
         <div id="sending-stats" class="row">
-            <div class="col-sm-6 col-md-4">
+            <div class="col-sm-12 col-xs-12 col-md-4">
                 <div class="ls-box">
                     <div class="ls-box-head">
                         <h6 class="ls-title-4">SALDO</h6>
                     </div>
                     <div class="ls-box-body">
-                        <strong class="<%= @month_color_class %>"><%= number_to_currency(@month_balance) %></strong>
+                      <strong class="<%= @month_color_class %>">
+                        <%= number_to_currency(@month_balance) %>
+                      </strong>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4">
+            <div class="col-sm-12 col-xs-12 col-md-4">
                 <div class="ls-box">
                     <div class="ls-box-head">
-                        <h6 class="ls-title-4 ls-ico-cart">DESPESAS</h6>
+                        <h6 class="ls-title-4">DESPESAS</h6>
                     </div>
                     <div class="ls-box-body">
                         <strong>
-                            <%=
-                            number_to_currency(@month_expense)
-                            %>
+                            <%= number_to_currency(@month_expense) %>
                         </strong>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-4">
+            <div class="col-sm-12 col-xs-12 col-md-4">
                 <div class="ls-box">
                     <div class="ls-box-head">
-                        <h6 class="ls-title-4 ls-ico-chart-bar-up">RECEITAS</h6>
+                        <h6 class="ls-title-4">RECEITAS</h6>
                     </div>
                     <div class="ls-box-body">
                         <strong>
-                            <%=
-                            number_to_currency(@month_revenue)
-                            %>
+                            <%= number_to_currency(@month_revenue) %>
                         </strong>
                     </div>
                 </div>

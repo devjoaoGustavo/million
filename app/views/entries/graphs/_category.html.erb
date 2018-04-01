@@ -1,32 +1,40 @@
 <div class="ls-box ls-board-box">
-    <header class="ls-info-header">
-        <h2 class="ls-title-3 ls-ico-envelop">Entradas por envelope</h2>
-        <p class="ls-float-right ls-float-none-xs ls-small-info">
-            Lançamentos a partir de <strong><%= DateTime.current.at_beginning_of_month.strftime('%d/%m/%Y') %></strong>
-        </p>
-    </header>
-    <div class="col-sm-12 col-md-6">
-        <div class="ls-box">
-            <div class="ls-box-head">
-                <h6 class="ls-title-4">DESPESAS</h6>
-            </div>
-            <pie-chart :params="<%= @expense_params %>" :data="<%= @expense_data %>"></pie-chart>
-            <div class="ls-box-footer">
-                <%= link_to 'Ver todas', expenses_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
-                'aria-label': 'Abrir todas as despesas' %>
-            </div>
+  <header class="ls-info-header">
+    <h2 class="ls-title-3 ls-ico-envelop">Entradas por envelope</h2>
+    <p class="ls-float-right ls-float-none-xs ls-small-info">
+      Lançamentos a partir de <strong><%= DateTime.current.at_beginning_of_month.strftime('%d/%m/%Y') %></strong>
+    </p>
+  </header>
+  <div class="col-sm-12 col-xs-12 col-md-6 ls-xs-space">
+    <div class="ls-box ls-no-padding-left ls-no-padding-right">
+      <% if JSON.parse(@expense_data).empty? %>
+        <p class="ls-no-data">Não há despesas neste mês</p>
+      <% else %>
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">DESPESAS</h6>
         </div>
-    </div>
-    <div class="col-sm-12 col-md-6">
-        <div class="ls-box">
-            <div class="ls-box-head">
-                <h6 class="ls-title-4">RECEITAS</h6>
-            </div>
-            <pie-chart :params="<%= @revenue_params %>" :data="<%= @revenue_data %>"></pie-chart>
-            <div class="ls-box-footer">
-                <%= link_to 'Ver todas', revenues_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
-                'aria-label': 'Abrir todas as receitas' %>
-            </div>
+        <pie-chart :params="<%= @expense_params %>" :data="<%= @expense_data %>"></pie-chart>
+        <div class="ls-box-footer">
+          <%= link_to 'Ver todas', expenses_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
+            'aria-label': 'Abrir todas as despesas' %>
         </div>
+      <% end %>
     </div>
+  </div>
+  <div class="col-sm-12 col-xs-12 col-md-6 ls-xs-space">
+    <div class="ls-box ls-no-padding-left ls-no-padding-right">
+      <% if JSON.parse(@revenue_data).empty? %>
+        <p class="ls-no-data">Não há receitas neste mês</p>
+      <% else %>
+        <div class="ls-box-head">
+          <h6 class="ls-title-4">RECEITAS</h6>
+        </div>
+        <pie-chart :params="<%= @revenue_params %>" :data="<%= @revenue_data %>"></pie-chart>
+        <div class="ls-box-footer">
+          <%= link_to 'Ver todas', revenues_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
+            'aria-label': 'Abrir todas as receitas' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

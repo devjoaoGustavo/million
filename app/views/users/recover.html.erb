@@ -1,6 +1,7 @@
 <div class="ls-login-box">
     <div class="ls-login-logo">
-        <h2>Recuperação de senha</h2>
+        <image src="<%= image_url('million-logo.svg') %>">
+        <h3>Recuperar senha</h3>
     </div>
     <%= form_tag '/recover', class: 'ls-form ls-login-form' do |f| %>
         <fieldset>
@@ -9,7 +10,7 @@
                 <%= email_field_tag :email, '' , placeholder: 'Digite o email cadastrado' %>
             </div>
 
-            <%= submit_tag "Recuperar", class: 'ls-btn-primary ls-btn-block ls-btn-lg' %>
+            <%= submit_tag 'Envie', class: 'ls-btn-primary ls-btn-block ls-btn-lg' %>
 
             <p class="ls-txt-center ls-login-signup">
                 Se lembrou de sua senha Million?<br>

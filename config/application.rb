@@ -33,8 +33,6 @@ module Million
       user_name: ENV['SMTP_USER_NAME']
     }
 
-    config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
@@ -42,6 +40,8 @@ module Million
     config.i18n.available_locales = 'pt-BR'
     config.i18n.default_locale = 'pt-BR'
     config.time_zone = 'Brasilia'
+
+    config.serve_static_assets = true
 
     config.filter_parameters << :password
 

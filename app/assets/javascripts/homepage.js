@@ -1,3 +1,3 @@
 //= require homepage/skel.min
-//= require application
+//= require jquery
 //= require_tree ./homepage

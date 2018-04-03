@@ -14,8 +14,3 @@
 //= require jquery
 //= require_tree .
 //= require rails.validations
-//= require amcharts3
-//= require amcharts3/amcharts/amcharts
-//= require amcharts3/amcharts/serial
-//= require amcharts3/amcharts/pie
-//= require amcharts3/amcharts/themes/light

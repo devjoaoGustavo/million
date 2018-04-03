@@ -11,25 +11,17 @@ import Vue from 'vue/dist/vue.esm'
 
 import Intro from '../components/intro.vue'
 import Alert from '../components/alert.vue'
-import ExpenseDiary from '../components/expense_diary.vue'
-import RevenueDiary from '../components/revenue_diary.vue'
-import BalanceChart from '../components/graphs/balance.vue'
-import CategoryChart from '../components/graphs/category.vue'
-import PieChart from '../components/graphs/pie.vue'
+import ByCategory from '../components/graphs/by_category.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
-    const app = new Vue({
-        el: '#app',
-        components: {
-            'intro': Intro,
-            'alert': Alert,
-            'expense-diary': ExpenseDiary,
-            'revenue-diary': RevenueDiary,
-            'balance-chart': BalanceChart,
-            'category-chart': CategoryChart,
-            'pie-chart': PieChart
-        }
-    })
+  const app = new Vue({
+    el: '#app',
+    components: {
+      'intro': Intro,
+      'alert': Alert,
+      'by-category': ByCategory
+    }
+  })
 
-    console.log(app)
+  console.log(app)
 })

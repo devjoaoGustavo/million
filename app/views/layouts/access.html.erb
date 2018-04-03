@@ -18,9 +18,6 @@
             <div class="ls-login-inner">
                 <div class="ls-login-container">
                     <div id="app" class="ls-height-inherit">
-                        <% if @welcome.present? %>
-                            <welcome :params="<%= @welcome %>"></welcome>
-                        <% end %>
                         <alert
                             :is-alert="<%= flash[:alert].present? %>"
                             :is-notice="<%= flash[:notice].present? %>"

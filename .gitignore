@@ -20,9 +20,9 @@
 .env/public/packs
 /public/packs-test
 /node_modules
+yarn.lock
 yarn-debug.log*
 .yarn-integrity
 Procfile
-yarn.lock
 .env
 .DS_Store

@@ -12,6 +12,7 @@ import Vue from 'vue/dist/vue.esm'
 import Intro from '../components/intro.vue'
 import Alert from '../components/alert.vue'
 import ByCategory from '../components/graphs/by_category.vue'
+import Goals from '../components/goals/index.vue'
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
@@ -19,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     components: {
       'intro': Intro,
       'alert': Alert,
-      'by-category': ByCategory
+      'by-category': ByCategory,
+      'goals': Goals
     }
   })
 

@@ -89,9 +89,10 @@
                 <% if logged_in? %>
                     <nav class="ls-menu hidden-xs">
                         <ul>
-                            <li><%= link_to 'Painel',   dashboard_path(current_user), class: 'ls-ico-dashboard',    'aria-label': 'Painel inicial' %></li>
-                            <li><%= link_to 'Despesas', expenses_path(current_user),  class: 'ls-ico-cart',         'aria-label': 'Painel de despesas' %></li>
-                            <li><%= link_to 'Receitas', revenues_path(current_user),  class: 'ls-ico-chart-bar-up', 'aria-label': 'Painel de receitas' %></li>
+                            <li><%= link_to 'Painel',    dashboard_path(current_user),  class: 'ls-ico-dashboard',    'aria-label': 'Painel inicial' %></li>
+                            <li><%= link_to 'Despesas',  expenses_path(current_user),   class: 'ls-ico-cart',         'aria-label': 'Painel de despesas' %></li>
+                            <li><%= link_to 'Receitas',  revenues_path(current_user),   class: 'ls-ico-chart-bar-up', 'aria-label': 'Painel de receitas' %></li>
+                            <li><%= link_to 'Objetivos', user_goals_path(current_user), class: 'ls-ico-trophy',       'aria-label': 'Painel de objetivos' %></li>
                         </ul>
                     </nav>
                     <div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">

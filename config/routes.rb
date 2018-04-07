@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
   namespace :api do
     resources :users, only: [] do
-      resources :goals, only: %i(index)
+      resources :goals, only: %i(index create)
     end
   end
   get  '/signup',                 to: 'users#new',               as: 'signup'

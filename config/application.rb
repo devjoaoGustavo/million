@@ -35,6 +35,8 @@ module Million
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
+      g.test_framework :rspec
+      g.factory_bot false
     end
 
     config.i18n.available_locales = 'pt-BR'
@@ -44,9 +46,5 @@ module Million
     config.serve_static_assets = true
 
     config.filter_parameters << :password
-
-    Raven.configure do |cfg|
-      cfg.dsn = ENV['SENTRY_DSN']
-    end
   end
 end

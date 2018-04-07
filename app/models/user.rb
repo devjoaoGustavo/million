@@ -2,6 +2,8 @@ class User < ApplicationRecord
   has_secure_password
   has_many :entries
   validates :email, :username, presence: true
+  has_many :dreams, dependent: :destroy
+  has_many :goals, through: :dreams
 
   validates_with UserValidator, fields: [:email]
   validate do |record|

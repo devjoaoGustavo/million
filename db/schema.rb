@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180330033112) do
+ActiveRecord::Schema.define(version: 20180407001942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,15 @@ ActiveRecord::Schema.define(version: 20180330033112) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "dreams", force: :cascade do |t|
+    t.uuid "goal_id"
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goal_id"], name: "index_dreams_on_goal_id"
+    t.index ["user_id"], name: "index_dreams_on_user_id"
+  end
+
   create_table "entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "description"
     t.uuid "user_id", null: false
@@ -34,8 +43,10 @@ ActiveRecord::Schema.define(version: 20180330033112) do
     t.datetime "updated_at", null: false
     t.datetime "entry_date", default: -> { "now()" }, null: false
     t.uuid "entry_id"
+    t.uuid "goal_id"
     t.index ["category_id"], name: "index_entries_on_category_id"
     t.index ["entry_id"], name: "index_entries_on_entry_id"
+    t.index ["goal_id"], name: "index_entries_on_goal_id"
     t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
@@ -46,6 +57,17 @@ ActiveRecord::Schema.define(version: 20180330033112) do
     t.datetime "updated_at", null: false
     t.index ["entry_id"], name: "index_entries_tags_on_entry_id"
     t.index ["tag_id"], name: "index_entries_tags_on_tag_id"
+  end
+
+  create_table "goals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description"
+    t.string "status", default: "active", null: false
+    t.date "deadline", null: false
+    t.decimal "amount", null: false
+    t.decimal "reached", default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

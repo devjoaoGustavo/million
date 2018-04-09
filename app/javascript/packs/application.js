@@ -13,6 +13,7 @@ import Intro from '../components/intro.vue'
 import Alert from '../components/alert.vue'
 import ByCategory from '../components/graphs/by_category.vue'
 import Goals from '../components/goals/index.vue'
+import Goal from '../components/goals/show.vue'
 
 Vue.filter('currency', function(value) {
   return 'R$ ' + Number(value)
@@ -33,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'intro': Intro,
       'alert': Alert,
       'by-category': ByCategory,
-      'goals': Goals
+      'goals': Goals,
+      'goal': Goal
     }
   });
   console.log(app)

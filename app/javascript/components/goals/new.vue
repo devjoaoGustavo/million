@@ -33,8 +33,8 @@
             <small class="ls-label-info">Quando você irá realizá-lo?</small>
           </label>
           <label class="ls-label col-md-4 col-xs-12">
-            <button class="ls-btn-primary" @click="createGoal()">Salvar</button>
-            <button class="ls-btn-danger" @click="clear()">Limpar</button>
+            <a href="#" class="ls-btn ls-btn-primary" @click="createGoal()">Salvar</a>
+            <a href="#" class="ls-btn ls-btn-danger" @click="clear()">Limpar</a>
           </label>
         </form>
       </div>
@@ -72,9 +72,9 @@ export default {
       })
     },
     clear: function() {
-      this.title = ''
-      this.amount = ''
-      this.deadline = ''
+      this.title       = ''
+      this.amount      = ''
+      this.deadline    = ''
       this.description = ''
     },
     updateDeadline: function(evt) {

@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:id="params.chartId" v-on:resize="drawChart" style="width: 100%; height: 400px;"></div>
+  <div :id="params.chartId" @resize="drawChart" class="ls-full-width ls-height-auto ls-no-padding"></div>
 </template>
 
 <script>
@@ -11,23 +11,26 @@ export default {
   data: function() {
     return {
       options: {
-        backgroundColor: '#f7f7f7',
+        backgroundColor: {
+          fill: 'transparent'
+        },
         is3D: true,
-        legend: { position: 'bottom' },
+        legend: {
+          position: 'right',
+          alignment: 'center'
+        },
         chartArea: {
-          top: 10,
-          width: '75%',
-          height: '75%'
+          width: '96%',
+          height: '96%'
         }
-      },
-      rows: [['Category', 'Amount'],['Supermercado', 340.90],['Conta de agua', 25.54],['Conta de luz', 105.54],['Investimento', 283.00],['Aluguel', 2200.00]]
+      }
     }
   },
   methods: {
     drawChart: function() {
       var content = new google.visualization.arrayToDataTable(this.$props.data)
-
-      var chart = new google.visualization.PieChart(document.getElementById(this.$props.params.chartId))
+      var chart   = new google.visualization
+        .PieChart(document.getElementById(this.$props.params.chartId))
       chart.draw(content, this.$data.options)
     }
   },

@@ -2,14 +2,18 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#home'
 
-  resources :users, only: %i(create) do
-    resources :goals, only: %i(index)
-  end
   namespace :api do
     resources :users, only: [] do
       resources :goals, only: %i(index create)
     end
+    resources :goals, only: [] do
+      get '/expenses', to: 'entries#list'
+    end
   end
+  resources :users, only: %i(create) do
+    resources :goals, only: %i(index)
+  end
+  resources :goals, only: %i(show)
   get  '/signup',                 to: 'users#new',               as: 'signup'
   get  '/users/:id/confirmation', to: 'users#confirm',           as: 'confirmation'
   get  '/recover',                to: 'users#recover',           as: 'recover_password'

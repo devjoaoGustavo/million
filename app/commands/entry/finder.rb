@@ -13,7 +13,9 @@ class Entry < ApplicationRecord
     def list(params)
       if params[:goal_id].present?
         goal = Goal.find(params[:goal_id])
-        goal.expenses.order(entry_date: :desc)
+        goal.expenses
+          .where('entry_date <= ?',
+                 Time.current.at_end_of_day.utc).order(entry_date: :desc)
       end
     end
 

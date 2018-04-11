@@ -58,6 +58,7 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
           <li><%= link_to 'Painel', dashboard_path(current_user) %></li>
           <li><%= link_to 'Receitas', revenues_path(current_user) %></li>
           <li><%= link_to 'Despesas', expenses_path(current_user) %></li>
+          <li><%= link_to 'Objetivos', user_goals_path(current_user) %></li>
           <li>
             <%= button_to 'Sair', logout_path, class: 'button special small', method: :delete %>
           </li>
@@ -73,9 +74,9 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
       <div class="inner">
         <header>
           <h1>Este é o Million</h1>
-          <p>Um gerenciador pessoal de finanças simples e eficiente.<br>
-            Com ele, você tem uma visão de suas receitas e despesas de forma clara,<br>
-            planejando-se melhor para o futuro e possíveis imprevistos.</p>
+          <p>O aplicativo de educação financeira mais simples e eficiente que você já viu.<br>
+            Com ele, você tem uma visão clara e completa de suas receitas e despesas,<br>
+            podendo planejar-se melhor para o futuro e realizar seus sonhos.</p>
         </header>
         <a href="#main" class="button big more">Saiba mais</a>
       </div>
@@ -96,7 +97,9 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
             </div>
             <div class="col col2">
               <h3>Onde queremos chegar?</h3>
-              <p>O objetivo do Million é ajudar você a se educar na gestão de suas finanças e a se planejar, fazendo com que alcance cada uma de suas metas.</p>
+              <p>O propósito do <strong>Million</strong> é ajudar você a se educar na gestão de suas finanças e a se planejar, te auxiliando para que alcance cada uma de suas metas.</p>
+              <p>E como faremos isso? De maneira prática, você pode lançar seus objetivos no <strong>Million</strong>, informando o valor e a data até a qual você gostaria de realizar seu objetivo.
+                Depois disso, cada nova despesas que você cadastrar poderá ser relacionada a um objetivo estabelecido, que será automaticamente atualizado.</p>
               <%= link_to 'Cadastre-se', signup_path, class: 'button' %>
             </div>
           </div>
@@ -109,7 +112,7 @@ Released for free under the Creative Commons Attribution 3.0 license (templated.
           <div class="flex flex-2">
             <div class="col col2">
               <h3>A que pé estamos?</h3>
-              <p>Nesta versão inicial, o <strong>Million</strong> permite adicionar suas receitas e despesas, únicas ou parceladas, e visualizar os saldos de diferentes maneiras.
+              <p>No <strong>Million</strong> você pode adicionar suas receitas e despesas, únicas ou parceladas, e visualizar os saldos de diferentes maneiras.
                 Mas não paramos por aqui. Estamos trabalhando constantemente em nosso painel, afim de tornar esta a melhor experiência financeira de sua vida, e em breve teremos muitas novidades para você.</p>
               <p>Logo você também poderá cadastrar orçamentos, dando a cada <strong>envelope</strong> (categoria de receita ou despesa) um valor previsto de gastos ou ganhos.
                 Com estes orçamentos, e com a visão em tempo real de seu saldo, você verá com clareza para onde está indo seu dinheiro.</p>

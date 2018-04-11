@@ -1,5 +1,21 @@
 <%= render 'collapsed_form' %>
+
 <%= render 'filter_form', path: search_path(current_user), entry_type: 'Entry::Revenue' %>
 
-
-<%= render 'table' %>
+<% if @entries.present? %>
+  <%= render 'table' %>
+<% else %>
+  <div class="ls-box-group ls-md-margin-top">
+    <div class="ls-box ls-box-gray ls-md-space">
+      <div class="row">
+        <div class="col-md-2 ls-txt-center">
+          <span class="ls-ico-alone ls-ico-chart-bar-up"></span>
+        </div>
+        <div class="col-md-10">
+          <h3 class="ls-title-3 ls-md-margin-bottom"><strong>Você ainda não tem receitas aqui.</strong></h3>
+          <p>Comece a lançar suas receitas e acompanhe com clareza o quanto você ganha.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

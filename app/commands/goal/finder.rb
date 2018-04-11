@@ -34,10 +34,17 @@ class Goal < ApplicationRecord
           amount:      goal.amount,
           description: goal.description,
           deadline:    goal.deadline.strftime('%Y-%m-%d'),
-          reached:     ((goal.expenses.sum(&:amount) / goal.amount) * 100).to_f,
+          reached:     reached(goal),
           show_path:   goal_path(goal)
         }
       end
+    end
+
+    def reached(goal)
+      ((goal
+        .expenses
+        .where('entry_date <= ?', Time.current.at_end_of_day.utc)
+        .sum(&:amount) / goal.amount) * 100).to_f
     end
   end
 end

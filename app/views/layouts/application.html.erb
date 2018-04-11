@@ -68,7 +68,7 @@
                     <%= yield %>
                 </div>
 
-                <footer class="ls-footer" style="bottom: 0;">
+                <footer class="ls-footer">
                     <nav class="ls-footer-menu">
                         <h2 class="ls-title-footer">CONTATO</h2>
                         <ul class="ls-footer-list">
@@ -95,15 +95,15 @@
                             <li><%= link_to 'Objetivos', user_goals_path(current_user), class: 'ls-ico-trophy',       'aria-label': 'Painel de objetivos' %></li>
                         </ul>
                     </nav>
-                    div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">
+                    <div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">
                         <a href="#" class="ls-ico-user">
                             <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>
                         </a>
                         <nav class="ls-dropdown-nav ls-user-menu" aria-hidden="true">
                             <ul>
-                                <li><%= link_to 'Painel',   dashboard_path(current_user), class: 'ls-ico-dashboard',    'aria-label': 'Painel inicial' %></li>
-                                <li><%= link_to 'Despesas', expenses_path(current_user),  class: 'ls-ico-cart',         'aria-label': 'Painel de despesas' %></li>
-                                <li><%= link_to 'Receitas', revenues_path(current_user),  class: 'ls-ico-chart-bar-up', 'aria-label': 'Painel de receitas' %></li>
+                                <li><%= link_to 'Painel',    dashboard_path(current_user),  class: 'ls-ico-dashboard',    'aria-label': 'Painel inicial' %></li>
+                                <li><%= link_to 'Despesas',  expenses_path(current_user),   class: 'ls-ico-cart',         'aria-label': 'Painel de despesas' %></li>
+                                <li><%= link_to 'Receitas',  revenues_path(current_user),   class: 'ls-ico-chart-bar-up', 'aria-label': 'Painel de receitas' %></li>
                                 <li><%= link_to 'Objetivos', user_goals_path(current_user), class: 'ls-ico-trophy',       'aria-label': 'Painel de objetivos' %></li>
                             </ul>
                             <%= link_to 'Sair', logout_path, method: :delete, class: 'ls-btn-logout', role: 'combobox', 'aria-expanded': 'false' %>

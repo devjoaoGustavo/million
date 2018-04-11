@@ -68,6 +68,7 @@ class Entry < ApplicationRecord
   end
 
   def installment_label
+    return unless installments?
     sprintf("%d/%d", number, installments.count)
   end
 

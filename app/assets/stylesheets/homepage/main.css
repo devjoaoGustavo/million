@@ -3784,11 +3784,11 @@
 			-moz-transition: opacity 3s ease;
 			-webkit-transition: opacity 3s ease;
 			-ms-transition: opacity 3s ease;
-			transition: opacity 3s ease;
-			-moz-transition-delay: 1.25s;
-			-webkit-transition-delay: 1.25s;
-			-ms-transition-delay: 1.25s;
-			transition-delay: 1.25s;
+			transition: opacity 1s ease;
+			-moz-transition-delay: 1s;
+			-webkit-transition-delay: 1s;
+			-ms-transition-delay: 1s;
+			transition-delay: 1s;
 			content: '';
 			display: block;
 			background-color: #000;
@@ -3857,7 +3857,7 @@
 		}
 
 		body.is-loading #banner:before {
-			opacity: 1;
+			opacity: 0.99;
 		}
 
 /* Footer */

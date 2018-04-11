@@ -19,7 +19,8 @@ class Entry < ApplicationRecord
         category_id: params[:category_id],
         description: params[:description],
         amount:      parse_amount(params[:amount]),
-        entry_date:  params[:entry_date]
+        entry_date:  params[:entry_date],
+        goal_id:     params[:goal_id]
       )
     end
 

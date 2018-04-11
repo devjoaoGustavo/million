@@ -21,6 +21,7 @@ class Entry < ApplicationRecord
         description: params[:description],
         entry_date:  params[:entry_date],
         entry_id:    params[:entry_id],
+        goal_id:     params[:goal_id],
         amount:      parse_amount(params[:amount]),
       ).tap do |previous_entry|
         create!(

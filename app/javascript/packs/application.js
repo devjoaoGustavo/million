@@ -12,6 +12,20 @@ import Vue from 'vue/dist/vue.esm'
 import Intro from '../components/intro.vue'
 import Alert from '../components/alert.vue'
 import ByCategory from '../components/graphs/by_category.vue'
+import Goals from '../components/goals/index.vue'
+import Goal from '../components/goals/show.vue'
+
+Vue.filter('currency', function(value) {
+  return 'R$ ' + Number(value)
+    .toFixed(2)
+    .replace(',','')
+    .replace('.',',')
+    .replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
+});
+Vue.filter('formatDate', function(value) {
+  var date = new Date(value)
+  return String('00' + date.getUTCDate()).slice(-2) + '/' + String('00' + (date.getUTCMonth() + 1)).slice(-2) + '/' + date.getUTCFullYear()
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
@@ -19,9 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
     components: {
       'intro': Intro,
       'alert': Alert,
-      'by-category': ByCategory
+      'by-category': ByCategory,
+      'goals': Goals,
+      'goal': Goal
     }
-  })
-
+  });
   console.log(app)
 })

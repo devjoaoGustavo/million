@@ -76,6 +76,7 @@ class EntriesController < ApplicationController
   end
 
   def expenses
+    @goals = current_user.goals
     new_entry('Entry::Expense')
     intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: dashboard_path(current_user.id))
   end
@@ -101,6 +102,7 @@ class EntriesController < ApplicationController
   end
 
   def edit
+    @goals = current_user.goals
     @entry = find_entry
     intro(message:   @entry.expense? ? 'Despesas' : 'Receitas',
           ico_class: @entry.expense? ? 'ls-ico-cart' : 'ls-ico-chart-bar-up',
@@ -221,7 +223,7 @@ class EntriesController < ApplicationController
   def create_params
     key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
     params.require(key)
-      .permit(:category_id, :description, :entry_date, :type)
+      .permit(:category_id, :description, :entry_date, :type, :goal_id)
       .merge(user_id: current_user.id)
       .merge(amount: params.dig(key, :currency))
       .merge(installments: params[:installments])
@@ -230,7 +232,7 @@ class EntriesController < ApplicationController
   def update_params
     key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
     params.require(key)
-      .permit(:category_id, :description, :entry_date)
+      .permit(:category_id, :description, :entry_date, :goal_id)
       .merge(id: params[:id])
       .merge(user_id: current_user.id)
       .merge(amount: params.dig(key, :currency))

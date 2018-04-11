@@ -1,5 +1,7 @@
 ---
 pt-BR:
+  messages:
+    lets_get_rich: 'Bora ficar rico, meu povo!'
   activerecord:
     errors:
       messages:

@@ -10,37 +10,22 @@ class EntriesController < ApplicationController
 
   def index
     intro(message: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
-    @expenses    = Entry::Expense.by_user(current_user.id)
-    @revenues    = Entry::Revenue.by_user(current_user.id)
-    @balance     = (@revenues.sum(&:amount) - @expenses.sum(&:amount)).to_f
-    @color_class = css_color_class(@balance)
+    user = UserDecorator.decorate(current_user)
+    @options = { userid: current_user.id, token: form_authenticity_token }.to_json
+    @color_class = css_color_class(user.balance.to_f)
 
-    @month_expense     = @expenses.where(entry_date: this_month).sum(&:amount).to_f
-    @month_revenue     = @revenues.where(entry_date: this_month).sum(&:amount).to_f
-    @month_balance     = @month_revenue - @month_expense
-    @month_color_class = css_color_class(@month_balance)
-
-    @seven_days_expense     = @expenses.where(entry_date: last_days(7)).sum(&:amount).to_f
-    @seven_days_revenue     = @revenues.where(entry_date: last_days(7)).sum(&:amount).to_f
+    @seven_days_expense     = user.expenses_of_last_days(7).sum(&:amount).to_f
+    @seven_days_revenue     = user.revenues_of_last_days(7).sum(&:amount).to_f
     @seven_days_balance     = @seven_days_revenue - @seven_days_expense
     @seven_days_color_class = css_color_class(@seven_days_balance)
 
-    @today_expense     = @expenses.where(entry_date: today).sum(&:amount).to_f
-    @today_revenue     = @revenues.where(entry_date: today).sum(&:amount).to_f
+    @today_expense     = user.expenses_of_today.sum(&:amount).to_f
+    @today_revenue     = user.revenues_of_today.sum(&:amount).to_f
     @today_balance     = @today_revenue - @today_expense
     @today_color_class = css_color_class(@today_balance)
 
-    @expense_params = { chartId: 'expense-by-category' }.to_json
-    @data_expense = Entry::Expense
-      .amount_by_category(user_id: current_user.id, period: this_month)
-      .map(&:values)
-      .unshift(['Category', 'Amount'])
-
-    @revenue_params = { chartId: 'revenue-by-category' }.to_json
-    @data_revenue = Entry::Revenue
-      .amount_by_category(user_id: current_user.id, period: this_month)
-      .map(&:values)
-      .unshift(['Category', 'Amount'])
+    @data_expense = user.expenses_by_category
+    @data_revenue = user.revenues_by_category
   end
 
   def search
@@ -223,19 +208,17 @@ class EntriesController < ApplicationController
   def create_params
     key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
     params.require(key)
-      .permit(:category_id, :description, :entry_date, :type, :goal_id)
+      .permit(:category_id, :description, :amount, :entry_date, :type, :goal_id)
       .merge(user_id: current_user.id)
-      .merge(amount: params.dig(key, :currency))
       .merge(installments: params[:installments])
   end
 
   def update_params
     key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
     params.require(key)
-      .permit(:category_id, :description, :entry_date, :goal_id)
+      .permit(:category_id, :description, :amount, :entry_date, :goal_id)
       .merge(id: params[:id])
       .merge(user_id: current_user.id)
-      .merge(amount: params.dig(key, :currency))
   end
 
   def destroy_params

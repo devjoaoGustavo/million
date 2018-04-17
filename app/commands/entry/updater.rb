@@ -18,7 +18,7 @@ class Entry < ApplicationRecord
       @entry.update_attributes(
         category_id: params[:category_id],
         description: params[:description],
-        amount:      parse_amount(params[:amount]),
+        amount:      params[:amount],
         entry_date:  params[:entry_date],
         goal_id:     params[:goal_id]
       )
@@ -26,12 +26,6 @@ class Entry < ApplicationRecord
 
     def find_entry(params)
       @entry = Entry.find_by(user_id: params[:user_id], id: params[:id])
-    end
-
-    def parse_amount(input)
-      BigDecimal(input.remove('.').gsub(',', '.')).to_f
-    rescue
-      raise ::InvalidCurrencyFormat
     end
   end
 end

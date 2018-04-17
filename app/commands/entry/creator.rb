@@ -37,7 +37,7 @@ class Entry < ApplicationRecord
     end
 
     def parse_amount(input)
-      BigDecimal(input.remove('.').gsub(',', '.')).to_f
+      BigDecimal(input).to_f
     rescue
       raise ::InvalidCurrencyFormat
     end

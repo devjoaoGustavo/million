@@ -1,48 +1,28 @@
 <div class="ls-box ls-board-box">
-    <header class="ls-info-header">
-        <h2 class="ls-title-3">Resumo do dia</h2>
-        <p class="ls-float-right ls-float-none-xs ls-small-info">Lançamentos do dia <strong><%= DateTime.current.strftime('%d/%m/%Y') %></strong></p>
-    </header>
-    <% if @today_expense.zero? && @today_revenue.zero? %>
-        <p class="ls-no-data">Ainda não há entradas hoje</p>
-    <% else %>
-        <div id="sending-stats" class="row">
-            <div class="col-sm-12 col-xs-12 col-md-3">
-                <div class="ls-box">
-                    <div class="ls-box-head">
-                        <h6 class="ls-title-4">SALDO</h6>
-                    </div>
-                    <div class="ls-box-body">
-                        <strong class="<%= @today_color_class %>">
-                            <%= number_to_currency(@today_balance) %>
-                        </strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-xs-12 col-md-3">
-                <div class="ls-box">
-                    <div class="ls-box-head">
-                        <h6 class="ls-title-4">DESPESAS</h6>
-                    </div>
-                    <div class="ls-box-body">
-                        <strong>
-                            <%= number_to_currency(@today_expense) %>
-                        </strong>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-xs-12 col-md-3">
-                <div class="ls-box">
-                    <div class="ls-box-head">
-                        <h6 class="ls-title-4">RECEITAS</h6>
-                    </div>
-                    <div class="ls-box-body">
-                        <strong>
-                            <%= number_to_currency(@today_revenue) %>
-                        </strong>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <% end %>
+  <header class="ls-info-header">
+    <h2 class="ls-title-3">Resumo do dia</h2>
+    <p class="ls-float-right ls-float-none-xs ls-small-info">
+      Lançamentos do dia <strong><%= DateTime.current.strftime('%d/%m/%Y') %></strong>
+    </p>
+  </header>
+  <div id="sending-stats" class="row">
+    <div class="col-sm-12 col-xs-12 col-md-3">
+      <daily-balance
+        :userid="<%= current_user.id.to_json %>"
+        :reload="reloadBalance">
+      </daily-balance>
+    </div>
+    <div class="col-sm-12 col-xs-12 col-md-3">
+      <daily-expense
+        :userid="<%= current_user.id.to_json %>"
+        :reload="reloadBalance">
+      </daily-expense>
+    </div>
+    <div class="col-sm-12 col-xs-12 col-md-3">
+      <daily-revenue
+        :userid="<%= current_user.id.to_json %>"
+        :reload="reloadBalance">
+      </daily-revenue>
+    </div>
+  </div>
 </div>

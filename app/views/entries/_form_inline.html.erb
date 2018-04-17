@@ -4,46 +4,41 @@
     <fieldset>
       <div class="row">
         <%= f.hidden_field :type, value: @entry.type %>
-        <label class="ls-label col-md-3 col-xs-12">
+        <label class="ls-label col-md-3 col-xs-12 ls-xs-space ls-no-padding-bottom ls-no-padding-top">
           <%= content_tag :b, 'Categoria', class: 'ls-label-text ls-hidden-accessible' %>
           <div class="ls-custom-select">
-            <%= f.collection_select :category_id, @categories, :id, :name, prompt: 'Selecione um envelope...', class: 'ls-field-sm' %>
+            <%= f.collection_select :category_id, @categories, :id, :name, prompt: 'Envelope...', class: 'ls-field-sm' %>
           </div>
         </label>
-        <label class="ls-label col-md-3 col-xs-12">
+        <label class="ls-label col-md-3 col-xs-12 ls-xs-space ls-no-padding-bottom ls-no-padding-top">
           <%= content_tag :b, 'Descrição', class: 'ls-label-text ls-hidden-accessible' %>
           <%= f.text_field :description, placeholder: 'Descrição' %>
         </label>
-        <label class="ls-label col-md-2 col-xs-12">
+        <label class="ls-label col-md-2 col-xs-12 ls-xs-space ls-no-padding-bottom ls-no-padding-top">
           <%= content_tag :b, 'Valor', class: 'ls-label-text ls-hidden-accessible' %>
-          <%= f.text_field :currency, placeholder: 'Valor (ex.: 1.234,56)' %>
+          <%= f.number_field :amount, min: '0.00', step: '0.01', placeholder: 'Valor (1234,56)' %>
         </label>
-        <label class="ls-label col-md-2 col-xs-12">
-          <div class="ls-prefix-group">
-            <%= content_tag :b, 'data', class: 'ls-label-text ls-hidden-accessible' %>
-            <%= f.text_field :entry_date, id: 'entry_entry_date', class: 'datepicker', placeholder: 'data (ex.: 04/03/2018)' %>
-            <a href="#" class="ls-label-text-prefix ls-ico-calendar" data-trigger-calendar="#entry_entry_date"></a>
-          </div>
+        <label class="ls-label col-md-2 col-xs-12 ls-xs-space ls-no-padding-bottom ls-no-padding-top">
+          <%= f.date_field :entry_date, style: 'height: 33px;' %>
+          <%= content_tag :b, 'data', class: 'ls-label-text ls-ico-calendar ls-color-theme ls-xs-space' %>
         </label>
         <% unless @entry.persisted? %>
-          <div class="ls-form ls-form-inline col-md-2 col-xs-6 row">
-            <label class="ls-label col-md-12 col-xs-12 ls-no-padding-right">
-              <%= content_tag :b, 'Parcelas', class: 'ls-label-text ls-color-theme' %>
-              <%= number_field_tag :installments, '1', class: 'ls-txt-center', step: 1, max: 720, min: 1 %>
-            </label>
-          </div>
+          <label class="ls-label col-md-2 col-xs-12 ls-xs-space ls-no-padding-bottom ls-no-padding-top">
+            <%= number_field_tag :installments, '1', class: 'ls-txt-center', step: 1, max: 720, min: 1 %>
+            <%= content_tag :b, 'Parcelas', class: 'ls-label-text ls-color-theme' %>
+          </label>
         <% end %>
       </div>
-      <div class="row ls-sm-margin-top">
+      <div class="row">
         <% if @entry.expense? %>
-          <label class="ls-label col-md-3 col-xs-12">
+          <label class="ls-label col-md-3 col-xs-12 ls-xs-space ls-no-padding-bottom ls-no-padding-top">
             <%= content_tag :b, 'Objetivo', class: 'ls-label-text ls-hidden-accessible' %>
             <div class="ls-custom-select">
               <%= f.collection_select :goal_id, @goals, :id, :title, include_blank: true, prompt: 'Realize um objetivo...', class: 'ls-field-sm' %>
             </div>
           </label>
         <% end %>
-        <label class="ls-label col-md-2 col-xs-12">
+        <label class="ls-label col-md-2 col-xs-12 ls-xs-space ls-no-padding-bottom ls-no-padding-top">
           <%= f.submit 'Salvar', class: 'ls-btn ls-btn-primary ls-no-margin-top' %>
         </label>
       </div>

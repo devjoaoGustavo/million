@@ -23,6 +23,7 @@ class Goal < ApplicationRecord
           .goals
           .where
           .not(status: :inactive)
+          .order(deadline: :asc)
       end
     end
 
@@ -35,7 +36,9 @@ class Goal < ApplicationRecord
           description: goal.description,
           deadline:    goal.deadline.strftime('%Y-%m-%d'),
           reached:     reached(goal),
-          show_path:   goal_path(goal)
+          show_path:   goal_path(goal),
+          edit_path:   edit_goal_path(goal),
+          delete_path: goal_path(goal)
         }
       end
     end

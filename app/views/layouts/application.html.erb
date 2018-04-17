@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css">
     </head>
 
-    <body style="min-height: 100%px;">
+    <body style="min-height: 100%;">
         <div id="app">
             <div class="ls-topbar">
                 <!-- Barra de Notificações -->
@@ -59,11 +59,7 @@
                     <% if @intro.present? %>
                         <intro :params="<%= @intro %>"></intro>
                     <% end %>
-                    <alert
-                        :is-alert="<%= flash[:alert].present? %>"
-                        :is-notice="<%= flash[:notice].present? %>"
-                        :message="<%= (flash[:notice] || flash[:alert]).to_json %>">
-                    </alert>
+                    <alert :is-alert="isAlert" :is-notice="isNotice" :message="message" @close="closeAlert()"></alert>
 
                     <%= yield %>
                 </div>

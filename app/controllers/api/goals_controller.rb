@@ -12,6 +12,16 @@ module Api
       result[:errors] ? render_precondition_failed(result) : render_ok(result)
     end
 
+    def update
+      result = updater.call(goal_params)
+      result[:errors] ? render_precondition_failed(result) : render_ok(result)
+    end
+
+    def destroy
+      destroyer.call(goal_id: params[:id])
+      head :ok
+    end
+
     private
 
     def render_ok(result)
@@ -30,9 +40,17 @@ module Api
       Goal::Creator.new
     end
 
+    def updater
+      Goal::Updater.new
+    end
+
+    def destroyer
+      Goal::Destroyer.new
+    end
+
     def goal_params
       params
-        .permit(:title, :description, :deadline, :amount)
+        .permit(:id, :title, :description, :deadline, :amount)
         .merge(user_id: current_user.id)
     end
   end

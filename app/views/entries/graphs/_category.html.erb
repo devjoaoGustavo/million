@@ -17,7 +17,10 @@
           <%= link_to 'DESPESAS', expenses_path(current_user), class: 'ls-tooltip-bottom ls-title-4',
             'aria-label': 'Abrir todas as despesas' %>
         </div>
-        <by-category :params="<%= @expense_params %>" :data="<%= @data_expense %>"></by-category>
+        <by-category
+          :chartid="<%= 'expenses-by-category'.to_json %>"
+          :data="<%= @data_expense %>">
+        </by-category>
       <% end %>
     </div>
   </div>
@@ -30,7 +33,10 @@
           <%= link_to 'RECEITAS', revenues_path(current_user), class: 'ls-tooltip-bottom ls-title-4',
             'aria-label': 'Abrir todas as despesas' %>
         </div>
-        <by-category :params="<%= @revenue_params %>" :data="<%= @data_revenue %>"></by-category>
+        <by-category
+          :chartid="<%= 'revenues-by-category'.to_json %>"
+          :data="<%= @data_revenue %>">
+        </by-category>
       <% end %>
     </div>
   </div>

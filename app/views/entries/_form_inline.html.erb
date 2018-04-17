@@ -19,10 +19,7 @@
           <%= f.number_field :amount, min: '0.00', step: '0.01', placeholder: 'Valor (1234,56)' %>
         </label>
         <label class="ls-label col-md-2 col-xs-12 ls-xs-space ls-no-padding-bottom ls-no-padding-top">
-          <div class="ls-prefix-group">
-            <%= f.text_field :entry_date, id: 'entry_date', class: 'datepicker', style: 'height: 33px;' %>
-            <a class="ls-label-text-prefix ls-ico-calendar" data-trigger-calendar="#entry_date" href="#"></a>
-          </div>
+          <%= f.date_field :entry_date, style: 'height: 33px;' %>
           <%= content_tag :b, 'data', class: 'ls-label-text ls-ico-calendar ls-color-theme ls-xs-space' %>
         </label>
         <% unless @entry.persisted? %>

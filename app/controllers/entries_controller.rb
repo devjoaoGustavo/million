@@ -88,7 +88,7 @@ class EntriesController < ApplicationController
 
   def edit
     @goals = current_user.goals
-    @entry = EntryDecorator.decorate(find_entry)
+    @entry = find_entry
     intro(message:   @entry.expense? ? 'Despesas' : 'Receitas',
           ico_class: @entry.expense? ? 'ls-ico-cart' : 'ls-ico-chart-bar-up',
           href:      entry_path(@entry.id))

@@ -40,10 +40,7 @@
               <small class="ls-label-text ls-color-theme">Valor</small>
             </label>
             <label class="ls-label col-md-4 col-xs-12 ls-txt-left ls-xs-space ls-no-padding-top ls-no-padding-bottom">
-              <div class="ls-prefix-group">
-              <input id="entry_date" class="datepicker ls-field-sm" type="date" name="entry_date" @focus="setEntryDate($event)" placeholder="dd/mm/aaaa" v-model="entryDate">
-              <a class="ls-label-text-prefix ls-ico-calendar" data-trigger-calendar="#entry_date" href="#"></a>
-            </div>
+              <input id="entry_date" class="ls-field-sm" type="date" name="entry_date" placeholder="dd/mm/aaaa" v-model="entryDate" style="height: 30px;">
               <small class="ls-label-text ls-color-theme ls-no-margin">Data</small>
             </label>
             <label class="ls-label col-md-4 col-xs-12 ls-txt-left ls-xs-margin-bottom ls-xs-space ls-no-padding-top ls-no-padding-bottom">
@@ -146,9 +143,6 @@ export default {
     },
     selectRevenue: function() {
       this.entrytype = 'revenue'
-    },
-    setEntryDate: function(evt) {
-      this.entryDate = evt.target.value
     },
     defaultDate: function() {
       var date = new Date()

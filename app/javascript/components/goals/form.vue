@@ -19,13 +19,8 @@
             <small class="ls-label-info">Qual o valor total do seu objetivo?</small>
           </label>
           <label class="ls-label col-md-3 col-xs-12">
-            <div class="ls-prefix-group">
-              <div class="ls-prefix-group">
-                <b class="ls-label-text ls-hidden-accessible">Prazo</b>
-                <input id="deadline" class="datepicker" type="text" name="deadline" v-model="deadline" @focus="updateDeadline($event)" required>
-                <a class="ls-label-text-prefix ls-ico-calendar" data-trigger-calendar="#deadline" href="#"></a>
-              </div>
-            </div>
+            <b class="ls-label-text ls-hidden-accessible">Prazo</b>
+            <input type="date" name="deadline" v-model="deadline" placeholder="dd/mm/aaaa" required>
             <small class="ls-label-info">Quando você irá realizá-lo?</small>
           </label>
           <label class="ls-label col-md-4 col-xs-12">
@@ -48,11 +43,20 @@ export default {
   data: function() {
     return {
       authenticity_token: this.$props.token,
-      id: this.goal.id || '',
-      title: this.goal.title || '',
-      amount: this.goal.amount || '',
-      deadline: this.goal.deadline || '',
-      description: this.goal.description || ''
+      id: '',
+      title: '',
+      amount: '',
+      deadline: '',
+      description: ''
+    }
+  },
+  beforeMount: function() {
+    if (this.goal) {
+      this.id = this.goal.id
+      this.title = this.goal.title
+      this.amount = this.goal.amount
+      this.deadline = this.goal.deadline
+      this.description = this.goal.description
     }
   },
   methods: {
@@ -94,9 +98,6 @@ export default {
       this.amount      = ''
       this.deadline    = ''
       this.description = ''
-    },
-    updateDeadline: function(evt) {
-      this.deadline = evt.target.value
     }
   }
 }

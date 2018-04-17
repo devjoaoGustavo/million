@@ -1,0 +1,6 @@
+<goal-form
+  :userId="<%= current_user.id.to_json %>"
+  :goal="<%= @goal.to_json %>"
+  :token="<%= form_authenticity_token.to_json %>"
+  @updated="updatedGoal()">
+</goal-form>

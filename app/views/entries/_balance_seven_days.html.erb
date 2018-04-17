@@ -10,40 +10,22 @@
     <% else %>
         <div id="sending-stats" class="row">
             <div class="col-sm-12 col-xs-12 col-md-3">
-                <div class="ls-box">
-                    <div class="ls-box-head">
-                        <h6 class="ls-title-4">SALDO</h6>
-                    </div>
-                    <div class="ls-box-body">
-                        <strong class="<%= @seven_days_color_class %>">
-                            <%= number_to_currency(@seven_days_balance) %>
-                        </strong>
-                    </div>
-                </div>
+              <weekly-balance
+                :userid="<%= current_user.id.to_json %>"
+                :reload="reloadBalance">
+              </weekly-balance>
             </div>
             <div class="col-sm-12 col-xs-12 col-md-3">
-                <div class="ls-box">
-                    <div class="ls-box-head">
-                        <h6 class="ls-title-4">DESPESAS</h6>
-                    </div>
-                    <div class="ls-box-body">
-                        <strong>
-                            <%= number_to_currency(@seven_days_expense) %>
-                        </strong>
-                    </div>
-                </div>
+              <weekly-expense
+                :userid="<%= current_user.id.to_json %>"
+                :reload="reloadBalance">
+              </weekly-expense>
             </div>
             <div class="col-sm-12 col-xs-12 col-md-3">
-                <div class="ls-box">
-                    <div class="ls-box-head">
-                        <h6 class="ls-title-4">RECEITAS</h6>
-                    </div>
-                    <div class="ls-box-body">
-                        <strong>
-                            <%= number_to_currency(@seven_days_revenue) %>
-                        </strong>
-                    </div>
-                </div>
+              <weekly-revenue
+                :userid="<%= current_user.id.to_json %>"
+                :reload="reloadBalance">
+              </weekly-revenue>
             </div>
         </div>
     <% end %>

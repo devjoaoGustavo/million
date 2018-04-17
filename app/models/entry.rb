@@ -40,10 +40,6 @@ class Entry < ApplicationRecord
     sprintf("%.2f", amount).gsub('.', ',') if amount.present?
   end
 
-  def entry_date
-    I18n.l(super, format: '%d/%m/%Y') if super.present?
-  end
-
   def self.total_balance(user_id)
     (Revenue.total_amount(user_id) - Expense.total_amount(user_id)).to_f
   end

@@ -20,7 +20,7 @@
               <span v-if="entry.installment_label" class="ls-tag">{{ entry.installment_label }}</span>
             </a>
           </td>
-          <td class="ls-txt-center">{{ entry.entry_date }}</td>
+          <td class="ls-txt-center">{{ entry.entry_date | formatDate }}</td>
           <td class="ls-txt-center hidden-xs">
             <a :href="entry.edit_path" class="ls-btn-sm ls-ico-cog"></a>
             <a href="#"

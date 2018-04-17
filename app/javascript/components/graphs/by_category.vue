@@ -1,11 +1,15 @@
 <template>
-  <div :id="params.chartId" @resize="drawChart" class="ls-full-width ls-height-auto ls-no-padding"></div>
+  <div
+    :id="chartid"
+    @resize="drawChart"
+    class="ls-full-width ls-height-auto ls-no-padding">
+  </div>
 </template>
 
 <script>
 export default {
   props: {
-    params: Object,
+    chartid: String,
     data: Array
   },
   data: function() {
@@ -28,10 +32,10 @@ export default {
   },
   methods: {
     drawChart: function() {
-      var content = new google.visualization.arrayToDataTable(this.$props.data)
+      var content = new google.visualization.arrayToDataTable(this.data)
       var chart   = new google.visualization
-        .PieChart(document.getElementById(this.$props.params.chartId))
-      chart.draw(content, this.$data.options)
+        .PieChart(document.getElementById(this.chartid))
+      chart.draw(content, this.options)
     }
   },
   mounted: function() {

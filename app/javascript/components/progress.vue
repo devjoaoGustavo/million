@@ -1,5 +1,7 @@
 <template>
-  <div data-ls-module="progressBar" role="progressbar" :aria-valuenow="valuenow | fixed"></div>
+  <div data-ls-module="progressBar" role="progressbar" :aria-valuenow="valuenow | fixed">
+    <span v-if="addValue" :aria-valuenow="valuenow + '%'" :style="'width: ' + valuenow + '%;'"></span>
+  </div>
 </template>
 
 <script>
@@ -11,13 +13,13 @@ export default {
     }
   },
   mounted: function() {
-    if (this.$props.addValue) {
-      var el = this.$el
-      var percentage = $(el).attr("aria-valuenow");
-      $(el).append("<span aria-valuenow='"+percentage+"%'>");
-      var $bar = $(el).find('span');
-      this.setProgressBarValue($bar, percentage);
-    }
+  // if (this.$props.addValue) {
+  //   var el = this.$el
+  //   var percentage = $(el).attr("aria-valuenow");
+  //   $(el).append("<span aria-valuenow='"+percentage+"%'>");
+  //   var $bar = $(el).find('span');
+  //   this.setProgressBarValue($bar, percentage);
+  // }
   },
   methods: {
     setProgressBarValue: function(target, percentage) {

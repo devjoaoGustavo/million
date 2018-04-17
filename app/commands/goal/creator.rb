@@ -29,7 +29,7 @@ class Goal < ApplicationRecord
       }
     end
 
-    def respond_faillure
+    def respond_failure
       respond_success.merge(errors: goal.errors.full_messages)
     end
   end

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <new-goal :userId="userId" :apiToken="apiToken" @goalCreated="addGoal($event)"></new-goal>
+    <new-goal :userId="userId" :apiToken="apiToken" @goalCreated="refresh()"></new-goal>
     <div v-if="goals.length > 0">
-      <div v-for="goal in orderedGoals">
-        <goal :goal="goal"></goal>
+      <div v-for="goal in goals">
+        <goal :goal="goal" :userid="options.userId"></goal>
       </div>
     </div>
     <div v-else>
@@ -27,7 +27,7 @@
 
 <script>
 import NewGoal from './new.vue'
-import Goal from './goal.vue'
+import Goal    from './goal.vue'
 
 export default {
   props: {
@@ -35,9 +35,9 @@ export default {
   },
   data: function() {
     return {
-      userId: this.$props.options.userId,
+      userId:   this.$props.options.userId,
       apiToken: this.$props.options.apiToken,
-      goals:  []
+      goals:    []
     }
   },
   computed: {
@@ -47,19 +47,25 @@ export default {
       })
     }
   },
+  mounted: function() {
+    this.loadGoals()
+  },
   methods: {
-    addGoal: function(goal) {
-      this.$data.goals.push(goal)
+    loadGoals: function(goal) {
+      var that = this;
+      var path = '/api/users/' + this.$data.userId + '/goals'
+      $.get(path, (res) => {
+        that.goals = res
+      });
+    },
+    refresh: function() {
+      this.loadGoals()
+      window.location.reload()
     }
   },
-  mounted: function() {
-    var that = this;
-    var path = '/api/users/' + this.$data.userId + '/goals'
-    $.get(path, (res) => { that.goals = res });
-  },
   components: {
-    'new-goal':     NewGoal,
-    'goal':         Goal
+    'new-goal': NewGoal,
+    'goal':     Goal
   }
 }
 </script>

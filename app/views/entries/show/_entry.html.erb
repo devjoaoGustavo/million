@@ -30,7 +30,7 @@
     </div>
     <div class="col-xs-12 col-md-3">
       <%= content_tag :span, 'Data', class:'ls-list-label ls-ico-calendar' %>
-      <%= content_tag :strong, entry.entry_date %>
+      <%= content_tag :strong, entry.entry_date.strftime('%d/%m/%Y') %>
     </div>
     <% if entry.goal_id.present? %>
       <div class="col-xs-12 col-md-3">

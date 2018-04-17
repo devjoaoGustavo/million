@@ -1,28 +1,13 @@
 <div class="ls-box ls-board-box">
-    <header class="ls-info-header">
-        <h2 class="ls-title-3">Saldo Total</h2>
-        <p class="ls-float-right ls-float-none-xs ls-small-info">
-            Olá, <strong><%= current_user.presentation_name %></strong>.
-        </p>
-    </header>
-    <% if @expenses.empty? && @revenues.empty? %>
-        <p class="ls-no-data">Você ainda não tem entradas</p>
-    <% else %>
-        <div id="sending-stats">
-          <div class="ls-box">
-            <div class="ls-box-head">
-              <h6 class="ls-title-4">SALDO</h6>
-            </div>
-            <div class="ls-box-body">
-              <strong class="<%= @color_class %>"><%= number_to_currency(@balance) %></strong>
-            </div>
-            <div class="ls-box-footer">
-              <%= link_to 'Ver receitas', revenues_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
-                'aria-label': 'Abrir todas as receitas' %>
-              <%= link_to 'Ver despesas', expenses_path(current_user.id), class: 'ls-tooltip-bottom ls-btn ls-btn-sm',
-                'aria-label': 'Abrir todas as despesas' %>
-            </div>
-          </div>
-        </div>
-    <% end %>
+  <header class="ls-info-header">
+    <h2 class="ls-title-3">Saldo Total</h2>
+    <p class="ls-float-right ls-float-none-xs ls-small-info">
+      Olá, <strong><%= current_user.presentation_name %></strong>.
+    </p>
+  </header>
+  <div id="sending-stats">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <total-balance :userid="<%= current_user.id.to_json %>" :reload="reloadBalance"></total-balance>
+    </div>
+  </div>
 </div>

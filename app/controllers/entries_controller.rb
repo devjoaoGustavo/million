@@ -29,6 +29,7 @@ class EntriesController < ApplicationController
   end
 
   def search
+    @goals = current_user.goals
     new_entry(params[:type])
     filters = {}.tap do |f|
       f[:category_id] = params[:category_id] if params[:category_id].present?

@@ -3,6 +3,7 @@
 class GoalsController < ApplicationController
   def edit
     @goal = finder.call(goal_id: params[:id]).first
+    @goal.merge!(deadline: Date.parse(@goal[:deadline]).strftime('%d/%m/%Y'))
     intro(message: 'Editar objetivo', ico_class: 'ls-ico-trophy', href: user_goals_path(current_user))
   end
 

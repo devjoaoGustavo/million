@@ -20,8 +20,11 @@
           </label>
           <label class="ls-label col-md-3 col-xs-12">
             <div class="ls-prefix-group">
-              <b class="ls-label-text ls-hidden-accessible">Prazo</b>
-              <input type="date" name="deadline" v-model="deadline" @focus="updateDeadline($event)" required>
+              <div class="ls-prefix-group">
+                <b class="ls-label-text ls-hidden-accessible">Prazo</b>
+                <input id="deadline" class="datepicker" type="text" name="deadline" v-model="deadline" @focus="updateDeadline($event)" required>
+                <a class="ls-label-text-prefix ls-ico-calendar" data-trigger-calendar="#deadline" href="#"></a>
+              </div>
             </div>
             <small class="ls-label-info">Quando você irá realizá-lo?</small>
           </label>

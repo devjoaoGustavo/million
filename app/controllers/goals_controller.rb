@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class GoalsController < ApplicationController
+  before_action :validate_session!
+
   def edit
     @goal = finder.call(goal_id: params[:id]).first
     intro(message: 'Editar objetivo', ico_class: 'ls-ico-trophy', href: user_goals_path(current_user))

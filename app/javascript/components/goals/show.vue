@@ -1,6 +1,6 @@
 <template>
   <div>
-    <goal-details :goal="goal"></goal-details>
+    <goal :goal="goal"></goal>
     <entries type="expense" :goalId="goal.id"></entries>
   </div>
 </template>
@@ -14,8 +14,8 @@ export default {
     goal: Object,
   },
   components: {
-    'entries':      Entries,
-    'goal-details': Goal
+    'entries': Entries,
+    'goal':    Goal
   }
 }
 </script>

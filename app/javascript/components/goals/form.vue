@@ -42,7 +42,7 @@ export default {
   },
   data: function() {
     return {
-      authenticity_token: this.$props.token,
+      authenticity_token: this.token,
       id: '',
       title: '',
       amount: '',

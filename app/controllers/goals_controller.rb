@@ -7,8 +7,8 @@ class GoalsController < ApplicationController
   end
 
   def index
+    @options = { id: 'goal-list', userid: current_user.id, token: form_authenticity_token }.to_json
     intro(message: 'Objetivos', ico_class: 'ls-ico-trophy', href: dashboard_path(current_user))
-    @options = { id: 'goal-list', userId: current_user.id, apiToken: form_authenticity_token }.to_json
   end
 
   def show

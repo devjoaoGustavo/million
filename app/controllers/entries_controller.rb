@@ -2,7 +2,6 @@
 
 class EntriesController < ApplicationController
   include Timing
-  before_action :validate_session!
   before_action :load_expenses, only: [:expenses]
   before_action :load_revenues, only: [:revenues]
   before_action :load_categories, only: [:revenues, :expenses, :edit, :create, :update, :search]
@@ -174,10 +173,6 @@ class EntriesController < ApplicationController
 
   def find_entry
     Entry.find_by(user_id: current_user.id, id: params[:id])
-  end
-
-  def validate_session!
-    raise ExpiredSessionError if current_user.blank?
   end
 
   def new_entry(type)

@@ -5,10 +5,15 @@ require 'helpers/timing'
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_raven_context
+  before_action :validate_session!
 
   rescue_from ExpiredSessionError, with: :redirect_to_login
 
   private
+
+  def validate_session!
+    raise ExpiredSessionError if current_user.blank?
+  end
 
   def redirect_to_login
     flash[:notice] = 'Sessão expirada. Faça o login novamente'

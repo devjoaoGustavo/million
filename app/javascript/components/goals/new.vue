@@ -5,7 +5,7 @@
       <p>Alcance seus sonhos, desafie-se, ouse.</p>
     </a>
     <div id="new-goal-div" class="ls-collapse-body">
-      <goal-form :userId="userId" :token="apiToken" @created="sendCreated($event)"></goal-form>
+      <goal-form :userid="userid" :token="token" @created="sendCreated($event)"></goal-form>
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
 import Form from './form.vue'
 
 export default {
-  props: ['userId', 'apiToken'],
+  props: ['userid', 'token'],
   methods: {
     sendCreated: function(evt) {
       this.$emit('goalCreated', evt)

@@ -71,9 +71,8 @@ export default {
     }
   },
   mounted: function() {
-    var path = '/api/goals/' + this.$props.goalId + '/expenses'
+    var path = '/api/goals/' + this.goalId + '/expenses'
     $.get(path, (res) => {
-      console.log(res)
       this.entries = res
     })
   },

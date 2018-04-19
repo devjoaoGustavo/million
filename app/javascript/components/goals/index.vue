@@ -1,6 +1,9 @@
 <template>
   <div>
-    <new-goal :userId="userId" :apiToken="apiToken" @goalCreated="refresh()"></new-goal>
+    <new-goal
+      :userid="userid"
+      :token="token"
+      @goalCreated="refresh()"></new-goal>
     <div v-if="goals.length > 0">
       <div v-for="goal in goals">
         <goal :goal="goal" :userid="options.userId"></goal>
@@ -30,13 +33,11 @@ import NewGoal from './new.vue'
 import Goal    from './goal.vue'
 
 export default {
-  props: {
-    options: Object
-  },
+  props: { options: Object },
   data: function() {
     return {
-      userId:   this.$props.options.userId,
-      apiToken: this.$props.options.apiToken,
+      userid:   this.options.userid,
+      token: this.options.token,
       goals:    []
     }
   },
@@ -53,10 +54,11 @@ export default {
   methods: {
     loadGoals: function(goal) {
       var that = this;
-      var path = '/api/users/' + this.$data.userId + '/goals'
+      var path = '/api/users/' + this.userid + '/goals'
       $.get(path, (res) => {
         that.goals = res
       });
+      locastyle.progressBar.init()
     },
     refresh: function() {
       this.loadGoals()

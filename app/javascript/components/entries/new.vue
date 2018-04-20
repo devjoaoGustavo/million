@@ -36,7 +36,7 @@
               <input class="ls-field-sm" type="text" name="description" placeholder="Descrição" v-model="description">
             </label>
             <label class="ls-label col-md-4 col-xs-12 ls-txt-left ls-no-margin-bottom ls-xs-space ls-no-padding-top ls-no-padding-bottom">
-              <input class="ls-mask-money ls-field-sm" type="number" name="amount" min="0.00" step="0.01" placeholder="Valor (ex: 21,56)" v-model="amount">
+              <input class="ls-field-sm" type="number" name="amount" min="0.00" step="0.01" placeholder="Valor (ex: 21,56)" v-model="amount">
               <small class="ls-label-text ls-color-theme">Valor</small>
             </label>
             <label class="ls-label col-md-4 col-xs-12 ls-txt-left ls-xs-space ls-no-padding-top ls-no-padding-bottom">

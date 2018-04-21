@@ -73,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     methods: {
       createdEntry: function(evt) {
-        console.log(evt.responseJSON)
         this.reloadBalance = !this.reloadBalance
         this.message       = 'Nova entrada inserida com sucesso'
         this.isNotice      = true

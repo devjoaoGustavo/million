@@ -75,7 +75,6 @@ export default {
         method:  meth,
         data:    this.$data,
         success: (res) => {
-          res['addValue'] = true
           var evt = meth == "POST" ? "created" : "updated"
           this.$emit(evt, res)
 

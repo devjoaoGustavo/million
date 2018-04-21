@@ -3,13 +3,16 @@
     <new-goal
       :userid="userid"
       :token="token"
-      @goalCreated="refresh()"></new-goal>
-    <div v-if="goals.length > 0">
-      <div v-for="goal in goals">
-        <goal :goal="goal" :userid="options.userId"></goal>
-      </div>
-    </div>
-    <div v-else>
+      @goalCreated="refresh($event)"></new-goal>
+    <template v-if="loading">
+      <spinner :size="spinnerSize"></spinner>
+    </template>
+    <template v-else-if="goals.length > 0">
+      <template v-for="goal in orderedGoals">
+        <goal :goal="goal" :userid="options.userId" :key="goal.id"></goal>
+      </template>
+    </template>
+    <template v-else>
       <div class="ls-box-group">
         <div class="ls-box ls-box-gray ls-md-space">
           <div class="row">
@@ -24,21 +27,24 @@
           </div>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
 import NewGoal from './new.vue'
 import Goal    from './goal.vue'
+import Spinner from '../spinner_wedges.vue'
 
 export default {
   props: { options: Object },
   data: function() {
     return {
-      userid:   this.options.userid,
-      token: this.options.token,
-      goals:    []
+      userid:      this.options.userid,
+      token:       this.options.token,
+      loading:     true,
+      spinnerSize: 100,
+      goals:       []
     }
   },
   computed: {
@@ -50,6 +56,7 @@ export default {
   },
   mounted: function() {
     this.loadGoals()
+    locastyle.progressBar.init()
   },
   methods: {
     loadGoals: function(goal) {
@@ -57,16 +64,16 @@ export default {
       var path = '/api/users/' + this.userid + '/goals'
       $.get(path, (res) => {
         that.goals = res
+        this.loading = false
       });
-      locastyle.progressBar.init()
     },
-    refresh: function() {
-      this.loadGoals()
-      window.location.reload()
+    refresh: function(evt) {
+      this.goals.push(evt)
     }
   },
   components: {
     'new-goal': NewGoal,
+    'spinner':  Spinner,
     'goal':     Goal
   }
 }

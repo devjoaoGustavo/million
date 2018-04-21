@@ -113,14 +113,12 @@ export default {
         installments:       this.installments,
         authenticity_token: this.options.token
       }
-      console.log(input)
       var path = '/api/users/'+this.options.userid+'/entries'
       $.ajax({
         url: path,
         method: 'POST',
         data: input,
         success: (res) => {
-          console.log(res)
           this.$emit('entrycreated', res)
           this.clear()
         },

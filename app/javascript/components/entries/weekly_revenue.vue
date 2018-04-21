@@ -24,7 +24,6 @@ export default {
   },
   watch: {
     reload: function() {
-      console.log("atualizar receita semanal")
       this.updateExpense()
     }
   },

@@ -1,5 +1,5 @@
 <template>
-  <div :id="goal.id" class="ls-list">
+  <div class="ls-list">
     <header class="ls-list-header">
       <div class="ls-list-title col-md-8">
         <a :href="goal.show_path">{{ goal.title }}</a>
@@ -30,21 +30,23 @@
       </div>
       <div class="col-xs-12 col-md-8">
         <span class="ls-list-label">Progresso</span>
-        <div data-ls-module="progressBar" role="progressbar" :aria-valuenow="goal.reached | fixed"></div>
+        <progress-bar :valuenow="goal.reached" :addvalue="goal.addvalue"></progress-bar>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ProgressBar from '../progress.vue'
 export default {
-  props: {
-    goal: Object
-  },
+  props:   { goal: Object },
   filters: {
     fixed: function(value) {
       return value.toFixed(2);
     }
+  },
+  components: {
+    'progress-bar': ProgressBar
   }
 }
 </script>

@@ -25,7 +25,8 @@ class Goal < ApplicationRecord
         amount:      goal.amount,
         description: goal.description,
         deadline:    goal.deadline.strftime('%Y-%m-%d'),
-        reached:     ((goal.expenses.sum(&:amount) / goal.amount) * 100).to_f
+        reached:     ((goal.expenses.sum(&:amount) / goal.amount) * 100).to_f,
+        addvalue:    true
       }
     end
 

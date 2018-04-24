@@ -2,6 +2,8 @@
 
 class Goal < ApplicationRecord
   class Creator
+    include Rails.application.routes.url_helpers
+
     # Create a new goal with the given params
     def call(params={})
       @goal = create(params)
@@ -26,7 +28,10 @@ class Goal < ApplicationRecord
         description: goal.description,
         deadline:    goal.deadline.strftime('%Y-%m-%d'),
         reached:     ((goal.expenses.sum(&:amount) / goal.amount) * 100).to_f,
-        addvalue:    true
+        addvalue:    true,
+        show_path:   goal_path(goal),
+        edit_path:   edit_goal_path(goal),
+        delete_path: goal_path(goal)
       }
     end
 

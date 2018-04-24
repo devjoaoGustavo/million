@@ -18,43 +18,77 @@
       <div class="ls-topbar">
         <!-- Barra de Notificações -->
         <div class="ls-notification-topbar">
-          <!-- Dropdown com detalhes da conta de usuário -->
-          <% if logged_in? %>
-            <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-              <a href="#" class="ls-ico-user">
-                <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>
-              </a>
-              <nav class="ls-dropdown-nav ls-user-menu">
-                <ul>
-                  <li><%= link_to 'Sair', logout_path, method: :delete %></li>
-                </ul>
-              </nav>
-            </div>
-          <% else %>
-            <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-              <a href="#" class="ls-ico-user">
-              </a>
-              <nav class="ls-dropdown-nav ls-user-menu">
-                <ul>
-                  <li><%= link_to 'Cadastre-se', signup_path %></li>
-                  <li><%= link_to 'Entre', login_path %></li>
-                </ul>
-              </nav>
-            </div>
-          <% end %>
-        </div>
+          <nav class="ls-alerts-list" role="navigation">
+            <%= link_to '',  dashboard_path(current_user),
+              class: 'ls-ico-dashboard',
+              'data-ls-module': 'popover',
+              'data-trigger': 'hover',
+              'data-title': 'Painel Inicial',
+              'data-content': 'Acompanhe seu saldo e insira novas entradas',
+              'data-placement': 'bottom',
+              'aria-label': 'Painel inicial' %>
+            <%= link_to '', expenses_path(current_user),
+              class: 'ls-ico-cart',
+              'data-ls-module': 'popover',
+              'data-trigger': 'hover',
+              'data-title': 'Painel de despesas',
+              'data-content': 'Veja de perto para onde está indo seu dinheiro',
+              'data-placement': 'bottom',
+              'aria-label': 'Painel de despesas' %>
+            <%= link_to '', revenues_path(current_user),
+              class: 'ls-ico-chart-bar-up',
+              'data-ls-module': 'popover',
+              'data-trigger': 'hover',
+              'data-title': 'Painel de receitas',
+              'data-content': 'Gerencie e otimize seus ganhos',
+              'data-placement': 'bottom',
+              'aria-label': 'Painel de receitas' %>
+            <%= link_to '', user_goals_path(current_user),
+              class: 'ls-ico-trophy',
+              'data-ls-module': 'popover',
+              'data-trigger': 'hover',
+              'data-title': 'Painel de objetivos',
+              'data-content': 'Cadastre novos objetivos e realize seus sonhos',
+              'data-placement': 'bottom',
+              'aria-label': 'Painel de objetivos' %>
+            </nav>
+            <!-- Dropdown com detalhes da conta de usuário -->
+            <% if logged_in? %>
+              <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
+                <a href="#" class="ls-ico-user">
+                  <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>
+                </a>
+                <nav class="ls-dropdown-nav ls-user-menu">
+                  <ul>
+                    <li><%= link_to 'Sair', logout_path, method: :delete %></li>
+                  </ul>
+                </nav>
+              </div>
+            <% else %>
+              <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
+                <a href="#" class="ls-ico-user">
+                </a>
+                <nav class="ls-dropdown-nav ls-user-menu">
+                  <ul>
+                    <li><%= link_to 'Cadastre-se', signup_path %></li>
+                    <li><%= link_to 'Entre', login_path %></li>
+                  </ul>
+                </nav>
+              </div>
+            <% end %>
+          </div>
 
-        <span class="ls-show-sidebar ls-ico-menu"></span>
+          <span class="ls-show-sidebar ls-ico-menu"></span>
 
-        <!-- Nome do produto/marca -->
-        <h1 class="ls-brand-name ls-xs-space">
-          <%= link_to root_path, class: 'ls-display-block' do %>
+          <!-- Nome do produto/marca -->
+          <h1 class="ls-brand-name ls-xs-space">
+            <%= link_to root_path, class: 'ls-display-block' do %>
             <image src="<%= image_url('million-logo.svg') %>">
           <% end %>
         </h1>
       </div>
 
-      <main class="ls-main">
+      <main class="ls-main ls-no-margin-left">
         <div class="container-fluid">
           <% if @intro.present? %>
             <intro :params="<%= @intro %>"></intro>
@@ -81,16 +115,8 @@
         </footer>
       </main>
 
-      <aside class="ls-sidebar">
+      <aside class="ls-sidebar hidden-md hidden-lg">
         <% if logged_in? %>
-          <nav class="ls-menu hidden-xs">
-            <ul>
-              <li><%= link_to 'Painel',    dashboard_path(current_user),  class: 'ls-ico-dashboard',    'aria-label': 'Painel inicial' %></li>
-              <li><%= link_to 'Despesas',  expenses_path(current_user),   class: 'ls-ico-cart',         'aria-label': 'Painel de despesas' %></li>
-              <li><%= link_to 'Receitas',  revenues_path(current_user),   class: 'ls-ico-chart-bar-up', 'aria-label': 'Painel de receitas' %></li>
-              <li><%= link_to 'Objetivos', user_goals_path(current_user), class: 'ls-ico-trophy',       'aria-label': 'Painel de objetivos' %></li>
-            </ul>
-          </nav>
           <div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">
             <a href="#" class="ls-ico-user">
               <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>

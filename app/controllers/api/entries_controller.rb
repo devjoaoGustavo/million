@@ -8,6 +8,11 @@ module Api
       render_json_ok(finder.call(find_params))
     end
 
+    def entries_by_month
+      render_json_ok(UserDecorator
+        .decorate(current_user).entries_by_month)
+    end
+
     def expense_by_category
       render_json_ok(UserDecorator
         .decorate(current_user).expense_by_category)

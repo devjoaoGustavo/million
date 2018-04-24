@@ -69,6 +69,7 @@ export default {
     },
     refresh: function(evt) {
       this.goals.push(evt)
+      window.location.reload()
     }
   },
   components: {

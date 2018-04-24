@@ -39,7 +39,7 @@ export default {
     }
   },
   mounted: function() {
-    google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages':['corechart'], 'language': 'pt-br' });
     google.charts.setOnLoadCallback(this.drawChart);
     window.addEventListener('resize', this.drawChart);
   },

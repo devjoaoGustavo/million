@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       resources :goals,   only: %i(index create)
       resources :entries, only: %i(index create)
 
+      get '/entries/by_month', to: 'entries#entries_by_month'
+
       get '/balance', to: 'entries#balance'
       get '/balance/monthly', to: 'entries#monthly_balance'
       get '/expense/monthly', to: 'entries#monthly_expense'

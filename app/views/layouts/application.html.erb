@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="ls-theme-yellow-gold">
+<html class="ls-theme-yellow-gold" style="height: 100%; margin: 0px;">
   <head>
     <title>Million</title>
     <meta charset="utf-8">
@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css">
   </head>
 
-  <body style="height: 100%; display: flex;">
+  <body style="height: 100%; margin: 0px;">
     <div id="app">
       <div class="ls-topbar">
         <!-- Barra de Notificações -->
@@ -88,7 +88,7 @@
         </h1>
       </div>
 
-      <main class="ls-main ls-no-margin-left">
+      <main class="ls-main ls-no-margin-left" style="min-height: calc(100vh);">
         <div class="container-fluid">
           <% if @intro.present? %>
             <intro :params="<%= @intro %>"></intro>
@@ -99,21 +99,21 @@
         </div>
       </main>
 
-      <footer class="ls-footer" style="flex: 1 0 auto;">
-        <nav class="ls-footer-menu">
-          <h2 class="ls-title-footer">CONTATO</h2>
-          <ul class="ls-footer-list">
-            <li><a class="bg-customer-support"
-                href="#"
-                data-ls-module="popover"
-                data-title="Escreva para"
-                data-content="<p><a href='mailto:dev.joaogustavo@gmail.com'>João Gustavo de Paula</a></li>">Críticas e sugestões</a></li>
-          </ul>
-        </nav>
-        <div class="ls-footer-info">
-          <p class="ls-copy-right">Hobbyright © 2018-2018 Million personal finance manager.</p>
-        </div>
-      </footer>
+        <footer class="ls-footer" style="height: 120px">
+          <nav class="ls-footer-menu">
+            <h2 class="ls-title-footer">CONTATO</h2>
+            <ul class="ls-footer-list">
+              <li><a class="bg-customer-support"
+                  href="#"
+                  data-ls-module="popover"
+                  data-title="Escreva para"
+                  data-content="<p><a href='mailto:dev.joaogustavo@gmail.com'>João Gustavo de Paula</a></li>">Críticas e sugestões</a></li>
+            </ul>
+          </nav>
+          <div class="ls-footer-info">
+            <p class="ls-copy-right">Hobbyright © 2018-2018 Million personal finance manager.</p>
+          </div>
+        </footer>
 
       <aside class="ls-sidebar hidden-md hidden-lg">
         <% if logged_in? %>

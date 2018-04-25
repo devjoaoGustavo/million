@@ -1,6 +1,5 @@
 <template>
-  <span v-if="content.lenght == 1">Não há entradas</span>
-  <div v-else id="chart-by-month" :style="size"></div>
+  <div :id="chartId" :style="size"></div>
 </template>
 
 <script>
@@ -8,6 +7,7 @@ export default {
   props: ['userid'],
   data: function() {
     return {
+      chartId: 'chart-by-month',
       content: [['Mês', 'Despesas', 'Receitas']],
       size: {
         width: '100%',
@@ -31,7 +31,7 @@ export default {
   methods: {
     drawChart: function() {
       var data  = google.visualization.arrayToDataTable(this.content)
-      var chart = new google.charts.Bar(this.$el)
+      var chart = new google.charts.Bar(document.getElementById(this.chartId))
       chart.draw(data, google.charts.Bar.convertOptions(this.options))
     }
   },
@@ -43,10 +43,10 @@ export default {
   mounted: function() {
     google.charts.load('current', { 'packages': ['bar'], 'language': 'pt-br' })
     google.charts.setOnLoadCallback(this.drawChart)
-    window.addEventListener('resize', this.drawChart)
+    screen.orientation.addEventListener('change', this.drawChart)
   },
   beforeDestroy: function() {
-    window.removeEventListener('resize', this.drawChart)
+    screen.orientation.removeEventListener('change', this.drawChart)
   }
 }
 </script>

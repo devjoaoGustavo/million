@@ -5,28 +5,24 @@
       Lançamentos de <strong><%= 7.days.ago.strftime('%d/%m/%Y') %></strong> até <strong><%= DateTime.current.strftime('%d/%m/%Y') %></strong>
     </p>
   </header>
-  <% if @seven_days_expense.zero? && @seven_days_revenue.zero? %>
-    <p class="ls-no-data">Não foram feitas entradas nos últimos sete dias</p>
-  <% else %>
-    <div id="sending-stats" class="row">
-      <div class="col-sm-12 col-xs-12 col-md-3">
-        <weekly-balance
-          :userid="<%= current_user.id.to_json %>"
-          :reload="reloadBalance">
-        </weekly-balance>
-      </div>
-      <div class="col-sm-12 col-xs-12 col-md-3">
-        <weekly-expense
-          :userid="<%= current_user.id.to_json %>"
-          :reload="reloadBalance">
-        </weekly-expense>
-      </div>
-      <div class="col-sm-12 col-xs-12 col-md-3">
-        <weekly-revenue
-          :userid="<%= current_user.id.to_json %>"
-          :reload="reloadBalance">
-        </weekly-revenue>
-      </div>
+  <div id="sending-stats" class="row">
+    <div class="col-sm-12 col-xs-12 col-md-3">
+      <weekly-balance
+        :userid="<%= current_user.id.to_json %>"
+        :reload="reloadBalance">
+      </weekly-balance>
     </div>
-  <% end %>
+    <div class="col-sm-12 col-xs-12 col-md-3">
+      <weekly-expense
+        :userid="<%= current_user.id.to_json %>"
+        :reload="reloadBalance">
+      </weekly-expense>
+    </div>
+    <div class="col-sm-12 col-xs-12 col-md-3">
+      <weekly-revenue
+        :userid="<%= current_user.id.to_json %>"
+        :reload="reloadBalance">
+      </weekly-revenue>
+    </div>
+  </div>
 </div>

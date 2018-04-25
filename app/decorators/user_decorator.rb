@@ -11,7 +11,7 @@ class UserDecorator < ApplicationDecorator
   def entries_by_month
     [].tap do |result|
       grouped = Entry.where(user_id: id, entry_date: this_year).order(entry_date: :asc).group_by(&method(:per_month))
-      I18n.t('date')[:month_names].compact.each_with_index do |month, idx|
+      I18n.t('date')[:abbr_month_names].compact.each_with_index do |month, idx|
         values = grouped[idx + 1] || []
         result << [month,
                    BigDecimal(values.select(&:expense?).sum(&:amount).to_s).to_f,

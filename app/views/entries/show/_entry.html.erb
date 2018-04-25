@@ -9,7 +9,7 @@
           'aria-label': 'Ver todas as parcelas' %>
       <% end %>
     </div>
-    <div class="col-md-3 ls-txt-right">
+    <div class="col-md-3 ls-float-right ls-txt-right">
       <%= link_to 'editar', edit_entry_path(entry.id), class: 'ls-btn ls-ico-cog' %>
       <%= link_to 'deletar', '#', class: 'ls-btn ls-btn-primary-danger ls-ico-remove',
         'data-custom-class': 'ls-color-danger',
@@ -42,4 +42,3 @@
     <% end %>
   </div>
 </div>
-

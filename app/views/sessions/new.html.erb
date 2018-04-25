@@ -5,7 +5,7 @@
   </div>
 
   <%= form_tag sessions_path, class: 'ls-form ls-login-form' do %>
-    <fieldset class="ls-sm-space">
+    <fieldset>
       <div class="ls-label">
         <%= content_tag :b, 'Usuário', class: 'ls-label-text ls-hidden-accessible' %>
         <%= text_field_tag :access, params[:access], class: 'ls-login-bg-user ls-field-lg', placeholder: 'Usuário', autofocus: true %>

@@ -4,10 +4,16 @@
         <h6 class="ls-title-4">SALDO</h6>
       </div>
       <div class="ls-box-body">
-        <spinner v-if="loading" :size="'50'"></spinner>
-        <strong v-else :class="amountClass">
-          {{ balance | currency }}
+        <strong v-if="!visible">
+          <i class="ls-ico-eye" @click="see()"></i>
         </strong>
+        <spinner v-else-if="loading" :size="'50'"></spinner>
+        <template v-else>
+          <strong :class="amountClass">
+            {{ balance | currency }}
+          </strong>
+          <i class="ls-ico-eye-blocked" @click="see()"></i>
+        </template>
       </div>
       <div class="ls-box-footer">
         <a :href="revenues_path" class="ls-tooltip-bottom ls-btn ls-btn-sm" aria-label="Abrir todas as receitas">Ver receitas</a>
@@ -26,7 +32,8 @@ export default {
       balance: 0,
       revenues_path: '/users/'+this.userid+'/revenues',
       expenses_path: '/users/'+this.userid+'/expenses',
-      loading: true
+      loading: true,
+      visible: false
     }
   },
   watch: {
@@ -54,6 +61,9 @@ export default {
         this.balance = res
         this.loading = false
       })
+    },
+    see: function() {
+      this.visible = !this.visible
     }
   },
   components: {

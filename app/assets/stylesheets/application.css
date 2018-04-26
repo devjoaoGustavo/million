@@ -12,4 +12,5 @@
  *
  *= require font-awesome.min
  *= require_self
+ *= require vuetify/dist/vuetify.min
  */

@@ -8,6 +8,9 @@
 // layout file, like app/views/layouts/application.html.erb
 
 import Vue from 'vue/dist/vue.esm'
+import Vuetify from 'vuetify'
+
+Vue.use(Vuetify)
 
 import Intro from '../components/intro.vue'
 import Alert from '../components/alert.vue'

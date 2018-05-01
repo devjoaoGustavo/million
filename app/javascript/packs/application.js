@@ -10,7 +10,11 @@
 import Vue from 'vue/dist/vue.esm'
 import Vuetify from 'vuetify'
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#F9A825'
+  }
+})
 
 import Intro from '../components/intro.vue'
 import Alert from '../components/alert.vue'
@@ -53,8 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
     data: {
       isNotice: false,
       isAlert: false,
+      alert: true,
       message: '',
-      reloadBalance: false
+      reloadBalance: false,
+      drawer: null,
+      dashboardPath: '/users/' + this.userid + '/entries',
+      expensesPath: '/users/' + this.userid + '/expenses',
+      revenuesPath: '/users/' + this.userid + '/revenues',
+      goalsPath: '/users/' + this.userid + '/goals',
+      password: '',
+      password_confirmation: ''
     },
     components: {
       'intro': Intro,
@@ -94,6 +106,31 @@ document.addEventListener('DOMContentLoaded', () => {
       updatedGoal: function() {
         this.message  = 'Objetivo atualizado com sucesso'
         this.isNotice = true
+      },
+      goto: function(path) {
+        window.location.assign(path)
+      },
+      redefinePassword: function(userid, token) {
+        console.log(this.password, this. password_confirmation)
+        var input = {
+          id: userid,
+          password: this.password,
+          password_confirmation: this.password_confirmation,
+          authenticity_token: token
+        }
+        var path = '/api/users/' + userid + '/redefine'
+        console.log(path)
+        $.ajax({
+          url: path,
+          method: 'PUT',
+          data: input,
+          success: (res) => {
+            window.location.assign('/users/'+userid+'/entries')
+          },
+          error: (res) => {
+            window.location.reload()
+          }
+        })
       }
     }
   });

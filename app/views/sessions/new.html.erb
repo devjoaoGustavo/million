@@ -1,30 +1,24 @@
-<div class="ls-login-box">
-  <div class="ls-login-logo">
-    <image src="<%= image_url('million-logo.svg') %>">
-    <h3>Acesso Million</h3>
-  </div>
-
-  <%= form_tag sessions_path, class: 'ls-form ls-login-form' do %>
-    <fieldset>
-      <div class="ls-label">
-        <%= content_tag :b, 'Usuário', class: 'ls-label-text ls-hidden-accessible' %>
-        <%= text_field_tag :access, params[:access], class: 'ls-login-bg-user ls-field-lg', placeholder: 'Usuário', autofocus: true %>
-      </div>
-
-      <div class="field">
-        <%= content_tag :b, 'Senha', class: 'ls-label-text ls-hidden-accessible' %>
-        <div class="ls-prefix-group ls-field-lg">
-          <%= password_field_tag :password, params[:password], class: 'ls-login-bg-password', placeholder: 'Senha' %>
-          <%= link_to "", "#", class: 'ls-label-text-prefix ls-toggle-pass ls-ico-eye', 'data-target': '#password' %>
-        </div>
-      </div>
-      <%= submit_tag "Entrar", class: 'ls-btn-primary ls-btn-block ls-btn-lg ls-xs-margin-bottom' %>
-      <p class="ls-txt-center"><small><%= link_to 'Esqueci minha senha', recover_password_path %></small></p>
-      <p class="ls-txt-center ls-login-signup">
-        Ainda não possui cadastro no Million?
-        <%= link_to 'Cadastre-se agora', signup_path %> ou
-        <%= link_to 'volte ao início', root_path %>
-      </p>
-    </fieldset>
-  <% end %>
-</div>
+<v-card class="elevation-12">
+  <v-toolbar dark color="primary">
+    <v-btn icon href="/">
+      <image src="<%= image_url('million-logo.svg') %>">
+    </v-btn>
+    <v-spacer></v-spacer>
+    <v-tooltip bottom>
+      <v-btn flat small slot="activator" href="/signup">Cadastre-se</v-btn>
+      <span>Ainda não tenho conta</span>
+    </v-tooltip>
+  </v-toolbar>
+  <v-form action="/sessions" method="post">
+    <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+    <v-card-text>
+      <v-text-field prepend-icon="person" name="access" label="login ou email" type="text" autocomplete="username" required></v-text-field>
+      <v-text-field prepend-icon="lock" name="password" label="Senha" type="password" autocomplete="current-password" required></v-text-field>
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn flat small href="/recover">Esqueci minha senha</v-btn>
+      <v-btn type="submit" color="primary">Entrar</v-btn>
+    </v-card-actions>
+  </v-form>
+</v-card>

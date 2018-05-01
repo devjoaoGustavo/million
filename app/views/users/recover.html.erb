@@ -1,22 +1,22 @@
-<div class="ls-login-box">
-  <div class="ls-login-logo">
-    <image src="<%= image_url('million-logo.svg') %>">
-    <h3>Recuperar senha</h3>
-  </div>
-  <%= form_tag '/recover', class: 'ls-form ls-login-form' do |f| %>
-    <fieldset>
-      <div class="ls-label">
-        <%= content_tag :b, 'Email', class: 'ls-label-text ls-hidden-accessible' %>
-        <%= email_field_tag :email, '' , placeholder: 'Digite o email cadastrado' %>
-      </div>
-
-      <%= submit_tag 'Envie', class: 'ls-btn-primary ls-btn-block ls-btn-lg' %>
-
-      <p class="ls-txt-center ls-login-signup">
-        Se lembrou de sua senha Million?<br>
-        <%= link_to 'Entre aqui', login_path %> ou
-        <%= link_to 'volte ao início', root_path %>
-      </p>
-    </fieldset>
-  <% end %>
-</div>
+<v-card class="elevation-12">
+  <v-toolbar dark color="primary">
+    <v-btn icon href="/">
+      <image src="<%= image_url('million-logo.svg') %>">
+    </v-btn>
+    <v-spacer></v-spacer>
+    <v-tooltip bottom>
+      <v-btn flat small slot="activator" href="/login">Fazer login</v-btn>
+      <span>Lembrei meus dados</span>
+    </v-tooltip>
+  </v-toolbar>
+  <v-form action="/recover" method="post">
+    <%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+    <v-card-text>
+      <v-text-field prepend-icon="person" name="email" label="Email" type="email" autocomplete="email" required></v-text-field>
+    </v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn type="submit" color="primary">Enviar</v-btn>
+    </v-card-actions>
+  </v-form>
+</v-card>

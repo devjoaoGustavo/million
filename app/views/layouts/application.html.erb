@@ -1,104 +1,121 @@
 <!DOCTYPE html>
-<html class="ls-theme-yellow-gold" style="height: 100%; margin: 0px;">
+<html>
   <head>
     <title>Million</title>
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="description" content="O melhor e mais simples gerenciador pessoal de finanças.">
+    <meta name="description" content="O mais simples e eficiente aplicativo de educação financeira.">
     <link rel="icon" href="<%= image_url('million-logo.png') %>">
     <link rel="apple-touch-icon" href="<%= image_url('million-logo.png') %>">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
-    <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css">
+    <%# <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"> %>
+    <%# <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css"> %>
   </head>
 
-  <body style="height: 100%; margin: 0px;">
-    <div id="app">
-      <div class="ls-topbar">
-        <!-- Barra de Notificações -->
-        <div class="ls-notification-topbar">
-          <nav class="ls-alerts-list" role="navigation">
-            <%= link_to '',  dashboard_path(current_user),
-              class: 'ls-ico-dashboard',
-              'data-ls-module': 'popover',
-              'data-trigger': 'hover',
-              'data-title': 'Painel Inicial',
-              'data-content': 'Acompanhe seu saldo e insira novas entradas',
-              'data-placement': 'bottom',
-              'aria-label': 'Painel inicial' %>
-            <%= link_to '', expenses_path(current_user),
-              class: 'ls-ico-cart',
-              'data-ls-module': 'popover',
-              'data-trigger': 'hover',
-              'data-title': 'Painel de despesas',
-              'data-content': 'Veja de perto para onde está indo seu dinheiro',
-              'data-placement': 'bottom',
-              'aria-label': 'Painel de despesas' %>
-            <%= link_to '', revenues_path(current_user),
-              class: 'ls-ico-chart-bar-up',
-              'data-ls-module': 'popover',
-              'data-trigger': 'hover',
-              'data-title': 'Painel de receitas',
-              'data-content': 'Gerencie e otimize seus ganhos',
-              'data-placement': 'bottom',
-              'aria-label': 'Painel de receitas' %>
-            <%= link_to '', user_goals_path(current_user),
-              class: 'ls-ico-trophy',
-              'data-ls-module': 'popover',
-              'data-trigger': 'hover',
-              'data-title': 'Painel de objetivos',
-              'data-content': 'Cadastre novos objetivos e realize seus sonhos',
-              'data-placement': 'bottom',
-              'aria-label': 'Painel de objetivos' %>
-            </nav>
-            <!-- Dropdown com detalhes da conta de usuário -->
-            <% if logged_in? %>
-              <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-                <a href="#" class="ls-ico-user">
-                  <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>
-                </a>
-                <nav class="ls-dropdown-nav ls-user-menu">
-                  <ul>
-                    <li><%= link_to 'Sair', logout_path, method: :delete %></li>
-                  </ul>
-                </nav>
-              </div>
-            <% else %>
-              <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-                <a href="#" class="ls-ico-user">
-                </a>
-                <nav class="ls-dropdown-nav ls-user-menu">
-                  <ul>
-                    <li><%= link_to 'Cadastre-se', signup_path %></li>
-                    <li><%= link_to 'Entre', login_path %></li>
-                  </ul>
-                </nav>
-              </div>
-            <% end %>
-          </div>
+  <body>
+    <v-app id="app" userid="<%= current_user.id %>">
+      <v-navigation-drawer temporary v-model="drawer" absolute app>
+        <v-list>
+          <v-list-tile avatar>
+            <v-list-tile-avatar>
+              <v-icon>account_circle</v-icon>
+            </v-list-tile-avatar>
+            <v-list-tile-content>
+              <v-list-tile-title><%= current_user.presentation_name %></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+        <v-list>
+          <v-divider></v-divider>
+          <v-list-tile>
+            <v-list-tile-action @click.stop="goto('<%= dashboard_path(current_user) %>')">
+              <v-icon>dashboard</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Painel</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
 
-          <span class="ls-show-sidebar ls-ico-menu"></span>
+          <v-list-tile>
+            <v-list-tile-action @click.stop="goto('<%= expenses_path(current_user) %>')">
+              <v-icon>shopping_cart</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Despesas</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
 
-          <!-- Nome do produto/marca -->
-          <h1 class="ls-brand-name ls-xs-space">
-            <%= link_to root_path, class: 'ls-display-block' do %>
-            <image src="<%= image_url('million-logo.svg') %>">
-          <% end %>
-        </h1>
-      </div>
+          <v-list-tile>
+            <v-list-tile-action @click.stop="goto('<%= revenues_path(current_user) %>')">
+              <v-icon>account_balance_wallet</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Receitas</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
 
-      <main class="ls-main ls-no-margin-left" style="min-height: calc(100vh);">
-        <div class="container-fluid">
+          <v-list-tile>
+            <v-list-tile-action @click.stop="goto('<%= user_goals_path(current_user) %>')">
+              <v-icon>my_location</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>Objetivos</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+
+          <v-list-tile>
+            <v-btn href="<%= logout_path %>" data-method="delete" flat small>
+              <v-list-tile-action>
+                <v-icon>exit_to_app</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>Sair</v-list-tile-title>
+              </v-list-tile-content>
+            </v-btn>
+          </v-list-tile>
+        </v-list>
+      </v-navigation-drawer>
+      <v-toolbar color="primary">
+        <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-toolbar-side-icon>
+        <v-spacer class="hidden-md-and-up"></v-spacer>
+        <v-btn icon href="/">
+          <image src="<%= image_url('million-logo.svg') %>">
+        </v-btn>
+        <v-spacer></v-spacer>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-sm-and-down">
+          <v-btn href="<%= dashboard_path(current_user) %>" flat small>Painel</v-btn>
+          <v-btn href="<%= expenses_path(current_user) %>" flat small>Despesas</v-btn>
+          <v-btn href="<%= revenues_path(current_user) %>" flat small>Receitas</v-btn>
+          <v-btn href="<%= user_goals_path(current_user) %>" flat small>Objetivos</v-btn>
+          <v-btn href="<%= logout_path %>" data-method="delete" flat small>Sair</v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+
+      <v-content>
+        <v-container fluid>
           <% if @intro.present? %>
             <intro :params="<%= @intro %>"></intro>
           <% end %>
-          <alert :is-alert="isAlert" :is-notice="isNotice" :message="message" @close="closeAlert()"></alert>
+          <% if flash[:notice].present? %>
+            <v-alert type="success" :value="true" dismissible v-model="alert">
+              <%= flash[:notice] %>
+            </v-alert>
+          <% elsif flash[:alert].present? %>
+            <v-alert type="error" :value="true" dismissible v-model="alert">
+              <%= flash[:alert] %>
+            </v-alert>
+          <% end %>
 
           <%= yield %>
-        </div>
-      </main>
+        </v-container>
+      </v-content>
+      <v-footer app>
+        <v-spacer></v-spacer>
+        <div>Hobbyright &copy; {{ new Date().getFullYear() }} Million financial education app.</div>
+      </v-footer>
 
         <footer class="ls-footer" style="height: 120px">
           <nav class="ls-footer-menu">
@@ -144,10 +161,10 @@
           </div>
         <% end %>
       </aside>
-    </div>
+    </v-app>
     <%= javascript_pack_tag 'application' %>
-    <%= javascript_include_tag 'application' %>
-    <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script>
-    <%= yield :google_chart %>
+    <%# <%= javascript_include_tag 'application' %1> %>
+    <%# <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script> %>
+    <%# yield :google_chart %>
   </body>
 </html>

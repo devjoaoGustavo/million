@@ -5,35 +5,39 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="description" content="O melhor e mais simples gerenciador pessoal de finanças.">
-    <link rel="icon" sizes="192x192" href="/locawebstyle/assets/images/ico-boilerplate.png">
-    <link rel="apple-touch-icon" href="/locawebstyle/assets/images/ico-boilerplate.png">
+    <meta name="description" content="O mais simples e eficiente aplicativo de educação financeira.">
+    <link rel="icon" href="<%= image_url('million-logo.png') %>">
+    <link rel="apple-touch-icon" href="<%= image_url('million-logo.png') %>">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css">
   </head>
 
   <body>
-    <div class="ls-login-parent">
-      <div class="ls-login-inner">
-        <div class="ls-login-container">
-          <div id="app" class="ls-height-inherit">
-            <alert
-              :is-alert="<%= flash[:alert].present? %>"
-              :is-notice="<%= flash[:notice].present? %>"
-              :message="<%= (flash[:notice] || flash[:alert]).to_json %>">
-            </alert>
+    <v-app id="app">
+      <v-content>
+        <% if flash[:notice].present? %>
+          <v-alert type="success" :value="true" dismissible v-model="alert">
+            <%= flash[:notice] %>
+          </v-alert>
+        <% elsif flash[:alert].present? %>
+          <v-alert type="error" :value="true" dismissible v-model="alert">
+            <%= flash[:alert] %>
+          </v-alert>
+        <% end %>
 
-            <%= yield %>
-          </div>
-        </div>
-      </div>
-    </div>
+        <v-container fluid fill-height>
+          <v-layout align-center justify-center>
+            <v-flex xs12 sm8 md4>
+              <%= yield %>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-content>
+    </v-app>
   </body>
 
   <footer>
     <%= javascript_include_tag 'application' %>
-    <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script>
     <%= javascript_pack_tag 'application' %>
   </footer>
 </html>

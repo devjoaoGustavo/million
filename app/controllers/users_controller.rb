@@ -47,14 +47,19 @@ class UsersController < ApplicationController
 
   def redefine
     @user = User.find params[:id]
-    @user.password              = allowed_params[:password]
-    @user.password_confirmation = allowed_params[:password_confirmation]
-    if @user.activate!
-      session[:user_id] = @user.id
-      redirect_to root_path, notice: 'Senha redefinida com sucesso.'
-    else
-      flash.now[:alert] = 'Algo deu errado'
+    if allowed_params[:password].blank? || allowed_params[:password_confirmation].blank?
+      flash.now[:alert] = 'Informe corretamente a nova senha e a confirmação de senha'
       render :redefine_password, layout: 'access'
+    else
+      @user.password              = allowed_params[:password]
+      @user.password_confirmation = allowed_params[:password_confirmation]
+      if @user.activate!
+        session[:user_id] = @user.id
+        redirect_to dashboard_path(@user.id), notice: 'Senha redefinida com sucesso.'
+      else
+        flash.now[:alert] = 'Algo deu errado'
+        render :redefine_password, layout: 'access'
+      end
     end
   end
 

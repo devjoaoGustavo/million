@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       get '/expenses', to: 'entries#list'
     end
     get '/categories', to: 'categories#index'
+
+    put  '/users/:id/redefine',     to: 'users#redefine'
   end
 
   resources :users, only: %i(create) do

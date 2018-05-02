@@ -1,27 +1,25 @@
-<div class="col-md-6 col-sm-12 col-xs-12">
-  <%= render 'total_balance' %>
-</div>
-
-<div class="col-md-6 col-sm-12 col-xs-12">
-  <%= render 'new_entry' %>
-</div>
-
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'entries/graphs/month' %>
-</div>
-
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'balance_month' %>
-</div>
-
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'entries/graphs/category' %>
-</div>
-
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'balance_seven_days' %>
-</div>
-
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'balance_of_day' %>
-</div>
+<v-container fluid grid-list-lg>
+  <v-layout row wrap>
+    <v-flex xs12 sm12 md6>
+      <%= render 'total_balance' %>
+    </v-flex>
+    <v-flex xs12 sm12 md6>
+      <%= render 'new_entry' %>
+    </v-flex>
+    <v-flex xs12 sm12 md12>
+      <%= render 'entries/graphs/month' %>
+    </v-flex>
+    <v-flex xs12 sm12 md12>
+      <%= render 'balance_month' %>
+    </v-flex>
+    <v-flex xs12 sm12 md12>
+      <%= render 'entries/graphs/category' %>
+    </v-flex>
+    <v-flex xs12 sm12 md12>
+      <%= render 'balance_seven_days' %>
+    </v-flex>
+    <v-flex xs12 sm12 md12>
+      <%= render 'balance_of_day' %>
+    </v-flex>
+  </v-layout>
+</v-container>

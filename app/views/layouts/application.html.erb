@@ -99,6 +99,14 @@
           <% if @intro.present? %>
             <intro :params="<%= @intro %>"></intro>
           <% end %>
+          <v-snackbar :timeout="6000" :bottom="true" color="error" v-model="isAlert">
+            A operação não foi realizada com sucesso
+            <v-btn flat color="primary" @click-native="isAlert = false">Fechar</v-btn>
+          </v-snackbar>
+          <v-snackbar :timeout="6000" :bottom="true" color="success" v-model="isNotice">
+            Operação realizada com sucesso
+            <v-btn flat color="primary" @click-native="isNotice = false">Fechar</v-btn>
+          </v-snackbar>
           <% if flash[:notice].present? %>
             <v-alert type="success" :value="true" dismissible v-model="alert">
               <%= flash[:notice] %>
@@ -113,57 +121,11 @@
         </v-container>
       </v-content>
       <v-footer app>
-        <v-spacer></v-spacer>
-        <div>Hobbyright &copy; {{ new Date().getFullYear() }} Million financial education app.</div>
+        <div>Hobbyright &copy; {{ new Date().getFullYear() }} Million - The financial education app.</div>
       </v-footer>
-
-        <footer class="ls-footer" style="height: 120px">
-          <nav class="ls-footer-menu">
-            <h2 class="ls-title-footer">CONTATO</h2>
-            <ul class="ls-footer-list">
-              <li><a class="bg-customer-support"
-                  href="#"
-                  data-ls-module="popover"
-                  data-title="Escreva para"
-                  data-content="<p><a href='mailto:dev.joaogustavo@gmail.com'>João Gustavo de Paula</a></li>">Críticas e sugestões</a></li>
-            </ul>
-          </nav>
-          <div class="ls-footer-info">
-            <p class="ls-copy-right">Hobbyright © 2018-2018 Million personal finance manager.</p>
-          </div>
-        </footer>
-
-      <aside class="ls-sidebar hidden-md hidden-lg">
-        <% if logged_in? %>
-          <div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">
-            <a href="#" class="ls-ico-user">
-              <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>
-            </a>
-            <nav class="ls-dropdown-nav ls-user-menu" aria-hidden="true">
-              <ul>
-                <li><%= link_to 'Painel',    dashboard_path(current_user),  class: 'ls-ico-dashboard',    'aria-label': 'Painel inicial' %></li>
-                <li><%= link_to 'Despesas',  expenses_path(current_user),   class: 'ls-ico-cart',         'aria-label': 'Painel de despesas' %></li>
-                <li><%= link_to 'Receitas',  revenues_path(current_user),   class: 'ls-ico-chart-bar-up', 'aria-label': 'Painel de receitas' %></li>
-                <li><%= link_to 'Objetivos', user_goals_path(current_user), class: 'ls-ico-trophy',       'aria-label': 'Painel de objetivos' %></li>
-              </ul>
-              <%= link_to 'Sair', logout_path, method: :delete, class: 'ls-btn-logout', role: 'combobox', 'aria-expanded': 'false' %>
-            </nav>
-          </div>
-        <% else %>
-          <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-            <a href="#" class="ls-ico-user"></a>
-            <nav class="ls-dropdown-nav ls-user-menu">
-              <ul>
-                <li><%= link_to 'Cadastre-se', signup_path %></li>
-                <li><%= link_to 'Entre', login_path %></li>
-              </ul>
-            </nav>
-          </div>
-        <% end %>
-      </aside>
     </v-app>
     <%= javascript_pack_tag 'application' %>
-    <%# <%= javascript_include_tag 'application' %1> %>
+    <%= javascript_include_tag 'application' %>
     <%# <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script> %>
     <%# yield :google_chart %>
   </body>

@@ -1,13 +1,11 @@
-<div class="ls-box ls-board-box">
-  <header class="ls-info-header">
-    <h2 class="ls-title-3">Saldo Total</h2>
-    <p class="ls-float-right ls-float-none-xs ls-small-info">
-      Olá, <strong><%= current_user.presentation_name %></strong>.
-    </p>
-  </header>
-  <div id="sending-stats">
-    <div class="col-md-12 col-sm-12 col-xs-12">
-      <total-balance :userid="<%= current_user.id.to_json %>" :reload="reloadBalance"></total-balance>
-    </div>
-  </div>
-</div>
+<v-card>
+  <v-card-text>
+    <v-card-title class="title">Meu saldo</v-card-title>
+    <total-balance class="text-xs-center" :userid="<%= current_user.id.to_json %>" :reload="reloadBalance"></total-balance>
+  </v-card-text>
+  <v-card-actions>
+    <v-spacer></v-spacer>
+    <v-btn href="<%= expenses_path(current_user) %>" color="primary" flat dark>Ver despesas</v-btn>
+    <v-btn href="<%= revenues_path(current_user) %>" color="primary" flat dark>Ver receitas</v-btn>
+  </v-card-actions>
+</v-card>

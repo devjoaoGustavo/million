@@ -1,25 +1,19 @@
 <template>
-    <div class="ls-box">
-      <div class="ls-box-head">
-        <h6 class="ls-title-4">SALDO</h6>
-      </div>
-      <div class="ls-box-body">
+  <v-container>
+    <v-layout fill-height>
+      <v-flex xs12 sm6 md6 offset-sm3 offset-md3>
         <strong v-if="!visible">
-          <i class="ls-ico-eye" @click="see()"></i>
+          <v-icon @click="see()">visibility</v-icon>
         </strong>
         <spinner v-else-if="loading" :size="'50'"></spinner>
         <template v-else>
-          <strong :class="amountClass">
-            {{ balance | currency }}
-          </strong>
-          <i class="ls-ico-eye-blocked" @click="see()"></i>
+          <span class="display-1" :class="amountClass">{{ balance | currency }}</span>
+          <br>
+          <v-icon @click="see()">visibility_off</v-icon>
         </template>
-      </div>
-      <div class="ls-box-footer">
-        <a :href="revenues_path" class="ls-tooltip-bottom ls-btn ls-btn-sm" aria-label="Abrir todas as receitas">Ver receitas</a>
-        <a :href="expenses_path" class="ls-tooltip-bottom ls-btn ls-btn-sm" aria-label="Abrir todas as despesas">Ver despesas</a>
-      </div>
-    </div>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -43,7 +37,7 @@ export default {
   },
   computed: {
     amountClass: function() {
-      return this.balance < 0 ? 'ls-color-danger' : 'ls-color-success'
+      return this.balance < 0 ? 'deep-orange--text' : 'green--text'
     },
   },
   beforeMount: function() {

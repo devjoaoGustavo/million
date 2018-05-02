@@ -1,15 +1,10 @@
 <template>
-  <div class="ls-box">
-    <div class="ls-box-head">
-      <h6 class="ls-title-4">SALDO</h6>
-    </div>
-    <div class="ls-box-body">
-      <spinner v-if="loading" :size="'50'"></spinner>
-      <strong v-else :class="colorClass">
-        {{ amount | currency }}
-      </strong>
-    </div>
-  </div>
+  <v-container>
+    <spinner v-if="loading" :size="'50'"></spinner>
+    <strong v-else :class="colorClass">
+      {{ amount | currency }}
+    </strong>
+  </v-container>
 </template>
 
 <script>

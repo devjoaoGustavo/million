@@ -1,28 +1,63 @@
-<div class="ls-box ls-board-box">
-  <header class="ls-info-header">
-    <h2 class="ls-title-3">Resumo dos últimos sete dias</h2>
-    <p class="ls-float-right ls-float-none-xs ls-small-info">
-      Lançamentos de <strong><%= 7.days.ago.strftime('%d/%m/%Y') %></strong> até <strong><%= DateTime.current.strftime('%d/%m/%Y') %></strong>
-    </p>
-  </header>
-  <div id="sending-stats" class="row">
-    <div class="col-sm-12 col-xs-12 col-md-3">
-      <weekly-balance
-        :userid="<%= current_user.id.to_json %>"
-        :reload="reloadBalance">
-      </weekly-balance>
+<v-card>
+  <v-card-title primary-title>
+    <div>
+      <h3 class="headline md-o">
+        Resumo dos últimos sete dias
+        <v-chip small color="success" text-color="white">Novo</v-chip>
+      </h3>
+      <div>Lançamentos de <strong><%= 7.days.ago.strftime('%d/%m/%Y') %></strong> até <strong><%= DateTime.current.strftime('%d/%m/%Y') %></strong></div>
     </div>
-    <div class="col-sm-12 col-xs-12 col-md-3">
-      <weekly-expense
-        :userid="<%= current_user.id.to_json %>"
-        :reload="reloadBalance">
-      </weekly-expense>
-    </div>
-    <div class="col-sm-12 col-xs-12 col-md-3">
-      <weekly-revenue
-        :userid="<%= current_user.id.to_json %>"
-        :reload="reloadBalance">
-      </weekly-revenue>
-    </div>
-  </div>
-</div>
+  </v-card-title>
+  <v-container fluid style="min-height: 0;" grid-list-lg>
+    <v-layout row wrap>
+      <v-flex xs12>
+        <v-card color="cyan darken-2 white--text">
+          <v-card-title>
+            <div class="title">Saldo</div>
+          </v-card-title>
+          <v-card-media>
+            <v-container>
+              <weekly-balance
+                class="text-xs-center"
+                :userid="<%= current_user.id.to_json %>"
+                :reload="reloadBalance">
+              </weekly-balance>
+            </v-container>
+          </v-card-media>
+        </v-card>
+      </v-flex>
+      <v-flex xs12 sm6>
+        <v-card color="cyan darken-2 white--text">
+          <v-card-title>
+            <div class="title">Receitas</div>
+          </v-card-title>
+          <v-card-media>
+            <v-container>
+              <weekly-expense
+                class="text-xs-center"
+                :userid="<%= current_user.id.to_json %>"
+                :reload="reloadBalance">
+              </weekly-expense>
+            </v-container>
+          </v-card-media>
+        </v-card>
+      </v-flex>
+      <v-flex xs12 sm6>
+        <v-card color="cyan darken-2 white--text">
+          <v-card-title>
+            <div class="title">Despesas</div>
+          </v-card-title>
+          <v-card-media>
+            <v-container>
+              <weekly-revenue
+                class="text-xs-center"
+                :userid="<%= current_user.id.to_json %>"
+                :reload="reloadBalance">
+              </weekly-revenue>
+            </v-container>
+          </v-card-media>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</v-card>

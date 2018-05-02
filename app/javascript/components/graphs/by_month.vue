@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  props: ['userid'],
+  props: ['userid', 'updatechart'],
   data: function() {
     return {
       chartId: 'chart-by-month',
@@ -28,17 +28,26 @@ export default {
       }
     }
   },
+  watch: {
+    updatechart: function() {
+      this.fetchData()
+      this.drawChart()
+    }
+  },
   methods: {
     drawChart: function() {
       var data  = google.visualization.arrayToDataTable(this.content)
       var chart = new google.charts.Bar(document.getElementById(this.chartId))
       chart.draw(data, google.charts.Bar.convertOptions(this.options))
+    },
+    fetchData: function() {
+      var that = this
+      var path = '/api/users/' + this.userid + '/entries/by_month'
+      $.get(path, (res) => { that.content = res, console.log(that.content) })
     }
   },
   created: function() {
-    var that = this
-    var path = '/api/users/' + this.userid + '/entries/by_month'
-    $.get(path, (res) => { that.content = res, console.log(that.content) })
+    this.fetchData()
   },
   mounted: function() {
     google.charts.load('current', { 'packages': ['bar'], 'language': 'pt-br' })

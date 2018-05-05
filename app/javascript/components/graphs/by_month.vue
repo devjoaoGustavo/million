@@ -22,28 +22,30 @@ export default {
           position: 'none'
         },
         colors: ['red', 'green'],
-        hAxis: { legend: 'none' },
-        vAxis: { format: 'R$ ###,###,###.##' },
-        height: 400
+        hAxis: { title: '' },
+        vAxis: {
+          format: 'R$ ###,###,###.##',
+          textStyle: {
+            fontSize: 10
+          }
+        },
+        height: 350
       }
-    }
-  },
-  watch: {
-    updatechart: function() {
-      this.fetchData()
-      this.drawChart()
     }
   },
   methods: {
     drawChart: function() {
       var data  = google.visualization.arrayToDataTable(this.content)
       var chart = new google.charts.Bar(document.getElementById(this.chartId))
-      chart.draw(data, google.charts.Bar.convertOptions(this.options))
+      var that = this
+      setTimeout(function() {
+        chart.draw(data, google.charts.Bar.convertOptions(that.options))
+      }, 50)
     },
     fetchData: function() {
       var that = this
       var path = '/api/users/' + this.userid + '/entries/by_month'
-      $.get(path, (res) => { that.content = res, console.log(that.content) })
+      $.get(path, (res) => { that.content = res })
     }
   },
   created: function() {

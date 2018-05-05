@@ -10,8 +10,7 @@
     <link rel="apple-touch-icon" href="<%= image_url('million-logo.png') %>">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%# <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons"> %>
-    <%# <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css"> %>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
   </head>
 
   <body>
@@ -116,9 +115,9 @@
               <%= flash[:alert] %>
             </v-alert>
           <% end %>
-
-          <%= yield %>
         </v-container>
+
+        <%= yield %>
       </v-content>
       <v-footer app>
         <div>Hobbyright &copy; {{ new Date().getFullYear() }} Million - The financial education app.</div>
@@ -126,7 +125,6 @@
     </v-app>
     <%= javascript_pack_tag 'application' %>
     <%= javascript_include_tag 'application' %>
-    <%# <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script> %>
-    <%# yield :google_chart %>
+    <%= yield :google_chart %>
   </body>
 </html>

@@ -1,6 +1,11 @@
 <v-card>
   <v-card-text>
-    <v-card-title class="title">Meu saldo</v-card-title>
+    <v-card-title primary-title>
+      <h3 class="headline md-0">
+        Meu saldo
+        <v-chip small color="success" text-color="white">novo</v-chip>
+      </h3>
+    </v-card-title>
     <total-balance class="text-xs-center" :userid="<%= current_user.id.to_json %>" :reload="reloadBalance"></total-balance>
   </v-card-text>
   <v-card-actions>

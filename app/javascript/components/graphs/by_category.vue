@@ -1,12 +1,12 @@
 <template>
-  <div
-    :id="chartid"
-    @resize="drawChart"
-    class="ls-full-width ls-height-auto ls-no-padding">
+  <div>
+    <spinner v-show="loading" :size="'50'"></spinner>
+    <div v-show="!loading" :id="chartid"></div>
   </div>
 </template>
 
 <script>
+import Loading from '../spinner_wedges.vue'
 export default {
   props: {
     chartid: String,
@@ -18,7 +18,16 @@ export default {
         backgroundColor: {
           fill: 'transparent'
         },
-        is3D: true,
+        pieHole: .4,
+        slices: {
+          0: { offset: .05 },
+          2: { offset: .05 },
+          4: { offset: .05 },
+          12: { offset: .05 },
+          8: { offset: .05 }
+        },
+        sliceVisibilityThreshold: .05,
+        pieStartAngle: 30,
         legend: {
           position: 'right',
           alignment: 'center'
@@ -27,24 +36,31 @@ export default {
           width: '96%',
           height: '96%'
         }
-      }
+      },
+      loading: true
     }
   },
   methods: {
     drawChart: function() {
       var content = new google.visualization.arrayToDataTable(this.data)
-      var chart   = new google.visualization
-        .PieChart(document.getElementById(this.chartid))
-      chart.draw(content, this.options)
+      var chart   = new google.visualization.PieChart(document.getElementById(this.chartid))
+      var that = this
+      that.loading = false
+      setTimeout(function() {
+        chart.draw(content, that.options)
+      }, 50)
     }
   },
   mounted: function() {
     google.charts.load('current', {'packages':['corechart'], 'language': 'pt-br' });
     google.charts.setOnLoadCallback(this.drawChart);
-    window.addEventListener('resize', this.drawChart);
+    screen.orientation.addEventListener('change', this.drawChart)
   },
   beforeDestroy: function() {
-    window.removeEventListener('resize', this.drawChart);
+    screen.orientation.removeEventListener('change', this.drawChart)
+  },
+  components: {
+    'spinner': Loading
   }
 }
 </script>

@@ -1,7 +1,15 @@
 <template>
   <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent>
-      <v-btn color="primary" fab dark slot="activator"><v-icon dark>add</v-icon></v-btn>
+      <v-btn
+        color="primary"
+        dark
+        fab
+        slot="activator">
+        <div>
+          <v-icon>attach_money</v-icon>
+        </div>
+      </v-btn>
       <v-card>
         <v-form @submit-prevent="">
           <v-card-title>
@@ -32,9 +40,9 @@
                 </v-flex>
                 <v-flex xs12 sm6 md6>
                   <v-text-field
+                    prepend-icon="R$"
                     label="Valor"
                     v-model="amount"
-                    prefix="R$"
                     type="number"
                     min="0.00"
                     step="0.01" required>
@@ -62,8 +70,8 @@
                 </v-flex>
 
                 <v-flex xs12 sm6 md6>
+                  <v-badge left><span slot="badge">{{ installments }}</span></v-badge>
                   <v-slider color="primary" label="Parcelas" min="1" max="120" thumb-label v-model="installments"></v-slider>
-                  <v-text-field type="number" min="1" step="1" max="720" v-model="installments"></v-text-field>
                 </v-flex>
 
                 <v-flex v-if="entrytype == 'expense' && goals.length > 0" xs12 sm6 md6 offset-sm6 offset-md6>
@@ -76,7 +84,7 @@
                     single-line
                     auto
                     chips
-                    prepend-icon="mail_outline"
+                    prepend-icon="my_location"
                     hide-details required>
                   </v-select>
                 </v-flex>

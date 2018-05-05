@@ -8,36 +8,30 @@
       <div>Lançamentos a partir de <strong><%= DateTime.current.at_beginning_of_month.strftime('%d/%m/%Y') %></strong></div>
     </div>
   </v-card-title>
-  <v-container fluid style="min-height: 0px;" grid-list-lg>
-    <v-layout row wrap>
-      <v-flex xs12 sm6>
-        <v-card>
-          <v-card-title>
-            <div class="title">Receitas</div>
-          </v-card-title>
-          <v-card-media>
-            <by-category
-              chartid="revenues-by-category"
-              :data="<%= @data_revenue %>">
-            </by-category>
-          </v-card-media>
-        </v-card>
-      </v-flex>
-      <v-flex xs12 sm6>
-        <v-card>
-          <v-card-title>
-            <div class="title">Despesas</div>
-          </v-card-title>
-          <v-card-media>
-            <by-category
-              chartid="expenses-by-category"
-              :data="<%= @data_expense %>">
-            </by-category>
-          </v-card-media>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <v-layout row wrap>
+    <v-flex xs12 sm6>
+      <v-card flat>
+        <v-card-title class="pb-0">
+          <div class="title">Receitas</div>
+        </v-card-title>
+        <by-category
+          chartid="revenues-by-category"
+          :data="<%= @data_revenue %>">
+        </by-category>
+      </v-card>
+    </v-flex>
+    <v-flex xs12 sm6>
+      <v-card flat>
+        <v-card-title class="pb-0">
+          <div class="title">Despesas</div>
+        </v-card-title>
+        <by-category
+          chartid="expenses-by-category"
+          :data="<%= @data_expense %>">
+        </by-category>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </v-card>
 <%= content_for :google_chart do %>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

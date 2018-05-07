@@ -1,25 +1,23 @@
 <template>
-    <div class="ls-box">
-      <div class="ls-box-head">
-        <h6 class="ls-title-4">SALDO</h6>
-      </div>
-      <div class="ls-box-body">
-        <strong v-if="!visible">
-          <i class="ls-ico-eye" @click="see()"></i>
+  <div class="ls-box ls-xs-space">
+    <div class="ls-box-head"></div>
+    <div class="ls-box-body">
+      <strong v-if="!visible">
+        <i class="ls-ico-eye" @click="see()"></i>
+      </strong>
+      <spinner v-else-if="loading" :size="'50'"></spinner>
+      <template v-else>
+        <strong :class="amountClass">
+          {{ balance | currency }}
         </strong>
-        <spinner v-else-if="loading" :size="'50'"></spinner>
-        <template v-else>
-          <strong :class="amountClass">
-            {{ balance | currency }}
-          </strong>
-          <i class="ls-ico-eye-blocked" @click="see()"></i>
-        </template>
-      </div>
-      <div class="ls-box-footer">
-        <a :href="revenues_path" class="ls-tooltip-bottom ls-btn ls-btn-sm" aria-label="Abrir todas as receitas">Ver receitas</a>
-        <a :href="expenses_path" class="ls-tooltip-bottom ls-btn ls-btn-sm" aria-label="Abrir todas as despesas">Ver despesas</a>
-      </div>
+        <i class="ls-ico-eye-blocked" @click="see()"></i>
+      </template>
     </div>
+    <div class="ls-box-footer ls-no-padding">
+      <a :href="revenues_path" class="ls-tooltip-bottom ls-btn ls-btn-sm" aria-label="Abrir todas as receitas">Receitas</a>
+      <a :href="expenses_path" class="ls-tooltip-bottom ls-btn ls-btn-sm" aria-label="Abrir todas as despesas">Despesas</a>
+    </div>
+  </div>
 </template>
 
 <script>

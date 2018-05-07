@@ -26,13 +26,13 @@ class Entry < ApplicationRecord
     end
 
     def destroy_all
-      entry.installments.map do |target|
+      entry&.installments&.map do |target|
         target.destroy
       end
     end
 
     def destroy_forward
-      entry.entries_forward.map do |target|
+      entry&.entries_forward&.map do |target|
         target.destroy
       end
     end
@@ -43,9 +43,7 @@ class Entry < ApplicationRecord
     end
 
     def replace_entries!(entry)
-      entry
-        .next_entry
-        .update_attributes(entry_id: entry.entry_id)
+      entry&.next_entry&.update_attributes(entry_id: entry.entry_id)
     end
   end
 end

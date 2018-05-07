@@ -23,19 +23,15 @@
   </div>
   <div class="col-sm-12 col-xs-12 col-md-6 ls-xs-space">
     <div class="ls-box ls-xs-space">
-      <% if @data_revenue.size <= 1 %>
-        <p class="ls-no-data">Não há receitas neste mês</p>
-      <% else %>
-        <div class="ls-box-head">
-          <%= link_to 'RECEITAS', revenues_path(current_user),
-            class: 'ls-tooltip-bottom ls-title-4',
-            'aria-label': 'Abrir todas as despesas' %>
-        </div>
-        <by-category
-          chartid="revenues-by-category"
-          :data="<%= @data_revenue %>">
-        </by-category>
-      <% end %>
+      <div class="ls-box-head">
+        <%= link_to 'RECEITAS', revenues_path(current_user),
+          class: 'ls-tooltip-bottom ls-title-4',
+          'aria-label': 'Abrir todas as despesas' %>
+      </div>
+      <by-category
+        chartid="revenues-by-category"
+        :data="<%= @data_revenue %>">
+      </by-category>
     </div>
   </div>
 </div>

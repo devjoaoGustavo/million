@@ -1,9 +1,8 @@
 <v-card>
   <v-card-text>
     <v-card-title primary-title>
-      <h3 class="headline md-0">
+      <h3 class="title">
         Meu saldo
-        <v-chip small color="success" text-color="white">novo</v-chip>
       </h3>
     </v-card-title>
     <total-balance class="text-xs-center" :userid="<%= current_user.id.to_json %>" :reload="reloadBalance"></total-balance>

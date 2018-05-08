@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout fill-height>
-      <v-flex xs12 sm6 md6 offset-sm3 offset-md3>
+      <v-flex xs12>
         <strong v-if="!visible">
           <v-icon @click="see()">visibility</v-icon>
         </strong>

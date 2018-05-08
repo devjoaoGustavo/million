@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <spinner v-if="loading" :size="'50'"></spinner>
-    <strong v-else :class="colorClass">
+    <strong v-else :class="balanceClass + '--text'">
       {{ amount | currency }}
     </strong>
   </v-container>
@@ -23,8 +23,8 @@ export default {
     }
   },
   computed: {
-    colorClass: function() {
-      return this.amount < 0.00 ? 'ls-color-danger' : 'ls-color-success'
+    balanceClass: function() {
+      return this.amount < 0.00 ? 'error' : 'success'
     }
   },
   beforeMount: function() {

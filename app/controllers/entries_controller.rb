@@ -2,11 +2,11 @@
 
 class EntriesController < ApplicationController
   include Timing
+  before_action :validate_session!
   before_action :load_expenses, only: [:expenses]
   before_action :load_revenues, only: [:revenues]
   before_action :load_categories, only: [:revenues, :expenses, :edit, :create, :update, :search]
   rescue_from InvalidCurrencyFormat, with: :invalid_currency_format
-  before_action :validate_session!
 
   def index
     intro(message: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)

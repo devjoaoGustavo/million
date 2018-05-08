@@ -1,7 +1,11 @@
 {
   "_/assets/images/loading.svg": "/packs/_/assets/images/loading-d43e858ccad1354e9a8bc117be3314d2.svg",
-  "application.js": "/packs/application-c87fcdbb4ea774d847e5.js",
-  "application.js.map": "/packs/application-c87fcdbb4ea774d847e5.js.map",
-  "welcome.js": "/packs/welcome-02d02af77fab6849ed96.js",
-  "welcome.js.map": "/packs/welcome-02d02af77fab6849ed96.js.map"
+  "application.js": "/packs/application-645fd4ac0d2c220bc612.js",
+  "application.js.map": "/packs/application-645fd4ac0d2c220bc612.js.map",
+  "welcome.js": "/packs/welcome-928d9430f25c761912b5.js",
+  "welcome.js.map": "/packs/welcome-928d9430f25c761912b5.js.map",
+  "application.css": "/packs/application-5afe28a0cf74b917a1d5d8274aa78745.css",
+  "application.css.map": "/packs/application-5afe28a0cf74b917a1d5d8274aa78745.css.map",
+  "welcome.css": "/packs/welcome-5afe28a0cf74b917a1d5d8274aa78745.css",
+  "welcome.css.map": "/packs/welcome-5afe28a0cf74b917a1d5d8274aa78745.css.map"
 }

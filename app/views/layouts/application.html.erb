@@ -28,8 +28,9 @@
         </v-list>
         <v-list>
           <v-divider></v-divider>
-          <v-list-tile>
-            <v-list-tile-action @click.stop="goto('<%= dashboard_path(current_user) %>')">
+
+          <v-list-tile ripple>
+            <v-list-tile-action ripple @click.stop="goto('<%= dashboard_path(current_user) %>')">
               <v-icon>dashboard</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
@@ -37,7 +38,7 @@
             </v-list-tile-content>
           </v-list-tile>
 
-          <v-list-tile>
+          <v-list-tile ripple>
             <v-list-tile-action @click.stop="goto('<%= expenses_path(current_user) %>')">
               <v-icon>shopping_cart</v-icon>
             </v-list-tile-action>
@@ -46,7 +47,7 @@
             </v-list-tile-content>
           </v-list-tile>
 
-          <v-list-tile>
+          <v-list-tile ripple>
             <v-list-tile-action @click.stop="goto('<%= revenues_path(current_user) %>')">
               <v-icon>account_balance_wallet</v-icon>
             </v-list-tile-action>
@@ -55,7 +56,7 @@
             </v-list-tile-content>
           </v-list-tile>
 
-          <v-list-tile>
+          <v-list-tile ripple>
             <v-list-tile-action @click.stop="goto('<%= user_goals_path(current_user) %>')">
               <v-icon>my_location</v-icon>
             </v-list-tile-action>
@@ -64,7 +65,7 @@
             </v-list-tile-content>
           </v-list-tile>
 
-          <v-list-tile>
+          <v-list-tile ripple>
             <v-btn href="<%= logout_path %>" data-method="delete" flat small>
               <v-list-tile-action>
                 <v-icon>exit_to_app</v-icon>
@@ -76,13 +77,20 @@
           </v-list-tile>
         </v-list>
       </v-navigation-drawer>
-      <v-toolbar color="primary">
+      <v-toolbar color="primary" extended>
         <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-toolbar-side-icon>
         <v-spacer class="hidden-md-and-up"></v-spacer>
         <v-btn icon href="/">
           <image src="<%= image_url('million-logo.svg') %>">
         </v-btn>
         <v-spacer></v-spacer>
+
+        <new-entry
+          :options="<%= { userid: current_user.id, token: form_authenticity_token }.to_json %>"
+          @entrycreated="createdEntry($event)"
+          @entryfailed="failedEntry($event)">
+        </new-entry>
+
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-sm-and-down">
           <v-btn href="<%= dashboard_path(current_user) %>" flat small>Painel</v-btn>
@@ -91,13 +99,16 @@
           <v-btn href="<%= user_goals_path(current_user) %>" flat small>Objetivos</v-btn>
           <v-btn href="<%= logout_path %>" data-method="delete" flat small>Sair</v-btn>
         </v-toolbar-items>
+
+        <v-toolbar-title slot="extension">
+          <% if @intro.present? %>
+            <intro :params="<%= @intro %>"></intro>
+          <% end %>
+        </v-toolbar-title>
       </v-toolbar>
 
       <v-content>
         <v-container fluid>
-          <% if @intro.present? %>
-            <intro :params="<%= @intro %>"></intro>
-          <% end %>
           <v-snackbar :timeout="6000" :bottom="true" color="error" v-model="isAlert">
             A operação não foi realizada com sucesso
             <v-btn flat color="primary" @click-native="isAlert = false">Fechar</v-btn>
@@ -119,8 +130,15 @@
 
         <%= yield %>
       </v-content>
-      <v-footer app>
-        <div>Hobbyright &copy; {{ new Date().getFullYear() }} Million - The financial education app.</div>
+      <v-footer height="auto" class="grey darken-3">
+        <v-layout row wrap justify-center>
+          <v-btn href="<%= root_path %>" color="white" flat>Home</v-btn>
+          <v-btn href="mailto:dev.joaogustavo@gmail.com" color="white" flat>Contato</v-btn>
+
+          <v-flex xs12 py-3 text-xs-center white--text>
+            Hobbyright &copy; {{ new Date().getFullYear() }} Million - The first financial education app.
+          </v-flex>
+        </v-layout>
       </v-footer>
     </v-app>
     <%= javascript_pack_tag 'application' %>

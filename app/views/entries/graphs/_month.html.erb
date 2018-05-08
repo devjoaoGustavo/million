@@ -1,14 +1,13 @@
 <v-card>
+  <v-card-title primary-title>
+    <div>
+      <h3 class="headline md-0">
+        Mês a mês de <b><%= Time.current.strftime('%Y') %></b>
+      </h3>
+      <div>Acompanhe suas receitas e despesas lado a lado e veja se os seus gastos não ultrapassam os seus ganhos.</div>
+    </div>
+  </v-card-title>
   <v-card-text>
-    <v-card-title primary-title>
-      <div>
-        <h3 class="headline md-0">
-          Mês a mês de <b><%= Time.current.strftime('%Y') %></b>
-          <v-chip small color="success" text-color="white">Novo</v-chip>
-        </h3>
-        <div>Acompanhe suas receitas e despesas lado a lado e veja se os seus gastos não ultrapassam os seus ganhos.</div>
-      </div>
-    </v-card-title>
     <by-month userid="<%= current_user.id %>" :updatechart="reloadBalance"></by-month>
   </v-card-text>
 </v-card>

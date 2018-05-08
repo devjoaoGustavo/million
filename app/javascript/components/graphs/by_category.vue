@@ -15,18 +15,8 @@ export default {
   data: function() {
     return {
       options: {
-        backgroundColor: {
-          fill: 'transparent'
-        },
+        backgroundColor: { fill: 'transparent' },
         pieHole: .4,
-        slices: {
-          0: { offset: .05 },
-          2: { offset: .05 },
-          4: { offset: .05 },
-          12: { offset: .05 },
-          8: { offset: .05 }
-        },
-        sliceVisibilityThreshold: .05,
         pieStartAngle: 30,
         legend: {
           position: 'right',

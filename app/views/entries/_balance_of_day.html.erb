@@ -1,61 +1,48 @@
 <v-card>
   <v-card-title primary-title>
     <div>
-      <h3 class="headline md-o">
+      <h3 class="headline">
         Resumo do dia
-        <v-chip small color="success" text-color="white">Novo</v-chip>
       </h3>
       <div>Lançamentos do dia <strong><%= DateTime.current.strftime('%d/%m/%Y') %></strong></div>
     </div>
   </v-card-title>
-  <v-container fluid style="min-height: 0;" grid-list-lg>
+  <v-container fluid grid-list-lg>
     <v-layout row wrap>
       <v-flex xs12>
-        <v-card color="cyan darken-2 white--text">
-          <v-card-title>
+        <v-card color="primary white--text">
+          <v-card-title class="pb-0">
             <div class="title">Saldo</div>
           </v-card-title>
-          <v-card-media>
-            <v-container>
-              <daily-balance
-                class="text-xs-center"
-                :userid="<%= current_user.id.to_json %>"
-                :reload="reloadBalance">
-              </daily-balance>
-            </v-container>
-          </v-card-media>
+          <daily-balance
+            class="text-xs-center headline"
+            userid="<%= current_user.id %>"
+            :reload="reloadBalance">
+          </daily-balance>
         </v-card>
       </v-flex>
       <v-flex xs12 sm6>
-        <v-card color="cyan darken-2 white--text">
-          <v-card-title>
+        <v-card color="primary white--text">
+          <v-card-title class="pb-0">
             <div class="title">Receitas</div>
           </v-card-title>
-          <v-card-media>
-            <v-container>
-              <daily-expense
-                class="text-xs-center"
-                :userid="<%= current_user.id.to_json %>"
-                :reload="reloadBalance">
-              </daily-expense>
-            </v-container>
-          </v-card-media>
+          <daily-expense
+            class="text-xs-center headline"
+            userid="<%= current_user.id %>"
+            :reload="reloadBalance">
+          </daily-expense>
         </v-card>
       </v-flex>
       <v-flex xs12 sm6>
-        <v-card color="cyan darken-2 white--text">
-          <v-card-title>
+        <v-card color="primary white--text">
+          <v-card-title class="pb-0">
             <div class="title">Despesas</div>
           </v-card-title>
-          <v-card-media>
-            <v-container>
-              <daily-revenue
-                class="text-xs-center"
-                :userid="<%= current_user.id.to_json %>"
-                :reload="reloadBalance">
-              </daily-revenue>
-            </v-container>
-          </v-card-media>
+          <daily-revenue
+            class="text-xs-center headline"
+            userid="<%= current_user.id %>"
+            :reload="reloadBalance">
+          </daily-revenue>
         </v-card>
       </v-flex>
     </v-layout>

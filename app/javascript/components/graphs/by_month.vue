@@ -14,22 +14,13 @@ export default {
         height: 'auto'
       },
       options: {
-        backgroundColor: {
-          fill: 'transparent'
-        },
-        legend: {
-          alignment: 'center',
-          position: 'none'
-        },
-        colors: ['red', 'green'],
-        hAxis: { title: '' },
-        vAxis: {
-          format: 'R$ ###,###,###.##',
-          textStyle: {
-            fontSize: 10
-          }
-        },
-        height: 350
+        backgroundColor: { fill: 'transparent' },
+        legend: { position: 'none' },
+        colors: ['#F4511E', '#69F0AE'],
+        vAxis: { title: '' },
+        hAxis: { format: 'R$ ###,###,###.##', textStyle: { fontSize: 10 } },
+        height: 350,
+        bars: 'horizontal'
       }
     }
   },

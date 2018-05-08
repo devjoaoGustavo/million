@@ -3,59 +3,46 @@
     <div>
       <h3 class="headline md-o">
         Resumo mensal
-        <v-chip small color="success" text-color="white">Novo</v-chip>
       </h3>
       <div>Lançamentos a partir de <strong><%= DateTime.current.at_beginning_of_month.strftime('%d/%m/%Y') %></strong></div>
     </div>
   </v-card-title>
-  <v-container fluid style="min-height: 0;" grid-list-lg>
+  <v-container fluid grid-list-lg>
     <v-layout row wrap>
       <v-flex xs12>
-        <v-card color="cyan darken-2 white--text">
-          <v-card-title>
+        <v-card color="primary white--text">
+          <v-card-title class="pb-0">
             <div class="title">Saldo</div>
           </v-card-title>
-          <v-card-media>
-            <v-container>
-              <monthly-balance
-                class="text-xs-center"
-                userid="<%= current_user.id %>"
-                :reload="reloadBalance">
-              </monthly-balance>
-            </v-container>
-          </v-card-media>
+          <monthly-balance
+            class="text-xs-center headline"
+            userid="<%= current_user.id %>"
+            :reload="reloadBalance">
+          </monthly-balance>
         </v-card>
       </v-flex>
       <v-flex xs12 sm6>
-        <v-card color="cyan darken-2 white--text">
-          <v-card-title>
+        <v-card color="primary white--text">
+          <v-card-title class="pb-0">
             <div class="title">Receitas</div>
           </v-card-title>
-          <v-card-media>
-            <v-container>
-              <monthly-expense
-                class="text-xs-center"
-                userid="<%= current_user.id %>"
-                :reload="reloadBalance">
-              </monthly-expense>
-            </v-container>
-          </v-card-media>
+          <monthly-expense
+            class="text-xs-center headline"
+            userid="<%= current_user.id %>"
+            :reload="reloadBalance">
+          </monthly-expense>
         </v-card>
       </v-flex>
       <v-flex xs12 sm6>
-        <v-card color="cyan darken-2 white--text">
-          <v-card-title>
+        <v-card color="primary white--text">
+          <v-card-title class="pb-0">
             <div class="title">Despesas</div>
           </v-card-title>
-          <v-card-media>
-            <v-container>
-              <monthly-revenue
-                class="text-xs-center"
-                userid="<%= current_user.id %>"
-                :reload="reloadBalance">
-              </monthly-revenue>
-            </v-container>
-          </v-card-media>
+          <monthly-revenue
+            class="text-xs-center headline"
+            userid="<%= current_user.id %>"
+            :reload="reloadBalance">
+          </monthly-revenue>
         </v-card>
       </v-flex>
     </v-layout>

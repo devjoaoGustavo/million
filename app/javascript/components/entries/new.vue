@@ -2,12 +2,16 @@
   <v-layout row justify-center>
     <v-dialog v-model="dialog" persistent>
       <v-btn
-        color="primary"
+        absolute
         dark
         fab
+        bottom
+        right
+        color="green accent-3"
+        class="elevation-10"
         slot="activator">
         <div>
-          <v-icon>attach_money</v-icon>
+          <v-icon>add</v-icon>
         </div>
       </v-btn>
       <v-card>
@@ -53,6 +57,11 @@
                 </v-flex>
 
                 <v-flex xs12 sm6 md6>
+                  <v-badge right><span slot="badge">{{ installments }}</span></v-badge>
+                  <v-slider color="primary" label="Parcelas" min="1" max="120" thumb-label v-model="installments"></v-slider>
+                </v-flex>
+
+                <v-flex xs12 sm6 md6>
                   <v-menu
                     ref="menu1"
                     lazy
@@ -64,14 +73,9 @@
                     :nudge-right="40"
                     min-width="290px"
                     :return-value.sync="entryDate">
-                    <v-text-field slot="activator" label="Data" v-model="entryDate" prepend-icon="event" readonly></v-text-field>
-                    <v-date-picker v-model="entryDate" @input="$refs.menu1.save(entryDate)"></v-date-picker>
+                    <v-text-field type="date" slot="activator" label="Data" v-model="entryDate" prepend-icon="event" readonly></v-text-field>
+                    <v-date-picker locale="pt-br" v-model="entryDate" @input="$refs.menu1.save(entryDate)"></v-date-picker>
                   </v-menu>
-                </v-flex>
-
-                <v-flex xs12 sm6 md6>
-                  <v-badge left><span slot="badge">{{ installments }}</span></v-badge>
-                  <v-slider color="primary" label="Parcelas" min="1" max="120" thumb-label v-model="installments"></v-slider>
                 </v-flex>
 
                 <v-flex v-if="entrytype == 'expense' && goals.length > 0" xs12 sm6 md6 offset-sm6 offset-md6>

@@ -39,6 +39,8 @@ import MonthlyRevenue from '../components/entries/monthly_revenue.vue'
 import NewEntry from '../components/entries/new.vue'
 import GoalForm from '../components/goals/form.vue'
 
+import FilterForm from '../components/FilterForm.vue'
+
 Vue.filter('currency', function(value) {
   return 'R$ ' + Number(value)
     .toFixed(2)
@@ -86,7 +88,8 @@ document.addEventListener('DOMContentLoaded', () => {
       'monthly-expense': MonthlyExpense,
       'monthly-revenue': MonthlyRevenue,
       'new-entry': NewEntry,
-      'goal-form': GoalForm
+      'goal-form': GoalForm,
+      'filter-form': FilterForm
     },
     methods: {
       createdEntry: function(evt) {

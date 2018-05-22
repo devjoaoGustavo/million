@@ -4,6 +4,10 @@ module Api
   class EntriesController < ApplicationController
     rescue_from InvalidCurrencyFormat, with: :invalid_currency_format
 
+    def index
+      render_json_ok(finder.call(user_id: current_user.id, type: params[:type]))
+    end
+
     def list
       render_json_ok(finder.call(find_params))
     end

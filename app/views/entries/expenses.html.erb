@@ -2,6 +2,7 @@
   <v-layout row wrap>
     <filter-form entrytype="expense"></filter-form>
 
+    <Entries userid="<%= current_user.id %>" entrytype="expense"></Entries>
     <%= render 'table' %>
   </v-layout>
 </v-container>

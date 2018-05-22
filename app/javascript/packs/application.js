@@ -36,6 +36,8 @@ import MonthlyBalance from '../components/entries/monthly_balance.vue'
 import MonthlyExpense from '../components/entries/monthly_expense.vue'
 import MonthlyRevenue from '../components/entries/monthly_revenue.vue'
 
+import Entries from '../components/entries/Entries.vue'
+
 import NewEntry from '../components/entries/new.vue'
 import GoalForm from '../components/goals/form.vue'
 
@@ -87,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'monthly-balance': MonthlyBalance,
       'monthly-expense': MonthlyExpense,
       'monthly-revenue': MonthlyRevenue,
+      'entries': Entries,
       'new-entry': NewEntry,
       'goal-form': GoalForm,
       'filter-form': FilterForm

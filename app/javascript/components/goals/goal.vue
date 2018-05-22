@@ -30,23 +30,19 @@
       </div>
       <div class="col-xs-12 col-md-8">
         <span class="ls-list-label">Progresso</span>
-        <progress-bar :valuenow="goal.reached" :addvalue="goal.addvalue"></progress-bar>
+        <div data-ls-module="progressBar" role="progressbar" :aria-valuenow="goal.reached | fixed"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ProgressBar from '../progress.vue'
 export default {
   props:   { goal: Object },
   filters: {
     fixed: function(value) {
       return value.toFixed(2);
     }
-  },
-  components: {
-    'progress-bar': ProgressBar
   }
 }
 </script>

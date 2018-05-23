@@ -22,11 +22,14 @@ class Entry < ApplicationRecord
     def index_response(entries)
       entries.map do |entry|
         {
-          category:          entry.category.name,
+          id:                entry.id,
+          category_id:       entry.category_id,
+          category_name:     entry.category.name,
           description:       entry.description,
           entry_date:        entry.entry_date.to_date,
           amount:            entry.amount,
           installment_label: entry.installment_label,
+          goal_id:           entry.goal_id
         }
       end
     end

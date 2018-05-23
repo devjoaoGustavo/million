@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <filter-form entrytype="expense"></filter-form>
 
-    <Entries userid="<%= current_user.id %>" entrytype="expense"></Entries>
+    <Entries userid="<%= current_user.id %>" entrytype="expense" token="<%= form_authenticity_token %>"></Entries>
     <%= render 'table' %>
   </v-layout>
 </v-container>

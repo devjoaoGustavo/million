@@ -1,6 +1,81 @@
 <template>
   <v-flex xs12>
     <v-card>
+      <v-dialog v-model="dialog" max-width="500px">
+        <v-card>
+          <v-card-title>
+            <span class="headline">Editar entrada</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container grid-list-md>
+              <v-layout wrap>
+                <v-flex xs12 sm6>
+                  <v-select
+                    :items="categories"
+                    item-text="name"
+                    item-value="id"
+                    v-model="editedItem.category_id"
+                    label="Envelope"
+                    single-line
+                    auto
+                    chips
+                    prepend-icon="mail_outline"
+                    hide-details required>
+                  </v-select>
+                </v-flex>
+                <v-flex xs12 sm6>
+                  <v-text-field
+                    prepend-icon="R$"
+                    label="Valor"
+                    v-model="editedItem.amount"
+                    type="number"
+                    min="0.00"
+                    step="0.01" required>
+                  </v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6>
+                  <v-text-field v-model="editedItem.description" label="Descrição"></v-text-field>
+                </v-flex>
+                <v-flex xs12 sm6>
+                  <v-menu
+                    ref="menu1"
+                    lazy
+                    :close-on-content-click="false"
+                    v-model="menu1"
+                    transition="scale-transition"
+                    offset-y
+                    full-width
+                    :nudge-right="40"
+                    min-width="290px"
+                    :return-value.sync="editedItem.entry_date">
+                    <v-text-field type="date" slot="activator" label="Data" v-model="editedItem.entry_date" prepend-icon="event" readonly></v-text-field>
+                    <v-date-picker locale="pt-br" v-model="editedItem.entry_date" @input="$refs.menu1.save(editedItem.entry_date)"></v-date-picker>
+                  </v-menu>
+                </v-flex>
+                <v-flex v-if="entrytype == 'expense' && goals.length > 0" xs12 sm6>
+                  <v-select
+                    :items="goals"
+                    item-text="title"
+                    item-value="id"
+                    v-model="editedItem.goal_id"
+                    label="Objetivo"
+                    single-line
+                    auto
+                    chips
+                    prepend-icon="my_location"
+                    hide-details required>
+                  </v-select>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue daarken-1" flat @click.native="close">Cancelar</v-btn>
+            <v-btn color="blue daarken-1" flat @click.native="save">Salvar</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <v-card-title>
         {{ title }}
         <v-spacer></v-spacer>
@@ -21,7 +96,7 @@
         :disable-initial-sort="true"
         >
         <template slot="items" slot-scope="props">
-          <td>{{ props.item.category }}</td>
+          <td>{{ props.item.category_name }}</td>
           <td class="text-xs-right">{{ props.item.description }}</td>
           <td class="text-xs-right">
             <v-badge right v-if="props.item.installment_label">
@@ -31,6 +106,14 @@
             <template v-else>{{ props.item.amount | currency }}</template>
           </td>
           <td class="text-xs-right">{{ props.item.entry_date | formatDate }}</td>
+          <td class="justify-center layout px-0">
+            <v-btn icon class="mx-0" @click="editItem(props.item)">
+              <v-icon color="teal">edit</v-icon>
+            </v-btn>
+            <v-btn icon class="mx-0" @click="deleteItem(props.item)">
+              <v-icon color="pink">delete</v-icon>
+            </v-btn>
+          </td>
         </template>
         <v-alert slot="no-results" :value="true" color="error" icon="warning">
           Sua pesquisa por "{{ search }}" não retornou nenhum resultado.
@@ -42,23 +125,45 @@
 
 <script>
 export default {
-  props: ['userid', 'entrytype'],
+  props: ['userid', 'entrytype', 'token'],
   data () {
     return {
       search: '',
+      dialog: false,
+      menu1: false,
       pagination: [5,10,25,{"text": "Todas", "value": -1}],
       headers: [
         {
           text: 'Envelope (Categoria da entrada)',
           align: 'left',
           sortable: false,
-          value: 'category'
+          value: 'category_name'
         },
         { text: 'Descrição', value: 'description', sortable: false },
         { text: 'Valor', value: 'amount', sortable: false },
-        { text: 'Data', value: 'entry_date' }
+        { text: 'Data', value: 'entry_date' },
+        { text: 'Ações', value: 'category_name', sortable: false }
       ],
-      entries: []
+      entries: [],
+      editedIndex: -1,
+      editedItem: {
+        id: '',
+        category_id: '',
+        description: '',
+        amount: '',
+        entry_date: '',
+        goal_id: ''
+      },
+      defaultItem: {
+        id: '',
+        category_id: '',
+        description: '',
+        amount: '',
+        entry_date: '',
+        goal_id: ''
+      },
+      categories: [],
+      goals: []
     }
   },
   computed: {
@@ -66,10 +171,69 @@ export default {
       return this.entrytype == 'expense' ? 'Despesas' : 'Receitas'
     }
   },
+  watch: {
+    dialog (val) {
+      val || this.close()
+    }
+  },
   created: function() {
     var path = '/api/users/' + this.userid + '/entries/' + this.entrytype
-    console.log(path)
-    $.get(path, (res) => { this.entries = res; console.log(this.entries) })
+    $.get(path, (res) => { this.entries = res })
+
+    path = '/api/categories'
+    $.get(path, (res) => { this.categories = res })
+
+    path = '/api/users/' + this.userid + '/goals'
+    $.get(path, (res) => { this.goals = res })
+  },
+  methods: {
+    close () {
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem  = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      }, 300)
+    },
+    editItem (item) {
+      this.editedIndex = this.entries.indexOf(item)
+      this.editedItem  = Object.assign({}, item)
+      this.dialog      = true
+    },
+    deleteItem (item) {
+      const index = this.entries.indexOf(item)
+      if (confirm('Tem certeza de que deseja apagar este lançamento?')) {
+        var path = '/api/users/' + this.userid + '/entries/' + item.id
+        $.ajax({
+          url: path,
+          method: 'DELETE',
+          success: (res) => {
+            this.entries.splice(index, 1)
+          },
+          error: (res) => { console.error(res) }
+        })
+      }
+    },
+    save () {
+      var path = '/api/users/' + this.userid + '/entries/' + this.editedItem.id
+      var input = {
+        category_id:        this.editedItem.category_id,
+        description:        this.editedItem.description,
+        amount:             this.editedItem.amount,
+        entry_date:         this.editedItem.entry_date,
+        goal_id:            this.editedItem.goal_id,
+        authenticity_token: this.token,
+      }
+      $.ajax({
+        url: path,
+        method: 'PUT',
+        data: input,
+        success: (res) => {
+          Object.assign(this.entries[this.editedIndex], this.editedItem)
+          this.close()
+        },
+        error: (res) => { console.error(res) }
+      })
+    }
   }
 }
 </script>

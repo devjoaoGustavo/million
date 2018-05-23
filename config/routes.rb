@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users, only: [] do
       resources :goals,   only: %i(index create)
-      resources :entries, only: %i(index create)
+      resources :entries, only: %i(index create update destroy)
 
       get '/entries/expense', to: 'entries#index', type: 'expense'
       get '/entries/revenue', to: 'entries#index', type: 'revenue'

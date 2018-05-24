@@ -27,6 +27,7 @@ class Entry < ApplicationRecord
           category_name:     entry.category.name,
           description:       entry.description,
           entry_date:        entry.entry_date.to_date,
+          entry_type:        entry.expense? ? 'expense' : 'revenue',
           amount:            entry.amount,
           installment_label: entry.installment_label,
           goal_id:           entry.goal_id

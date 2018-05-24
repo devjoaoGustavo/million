@@ -71,8 +71,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue daarken-1" flat @click.native="close">Cancelar</v-btn>
-            <v-btn color="blue daarken-1" flat @click.native="save">Salvar</v-btn>
+            <v-btn color="error" flat @click.native="close">Cancelar</v-btn>
+            <v-btn color="primary" flat @click.native="save">Salvar</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -94,18 +94,19 @@
         :rows-per-page-items="pagination"
         rows-per-page-text="Linhas por página:"
         :disable-initial-sort="true"
+        :custom-sort="sort"
         >
         <template slot="items" slot-scope="props">
           <td>{{ props.item.category_name }}</td>
-          <td class="text-xs-right">{{ props.item.description }}</td>
-          <td class="text-xs-right">
+          <td class="text-xs-center">{{ props.item.description }}</td>
+          <td class="text-xs-center">
             <v-badge right v-if="props.item.installment_label">
               <span slot="badge" class="caption">{{ props.item.installment_label }}</span>
-              {{ props.item.amount | currency }}
+              {{ props.item.amount | decimal }}
             </v-badge>
-            <template v-else>{{ props.item.amount | currency }}</template>
+            <template v-else>{{ props.item.amount | decimal }}</template>
           </td>
-          <td class="text-xs-right">{{ props.item.entry_date | formatDate }}</td>
+          <td class="text-xs-center">{{ props.item.entry_date | formatDate }}</td>
           <td class="justify-center layout px-0">
             <v-btn icon class="mx-0" @click="editItem(props.item)">
               <v-icon color="teal">edit</v-icon>
@@ -140,7 +141,7 @@ export default {
           value: 'category_name'
         },
         { text: 'Descrição', value: 'description', sortable: false },
-        { text: 'Valor', value: 'amount', sortable: false },
+        { text: 'Valor (R$)', value: 'amount', sortable: false },
         { text: 'Data', value: 'entry_date' },
         { text: 'Ações', value: 'category_name', sortable: false }
       ],
@@ -179,8 +180,9 @@ export default {
   created: function() {
     var path = '/api/users/' + this.userid + '/entries/' + this.entrytype
     $.get(path, (res) => { this.entries = res })
-
-    path = '/api/categories'
+  },
+  beforeMount: function() {
+    var path = '/api/categories'
     $.get(path, (res) => { this.categories = res })
 
     path = '/api/users/' + this.userid + '/goals'
@@ -206,16 +208,19 @@ export default {
         $.ajax({
           url: path,
           method: 'DELETE',
+          data: { authenticity_token: this.token },
           success: (res) => {
             this.entries.splice(index, 1)
+            this.$emit('success')
           },
-          error: (res) => { console.error(res) }
+          error: (res) => { this.$emit('failure') }
         })
       }
     },
     save () {
       var path = '/api/users/' + this.userid + '/entries/' + this.editedItem.id
       var input = {
+        id:                 this.editedItem.id,
         category_id:        this.editedItem.category_id,
         description:        this.editedItem.description,
         amount:             this.editedItem.amount,
@@ -229,9 +234,19 @@ export default {
         data: input,
         success: (res) => {
           Object.assign(this.entries[this.editedIndex], this.editedItem)
+          this.$emit('success')
           this.close()
         },
-        error: (res) => { console.error(res) }
+        error: (res) => { this.$emit('failure') }
+      })
+    },
+    sort (items, index, isDescending) {
+      return items.sort((left, right) => {
+        if (isDescending) {
+          return new Date(left.entry_date) - new Date(right.entry_date)
+        } else {
+          return new Date(right.entry_date) - new Date(left.entry_date)
+        }
       })
     }
   }

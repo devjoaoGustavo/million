@@ -2,7 +2,12 @@
   <v-layout row wrap>
     <filter-form entrytype="revenue"></filter-form>
 
-    <Entries userid="<%= current_user.id %>" entrytype="revenue" token="<%= form_authenticity_token %>"></Entries>
-    <%= render 'table' %>
+    <Entries
+      userid="<%= current_user.id %>"
+      entrytype="revenue"
+      token="<%= form_authenticity_token %>"
+      @success="success()"
+      @failure="failure()">
+    </Entries>
   </v-layout>
 </v-container>

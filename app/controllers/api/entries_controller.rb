@@ -12,6 +12,14 @@ module Api
       render_json_ok(finder.call(find_params))
     end
 
+    def update
+      render_json_ok(updater.call(update_params))
+    end
+
+    def destroy
+      render_json_ok(destroyer.call(destroy_params))
+    end
+
     def entries_by_month
       render_json_ok(UserDecorator
         .decorate(current_user).entries_by_month)
@@ -106,12 +114,30 @@ module Api
         .merge(type: type)
     end
 
+    def update_params
+      params
+        .permit(:id, :category_id, :amount, :description, :entry_date, :goal_id)
+        .merge(user_id: current_user.id)
+    end
+
+    def destroy_params
+      params.permit(:id, :user_id)
+    end
+
     def finder
       Entry::Finder.new
     end
 
     def creator
       Entry::Creator.new
+    end
+
+    def updater
+      Entry::Updater.new
+    end
+
+    def destroyer
+      Entry::Destroyer.new
     end
 
     def invalid_currency_format

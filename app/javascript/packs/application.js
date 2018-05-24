@@ -12,7 +12,8 @@ import Vuetify from 'vuetify'
 
 Vue.use(Vuetify, {
   theme: {
-    primary: '#F9A825'
+    primary: '#FFC107',
+    secondary: '#FBC02D'
   }
 })
 
@@ -45,6 +46,13 @@ import FilterForm from '../components/FilterForm.vue'
 
 Vue.filter('currency', function(value) {
   return 'R$ ' + Number(value)
+    .toFixed(2)
+    .replace(',','')
+    .replace('.',',')
+    .replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
+});
+Vue.filter('decimal', function(value) {
+  return Number(value)
     .toFixed(2)
     .replace(',','')
     .replace('.',',')
@@ -112,6 +120,12 @@ document.addEventListener('DOMContentLoaded', () => {
       updatedGoal: function() {
         this.message  = 'Objetivo atualizado com sucesso'
         this.isNotice = true
+      },
+      success () {
+        this.isNotice = true
+      },
+      failure () {
+        this.isAlert  = false
       },
       goto: function(path) {
         window.location.assign(path)

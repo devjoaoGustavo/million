@@ -9,20 +9,21 @@ end
 
 gem 'rails',        '~> 5.1.4'
 
+gem 'jquery-rails'
 gem 'pg',           '~> 0.18'
 gem 'puma',         '~> 3.7'
 gem 'sass-rails',   '~> 5.0'
 gem 'therubyracer', platforms: :ruby
+gem 'turbolinks',   '~> 5.1.0'
 gem 'uglifier',     '>= 1.3.0'
 
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder',     '~> 2.5'
 gem 'bcrypt',       '~> 3.1.7'
-gem 'webpacker',    '~> 3.2.2'
 gem 'foreman'
 gem 'sentry-raven'
 
-gem 'client_side_validations', '~> 11.1'
+gem 'client_side_validations'
 gem 'draper'
 
 group :development, :test do

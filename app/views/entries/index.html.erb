@@ -1,21 +1,21 @@
 <v-container fluid grid-list-lg>
   <v-layout row wrap>
-    <v-flex xs12>
+    <v-flex xs12 sm6>
       <%= render 'total_balance' %>
     </v-flex>
-    <v-flex xs12 sm12 md12>
+    <v-flex xs12 sm6>
       <%= render 'entries/graphs/month' %>
     </v-flex>
-    <v-flex xs12 sm12 md12>
+    <v-flex xs12>
       <%= render 'balance_month' %>
     </v-flex>
-    <v-flex xs12 sm12 md12>
+    <v-flex xs12>
       <%= render 'entries/graphs/category' %>
     </v-flex>
-    <v-flex xs12 sm12 md12>
+    <v-flex xs12>
       <%= render 'balance_seven_days' %>
     </v-flex>
-    <v-flex xs12 sm12 md12>
+    <v-flex xs12>
       <%= render 'balance_of_day' %>
     </v-flex>
   </v-layout>

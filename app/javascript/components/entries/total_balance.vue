@@ -7,7 +7,7 @@
         </strong>
         <spinner v-else-if="loading" :size="'50'"></spinner>
         <template v-else>
-          <span class="display-1" :class="amountClass">{{ balance | currency }}</span>
+          <span class="display-1" :class="amountClass">{{ balance.current_balance | currency }}</span>
           <br>
           <v-icon @click="see()">visibility_off</v-icon>
         </template>
@@ -22,8 +22,7 @@ export default {
   props: ['userid', 'reload'],
   data: function() {
     return {
-      balanceChanged: this.reload,
-      balance: 0,
+      balance: { current_balance: 0, balance_per_month: [] },
       revenues_path: '/users/'+this.userid+'/revenues',
       expenses_path: '/users/'+this.userid+'/expenses',
       loading: true,
@@ -37,13 +36,14 @@ export default {
   },
   computed: {
     amountClass: function() {
-      return this.balance < 0 ? 'deep-orange--text' : 'green--text'
+      return this.balance.current_balance < 0 ? 'deep-orange--text' : 'green--text'
     },
   },
   beforeMount: function() {
     var path = '/api/users/' + this.userid + '/balance'
     $.get(path, (res) => {
       this.balance = res
+      console.log(this.balance)
       this.loading = false
     })
   },
@@ -53,12 +53,13 @@ export default {
       var path = '/api/users/' + this.userid + '/balance'
       $.get(path, (res) => {
         this.balance = res
+        console.log(this.balance)
         this.loading = false
       })
     },
     see: function() {
       this.visible = !this.visible
-    }
+    },
   },
   components: {
     'spinner': Loading

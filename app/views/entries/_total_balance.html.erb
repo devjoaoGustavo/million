@@ -1,4 +1,4 @@
-<v-card>
+<v-card height="100%">
   <v-card-text>
     <v-card-title primary-title>
       <h3 class="title">
@@ -12,4 +12,5 @@
     <v-btn href="<%= expenses_path(current_user) %>" color="primary" flat dark>Ver despesas</v-btn>
     <v-btn href="<%= revenues_path(current_user) %>" color="primary" flat dark>Ver receitas</v-btn>
   </v-card-actions>
+  <balance-per-month :userid="<%= current_user.id.to_json %>"></balance-per-montha>
 </v-card>

@@ -43,7 +43,7 @@ export default {
     this.fetchData()
   },
   mounted: function() {
-    google.charts.load('current', { 'packages': ['bar'], 'language': 'pt-br' })
+    google.charts.load('current', { 'packages': ['corechart', 'bar'], 'language': 'pt-br' })
     google.charts.setOnLoadCallback(this.drawChart)
     screen.orientation.addEventListener('change', this.drawChart)
   },

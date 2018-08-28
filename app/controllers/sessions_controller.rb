@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     user = retrieve_user
     if user&.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to dashboard_path(user.id), notice: 'Acesso iniciado. É bom te ver por aqui!'
+      redirect_to dashboard_path(user.id)
     else
       flash.now[:alert] = 'Verifique se os dados de acesso estão corretos ou se o usuário está ativo'
       render :new,  layout: 'access'

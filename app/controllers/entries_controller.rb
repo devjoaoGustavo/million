@@ -12,17 +12,6 @@ class EntriesController < ApplicationController
     intro(message: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
     user = UserDecorator.decorate(current_user)
     @options = { userid: current_user.id, token: form_authenticity_token }.to_json
-    @color_class = css_color_class(user.balance.to_f)
-
-    @seven_days_expense     = user.expenses_of_last_days(7).sum(&:amount).to_f
-    @seven_days_revenue     = user.revenues_of_last_days(7).sum(&:amount).to_f
-    @seven_days_balance     = @seven_days_revenue - @seven_days_expense
-    @seven_days_color_class = css_color_class(@seven_days_balance)
-
-    @today_expense     = user.expenses_of_today.sum(&:amount).to_f
-    @today_revenue     = user.revenues_of_today.sum(&:amount).to_f
-    @today_balance     = @today_revenue - @today_expense
-    @today_color_class = css_color_class(@today_balance)
 
     @data_expense = user.expenses_by_category
     @data_revenue = user.revenues_by_category

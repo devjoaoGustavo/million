@@ -21,6 +21,7 @@ import Intro from '../components/intro.vue'
 import Alert from '../components/alert.vue'
 import ByCategory from '../components/graphs/by_category.vue'
 import ByMonth from '../components/graphs/by_month.vue'
+import BalancePerMonth from '../components/graphs/BalancePerMonth.vue'
 import Goals from '../components/goals/index.vue'
 import Goal from '../components/goals/show.vue'
 import TotalBalance from '../components/entries/total_balance.vue'
@@ -85,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'alert': Alert,
       'by-category': ByCategory,
       'by-month': ByMonth,
+      'balance-per-month': BalancePerMonth,
       'goals': Goals,
       'goal': Goal,
       'total-balance': TotalBalance,

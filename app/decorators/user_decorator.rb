@@ -5,7 +5,14 @@ class UserDecorator < ApplicationDecorator
   delegate_all
 
   def balance
-    @balance ||= revenues_till_now.sum(&:amount) - expenses_till_now.sum(&:amount)
+    current_balance   = revenues_till_now.sum(&:amount) - expenses_till_now.sum(&:amount)
+    balance_per_month = current_user.entries.order(entry_date: :asc).group_by do |entry|
+      entry.entry_date.strftime('%m/%Y')
+    end.map do |key, value|
+      [key, (value.select(&:revenue?).sum(&:amount) - value.select(&:expense?).sum(&:amount)).to_f]
+    end.unshift(['Mês', 'Valor'])
+
+    @balance ||= { current_balance: current_balance, balance_per_month: balance_per_month }
   end
 
   def entries_by_month

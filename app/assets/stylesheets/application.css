@@ -11,5 +11,16 @@
  * It is generally better to create a new file per style scope.
  *
  *= require font-awesome.min
+ *= require materialize.min
  *= require_self
  */
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}

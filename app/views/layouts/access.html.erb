@@ -10,7 +10,6 @@
     <link rel="apple-touch-icon" href="/locawebstyle/assets/images/ico-boilerplate.png">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css">
   </head>
 
   <body>
@@ -32,6 +31,6 @@
   </body>
 
   <footer>
-    <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script>
+    <%= javascript_include_tag 'application', media: 'all' %>
   </footer>
 </html>

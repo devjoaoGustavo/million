@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :entries
+  has_many :entries, dependent: :destroy
   validates :email, :username, presence: true
   has_many :dreams, dependent: :destroy
   has_many :goals, through: :dreams
@@ -17,7 +17,7 @@ class User < ApplicationRecord
   end
 
   def activate!
-    return false unless self.persisted?
+    # return false unless self.persisted?
     self.active = true
     self.save
   end

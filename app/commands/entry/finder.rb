@@ -14,8 +14,8 @@ class Entry < ApplicationRecord
       if params[:goal_id].present?
         goal = Goal.find(params[:goal_id])
         goal.expenses
-          .where('entry_date <= ?',
-                 Time.current.at_end_of_day.utc).order(entry_date: :desc)
+          .where('made_at <= ?',
+                 Time.current.at_end_of_day.utc).order(made_at: :desc)
       end
     end
 
@@ -25,7 +25,7 @@ class Entry < ApplicationRecord
           id: entry.id,
           type: entry.type,
           amount: entry.amount,
-          entry_date: entry.entry_date,
+          made_at: entry.made_at,
           description: entry.description,
           category_name: entry.category.name,
           installment_label: entry.installment_label,

@@ -3,7 +3,7 @@
 class EntryDecorator < ApplicationDecorator
   delegate_all
 
-  def entry_date
+  def made_at
     super.strftime('%d/%m/%Y')
   end
 end

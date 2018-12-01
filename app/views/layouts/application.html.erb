@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="ls-theme-yellow-gold" style="height: 100%; margin: 0px;">
+<html style="height: 100%; margin: 0px;">
   <head>
     <title>Million</title>
     <meta charset="utf-8">
@@ -80,7 +80,16 @@
 
       <div id="modal-expense" class="modal">
         <div class="modal-content">
-          <h4>New expense!</h4>
+          <div class="row">
+            <form class="col s12" action="">
+              <div class="row">
+                <div class="col s6">
+                  <input id="first_name" class="validate" type="text" placeholder="Placeholder">
+                  <label for="first_name"></label>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
         <div class="modal-footer"></div>
       </div>
@@ -101,7 +110,12 @@
     <% end %>
 
     <main>
-      <%= yield %>
+      <div class="container">
+        <div class="masonry row">
+          <%= yield :title %>
+          <%= yield %>
+        </div>
+      </div>
     </main>
 
     <footer class="page-footer amber darken-1">
@@ -111,6 +125,5 @@
     </footer>
 
     <%= javascript_include_tag 'application', media: 'all' %>
-    <%= yield :google_chart %>
   </body>
 </html>

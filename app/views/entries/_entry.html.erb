@@ -11,7 +11,7 @@
       <% end %>
     </a>
   </td>
-  <td class="ls-txt-center"><%= entry.entry_date.strftime('%d/%m/%Y') %></td>
+  <td class="ls-txt-center"><%= entry.made_at.strftime('%d/%m/%Y') %></td>
   <td class="ls-txt-center hidden-xs">
     <%= link_to '', edit_entry_path(entry.id), class: 'ls-btn-sm ls-ico-cog' %>
     <%= link_to '', '#', class: 'ls-btn-sm ls-btn-primary-danger ls-ico-remove',

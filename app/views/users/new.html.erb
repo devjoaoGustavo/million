@@ -1,41 +1,39 @@
-<div class="ls-login-box">
-  <div class="ls-login-logo">
-    <image src="<%= image_url('million-logo.svg') %>">
-    <h3>Cadastro Million</h3>
-  </div>
-  <%= form_for @user, class: 'ls-form ls-login-form', validate: true do |f| %>
-    <fieldset>
-      <div class="ls-label">
-        <%= content_tag :b, 'Nome de acesso', class: 'ls-label-text ls-hidden-accessible' %>
-        <%= f.text_field :username, class: 'ls-login-bg-user ls-field-lg', placeholder: 'Nome de acesso', autofocus: true %>
-      </div>
+<%= form_for @user, validate: true do |f| %>
+  <div class="row">
+    <div class="logo col s6 offset-s3 center-align">
+      <image src="<%= image_url('million-logo.svg') %>">
+      <h4>Cadastro Million</h4>
+    </div>
 
-      <div class="ls-label">
-        <%= content_tag :b, 'Email', class: 'ls-label-text ls-hidden-accessible' %>
-        <%= f.text_field :email, placeholder: 'Email' %>
-      </div>
+    <div class="input-field col s12">
+      <%= content_tag :label, 'Nome de acesso', for: 'username' %>
+      <%= f.text_field :username, class: 'validate' %>
+    </div>
 
-      <div class="ls-label">
-        <%= content_tag :b, 'Senha', class: 'ls-labal-text ls-hidden-accessible' %>
-        <div class="ls-prefix-group ls-field-lg">
-          <%= f.password_field :password, class: 'ls-login-bg-password', placeholder: 'Senha' %>
-          <%= link_to "", "#", class: 'ls-label-text-prefix ls-toggle-pass ls-ico-eye', 'data-target': '#user_password' %>
-        </div>
-      </div>
+    <div class="input-field col s12">
+      <%= content_tag :label, 'Email', for: 'email' %>
+      <%= f.text_field :email, class: 'validate' %>
+    </div>
 
-      <div class="ls-label">
-        <%= content_tag :b, 'Confirmação de senha', class: 'ls-labal-text ls-hidden-accessible' %>
-        <div class="ls-prefix-group ls-field-lg">
-          <%= f.password_field :password_confirmation, class: 'ls-login-bg-password', placeholder: 'Confirmação de senha' %>
-          <%= link_to "", "#", class: 'ls-label-text-prefix ls-toggle-pass ls-ico-eye', 'data-target': '#user_password_confirmation' %>
-        </div>
-      </div>
-      <%= submit_tag "Cadastrar-se", class: 'ls-btn-primary ls-btn-block ls-btn-lg' %>
-      <p class="ls-txt-center ls-login-signup">
-        Já possui cadastro no Million?<br>
-        <%= link_to 'Entre aqui', login_path %> ou
-        <%= link_to 'volte ao início', root_path %>
+    <div class="input-field col s12">
+      <%= content_tag :label, 'Senha', for: 'password' %>
+      <%= f.password_field :password, class: 'validate' %>
+    </div>
+
+    <div class="input-field col s12">
+      <%= content_tag :label, 'Confirmação de senha', for: 'validate' %>
+      <%= f.password_field :password_confirmation, class: 'validate' %>
+    </div>
+
+    <div class="col s12 center-align">
+      <%= submit_tag "Cadastrar-se", class: 'btn waves-efect waves-light btn-small' %>
+
+      <p>
+      Já possui cadastro no Million?<br>
+      <%= link_to 'Entre aqui', login_path %>
+      ou
+      <%= link_to 'volte ao início', root_path %>
       </p>
-    </fieldset>
-  <% end %>
-</div>
+    </div>
+  </div>
+<% end %>

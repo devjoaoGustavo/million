@@ -1,27 +1,101 @@
-<div class="col-md-6 col-sm-12 col-xs-12">
-  <%= render 'total_balance' %>
+<%= content_for :title do %>
+  <div class="col s12">
+    <h2>Painel</h2>
+  </div>
+<% end %>
+
+<!-- Saldo -->
+<div class="col l3 m6 s12">
+  <div class="card z-depth-2">
+    <div class="card-stacked">
+      <div class="card-metrics card-static">
+        <div class="card-metric">
+          <div class="card-metric-title">
+            Saldo
+          </div>
+          <div class="card-metric-value">
+            2.345,21
+          </div>
+          <div class="card-metric-change increase">
+            <i class="material-icons left">keyboard_arrow_up</i>
+            12%
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-metric-chart">
+    </div>
+  </div>
 </div>
 
-<div class="col-md-6 col-sm-12 col-xs-12">
-  <%= render 'new_entry' %>
+<!-- Despesas -->
+<div class="col l3 m6 s12">
+  <div class="card z-depth-2">
+    <div class="card-stacked">
+      <div class="card-metrics card-static">
+        <div class="card-metric">
+          <div class="card-metric-title">
+            Despesas
+          </div>
+          <div class="card-metric-value">
+            2.345,21
+          </div>
+          <div class="card-metric-change increase">
+            <i class="material-icons left">keyboard_arrow_up</i>
+            12%
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-metric-chart">
+    </div>
+  </div>
 </div>
 
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'entries/graphs/month' %>
+<!-- Receitas -->
+<div class="col l3 m6 s12">
+  <div class="card z-depth-2">
+    <div class="card-stacked">
+      <div class="card-metrics card-static">
+        <div class="card-metric">
+          <div class="card-metric-title">
+            Receitas
+          </div>
+          <div class="card-metric-value">
+            2.345,21
+          </div>
+          <div class="card-metric-change increase">
+            <i class="material-icons left">keyboard_arrow_up</i>
+            12%
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-metric-chart">
+    </div>
+  </div>
 </div>
 
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'balance_month' %>
-</div>
-
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'entries/graphs/category' %>
-</div>
-
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'balance_seven_days' %>
-</div>
-
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'balance_of_day' %>
+<!-- Objetivos -->
+<div class="col l3 m6 s12">
+  <div class="card z-depth-2">
+    <div class="card-stacked">
+      <div class="card-metrics card-static">
+        <div class="card-metric">
+          <div class="card-metric-title">
+            Objetivos
+          </div>
+          <div class="card-metric-value">
+            2.345,21
+          </div>
+          <div class="card-metric-change increase">
+            <i class="material-icons left">keyboard_arrow_up</i>
+            12%
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-metric-chart">
+    </div>
+  </div>
 </div>

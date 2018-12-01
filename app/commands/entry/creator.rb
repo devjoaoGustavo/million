@@ -19,14 +19,14 @@ class Entry < ApplicationRecord
         user_id:     params[:user_id],
         category_id: params[:category_id],
         description: params[:description],
-        entry_date:  params[:entry_date],
+        made_at:  params[:made_at],
         entry_id:    params[:entry_id],
         goal_id:     params[:goal_id],
         amount:      parse_amount(params[:amount]),
       ).tap do |previous_entry|
         create!(
           params
-          .merge(entry_date: next_entry_date(params[:entry_date]))
+          .merge(made_at: next_made_at(params[:made_at]))
           .merge(entry_id: previous_entry.id)
         )
       end
@@ -42,7 +42,7 @@ class Entry < ApplicationRecord
       raise ::InvalidCurrencyFormat
     end
 
-    def next_entry_date(date)
+    def next_made_at(date)
       current = parse_date(date)
       (current + 1.send(PERIODICITY)).strftime('%Y-%m-%d')
     end

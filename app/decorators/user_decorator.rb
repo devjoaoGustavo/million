@@ -10,7 +10,7 @@ class UserDecorator < ApplicationDecorator
 
   def entries_by_month
     [].tap do |result|
-      grouped = Entry.where(user_id: id, entry_date: this_year).order(entry_date: :asc).group_by(&method(:per_month))
+      grouped = Entry.where(user_id: id, made_at: this_year).order(made_at: :asc).group_by(&method(:per_month))
       I18n.t('date')[:abbr_month_names].compact.each_with_index do |month, idx|
         values = grouped[idx + 1] || []
         result << [month,
@@ -33,11 +33,11 @@ class UserDecorator < ApplicationDecorator
   end
 
   def expenses_of_this_month
-    @expenses_of_this_month ||= expenses.where(entry_date: this_month)
+    @expenses_of_this_month ||= expenses.where(made_at: this_month)
   end
 
   def revenues_of_this_month
-    @revenues_of_this_month ||= revenues.where(entry_date: this_month)
+    @revenues_of_this_month ||= revenues.where(made_at: this_month)
   end
 
   def balance_of_last_days(days)
@@ -45,11 +45,11 @@ class UserDecorator < ApplicationDecorator
   end
 
   def expenses_of_last_days(days)
-    expenses.where(entry_date: last_days(days))
+    expenses.where(made_at: last_days(days))
   end
 
   def revenues_of_last_days(days)
-    revenues.where(entry_date: last_days(days))
+    revenues.where(made_at: last_days(days))
   end
 
   def balance_of_today
@@ -57,11 +57,11 @@ class UserDecorator < ApplicationDecorator
   end
 
   def expenses_of_today
-    expenses.where(entry_date: today)
+    expenses.where(made_at: today)
   end
 
   def revenues_of_today
-    revenues.where(entry_date: today)
+    revenues.where(made_at: today)
   end
 
   def expenses
@@ -90,6 +90,6 @@ class UserDecorator < ApplicationDecorator
   private
 
   def per_month(entry)
-    entry.entry_date.month
+    entry.made_at.month
   end
 end

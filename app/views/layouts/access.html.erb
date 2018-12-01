@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="ls-theme-yellow-gold">
+<html>
   <head>
     <title>Million</title>
     <meta charset="utf-8">
@@ -13,18 +13,10 @@
   </head>
 
   <body>
-    <div class="ls-login-parent">
-      <div class="ls-login-inner">
-        <div class="ls-login-container">
-          <div id="app" class="ls-height-inherit">
-            <alert
-              :is-alert="<%= flash[:alert].present? %>"
-              :is-notice="<%= flash[:notice].present? %>"
-              :message="<%= (flash[:notice] || flash[:alert]).to_json %>">
-            </alert>
-
-            <%= yield %>
-          </div>
+    <div class="container">
+      <div class="row valign-wrapper">
+        <div class="card col s6 offset-s3 hoverable">
+          <%= yield %>
         </div>
       </div>
     </div>

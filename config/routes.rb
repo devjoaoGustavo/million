@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#home'
 
+  get '/.well-known/acme-challenge/WIWjgVi6_hGu3SA3EwATc14OXnpH-_AENvIALP1flqo', to: 'entries#encrypt'
+
   namespace :api do
     resources :users, only: [] do
       resources :goals,   only: %i(index create)

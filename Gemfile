@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.5.0'
+ruby '2.5.3'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'rails',        '~> 5.1.4'
+gem 'rails',        '~> 5.1.6'
 
 gem 'jquery-rails'
 gem 'pg',           '~> 0.18'

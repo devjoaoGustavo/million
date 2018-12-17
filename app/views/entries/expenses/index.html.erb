@@ -4,4 +4,24 @@
   </div>
 <% end %>
 
+<table>
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Valor</th>
+      <th>Data</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @expenses.each do |expense| %>
+      <tr>
+        <%= content_tag(:td, expense.description) %>
+        <%= content_tag(:td, number_to_currency(expense.amount)) %>
+        <%= content_tag(:td, expense.made_at.strftime('%d/%m/%Y')) %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 

@@ -4,7 +4,7 @@ class Entry < ApplicationRecord
   include StringEnum
 
   belongs_to :user
-  belongs_to :sub_category
+  belongs_to :sub_category, default: -> { SubCategory.find_by(name: 'Categoria genérica') }
 
   # Relation for deal with installment entries
   # Useful when there are more than one entry to form an entire expense or revenue
@@ -20,7 +20,7 @@ class Entry < ApplicationRecord
   end
   scope :by_user, ->(user_id) do
     where(user_id: user_id)
-      .where('made_at <= ?', Time.current.at_end_of_day.utc)
+      .where('made_at <= ?', Time.current.at_end_of_day)
       .order(made_at: :desc, created_at: :desc)
   end
 
@@ -48,8 +48,8 @@ class Entry < ApplicationRecord
   end
 
   def self.amount_by_category(user_id:, period:)
-    in_range(user_id, period).group_by(&:category_id).map do |k, v|
-      { category: Category.find(k).name, amount: v.sum(&:amount) }
+    in_range(user_id, period).group_by(&:sub_category_id).map do |k, v|
+      { category: SubCategory.find(k).name, amount: v.sum(&:amount) }
     end
   end
 

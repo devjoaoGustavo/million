@@ -17,16 +17,16 @@ class Entry < ApplicationRecord
       Entry.create(
         type:        params[:type],
         user_id:     params[:user_id],
-        category_id: params[:category_id],
+        sub_category_id: params[:sub_category_id],
         description: params[:description],
-        made_at:  params[:made_at],
+        made_at:     made_at(Hash(params).symbolize_keys),
         entry_id:    params[:entry_id],
         goal_id:     params[:goal_id],
         amount:      parse_amount(params[:amount]),
       ).tap do |previous_entry|
         create!(
           params
-          .merge(made_at: next_made_at(params[:made_at]))
+          .merge(made_at: next_made_at(previous_entry.made_at))
           .merge(entry_id: previous_entry.id)
         )
       end
@@ -34,6 +34,11 @@ class Entry < ApplicationRecord
 
     def count(n)
       @count ||= n.zero? ? 1 : (n > MAX_INSTALLMENTS ? MAX_INSTALLMENTS : n)
+    end
+
+    def made_at(made_at:, **)
+      return if made_at.blank?
+      Date.parse(made_at, 'D/M/Y')
     end
 
     def parse_amount(input)

@@ -15,8 +15,6 @@
 //= require_tree .
 //= require rails.validations
 //= require materialize.min
-//= require Chart.bundle
-//= require chartkick
 
 
 document.addEventListener('DOMContentLoaded', function() {

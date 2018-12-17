@@ -1,4 +1,4 @@
-# frozen_string_litera: true
+# frozen_string_literal: true
 
 class UserDecorator < ApplicationDecorator
   include Timing
@@ -6,6 +6,28 @@ class UserDecorator < ApplicationDecorator
 
   def balance
     @balance ||= revenues_till_now.sum(&:amount) - expenses_till_now.sum(&:amount)
+  end
+
+  def monthly_expense
+    expenses_of_this_month.sum(&:amount)
+  end
+
+  def monthly_revenue
+    revenues_of_this_month.sum(&:amount)
+  end
+
+  def monthly_entries
+    collection = entries_by_month
+    colors = ['#f00', '#0f0']
+    [].tap do |result|
+      ['Despesas', 'Receitas'].each_with_index do |entry_type, idx|
+        result << {
+          name: entry_type,
+          data: collection.map { |line| [line.first, line[idx+1]] }.to_h,
+          color: colors[idx]
+        }
+      end
+    end
   end
 
   def entries_by_month
@@ -17,19 +39,23 @@ class UserDecorator < ApplicationDecorator
                    BigDecimal(values.select(&:expense?).sum(&:amount).to_s).to_f,
                    BigDecimal(values.select(&:revenue?).sum(&:amount).to_s).to_f]
       end
-    end.unshift ['Mês', 'Despesas', 'Receitas']
+    end
   end
 
   def monthly_balance
-    @monthly_balance ||= revenues_of_this_month.sum(&:amount) - expenses_of_this_month.sum(&:amount)
+    @monthly_balance ||= monthly_revenue - monthly_expense
   end
 
   def expenses_till_now
-    @expenses_till_now ||= Entry::Expense.by_user(id)
+    @expenses_till_now ||= Entry::Expense
+      .by_user(id)
+      .order(made_at: :desc)
   end
 
   def revenues_till_now
-    @revenues_till_now ||= Entry::Revenue.by_user(id)
+    @revenues_till_now ||= Entry::Revenue
+      .by_user(id)
+      .order(made_at: :desc)
   end
 
   def expenses_of_this_month
@@ -65,7 +91,9 @@ class UserDecorator < ApplicationDecorator
   end
 
   def expenses
-    @expenses ||= entries.where(type: Entry::Expense.to_s)
+    @expenses ||= entries
+      .where(type: Entry::Expense.to_s)
+      .order(made_at: :desc)
   end
 
   def revenues
@@ -84,7 +112,7 @@ class UserDecorator < ApplicationDecorator
     klass
       .amount_by_category(user_id: id, period: this_month)
       .map(&:values)
-      .unshift(['Category', 'Amount'])
+      .to_h
   end
 
   private

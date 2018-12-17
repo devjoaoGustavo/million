@@ -49,8 +49,7 @@ end
 
 Category.find_or_create_by(name: 'Geral').tap do |category|
   [
-    { 'name' => 'Diversão',             'category_id' => category.id },
-    { 'name' => 'Bares e restaurantes', 'category_id' => category.id },
+    { 'name' => 'Mercado',              'category_id' => category.id },
     { 'name' => 'Higiene pessoal',      'category_id' => category.id },
     { 'name' => 'Impostos e taxas',     'category_id' => category.id },
     { 'name' => 'Presentes',            'category_id' => category.id },
@@ -58,6 +57,17 @@ Category.find_or_create_by(name: 'Geral').tap do |category|
     { 'name' => 'Categoria genérica',   'category_id' => category.id },
     { 'name' => 'Investimentos',        'category_id' => category.id },
     { 'name' => 'Eletrônicos',          'category_id' => category.id },
+    { 'name' => 'Categoria genérica',   'category_id' => category.id },
+  ].each do |sub_category|
+    SubCategory.find_or_create_by(sub_category.merge(category_id: category.id))
+  end
+end
+
+Category.find_or_create_by(name: 'Lazer').tap do |category|
+  [
+    { 'name' => 'Cinema',               'category_id' => category.id },
+    { 'name' => 'Bares e restaurantes', 'category_id' => category.id },
+    { 'name' => 'Diversão',             'category_id' => category.id }
   ].each do |sub_category|
     SubCategory.find_or_create_by(sub_category.merge(category_id: category.id))
   end

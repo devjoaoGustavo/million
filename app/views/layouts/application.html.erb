@@ -12,6 +12,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
+    <style>
+      div#modal-expense, div#modal-revenue {
+        overflow: visible;
+      }
+    </style>
+    <%= javascript_include_tag 'pre_include', media: 'all' %>
   </head>
 
   <body style="height: 100%; margin: 0px;" class="">
@@ -38,6 +44,18 @@
         </ul>
       </div>
     </nav>
+
+    <%= content_for :javascript do %>
+    <script>
+      <% if flash[:notice].present? %>
+        M.toast({html: "<%= flash[:notice] %>", displayLength: 5000, classes: 'rounded'});
+      <% end %>
+
+      <% if flash[:alert].present? %>
+        M.toast({html: "<%= flash[:alert] %>", displayLength: 5000, classes: 'rounded'});
+      <% end %>
+    </script>
+    <% end %>
 
     <ul id="user-dropdown" class="dropdown-content">
       <% if logged_in? %>
@@ -79,26 +97,87 @@
       </div>
 
       <div id="modal-expense" class="modal">
-        <div class="modal-content">
-          <div class="row">
-            <form class="col s12" action="">
+        <%= form_for(@new_expense) do |f| %>
+          <div>
+            <div class="modal-content">
               <div class="row">
-                <div class="col s6">
-                  <input id="first_name" class="validate" type="text" placeholder="Placeholder">
-                  <label for="first_name"></label>
+                <h4>Nova despesa</h4>
+                <div class="row">
+                  <div class="input-field col s12 l6">
+                    <i class="material-icons prefix">receipt</i>
+                    <label for="entry_expense_description">Descrição</label>
+                    <%= f.text_field :description, placeholder: 'Descrição' %>
+                  </div>
+
+                  <div class="input-field col s12 l6">
+                    <i class="material-icons prefix">category</i>
+                    <%= f.collection_select(:sub_category_id, @sub_categories, :id, :name, prompt: 'Categoria') %>
+                    <label for="entry_expense_sub_category_id">Categoria</label>
+                  </div>
+
+                  <div class="input-field col s12 l6">
+                    <i class="material-icons prefix">calendar_today</i>
+                    <%= f.text_field :made_at, class: 'datepicker' %>
+                    <label for="entry_expense_made_at">Data</label>
+                  </div>
+
+                  <div class="input-field col s12 l6">
+                    <i class="material-icons prefix">attach_money</i>
+                    <%= f.number_field :amount, step: 0.01, min: 0.00 %>
+                    <label for="entry_expense_amount">Valor</label>
+                  </div>
                 </div>
               </div>
-            </form>
+            </div>
+
+            <div class="modal-footer">
+              <%= content_tag :span, 'Cancelar', class: 'btn-flat modal-close' %>
+              <%= f.submit 'Salvar', class: 'btn' %>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer"></div>
+        <% end %>
       </div>
 
       <div id="modal-revenue" class="modal">
-        <div class="modal-content">
-          <h4>New revenue!</h4>
-        </div>
-        <div class="modal-footer"></div>
+        <%= form_for(@new_revenue) do |f| %>
+          <div>
+            <div class="modal-content">
+              <div class="row">
+                <h4>Nova receita</h4>
+                <div class="row">
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">receipt</i>
+                    <label for="entry_revenue_description">Descrição</label>
+                    <%= f.text_field :description, placeholder: 'Descrição' %>
+                  </div>
+
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">category</i>
+                    <%= f.collection_select(:sub_category_id, @sub_categories, :id, :name, prompt: 'Categoria') %>
+                    <label for="entry_revenue_sub_category_id">Categoria</label>
+                  </div>
+
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">calendar_today</i>
+                    <%= f.text_field :made_at, class: 'datepicker' %>
+                    <label for="entry_revenue_made_at">Data</label>
+                  </div>
+
+                  <div class="input-field col s6">
+                    <i class="material-icons prefix">attach_money</i>
+                    <%= f.number_field :amount, step: 0.01, min: 0.00 %>
+                    <label for="entry_revenue_amount">Valor</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <%= content_tag :span, 'Cancelar', class: 'btn-flat modal-close' %>
+              <%= f.submit 'Salvar', class: 'btn' %>
+            </div>
+          </div>
+        <% end %>
       </div>
 
       <div id="modal-goal" class="modal">
@@ -110,12 +189,12 @@
     <% end %>
 
     <main>
-      <div class="container">
-        <div class="masonry row">
-          <%= yield :title %>
-          <%= yield %>
-        </div>
+    <div class="container">
+      <div class="masonry row">
+        <%= yield :title %>
+        <%= yield %>
       </div>
+    </div>
     </main>
 
     <footer class="page-footer amber darken-1">
@@ -125,5 +204,28 @@
     </footer>
 
     <%= javascript_include_tag 'application', media: 'all' %>
+    <%= yield :javascript %>
+    <script>
+      $(document).ready(function(){ $('select').formSelect(); });
+      var options = {
+      i18n: {
+      months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        weekdays: ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'],
+        weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+        weekdaysAbbrev: ['D','S','T','Q','Q','S','S'],
+        cancel: 'Cancelar',
+        clear: 'Limpar',
+        done: 'Ok'
+      },
+        format: "dd/mm/yyyy",
+        showClearBtn: true,
+        autoClose: true
+      };
+      document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.datepicker');
+      var instances = M.Datepicker.init(elems, options);
+      });
+    </script>
   </body>
 </html>

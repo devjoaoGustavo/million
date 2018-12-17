@@ -2,41 +2,21 @@
 
 class EntriesController < ApplicationController
   include Timing
-  before_action :validate_session!, except: :encrypt
-  before_action :load_expenses, only: [:expenses]
-  before_action :load_revenues, only: [:revenues]
-  before_action :load_categories, only: [:revenues, :expenses, :edit, :create, :update, :search]
+  before_action :validate_session!
+  before_action :new_expense
+  before_action :new_revenue
+  before_action :load_categories
+  before_action :assign_dashboard_values, only: %i[index create]
   rescue_from InvalidCurrencyFormat, with: :invalid_currency_format
 
-  def encrypt
-    render layout: false
-  end
-
   def index
-    intro(message: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
-    user = UserDecorator.decorate(current_user)
-    @options = { userid: current_user.id, token: form_authenticity_token }.to_json
-    @color_class = css_color_class(user.balance.to_f)
-
-    @seven_days_expense     = user.expenses_of_last_days(7).sum(&:amount).to_f
-    @seven_days_revenue     = user.revenues_of_last_days(7).sum(&:amount).to_f
-    @seven_days_balance     = @seven_days_revenue - @seven_days_expense
-    @seven_days_color_class = css_color_class(@seven_days_balance)
-
-    @today_expense     = user.expenses_of_today.sum(&:amount).to_f
-    @today_revenue     = user.revenues_of_today.sum(&:amount).to_f
-    @today_balance     = @today_revenue - @today_expense
-    @today_color_class = css_color_class(@today_balance)
-
-    @data_expense = user.expenses_by_category
-    @data_revenue = user.revenues_by_category
   end
 
   def search
     @goals = current_user.goals
     new_entry(params[:type])
     filters = {}.tap do |f|
-      f[:category_id] = params[:category_id] if params[:category_id].present?
+      f[:sub_category_id] = params[:sub_category_id] if params[:sub_category_id].present?
       f[:made_at]  = search_range
     end
     @entries = Entry.where(user_id: current_user.id, type: params[:type], **filters)
@@ -66,15 +46,12 @@ class EntriesController < ApplicationController
   end
 
   def expenses
-    @goals = current_user.goals
-    new_entry('Entry::Expense')
-    intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: dashboard_path(current_user.id))
+    @expenses = current_user.expenses_till_now
     render template: 'entries/expenses/index'
   end
 
   def revenues
-    new_entry('Entry::Revenue')
-    intro(message: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: dashboard_path(current_user.id))
+    @revenues = current_user.revenues_till_now
     render template: 'entries/revenues/index'
   end
 
@@ -118,19 +95,10 @@ class EntriesController < ApplicationController
 
     if @entry.persisted?
       flash[:notice] = 'Adicionada nova entrada'
-      return redirect_to expenses_path(current_user.id) if @entry.expense?
-      redirect_to revenues_path(current_user.id)
+      redirect_to dashboard_path(current_user.id)
     else
-      flash.now[:alert] = 'A entrada não foi salva. Verifique os valores e tente novamente'
-      if @entry.expense?
-        intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: expenses_path(current_user.id))
-        load_expenses
-        render :expenses
-      else
-        intro(message: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: revenues_path(current_user.id))
-        load_revenues
-        render :revenues
-      end
+      flash[:alert] = 'A entrada não foi salva. Verifique os valores e tente novamente'
+      render :index
     end
   end
 
@@ -151,19 +119,24 @@ class EntriesController < ApplicationController
 
   private
 
+  def assign_dashboard_values
+    @monthly_balance = current_user.monthly_balance
+    @balance = current_user.balance
+    @expense = current_user.monthly_expense
+    @revenue = current_user.monthly_revenue
+    @expense_by_category = current_user.expenses_by_category
+    @revenue_by_category = current_user.revenues_by_category
+    @entries_by_month    = current_user.monthly_entries
+  end
+
   def invalid_currency_format
     flash.now[:alert] = 'O valor informado possui formato inválido ou está vazio. Verifique e tente novamente'
     if params.key? :entry_expense
       build_expense_from_params.validate
-      load_expenses
-      intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: expenses_path(current_user.id))
-      render :expenses
     else
       build_revenue_from_params.validate
-      load_revenues
-      intro(message: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: revenues_path(current_user.id))
-      render :revenues
     end
+    render :index
   end
 
   def load_expenses
@@ -175,7 +148,7 @@ class EntriesController < ApplicationController
   end
 
   def load_categories
-    @categories = Category.ordered
+    @sub_categories = SubCategory.ordered
   end
 
   def find_entry
@@ -186,13 +159,25 @@ class EntriesController < ApplicationController
     @entry = Entry.new(type: type)
   end
 
+  def new_expense
+    @new_expense = current_user
+      .entries
+      .build(type: Entry::Expense.to_s)
+  end
+
+  def new_revenue
+    @new_revenue = current_user
+      .entries
+      .build(type: Entry::Revenue.to_s)
+  end
+
   def intro(message:, ico_class:, href:)
     @intro = { message: message, icoClass: ico_class, href: href }.to_json
   end
 
   def build_expense_from_params
     @entry = Entry::Expense.new(
-      category_id: params.dig(:entry_expense, :category_id),
+      sub_category_id: params.dig(:entry_expense, :sub_category_id),
       description: params.dig(:entry_expense, :description),
       amount:      params.dig(:entry_expense, :currency),
       made_at:  params.dig(:entry_expense, :made_at),
@@ -201,7 +186,7 @@ class EntriesController < ApplicationController
 
   def build_revenue_from_params
     @entry = Entry::Revenue.new(
-      category_id: params.dig(:entry_revenue, :category_id),
+      sub_category_id: params.dig(:entry_revenue, :sub_category_id),
       description: params.dig(:entry_revenue, :description),
       amount:      params.dig(:entry_revenue, :currency),
       made_at:  params.dig(:entry_revenue, :made_at),
@@ -211,7 +196,8 @@ class EntriesController < ApplicationController
   def create_params
     key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
     params.require(key)
-      .permit(:category_id, :description, :amount, :made_at, :type, :goal_id)
+      .permit(:sub_category_id, :description, :amount, :made_at, :goal_id)
+      .merge(type: String(key).split('_').map(&:capitalize).join('::'))
       .merge(user_id: current_user.id)
       .merge(installments: params[:installments])
   end
@@ -219,7 +205,7 @@ class EntriesController < ApplicationController
   def update_params
     key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
     params.require(key)
-      .permit(:category_id, :description, :amount, :made_at, :goal_id)
+      .permit(:sub_category_id, :description, :amount, :made_at, :goal_id)
       .merge(id: params[:id])
       .merge(user_id: current_user.id)
   end

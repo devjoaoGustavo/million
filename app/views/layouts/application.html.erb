@@ -34,7 +34,6 @@
             <li><a href="<%= dashboard_path(current_user) %>">Painel</a></li>
             <li><a href="<%= expenses_path(current_user) %>">Despesas</a></li>
             <li><a href="<%= revenues_path(current_user) %>">Receitas</a></li>
-            <li><a href="<%= user_goals_path(current_user) %>">Objetivos</a></li>
           <% end %>
           <li>
             <a class="dropdown-trigger" href="#!" data-target="user-dropdown">
@@ -91,7 +90,7 @@
             <a class="btn-floating green modal-trigger" href="#modal-revenue"><i class="material-icons">attach_money</i></a>
           </li>
           <li>
-            <a class="btn-floating yellow darken-1 modal-trigger" href="#modal-goal"><i class="material-icons">star</i></a>
+            <a class="btn-floating yellow darken-1 modal-trigger disabled" href="#modal-goal"><i class="material-icons">star</i></a>
           </li>
         </ul>
       </div>

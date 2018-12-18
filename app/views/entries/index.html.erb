@@ -83,7 +83,13 @@
       </div>
     </div>
     <div class="card-metric-chart">
-      <%= line_chart api_user_entries_by_month_path(current_user), defer: true, legend: 'bottom' %>
+      <%= line_chart api_user_entries_by_month_path(current_user),
+        defer:     true,
+        legend:    'bottom',
+        decimal:   ',',
+        thousands: '.',
+        prefix:    'R$ ',
+        download:  "entradas-million-#{Time.zone.today.year}" %>
     </div>
   </div>
 </div>
@@ -97,7 +103,13 @@
           <div class="card-metric-title">
             Despesas por categoria
           </div>
-          <%= pie_chart api_user_expense_by_category_path(current_user), legend: 'bottom' %>
+          <%= pie_chart api_user_expense_by_category_path(current_user),
+            legend: 'bottom',
+            donut: true,
+            decimal: ',',
+            thousands: '.',
+            prefix: 'R$ ',
+            download: "despesas-million-#{Time.zone.today.strftime('%m-%Y')}" %>
         </div>
       </div>
     </div>
@@ -115,7 +127,13 @@
           <div class="card-metric-title">
             Receitas por categoria
           </div>
-          <%= pie_chart api_user_revenue_by_category_path(current_user), legend: 'bottom' %>
+          <%= pie_chart api_user_revenue_by_category_path(current_user),
+            legend: 'bottom',
+            donut: true,
+            decimal: ',',
+            thousands: '.',
+            prefix: 'R$ ',
+            download: "receitas-million-#{Time.zone.today.strftime('%m-%Y')}" %>
         </div>
       </div>
     </div>

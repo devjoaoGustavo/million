@@ -120,7 +120,6 @@ class EntriesController < ApplicationController
   private
 
   def assign_dashboard_values
-    @monthly_balance = current_user.monthly_balance
     @balance = current_user.balance
     @expense = current_user.monthly_expense
     @revenue = current_user.monthly_revenue

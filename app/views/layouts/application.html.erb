@@ -82,7 +82,7 @@
 
     <% if logged_in? %>
       <div class="fixed-action-btn">
-        <a class="btn-floating btn-large red"><i class="large material-icons">add</i></a>
+        <a class="btn-floating btn-large red pulse"><i class="large material-icons">add</i></a>
         <ul>
           <li>
             <a class="btn-floating red modal-trigger" href="#modal-expense"><i class="material-icons">add_shopping_cart</i></a>
@@ -145,25 +145,25 @@
               <div class="row">
                 <h4>Nova receita</h4>
                 <div class="row">
-                  <div class="input-field col s6">
+                  <div class="input-field col s12 l6">
                     <i class="material-icons prefix">receipt</i>
                     <label for="entry_revenue_description">Descrição</label>
                     <%= f.text_field :description, placeholder: 'Descrição' %>
                   </div>
 
-                  <div class="input-field col s6">
+                  <div class="input-field col s12 l6">
                     <i class="material-icons prefix">category</i>
                     <%= f.collection_select(:sub_category_id, @sub_categories, :id, :name, prompt: 'Categoria') %>
                     <label for="entry_revenue_sub_category_id">Categoria</label>
                   </div>
 
-                  <div class="input-field col s6">
+                  <div class="input-field col s12 l6">
                     <i class="material-icons prefix">calendar_today</i>
                     <%= f.text_field :made_at, class: 'datepicker' %>
                     <label for="entry_revenue_made_at">Data</label>
                   </div>
 
-                  <div class="input-field col s6">
+                  <div class="input-field col s12 l6">
                     <i class="material-icons prefix">attach_money</i>
                     <%= f.number_field :amount, step: 0.01, min: 0.00 %>
                     <label for="entry_revenue_amount">Valor</label>
@@ -197,7 +197,7 @@
     </div>
     </main>
 
-    <footer class="page-footer amber darken-1">
+    <footer class="page-footer amber darken-1 no-padding">
       <div class="footer-copyright">
         <div class="container">® 2018 Hobbyright</div>
       </div>

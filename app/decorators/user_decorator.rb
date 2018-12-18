@@ -18,9 +18,9 @@ class UserDecorator < ApplicationDecorator
 
   def monthly_entries
     collection = entries_by_month
-    colors = ['#f00', '#0f0']
+    colors = ['#f00', '#0f0', '#3465cc']
     [].tap do |result|
-      ['Despesas', 'Receitas'].each_with_index do |entry_type, idx|
+      ['Despesas', 'Receitas', 'Saldo'].each_with_index do |entry_type, idx|
         result << {
           name: entry_type,
           data: collection.map { |line| [line.first, line[idx+1]] }.to_h,
@@ -35,9 +35,12 @@ class UserDecorator < ApplicationDecorator
       grouped = Entry.where(user_id: id, made_at: this_year).order(made_at: :asc).group_by(&method(:per_month))
       I18n.t('date')[:abbr_month_names].compact.each_with_index do |month, idx|
         values = grouped[idx + 1] || []
+        revs = values.select(&:revenue?).sum(&:amount)
+        exps = values.select(&:expense?).sum(&:amount)
         result << [month,
-                   BigDecimal(values.select(&:expense?).sum(&:amount).to_s).to_f,
-                   BigDecimal(values.select(&:revenue?).sum(&:amount).to_s).to_f]
+                   BigDecimal(exps.to_s).to_f,
+                   BigDecimal(revs.to_s).to_f,
+                   BigDecimal(revs - exps).to_f]
       end
     end
   end

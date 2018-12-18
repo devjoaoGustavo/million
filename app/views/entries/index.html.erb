@@ -13,8 +13,8 @@
           <div class="card-metric-title">
             Saldo geral
           </div>
-          <div class="card-metric-value">
-            <%= number_to_currency(@balance) || 'Erro interno ao exibir despesas' %>
+          <div class="card-metric-value center-align">
+            <h5><%= number_to_currency(@balance) || 'Erro interno ao exibir despesas' %></h5>
           </div>
           <div class="card-metric-change increase">
             <i class="material-icons left"><%= @monthly_balance.try(:negative?) ? 'keyboard_arrow_down' : 'keyboard_arrow_up' %></i>
@@ -22,8 +22,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="card-metric-chart">
     </div>
   </div>
 </div>
@@ -37,8 +35,8 @@
           <div class="card-metric-title">
             Despesas do mês
           </div>
-          <div class="card-metric-value">
-            <%= number_to_currency(@expense) || 'Erro interno ao exibir despesas' %>
+          <div class="card-metric-value center-align">
+            <h5><%= number_to_currency(@expense) || 'Erro interno ao exibir despesas' %></h5>
           </div>
           <div class="card-metric-change increase">
             <i class="material-icons left">keyboard_arrow_down</i>
@@ -46,8 +44,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="card-metric-chart">
     </div>
   </div>
 </div>
@@ -61,8 +57,8 @@
           <div class="card-metric-title">
             Receitas do mês
           </div>
-          <div class="card-metric-value">
-            <%= number_to_currency(@revenue) || 'Erro interno ao exibir receitas' %>
+          <div class="card-metric-value center-align">
+            <h5><%= number_to_currency(@revenue) || 'Erro interno ao exibir receitas' %></h5>
           </div>
           <div class="card-metric-change increase">
             <i class="material-icons left">keyboard_arrow_up</i>
@@ -70,8 +66,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="card-metric-chart">
     </div>
   </div>
 </div>
@@ -85,15 +79,11 @@
           <div class="card-metric-title">
             Entradas ao longo do ano
           </div>
-          <div class="card-metric-change increase">
-            <i class="material-icons left">keyboard_arrow_up</i>
-            ?? %
-          </div>
         </div>
       </div>
     </div>
     <div class="card-metric-chart">
-      <%= line_chart @entries_by_month, defer: true, legend: 'bottom' %>
+      <%= line_chart api_user_entries_by_month_path(current_user), defer: true, legend: 'bottom' %>
     </div>
   </div>
 </div>
@@ -107,11 +97,7 @@
           <div class="card-metric-title">
             Despesas por categoria
           </div>
-          <%= pie_chart @expense_by_category %>
-          <div class="card-metric-change increase">
-            <i class="material-icons left">keyboard_arrow_up</i>
-            ?? %
-          </div>
+          <%= pie_chart api_user_expense_by_category_path(current_user), legend: 'bottom' %>
         </div>
       </div>
     </div>
@@ -129,11 +115,7 @@
           <div class="card-metric-title">
             Receitas por categoria
           </div>
-          <%= pie_chart @revenue_by_category %>
-          <div class="card-metric-change increase">
-            <i class="material-icons left">keyboard_arrow_up</i>
-            ?? %
-          </div>
+          <%= pie_chart api_user_revenue_by_category_path(current_user), legend: 'bottom' %>
         </div>
       </div>
     </div>

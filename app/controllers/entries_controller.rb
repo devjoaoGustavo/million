@@ -124,9 +124,6 @@ class EntriesController < ApplicationController
     @balance = current_user.balance
     @expense = current_user.monthly_expense
     @revenue = current_user.monthly_revenue
-    @expense_by_category = current_user.expenses_by_category
-    @revenue_by_category = current_user.revenues_by_category
-    @entries_by_month    = current_user.monthly_entries
   end
 
   def invalid_currency_format

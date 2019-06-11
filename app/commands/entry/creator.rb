@@ -2,7 +2,7 @@ class Entry < ApplicationRecord
   class Creator
     def call(params = {})
       Entry.transaction do
-        entry = create!(params)
+        create!(params)
       end
     end
 

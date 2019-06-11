@@ -1,0 +1,263 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+$.fn.panel	app/assets/javascripts/homepage/util.js	/^	$.fn.panel = function(userConfig) {$/;"	f
+$.fn.placeholder	app/assets/javascripts/homepage/util.js	/^	$.fn.placeholder = function() {$/;"	f
+$.prioritize	app/assets/javascripts/homepage/util.js	/^	$.prioritize = function($elements, condition) {$/;"	f
+$this	app/assets/javascripts/homepage/util.js	/^			var	$this = $(this),$/;"	v
+Api	app/controllers/api/categories_controller.rb	/^module Api$/;"	m
+Api	app/controllers/api/entries_controller.rb	/^module Api$/;"	m
+Api	app/controllers/api/goals_controller.rb	/^module Api$/;"	m
+Application	config/application.rb	/^  class Application < Rails::Application$/;"	c	class:Million
+ApplicationController	app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c
+ApplicationDecorator	app/decorators/application_decorator.rb	/^class ApplicationDecorator < Draper::Decorator$/;"	c
+ApplicationHelper	app/helpers/application_helper.rb	/^module ApplicationHelper$/;"	m
+ApplicationJob	app/jobs/application_job.rb	/^class ApplicationJob < ActiveJob::Base$/;"	c
+ApplicationMailer	app/mailers/application_mailer.rb	/^class ApplicationMailer < ActionMailer::Base$/;"	c
+ApplicationRecord	app/models/application_record.rb	/^class ApplicationRecord < ActiveRecord::Base$/;"	c
+CategoriesController	app/controllers/api/categories_controller.rb	/^  class CategoriesController < ApplicationController$/;"	c	class:Api
+Category	app/models/category.rb	/^class Category < ApplicationRecord$/;"	c
+CreateCategory	db/migrate/20180221005400_create_category.rb	/^class CreateCategory < ActiveRecord::Migration[5.1]$/;"	c
+CreateDreams	db/migrate/20180407001942_create_dreams.rb	/^class CreateDreams < ActiveRecord::Migration[5.1]$/;"	c
+CreateEntry	db/migrate/20180221005621_create_entry.rb	/^class CreateEntry < ActiveRecord::Migration[5.1]$/;"	c
+CreateGoal	db/migrate/20180406233203_create_goal.rb	/^class CreateGoal < ActiveRecord::Migration[5.1]$/;"	c
+CreateSubCategory	db/migrate/20180221005410_create_sub_category.rb	/^class CreateSubCategory < ActiveRecord::Migration[5.1]$/;"	c
+CreateUser	db/migrate/20180121113841_create_user.rb	/^class CreateUser < ActiveRecord::Migration[5.1]$/;"	c
+Creator	app/commands/entry/creator.rb	/^  class Creator$/;"	c	class:Entry
+Creator	app/commands/goal/creator.rb	/^  class Creator$/;"	c	class:Goal
+Destroyer	app/commands/entry/destroyer.rb	/^  class Destroyer$/;"	c	class:Entry
+Destroyer	app/commands/goal/destroyer.rb	/^  class Destroyer$/;"	c	class:Goal
+Dream	app/models/dream.rb	/^class Dream < ApplicationRecord$/;"	c
+EnablePgcryptoExtension	db/migrate/20180121010335_enable_pgcrypto_extension.rb	/^class EnablePgcryptoExtension < ActiveRecord::Migration[5.1]$/;"	c
+EntriesController	app/controllers/api/entries_controller.rb	/^  class EntriesController < ApplicationController$/;"	c	class:Api
+EntriesController	app/controllers/entries_controller.rb	/^class EntriesController < ApplicationController$/;"	c
+Entry	app/commands/entry/creator.rb	/^class Entry < ApplicationRecord$/;"	c
+Entry	app/commands/entry/destroyer.rb	/^class Entry < ApplicationRecord$/;"	c
+Entry	app/commands/entry/finder.rb	/^class Entry < ApplicationRecord$/;"	c
+Entry	app/commands/entry/updater.rb	/^class Entry < ApplicationRecord$/;"	c
+Entry	app/models/entry.rb	/^class Entry < ApplicationRecord$/;"	c
+Entry	app/models/entry/expense.rb	/^class Entry$/;"	c
+Entry	app/models/entry/revenue.rb	/^class Entry$/;"	c
+EntryDecorator	app/decorators/entry_decorator.rb	/^class EntryDecorator < ApplicationDecorator$/;"	c
+Expense	app/models/entry/expense.rb	/^  class Expense < Entry$/;"	c	class:Entry
+ExpiredSessionError	app/errors/expired_session_error.rb	/^class ExpiredSessionError < StandardError; end$/;"	c
+Finder	app/commands/entry/finder.rb	/^  class Finder$/;"	c	class:Entry
+Finder	app/commands/goal/finder.rb	/^  class Finder$/;"	c	class:Goal
+Goal	app/commands/goal/creator.rb	/^class Goal < ApplicationRecord$/;"	c
+Goal	app/commands/goal/destroyer.rb	/^class Goal < ApplicationRecord$/;"	c
+Goal	app/commands/goal/finder.rb	/^class Goal < ApplicationRecord$/;"	c
+Goal	app/commands/goal/updater.rb	/^class Goal < ApplicationRecord$/;"	c
+Goal	app/models/goal.rb	/^class Goal < ApplicationRecord$/;"	c
+GoalsController	app/controllers/api/goals_controller.rb	/^  class GoalsController < ApplicationController$/;"	c	class:Api
+GoalsController	app/controllers/goals_controller.rb	/^class GoalsController < ApplicationController$/;"	c
+HomeController	app/controllers/home_controller.rb	/^class HomeController < ApplicationController$/;"	c
+HomeHelper	app/helpers/home_helper.rb	/^module HomeHelper$/;"	m
+InvalidCurrencyFormat	app/errors/invalid_currency_format.rb	/^class InvalidCurrencyFormat < StandardError; end$/;"	c
+Million	config/application.rb	/^module Million$/;"	m
+Revenue	app/models/entry/revenue.rb	/^  class Revenue < Entry$/;"	c	class:Entry
+SessionsController	app/controllers/sessions_controller.rb	/^class SessionsController < ApplicationController$/;"	c
+StringEnum	app/models/concerns/string_enum.rb	/^module StringEnum$/;"	m
+SubCategory	app/models/sub_category.rb	/^class SubCategory < ApplicationRecord$/;"	c
+Timing	lib/helpers/timing.rb	/^module Timing$/;"	m
+Updater	app/commands/entry/updater.rb	/^  class Updater$/;"	c	class:Entry
+Updater	app/commands/goal/updater.rb	/^  class Updater$/;"	c	class:Goal
+User	app/models/user.rb	/^class User < ApplicationRecord$/;"	c
+UserDecorator	app/decorators/user_decorator.rb	/^class UserDecorator < ApplicationDecorator$/;"	c
+UserMailer	app/mailers/user_mailer.rb	/^class UserMailer < ApplicationMailer$/;"	c
+UserValidator	app/validators/user_validator.rb	/^class UserValidator < ActiveModel::Validator$/;"	c
+UsersController	app/controllers/users_controller.rb	/^class UsersController < ApplicationController$/;"	c
+activate!	app/models/user.rb	/^  def activate!$/;"	f	class:User
+activate_bundler	bin/bundle	/^  def activate_bundler(bundler_version)$/;"	f
+activation_error_handling	bin/bundle	/^  def activation_error_handling$/;"	f
+allowed_params	app/controllers/users_controller.rb	/^  def allowed_params$/;"	f	class:UsersController
+amount_by_category	app/models/entry.rb	/^  def self.amount_by_category(user_id:, period:)$/;"	F	class:Entry
+assign_dashboard_values	app/controllers/entries_controller.rb	/^  def assign_dashboard_values$/;"	f	class:EntriesController
+balance	app/controllers/api/entries_controller.rb	/^    def balance$/;"	f	class:Api.EntriesController
+balance	app/decorators/user_decorator.rb	/^  def balance$/;"	f	class:UserDecorator
+balance_of_last_days	app/decorators/user_decorator.rb	/^  def balance_of_last_days(days)$/;"	f	class:UserDecorator
+balance_of_today	app/decorators/user_decorator.rb	/^  def balance_of_today$/;"	f	class:UserDecorator
+build_expense_from_params	app/controllers/entries_controller.rb	/^  def build_expense_from_params$/;"	f	class:EntriesController
+build_response	app/commands/entry/finder.rb	/^    def build_response(entries)$/;"	f	class:Entry.Finder
+build_response	app/commands/goal/finder.rb	/^    def build_response(goals)$/;"	f	class:Goal.Finder
+build_revenue_from_params	app/controllers/entries_controller.rb	/^  def build_revenue_from_params$/;"	f	class:EntriesController
+bundler_version	bin/bundle	/^  def bundler_version$/;"	f
+by_category	app/decorators/user_decorator.rb	/^  def by_category(klass)$/;"	f	class:UserDecorator
+call	app/commands/entry/creator.rb	/^    def call(params = {})$/;"	f	class:Entry.Creator
+call	app/commands/entry/destroyer.rb	/^    def call(params = {})$/;"	f	class:Entry.Destroyer
+call	app/commands/entry/finder.rb	/^    def call(params = {})$/;"	f	class:Entry.Finder
+call	app/commands/entry/updater.rb	/^    def call(params = {})$/;"	f	class:Entry.Updater
+call	app/commands/goal/creator.rb	/^    def call(params={})$/;"	f	class:Goal.Creator
+call	app/commands/goal/destroyer.rb	/^    def call(params = {})$/;"	f	class:Goal.Destroyer
+call	app/commands/goal/finder.rb	/^    def call(params = {})$/;"	f	class:Goal.Finder
+call	app/commands/goal/updater.rb	/^    def call(params = {})$/;"	f	class:Goal.Updater
+change	db/migrate/20180121010335_enable_pgcrypto_extension.rb	/^  def change$/;"	f	class:EnablePgcryptoExtension
+change	db/migrate/20180121113841_create_user.rb	/^  def change$/;"	f	class:CreateUser
+change	db/migrate/20180221005400_create_category.rb	/^  def change$/;"	f	class:CreateCategory
+change	db/migrate/20180221005410_create_sub_category.rb	/^  def change$/;"	f	class:CreateSubCategory
+change	db/migrate/20180221005621_create_entry.rb	/^  def change$/;"	f	class:CreateEntry
+change	db/migrate/20180406233203_create_goal.rb	/^  def change$/;"	f	class:CreateGoal
+change	db/migrate/20180407001942_create_dreams.rb	/^  def change$/;"	f	class:CreateDreams
+clear_entries_with_goal_id	app/commands/goal/destroyer.rb	/^    def clear_entries_with_goal_id(id)$/;"	f	class:Goal.Destroyer
+cli_arg_version	bin/bundle	/^  def cli_arg_version$/;"	f
+confirm	app/controllers/users_controller.rb	/^  def confirm$/;"	f	class:UsersController
+count	app/commands/entry/creator.rb	/^    def count(n)$/;"	f	class:Entry.Creator
+create	app/commands/goal/creator.rb	/^    def create(params)$/;"	f	class:Goal.Creator
+create	app/controllers/api/entries_controller.rb	/^    def create$/;"	f	class:Api.EntriesController
+create	app/controllers/api/goals_controller.rb	/^    def create$/;"	f	class:Api.GoalsController
+create	app/controllers/entries_controller.rb	/^  def create$/;"	f	class:EntriesController
+create	app/controllers/sessions_controller.rb	/^  def create$/;"	f	class:SessionsController
+create	app/controllers/users_controller.rb	/^  def create$/;"	f	class:UsersController
+create!	app/commands/entry/creator.rb	/^    def create!(params)$/;"	f	class:Entry.Creator
+create_params	app/controllers/entries_controller.rb	/^  def create_params$/;"	f	class:EntriesController
+creation_params	app/controllers/api/entries_controller.rb	/^    def creation_params$/;"	f	class:Api.EntriesController
+creator	app/controllers/api/entries_controller.rb	/^    def creator$/;"	f	class:Api.EntriesController
+creator	app/controllers/api/goals_controller.rb	/^    def creator$/;"	f	class:Api.GoalsController
+creator	app/controllers/entries_controller.rb	/^  def creator$/;"	f	class:EntriesController
+css_color_class	app/controllers/entries_controller.rb	/^  def css_color_class(amount)$/;"	f	class:EntriesController
+currency	app/models/entry.rb	/^  def currency$/;"	f	class:Entry
+current_user	app/controllers/application_controller.rb	/^  def current_user$/;"	f	class:ApplicationController
+daily_balance	app/controllers/api/entries_controller.rb	/^    def daily_balance$/;"	f	class:Api.EntriesController
+daily_expense	app/controllers/api/entries_controller.rb	/^    def daily_expense$/;"	f	class:Api.EntriesController
+daily_revenue	app/controllers/api/entries_controller.rb	/^    def daily_revenue$/;"	f	class:Api.EntriesController
+destroy	app/commands/entry/destroyer.rb	/^    def destroy$/;"	f	class:Entry.Destroyer
+destroy	app/controllers/api/goals_controller.rb	/^    def destroy$/;"	f	class:Api.GoalsController
+destroy	app/controllers/entries_controller.rb	/^  def destroy$/;"	f	class:EntriesController
+destroy	app/controllers/goals_controller.rb	/^  def destroy$/;"	f	class:GoalsController
+destroy	app/controllers/sessions_controller.rb	/^  def destroy$/;"	f	class:SessionsController
+destroy_all	app/commands/entry/destroyer.rb	/^    def destroy_all$/;"	f	class:Entry.Destroyer
+destroy_forward	app/commands/entry/destroyer.rb	/^    def destroy_forward$/;"	f	class:Entry.Destroyer
+destroy_params	app/controllers/entries_controller.rb	/^  def destroy_params$/;"	f	class:EntriesController
+destroyer	app/controllers/api/goals_controller.rb	/^    def destroyer$/;"	f	class:Api.GoalsController
+destroyer	app/controllers/entries_controller.rb	/^  def destroyer$/;"	f	class:EntriesController
+destroyer	app/controllers/goals_controller.rb	/^  def destroyer$/;"	f	class:GoalsController
+edit	app/controllers/entries_controller.rb	/^  def edit$/;"	f	class:EntriesController
+edit	app/controllers/goals_controller.rb	/^  def edit$/;"	f	class:GoalsController
+entries_backward	app/models/entry.rb	/^  def entries_backward$/;"	f	class:Entry
+entries_by_month	app/controllers/api/entries_controller.rb	/^    def entries_by_month$/;"	f	class:Api.EntriesController
+entries_by_month	app/decorators/user_decorator.rb	/^  def entries_by_month$/;"	f	class:UserDecorator
+entries_forward	app/models/entry.rb	/^  def entries_forward$/;"	f	class:Entry
+env_var_version	bin/bundle	/^  def env_var_version$/;"	f
+expense_by_category	app/controllers/api/entries_controller.rb	/^    def expense_by_category$/;"	f	class:Api.EntriesController
+expenses	app/controllers/entries_controller.rb	/^  def expenses$/;"	f	class:EntriesController
+expenses	app/decorators/user_decorator.rb	/^  def expenses$/;"	f	class:UserDecorator
+expenses_by_category	app/decorators/user_decorator.rb	/^  def expenses_by_category$/;"	f	class:UserDecorator
+expenses_of_last_days	app/decorators/user_decorator.rb	/^  def expenses_of_last_days(days)$/;"	f	class:UserDecorator
+expenses_of_this_month	app/decorators/user_decorator.rb	/^  def expenses_of_this_month$/;"	f	class:UserDecorator
+expenses_of_today	app/decorators/user_decorator.rb	/^  def expenses_of_today$/;"	f	class:UserDecorator
+expenses_till_now	app/decorators/user_decorator.rb	/^  def expenses_till_now$/;"	f	class:UserDecorator
+final_date	app/controllers/entries_controller.rb	/^  def final_date$/;"	f	class:EntriesController
+find_entry	app/commands/entry/destroyer.rb	/^    def find_entry(params)$/;"	f	class:Entry.Destroyer
+find_entry	app/commands/entry/updater.rb	/^    def find_entry(params)$/;"	f	class:Entry.Updater
+find_entry	app/controllers/entries_controller.rb	/^  def find_entry$/;"	f	class:EntriesController
+find_params	app/controllers/api/entries_controller.rb	/^    def find_params$/;"	f	class:Api.EntriesController
+finder	app/controllers/api/entries_controller.rb	/^    def finder$/;"	f	class:Api.EntriesController
+finder	app/controllers/api/goals_controller.rb	/^    def finder$/;"	f	class:Api.GoalsController
+finder	app/controllers/goals_controller.rb	/^  def finder$/;"	f	class:GoalsController
+fn.navList	app/assets/javascripts/homepage/util.js	/^(function($) {$/;"	f
+gemfile	bin/bundle	/^  def gemfile$/;"	f
+goal	app/models/entry/expense.rb	/^    def goal$/;"	f	class:Entry.Expense
+goal_params	app/controllers/api/goals_controller.rb	/^    def goal_params$/;"	f	class:Api.GoalsController
+home	app/controllers/home_controller.rb	/^  def home$/;"	f	class:HomeController
+included	app/models/concerns/string_enum.rb	/^  def self.included(klass)$/;"	F	class:StringEnum
+index	app/controllers/api/categories_controller.rb	/^    def index$/;"	f	class:Api.CategoriesController
+index	app/controllers/api/goals_controller.rb	/^    def index$/;"	f	class:Api.GoalsController
+index	app/controllers/entries_controller.rb	/^  def index$/;"	f	class:EntriesController
+index	app/controllers/goals_controller.rb	/^  def index$/;"	f	class:GoalsController
+initial_date	app/controllers/entries_controller.rb	/^  def initial_date$/;"	f	class:EntriesController
+installment_label	app/models/entry.rb	/^  def installment_label$/;"	f	class:Entry
+installments	app/controllers/entries_controller.rb	/^  def installments$/;"	f	class:EntriesController
+installments	app/models/entry.rb	/^  def installments$/;"	f	class:Entry
+installments?	app/models/entry.rb	/^  def installments?$/;"	f	class:Entry
+intro	app/controllers/entries_controller.rb	/^  def intro(message:, ico_class:, href:)$/;"	f	class:EntriesController
+intro	app/controllers/goals_controller.rb	/^  def intro(message:, ico_class:, href:)$/;"	f	class:GoalsController
+invalid_currency_format	app/controllers/api/entries_controller.rb	/^    def invalid_currency_format$/;"	f	class:Api.EntriesController
+invalid_currency_format	app/controllers/entries_controller.rb	/^  def invalid_currency_format$/;"	f	class:EntriesController
+invoked_as_script?	bin/bundle	/^  def invoked_as_script?$/;"	f
+last_days	lib/helpers/timing.rb	/^  def last_days(n)$/;"	f	class:Timing
+list	app/commands/entry/finder.rb	/^    def list(params)$/;"	f	class:Entry.Finder
+list	app/commands/goal/finder.rb	/^    def list(params)$/;"	f	class:Goal.Finder
+list	app/controllers/api/entries_controller.rb	/^    def list$/;"	f	class:Api.EntriesController
+load_bundler!	bin/bundle	/^  def load_bundler!$/;"	f
+load_categories	app/controllers/entries_controller.rb	/^  def load_categories$/;"	f	class:EntriesController
+load_expenses	app/controllers/entries_controller.rb	/^  def load_expenses$/;"	f	class:EntriesController
+load_revenues	app/controllers/entries_controller.rb	/^  def load_revenues$/;"	f	class:EntriesController
+lockfile	bin/bundle	/^  def lockfile$/;"	f
+lockfile_version	bin/bundle	/^  def lockfile_version$/;"	f
+made_at	app/commands/entry/creator.rb	/^    def made_at(made_at:, **)$/;"	f	class:Entry.Creator
+made_at	app/decorators/entry_decorator.rb	/^  def made_at$/;"	f	class:EntryDecorator
+monthly_balance	app/controllers/api/entries_controller.rb	/^    def monthly_balance$/;"	f	class:Api.EntriesController
+monthly_balance	app/decorators/user_decorator.rb	/^  def monthly_balance$/;"	f	class:UserDecorator
+monthly_entries	app/decorators/user_decorator.rb	/^  def monthly_entries$/;"	f	class:UserDecorator
+monthly_expense	app/controllers/api/entries_controller.rb	/^    def monthly_expense$/;"	f	class:Api.EntriesController
+monthly_expense	app/decorators/user_decorator.rb	/^  def monthly_expense$/;"	f	class:UserDecorator
+monthly_revenue	app/controllers/api/entries_controller.rb	/^    def monthly_revenue$/;"	f	class:Api.EntriesController
+monthly_revenue	app/decorators/user_decorator.rb	/^  def monthly_revenue$/;"	f	class:UserDecorator
+new	app/controllers/sessions_controller.rb	/^  def new$/;"	f	class:SessionsController
+new	app/controllers/users_controller.rb	/^  def new$/;"	f	class:UsersController
+new_entry	app/controllers/entries_controller.rb	/^  def new_entry(type)$/;"	f	class:EntriesController
+new_expense	app/controllers/entries_controller.rb	/^  def new_expense$/;"	f	class:EntriesController
+new_revenue	app/controllers/entries_controller.rb	/^  def new_revenue$/;"	f	class:EntriesController
+next_entry?	app/models/entry.rb	/^  def next_entry?$/;"	f	class:Entry
+next_made_at	app/commands/entry/creator.rb	/^    def next_made_at(date)$/;"	f	class:Entry.Creator
+number	app/models/entry.rb	/^  def number$/;"	f	class:Entry
+parse_amount	app/commands/entry/creator.rb	/^    def parse_amount(input)$/;"	f	class:Entry.Creator
+parse_date	app/commands/entry/creator.rb	/^    def parse_date(date)$/;"	f	class:Entry.Creator
+per_month	app/decorators/user_decorator.rb	/^  def per_month(entry)$/;"	f	class:UserDecorator
+presentation_name	app/models/user.rb	/^  def presentation_name$/;"	f	class:User
+previous_entry	app/models/entry.rb	/^  def previous_entry$/;"	f	class:Entry
+reached	app/commands/goal/finder.rb	/^    def reached(goal)$/;"	f	class:Goal.Finder
+recover	app/controllers/users_controller.rb	/^  def recover$/;"	f	class:UsersController
+recover_email	app/mailers/user_mailer.rb	/^  def recover_email(user)$/;"	f	class:UserMailer
+redefine	app/controllers/users_controller.rb	/^  def redefine$/;"	f	class:UsersController
+redefine_password	app/controllers/users_controller.rb	/^  def redefine_password$/;"	f	class:UsersController
+redirect_to_login	app/controllers/application_controller.rb	/^  def redirect_to_login$/;"	f	class:ApplicationController
+render_json_ok	app/controllers/api/entries_controller.rb	/^    def render_json_ok(result)$/;"	f	class:Api.EntriesController
+render_ok	app/controllers/api/goals_controller.rb	/^    def render_ok(result)$/;"	f	class:Api.GoalsController
+render_precondition_failed	app/controllers/api/goals_controller.rb	/^    def render_precondition_failed(result)$/;"	f	class:Api.GoalsController
+replace_entries!	app/commands/entry/destroyer.rb	/^    def replace_entries!(entry)$/;"	f	class:Entry.Destroyer
+respond_failure	app/commands/goal/creator.rb	/^    def respond_failure$/;"	f	class:Goal.Creator
+respond_failure	app/commands/goal/updater.rb	/^    def respond_failure$/;"	f	class:Goal.Updater
+respond_success	app/commands/goal/creator.rb	/^    def respond_success$/;"	f	class:Goal.Creator
+response_success	app/commands/goal/updater.rb	/^    def response_success$/;"	f	class:Goal.Updater
+retrieve_user	app/controllers/sessions_controller.rb	/^  def retrieve_user$/;"	f	class:SessionsController
+revenue_by_category	app/controllers/api/entries_controller.rb	/^    def revenue_by_category$/;"	f	class:Api.EntriesController
+revenues	app/controllers/entries_controller.rb	/^  def revenues$/;"	f	class:EntriesController
+revenues	app/decorators/user_decorator.rb	/^  def revenues$/;"	f	class:UserDecorator
+revenues_by_category	app/decorators/user_decorator.rb	/^  def revenues_by_category$/;"	f	class:UserDecorator
+revenues_of_last_days	app/decorators/user_decorator.rb	/^  def revenues_of_last_days(days)$/;"	f	class:UserDecorator
+revenues_of_this_month	app/decorators/user_decorator.rb	/^  def revenues_of_this_month$/;"	f	class:UserDecorator
+revenues_of_today	app/decorators/user_decorator.rb	/^  def revenues_of_today$/;"	f	class:UserDecorator
+revenues_till_now	app/decorators/user_decorator.rb	/^  def revenues_till_now$/;"	f	class:UserDecorator
+search	app/controllers/entries_controller.rb	/^  def search$/;"	f	class:EntriesController
+search_range	app/controllers/entries_controller.rb	/^  def search_range$/;"	f	class:EntriesController
+send_email_for_recover	app/controllers/users_controller.rb	/^  def send_email_for_recover$/;"	f	class:UsersController
+set_raven_context	app/controllers/application_controller.rb	/^  def set_raven_context$/;"	f	class:ApplicationController
+show	app/controllers/entries_controller.rb	/^  def show$/;"	f	class:EntriesController
+show	app/controllers/goals_controller.rb	/^  def show$/;"	f	class:GoalsController
+string_enum	app/models/concerns/string_enum.rb	/^      def self.string_enum(**kargs)$/;"	F	class:StringEnum.included
+system!	bin/setup	/^def system!(*args)$/;"	f
+system!	bin/update	/^def system!(*args)$/;"	f
+this_month	lib/helpers/timing.rb	/^  def this_month$/;"	f	class:Timing
+this_year	lib/helpers/timing.rb	/^  def this_year$/;"	f	class:Timing
+today	lib/helpers/timing.rb	/^  def today$/;"	f	class:Timing
+total_amount	app/models/entry.rb	/^  def self.total_amount(user_id)$/;"	F	class:Entry
+total_balance	app/models/entry.rb	/^  def self.total_balance(user_id)$/;"	F	class:Entry
+update	app/commands/goal/updater.rb	/^    def update(params)$/;"	f	class:Goal.Updater
+update	app/controllers/api/goals_controller.rb	/^    def update$/;"	f	class:Api.GoalsController
+update	app/controllers/entries_controller.rb	/^  def update$/;"	f	class:EntriesController
+update!	app/commands/entry/updater.rb	/^    def update!(params)$/;"	f	class:Entry.Updater
+update_entry	app/commands/entry/updater.rb	/^    def update_entry(params)$/;"	f	class:Entry.Updater
+update_params	app/controllers/entries_controller.rb	/^  def update_params$/;"	f	class:EntriesController
+updater	app/controllers/api/goals_controller.rb	/^    def updater$/;"	f	class:Api.GoalsController
+updater	app/controllers/entries_controller.rb	/^  def updater$/;"	f	class:EntriesController
+validate	app/validators/user_validator.rb	/^  def validate(record)$/;"	f	class:UserValidator
+validate_amount_format	app/models/entry.rb	/^  def validate_amount_format$/;"	f	class:Entry
+validate_session!	app/controllers/application_controller.rb	/^  def validate_session!$/;"	f	class:ApplicationController
+weekly_balance	app/controllers/api/entries_controller.rb	/^    def weekly_balance$/;"	f	class:Api.EntriesController
+weekly_expense	app/controllers/api/entries_controller.rb	/^    def weekly_expense$/;"	f	class:Api.EntriesController
+weekly_revenue	app/controllers/api/entries_controller.rb	/^    def weekly_revenue$/;"	f	class:Api.EntriesController
+welcome_email	app/mailers/user_mailer.rb	/^  def welcome_email(user)$/;"	f	class:UserMailer
+welcome_message	app/helpers/home_helper.rb	/^  def welcome_message$/;"	f	class:HomeHelper

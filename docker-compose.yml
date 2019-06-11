@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  web:
+    image: million
+    build:
+      context: .
+    volumes:
+      - ".:/var/www/million/"
+    ports:
+      - "80:80"
+      - "3000:3000"
+    environment:
+      - RAILS_ENV=development
+      - DATABASE_URL=postgres
+      - MILLION_DATABASE_USERNAME=postgres
+      - MILLION_DATABASE_PASSWORD=postgres
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379"
+

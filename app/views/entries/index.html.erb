@@ -1,143 +1,70 @@
-<%= content_for :title do %>
-  <div class="col s12">
-    <h2>Painel</h2>
-  </div>
+<%= content_for :css do %>
+    <%= stylesheet_link_tag 'dashboard', media: 'all' %>
 <% end %>
 
-<!-- Saldo -->
-<div class="col l4 m6 s12">
-  <div class="card z-depth-2">
-    <div class="card-stacked">
-      <div class="card-metrics card-static">
-        <div class="card-metric">
-          <div class="card-metric-title">
-            Saldo geral
-          </div>
-          <div class="card-metric-value center-align">
-            <h5><%= number_to_currency(@balance) || 'Erro interno ao exibir despesas' %></h5>
-          </div>
-          <div class="card-metric-change increase">
-            <i class="material-icons left"><%= @monthly_balance.try(:negative?) ? 'keyboard_arrow_down' : 'keyboard_arrow_up' %></i>
-            <small>Saldo do mês: <%= number_to_currency(@monthly_balance) %></small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<h1>Painel</h1>
 
-<!-- Despesas -->
-<div class="col l4 m6 s12">
-  <div class="card z-depth-2">
-    <div class="card-stacked">
-      <div class="card-metrics card-static">
-        <div class="card-metric">
-          <div class="card-metric-title">
-            Despesas do mês
-          </div>
-          <div class="card-metric-value center-align">
-            <h5><%= number_to_currency(@expense) || 'Erro interno ao exibir despesas' %></h5>
-          </div>
-          <div class="card-metric-change increase">
-            <i class="material-icons left">keyboard_arrow_down</i>
-            ?? %
-          </div>
-        </div>
-      </div>
+<div class="container">
+  <%= form_for(@new_entry, html: { class: 'form-container' }) do |f| %>
+    <div class="form-group entry-date">
+      <%= label :entry_date, 'Data', class: 'invisible' %>
+      <%= f.date_field :entry_date %>
     </div>
-  </div>
-</div>
+    <div class="form-group entry-type">
+      <%= f.radio_button :type, 'expense', checked: true %>
+      <%= label :type, 'Gasto' %>
+      <%= f.radio_button :type, 'revenue', checked: true %>
+      <%= label :type, 'Ganho' %>
+    </div>
+    <div class="form-group entry-category">
+      <%= label :category_id, 'Categoria', class: 'invisible' %>
+      <%= f.select :category_id, @categories.collect { |category| [category.name, category.id] }, include_blank: "Selecione a categoria" %>
+    </div>
+    <div class="form-group entry-description">
+      <%= label :entry_description, 'Descrição', class: 'invisible' %>
+      <%= f.text_field :description, placeholder: 'Descrição' %>
+    </div>
+    <div class="form-group entry-amount">
+      <%= label :amount, 'Valor', class: 'invisible' %>
+      <%= f.number_field :amount, min: 0.00, step: 0.01, placeholder: 'Valor' %>
+    </div>
+    <div class="action-group">
+      <%= f.submit 'Salvar nova entrada' %>
+    </div>
+  <% end %>
 
-<!-- Receitas -->
-<div class="col l4 m6 s12">
-  <div class="card z-depth-2">
-    <div class="card-stacked">
-      <div class="card-metrics card-static">
-        <div class="card-metric">
-          <div class="card-metric-title">
-            Receitas do mês
-          </div>
-          <div class="card-metric-value center-align">
-            <h5><%= number_to_currency(@revenue) || 'Erro interno ao exibir receitas' %></h5>
-          </div>
-          <div class="card-metric-change increase">
-            <i class="material-icons left">keyboard_arrow_up</i>
-            ?? %
-          </div>
-        </div>
+  <div class="balance-container">  
+    <!-- Saldo geral -->  
+    <section id="total-balance">
+      <div id="total-balance">
+        <h3>Saldo geral</h3>
+        <span><%= number_to_currency(@balance) %></span>
       </div>
-    </div>
-  </div>
-</div>
+    </section>
 
-<!-- Entradas ao longo do ano -->
-<div class="col s12">
-  <div class="card z-depth-2">
-    <div class="card-stacked">
-      <div class="card-metrics card-static">
-        <div class="card-metric">
-          <div class="card-metric-title">
-            Entradas ao longo do ano
-          </div>
-        </div>
+    <!-- Saldo do mês -->  
+    <section id="monthly-balance">
+      <div id="monthly-balance">
+        <p>Saldo do mês</p>
+        <span><%= number_to_currency(@monthly_balance) %></span>
       </div>
-    </div>
-    <div class="card-metric-chart">
-      <%= line_chart api_user_entries_by_month_path(current_user),
-        defer:     true,
-        legend:    'bottom',
-        decimal:   ',',
-        thousands: '.',
-        prefix:    'R$ ',
-        download:  "entradas-million-#{Time.zone.today.year}" %>
-    </div>
+    </section>
   </div>
-</div>
 
-<!-- Despesas por categoria -->
-<div class="col l6 s12">
-  <div class="card z-depth-2">
-    <div class="card-stacked">
-      <div class="card-metrics card-static">
-        <div class="card-metric">
-          <div class="card-metric-title">
-            Despesas por categoria
-          </div>
-          <%= pie_chart api_user_expense_by_category_path(current_user),
-            legend: 'bottom',
-            donut: true,
-            decimal: ',',
-            thousands: '.',
-            prefix: 'R$ ',
-            download: "despesas-million-#{Time.zone.today.strftime('%m-%Y')}" %>
-        </div>
+  <div class="entries-container">
+    <!-- Despesas -->
+    <section id="expenses">
+      <h3>Despesas do mês</h3>
+      <div>
+        <span><%= number_to_currency(@expense) %></span>
       </div>
-    </div>
-    <div class="card-metric-chart">
-    </div>
-  </div>
-</div>
+    </section>
 
-<!-- Receitas por categoria -->
-<div class="col l6 s12">
-  <div class="card z-depth-2">
-    <div class="card-stacked">
-      <div class="card-metrics card-static">
-        <div class="card-metric">
-          <div class="card-metric-title">
-            Receitas por categoria
-          </div>
-          <%= pie_chart api_user_revenue_by_category_path(current_user),
-            legend: 'bottom',
-            donut: true,
-            decimal: ',',
-            thousands: '.',
-            prefix: 'R$ ',
-            download: "receitas-million-#{Time.zone.today.strftime('%m-%Y')}" %>
-        </div>
+    <!-- Receitas -->
+    <section id="revenues">
+      <h3>Receitas do mês</h3>
+      <div>
+        <span><%= number_to_currency(@revenue) %></span>
       </div>
-    </div>
-    <div class="card-metric-chart">
-    </div>
-  </div>
+    </section>
 </div>

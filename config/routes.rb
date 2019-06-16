@@ -48,10 +48,10 @@ Rails.application.routes.draw do
 
   get   '/users/:user_id/search',   to: 'entries#search',   as: 'search'
 
+  resources :entries, only: [:create]
+
   get   '/users/:user_id/expenses', to: 'entries#expenses', as: 'expenses'
   get   '/users/:user_id/revenues', to: 'entries#revenues', as: 'revenues'
-  post  '/users/:user_id/revenues', to: 'entries#create',   as: 'entry_revenues'
-  post  '/users/:user_id/expenses', to: 'entries#create',   as: 'entry_expenses'
   patch '/entries/:id',             to: 'entries#update',   as: 'entry_revenue'
   patch '/entries/:id',             to: 'entries#update',   as: 'entry_expense'
   put   '/entries/:id',             to: 'entries#update'

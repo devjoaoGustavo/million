@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @user = User.new(allowed_params)
     if @user.activate!
       UserMailer.welcome_email(@user).deliver_now
+      session[:user_id] = @user.id
       redirect_to root_path, notice: 'Cadastro efetivado com sucesso. Enviaremos um email para a ativação da sua conta!'
     else
       flash.now[:alert] = 'Verifique os dados e tente novamente'

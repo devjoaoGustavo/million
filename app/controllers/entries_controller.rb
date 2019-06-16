@@ -16,11 +16,11 @@ class EntriesController < ApplicationController
     @goals = current_user.goals
     new_entry(params[:type])
     filters = {}.tap do |f|
-      f[:sub_category_id] = params[:sub_category_id] if params[:sub_category_id].present?
-      f[:made_at]  = search_range
+      f[:category_id] = params[:category_id] if params[:category_id].present?
+      f[:entry_date]  = search_range
     end
     @entries = Entry.where(user_id: current_user.id, type: params[:type], **filters)
-      .order(made_at: :desc, created_at: :desc)
+      .order(entry_date: :desc, created_at: :desc)
 
     if @entry.expense?
       intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: dashboard_path(current_user.id))
@@ -123,6 +123,8 @@ class EntriesController < ApplicationController
     @balance = current_user.balance
     @expense = current_user.monthly_expense
     @revenue = current_user.monthly_revenue
+    @monthly_balance = current_user.monthly_balance
+    @new_entry = new_entry(entry_date: Time.zone.today)
   end
 
   def invalid_currency_format
@@ -144,15 +146,15 @@ class EntriesController < ApplicationController
   end
 
   def load_categories
-    @sub_categories = SubCategory.ordered
+    @categories = Category.ordered
   end
 
   def find_entry
     Entry.find_by(user_id: current_user.id, id: params[:id])
   end
 
-  def new_entry(type)
-    @entry = Entry.new(type: type)
+  def new_entry(args = {})
+    @entry = Entry.new(args)
   end
 
   def new_expense
@@ -173,27 +175,25 @@ class EntriesController < ApplicationController
 
   def build_expense_from_params
     @entry = Entry::Expense.new(
-      sub_category_id: params.dig(:entry_expense, :sub_category_id),
+      category_id: params.dig(:entry_expense, :category_id),
       description: params.dig(:entry_expense, :description),
       amount:      params.dig(:entry_expense, :currency),
-      made_at:  params.dig(:entry_expense, :made_at),
+      entry_date:  params.dig(:entry_expense, :entry_date),
     )
   end
 
   def build_revenue_from_params
     @entry = Entry::Revenue.new(
-      sub_category_id: params.dig(:entry_revenue, :sub_category_id),
+      category_id: params.dig(:entry_revenue, :category_id),
       description: params.dig(:entry_revenue, :description),
       amount:      params.dig(:entry_revenue, :currency),
-      made_at:  params.dig(:entry_revenue, :made_at),
+      entry_date:  params.dig(:entry_revenue, :entry_date),
     )
   end
 
   def create_params
-    key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
-    params.require(key)
-      .permit(:sub_category_id, :description, :amount, :made_at, :goal_id)
-      .merge(type: String(key).split('_').map(&:capitalize).join('::'))
+    params.require(:entry)
+      .permit(:category_id, :description, :amount, :entry_date, :goal_id, :type)
       .merge(user_id: current_user.id)
       .merge(installments: params[:installments])
   end
@@ -201,7 +201,7 @@ class EntriesController < ApplicationController
   def update_params
     key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
     params.require(key)
-      .permit(:sub_category_id, :description, :amount, :made_at, :goal_id)
+      .permit(:category_id, :description, :amount, :entry_date, :goal_id)
       .merge(id: params[:id])
       .merge(user_id: current_user.id)
   end

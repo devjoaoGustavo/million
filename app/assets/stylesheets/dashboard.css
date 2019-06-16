@@ -1,0 +1,104 @@
+h1 {
+  width: 90%;
+  margin: 10px auto;
+}
+/*------------------container------------------*/
+.container {
+  display: grid;
+  grid-template-areas: "form" "balance" "entries";
+  grid-template-rows: 2fr 1fr 1fr;
+  grid-row-gap: 20px;
+  width: 90%;
+  margin: auto;
+}
+
+/*------------------container------------------*/
+
+/*------------------form------------------*/
+.form-container {
+  grid-area: form;
+  display: grid;
+  grid-template-areas: "date . type" "category category category" "description description description" "amount . actions";
+  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px 10px;
+  padding: 2px;
+  background-color: #fff;
+}
+
+.form-container .entry-date {
+  grid-area: date;
+}
+
+.form-container .entry-category select, .form-container .entry-category select, .form-container .entry-description input[type="text"], .form-container .entry-date input[type="date"], .form-container .entry-amount input[type="number"] {
+  width: 100%;
+}
+
+.form-container .entry-type {
+  grid-area: type;
+}
+
+.form-container .entry-category {
+  grid-area: category;
+}
+
+.form-container .entry-description {
+  grid-area: description;
+}
+
+.form-container .entry-amount {
+  grid-area: amount;
+}
+
+.form-container .action-group {
+  grid-area: actions;
+}
+
+.form-container .invisible {
+  display: none;
+}
+
+.form-container input, .form-container select {
+  border: none;
+  border-bottom: 2px solid #ffb300;
+  border-radius: 0;
+}
+/*------------------form------------------*/
+
+
+/*------------------Balance------------------*/
+.balance-container {
+  grid-area: balance;
+  display: grid;
+  grid-template-areas: "total-balance monthly-balance";
+  grid-template-columns: 1fr 1fr;
+  background-color: #fff;
+}
+
+#monthly-balance {
+  grid-area: monthly-balance;
+}
+
+#total-balance {
+  grid-area: total-balance;
+}
+/*------------------Balance------------------*/
+
+
+/*------------------Report------------------*/
+.entries-container {
+  grid-area: entries;
+  display: grid;
+  grid-template-areas: "expense revenue";
+  grid-template-columns: 1fr 1fr;
+  background-color: #fff;
+}
+
+#revenues {
+  grid-area: revenue;
+}
+
+#expenses {
+  grid-area: expense;
+}
+/*------------------Report------------------*/

@@ -94,7 +94,7 @@ module Api
       params.permit(:amount,
                     :goal_id,
                     :user_id,
-                    :made_at,
+                    :entry_date,
                     :description,
                     :category_id,
                     :installments)

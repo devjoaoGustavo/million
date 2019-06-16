@@ -23,7 +23,6 @@ gem 'bcrypt',       '~> 3.1.7'
 gem 'foreman'
 gem 'sentry-raven'
 
-gem 'chartkick'
 gem 'client_side_validations'
 gem 'draper'
 gem 'groupdate'

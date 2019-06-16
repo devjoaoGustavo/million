@@ -1,117 +1,45 @@
 # Categorias
-Category.find_or_create_by(name: 'Casa').tap do |category|
-  [
-    { 'name' => 'Luz',                'category_id' => category.id },
-    { 'name' => 'Internet',           'category_id' => category.id },
-    { 'name' => 'Água',               'category_id' => category.id },
-    { 'name' => 'Gás',                'category_id' => category.id },
-    { 'name' => 'Limpeza',            'category_id' => category.id },
-    { 'name' => 'Aluguel',            'category_id' => category.id },
-    { 'name' => 'Móveis',             'category_id' => category.id },
-    { 'name' => 'Decoração',          'category_id' => category.id },
-    { 'name' => 'Segurança',          'category_id' => category.id },
-    { 'name' => 'Alimentação',        'category_id' => category.id },
-    { 'name' => 'Manutenção de casa', 'category_id' => category.id },
-  ].each do |sub_category|
-    SubCategory.find_or_create_by(sub_category.merge(category_id: category.id))
-  end
-end
-
-Category.find_or_create_by(name: 'Espiritualidade').tap do |category|
-  [
-    { 'name' => 'Dízimo',                'category_id' => category.id },
-    { 'name' => 'Comunhão de bens',      'category_id' => category.id },
-    { 'name' => 'Formação espiritual',   'category_id' => category.id },
-    { 'name' => 'Encontros espirituais', 'category_id' => category.id },
-  ].each do |sub_category|
-    SubCategory.find_or_create_by(sub_category.merge(category_id: category.id))
-  end
-end
-
-Category.find_or_create_by(name: 'Educação').tap do |category|
-  [
-    { 'name' => 'Cursos',              'category_id' => category.id },
-    { 'name' => 'Mensalidade escolar', 'category_id' => category.id },
-    { 'name' => 'Material escolar',    'category_id' => category.id },
-  ].each do |sub_category|
-    SubCategory.find_or_create_by(sub_category.merge(category_id: category.id))
-  end
-end
-
-Category.find_or_create_by(name: 'Transporte').tap do |category|
-  [
-    { 'name' => 'Transporte coletivo', 'category_id' => category.id },
-    { 'name' => 'Aluguel de carros',   'category_id' => category.id },
-  ].each do |sub_category|
-    SubCategory.find_or_create_by(sub_category.merge(category_id: category.id))
-  end
-end
-
-Category.find_or_create_by(name: 'Geral').tap do |category|
-  [
-    { 'name' => 'Mercado',              'category_id' => category.id },
-    { 'name' => 'Higiene pessoal',      'category_id' => category.id },
-    { 'name' => 'Impostos e taxas',     'category_id' => category.id },
-    { 'name' => 'Presentes',            'category_id' => category.id },
-    { 'name' => 'Doações',              'category_id' => category.id },
-    { 'name' => 'Categoria genérica',   'category_id' => category.id },
-    { 'name' => 'Investimentos',        'category_id' => category.id },
-    { 'name' => 'Eletrônicos',          'category_id' => category.id },
-    { 'name' => 'Categoria genérica',   'category_id' => category.id },
-  ].each do |sub_category|
-    SubCategory.find_or_create_by(sub_category.merge(category_id: category.id))
-  end
-end
-
-Category.find_or_create_by(name: 'Lazer').tap do |category|
-  [
-    { 'name' => 'Cinema',               'category_id' => category.id },
-    { 'name' => 'Bares e restaurantes', 'category_id' => category.id },
-    { 'name' => 'Diversão',             'category_id' => category.id }
-  ].each do |sub_category|
-    SubCategory.find_or_create_by(sub_category.merge(category_id: category.id))
-  end
-end
-
-Category.find_or_create_by(name: 'Pessoal').tap do |category|
-  [
-    { 'name' => 'Acessórios',        'category_id' => category.id },
-    { 'name' => 'Vestuário',         'category_id' => category.id },
-    { 'name' => 'Calçados',          'category_id' => category.id },
-    { 'name' => 'Cosméticos',        'category_id' => category.id },
-    { 'name' => 'Higiene pessoal',   'category_id' => category.id },
-    { 'name' => 'Cartão de crédito', 'category_id' => category.id },
-    { 'name' => 'Comunicação',       'category_id' => category.id },
-    { 'name' => 'Empréstimos',       'category_id' => category.id },
-  ].each do |sub_category|
-    SubCategory.find_or_create_by(sub_category.merge(category_id: category.id))
-  end
-end
-
-Category.find_or_create_by(name: 'Saúde').tap do |category|
-  [
-    { 'name' => 'Medicamentos', 'category_id' => category.id },
-    { 'name' => 'Consultas',    'category_id' => category.id },
-    { 'name' => 'Exames',       'category_id' => category.id },
-    { 'name' => 'Cirugias',     'category_id' => category.id },
-    { 'name' => 'Terapias',     'category_id' => category.id },
-  ].each do |sub_category|
-    SubCategory.find_or_create_by(sub_category.merge(category_id: category.id))
-  end
-end
-
-Category.find_or_create_by(name: 'Trabalho').tap do |category|
-  [
-    { 'name' => 'Adiantamento de salário', 'category_id' => category.id },
-    { 'name' => 'Participação nos lucros', 'category_id' => category.id },
-    { 'name' => 'Reembolso de despesas',   'category_id' => category.id },
-    { 'name' => 'Recisão contratual',      'category_id' => category.id },
-    { 'name' => 'Prestação de serviços',   'category_id' => category.id },
-    { 'name' => 'Seguro desemprego',       'category_id' => category.id },
-    { 'name' => '13º Salário',             'category_id' => category.id },
-    { 'name' => 'Salário',                 'category_id' => category.id },
-    { 'name' => 'Férias',                  'category_id' => category.id },
-  ].each do |sub_category|
-    SubCategory.find_or_create_by(sub_category.merge(category_id: category.id))
-  end
+[
+  { name: 'Acessórios',                description: 'Acessórios como boné, guarda-chuvas, pulseiras, anéis...' },
+  { name: 'Adiantamento de salário',   description: 'Parte do salário recebido no meio do mês' },
+  { name: 'Alimentação',               description: 'Referente aos gastos compras em feiras e mercados de alimentos' },
+  { name: 'Aluguel de imóvel',         description: 'Dinheiro gasto com alguel para moradia' },
+  { name: 'Aluguel de automóvel',      description: 'Dinheiro gasto com alguel de veículos' },
+  { name: 'Calçados',                  description: 'Dinheiro gasto com calçados' },
+  { name: 'Comida de rua',             description: 'Dinheiro gasto em restaurantes, lanches na rua, pasteis na feira, ou salgadinhos em mercado' },
+  { name: 'Comunhão',                  description: 'Dinheiro doado para qualquer pessoa de fora da família sem nenhum retorno esperado' },
+  { name: 'Comunicação',               description: 'Dinheiro gasto com crédito de celular' },
+  { name: 'Conta de gás',              description: 'Dinheiro gasto com a conta de gás de casa' },
+  { name: 'Conta de Internet',         description: 'Dinheiro gasto com a conta de internet de casa' },
+  { name: 'Conta de luz',              description: 'Dinheiro gasto com a conta de luz de casa' },
+  { name: 'Cosméticos',                description: 'Dinheiro gasto com sabonetes, cremes e desodorantes' },
+  { name: 'Cursos',                    description: 'Dinheiro gasto com formação em cursos de idioma, habilidades técnicas e afins' },
+  { name: 'Décimo terceiro',           description: 'Dinheiro recebido referente ao 13 salário' },
+  { name: 'Doação',                    description: 'Dinheiro doado para qualquer pessoa, da família ou não, sem nenhum retorno esperado' },
+  { name: 'Eletrônicos',               description: 'Dinheiro gasto com aparelhos eletrônicos, como celulares, laptops, computador, e afins' },
+  { name: 'Empréstimos',               description: 'Dinheiro dado ou recebido de alguém com retorno esperado' },
+  { name: 'Encontros',                 description: 'Dinheiro gasto com formação humana e/ou espiritual' },
+  { name: 'Férias',                    description: 'Dinheiro gasto com viagens de lazer' },
+  { name: 'Freelas',                   description: 'Dinheiro gasto recebidos por atividades de trabalho pontuais ou informais' },
+  { name: 'Aplicação de investimento', description: 'Dinheiro direcionado para algum investimento, como tesouro direto, bolsa de valores e afins' },
+  { name: 'Lazeres',                   description: 'Gastos com cinemas, teatros, show e afins' },
+  { name: 'Móveis',                    description: 'Gastos com móveis e/ou eletrodomésticos, como TV, mesas, e afins' },
+  { name: 'Participação no Lucros',    description: 'Dinheiro recebido como participação nos lucros e resultados da empresa na qual se trabalha' },
+  { name: 'Resgate de investimento',   description: 'Dinheiro recuperado de algum investimento feito anteriormente' },
+  { name: 'Salário',                   description: 'Restante ou todo o salário devido do mês, recebido no início do mês subsequente' },
+  { name: 'Transporte',                description: 'Gastos com transportes públicos ou aluguéis de veículos' },
+  { name: 'Venda de passivos',         description: 'Dinheiro recebido pela venda de algum bem' },
+  { name: 'Vestuário',                 description: 'Gastos com roupas' },
+  { name: 'Saúde',                     description: 'Gastos com medicamentos e afins' },
+  { name: 'Gastos extras',             description: 'Gastos com produtos e/ou serviços diversos' },
+  { name: 'Imprevistos',               description: 'Gastos não planejados' },
+  { name: 'Saldo',                     description: 'Valor de ajuste' },
+  { name: 'Presentes',                 description: 'Gastos ou recebimentos de presentes' },
+  { name: 'Impostos e taxas',          description: 'Gastos comm impostos e taxas genéricos (ex.: ISS, renovação de documentos, etc.)' },
+  { name: 'Cartão de crédito',         description: 'Fatura de cartão de crédito' },
+  { name: 'Higiene pessoal',           description: 'Lançamentos relativos a gastos com higiene pessoal' },
+  { name: 'Educação',                  description: 'Lançamentos relativos a gastos com cursos, escolas e formações em geral' },
+  { name: 'Limpeza',                   description: 'Lançamentos relativos a gastos com limpeza em geral' }
+].each do |params|
+  Category.find_or_create_by(params)
 end

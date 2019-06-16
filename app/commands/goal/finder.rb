@@ -46,7 +46,7 @@ class Goal < ApplicationRecord
     def reached(goal)
       ((goal
         .expenses
-        .where('made_at <= ?', Time.current.at_end_of_day.utc)
+        .where('entry_date <= ?', Time.current.at_end_of_day.utc)
         .sum(&:amount) / goal.amount) * 100).to_f
     end
   end

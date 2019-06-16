@@ -9,7 +9,7 @@ FactoryBot.define do
 
     description { 'Aquela dívida de uns anos atrás' }
     amount      { 500.90 }
-    made_at     { Date.today }
+    entry_date     { Date.today }
 
     after(:create) do |re, ev|
       re.sub_category_id { SubCategory.find_or_create_by( name: ev.sub_category, category: Category.find_or_create_by(name: ev.category)).id }

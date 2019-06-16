@@ -10,17 +10,111 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require font-awesome.min
- *= require materialize.min
  *= require_self
  */
-
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-main {
-  flex: 1 0 auto;
+body {
+  display: grid;
+  width: 100%;
+  grid-template-areas: "nav" "main" "footer";
+  grid-template-rows: 64px 84.5vh 64px;
+  background-color: rgb(230, 230, 230);
+}
+
+.toolbar {
+  grid-area: nav;
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffb300; /* amber darken-1 */
+}
+
+.toolbar #logo {
+  flex: 1;
+  align-items: center;
+}
+
+.toolbar #logo img {
+  vertical-align: middle;
+}
+
+.toolbar .menu-inline {
+  padding: 0;
+  display: flex;
+  width: 25vw;
+  flex: 1;
+  align-items: center;
+}
+
+.toolbar .menu-inline .menu-item {
+  flex: 1;
+  list-style: none;
+  text-align: center;
+}
+
+.toolbar .menu-inline .menu-item a {
+  text-decoration: none;
+  color: black;
+  height: 100%;
+}
+
+.toolbar .menu-inline .menu-item a:hover {
+  color: #e65100; /*  #e65100 orange darken-4 */
+  text-transform: uppercase;  
+}
+
+#main {
+  grid-area: main;
+}
+
+#footer {
+  display: flex;
+  align-items: center;
+  grid-area: footer;
+  background-color: #9e6f00;
+}
+
+#footer p {
+  flex: 1;
+  text-align: center;
+  color: #f4f4f4;
+  font-style: bold;
+}
+
+@media (max-width: 768px) {
+  body {
+    display: grid;
+    width: 100%;
+    grid-template-areas: "nav" "main" "footer";
+    grid-template-rows: 128px 70vh 64px;
+  }
+
+  .toolbar {
+    display: grid;
+    grid-template-areas: "logo" "menu";
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .toolbar #logo {
+    grid-area: logo;
+    text-align: center;
+  }
+
+  .toolbar .menu-inline {
+    grid-area: menu;
+    padding: 0;
+    display: flex;
+    width: 100vw;
+    border-top: 1px dotted black;
+  }
+
+  .toolbar .menu-inline .menu-item {
+    flex: 1;
+    list-style: none;
+    text-align: center;
+  }
 }

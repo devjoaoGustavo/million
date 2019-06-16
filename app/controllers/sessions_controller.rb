@@ -25,8 +25,8 @@ class SessionsController < ApplicationController
 
   def retrieve_user
     User
-      .where(email: params[:access], active: true)
-      .or(User.where(username: params[:access], active: true))
+      .where(email: params[:access])
+      .or(User.where(username: params[:access]))
       .first
   end
 end

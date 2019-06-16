@@ -18,7 +18,7 @@
       <tr>
         <%= content_tag(:td, revenue.description) %>
         <%= content_tag(:td, number_to_currency(revenue.amount)) %>
-        <%= content_tag(:td, revenue.made_at.strftime('%d/%m/%Y')) %>
+        <%= content_tag(:td, revenue.entry_date.strftime('%d/%m/%Y')) %>
       </tr>
     <% end %>
   </tbody>

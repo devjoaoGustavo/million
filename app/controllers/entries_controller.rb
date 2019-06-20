@@ -2,10 +2,11 @@
 
 class EntriesController < ApplicationController
   include Timing
-  before_action :validate_session!, except: :encrypt
-  before_action :load_expenses, only: [:expenses]
-  before_action :load_revenues, only: [:revenues]
-  before_action :load_categories, only: [:revenues, :expenses, :edit, :create, :update, :search]
+  before_action :validate_session!
+  before_action :new_expense
+  before_action :new_revenue
+  before_action :load_categories
+  before_action :assign_dashboard_values, only: %i[index create]
   rescue_from InvalidCurrencyFormat, with: :invalid_currency_format
 
   def encrypt
@@ -13,23 +14,6 @@ class EntriesController < ApplicationController
   end
 
   def index
-    intro(message: 'Painel', ico_class: 'ls-ico-dashboard', href: root_path)
-    user = UserDecorator.decorate(current_user)
-    @options = { userid: current_user.id, token: form_authenticity_token }.to_json
-    @color_class = css_color_class(user.balance.to_f)
-
-    @seven_days_expense     = user.expenses_of_last_days(7).sum(&:amount).to_f
-    @seven_days_revenue     = user.revenues_of_last_days(7).sum(&:amount).to_f
-    @seven_days_balance     = @seven_days_revenue - @seven_days_expense
-    @seven_days_color_class = css_color_class(@seven_days_balance)
-
-    @today_expense     = user.expenses_of_today.sum(&:amount).to_f
-    @today_revenue     = user.revenues_of_today.sum(&:amount).to_f
-    @today_balance     = @today_revenue - @today_expense
-    @today_color_class = css_color_class(@today_balance)
-
-    @data_expense = user.expenses_by_category
-    @data_revenue = user.revenues_by_category
   end
 
   def search
@@ -66,14 +50,13 @@ class EntriesController < ApplicationController
   end
 
   def expenses
-    @goals = current_user.goals
-    new_entry('Entry::Expense')
-    intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: dashboard_path(current_user.id))
+    @expenses = current_user.expenses_till_now
+    render template: 'entries/expenses/index'
   end
 
   def revenues
-    new_entry('Entry::Revenue')
-    intro(message: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: dashboard_path(current_user.id))
+    @revenues = current_user.revenues_till_now
+    render template: 'entries/revenues/index'
   end
 
   def show
@@ -116,19 +99,10 @@ class EntriesController < ApplicationController
 
     if @entry.persisted?
       flash[:notice] = 'Adicionada nova entrada'
-      return redirect_to expenses_path(current_user.id) if @entry.expense?
-      redirect_to revenues_path(current_user.id)
+      redirect_to dashboard_path(current_user.id)
     else
-      flash.now[:alert] = 'A entrada não foi salva. Verifique os valores e tente novamente'
-      if @entry.expense?
-        intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: expenses_path(current_user.id))
-        load_expenses
-        render :expenses
-      else
-        intro(message: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: revenues_path(current_user.id))
-        load_revenues
-        render :revenues
-      end
+      flash[:alert] = 'A entrada não foi salva. Verifique os valores e tente novamente'
+      render :index
     end
   end
 
@@ -149,19 +123,22 @@ class EntriesController < ApplicationController
 
   private
 
+  def assign_dashboard_values
+    @balance = current_user.balance
+    @expense = current_user.monthly_expense
+    @revenue = current_user.monthly_revenue
+    @monthly_balance = current_user.monthly_balance
+    @new_entry = new_entry(entry_date: Time.zone.today)
+  end
+
   def invalid_currency_format
     flash.now[:alert] = 'O valor informado possui formato inválido ou está vazio. Verifique e tente novamente'
     if params.key? :entry_expense
       build_expense_from_params.validate
-      load_expenses
-      intro(message: 'Despesas', ico_class: 'ls-ico-cart', href: expenses_path(current_user.id))
-      render :expenses
     else
       build_revenue_from_params.validate
-      load_revenues
-      intro(message: 'Receitas', ico_class: 'ls-ico-chart-bar-up', href: revenues_path(current_user.id))
-      render :revenues
     end
+    render :index
   end
 
   def load_expenses
@@ -180,8 +157,20 @@ class EntriesController < ApplicationController
     Entry.find_by(user_id: current_user.id, id: params[:id])
   end
 
-  def new_entry(type)
-    @entry = Entry.new(type: type)
+  def new_entry(args = {})
+    @entry = Entry.new(args)
+  end
+
+  def new_expense
+    @new_expense = current_user
+      .entries
+      .build(type: Entry::Expense.to_s)
+  end
+
+  def new_revenue
+    @new_revenue = current_user
+      .entries
+      .build(type: Entry::Revenue.to_s)
   end
 
   def intro(message:, ico_class:, href:)
@@ -207,9 +196,8 @@ class EntriesController < ApplicationController
   end
 
   def create_params
-    key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
-    params.require(key)
-      .permit(:category_id, :description, :amount, :entry_date, :type, :goal_id)
+    params.require(:entry)
+      .permit(:category_id, :description, :amount, :entry_date, :goal_id, :type)
       .merge(user_id: current_user.id)
       .merge(installments: params[:installments])
   end

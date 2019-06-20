@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="ls-theme-yellow-gold" style="height: 100%; margin: 0px;">
+<html style="height: 100%; margin: 0px;">
   <head>
     <title>Million</title>
     <meta charset="utf-8">
@@ -8,145 +8,36 @@
     <meta name="description" content="O melhor e mais simples gerenciador pessoal de finanças.">
     <link rel="icon" href="<%= image_url('million-logo.png') %>">
     <link rel="apple-touch-icon" href="<%= image_url('million-logo.png') %>">
+    <link https://fonts.googleapis.com/css?family=Noto+Sans+HK:300,400,700&display=swap" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css">
+    <%= yield :css %>
   </head>
 
-  <body style="height: 100%; margin: 0px;">
-    <div id="app">
-      <div class="ls-topbar">
-        <!-- Barra de Notificações -->
-        <div class="ls-notification-topbar">
-          <nav class="ls-alerts-list" role="navigation">
-            <%= link_to '',  dashboard_path(current_user),
-              class: 'ls-ico-dashboard',
-              'data-ls-module': 'popover',
-              'data-trigger': 'hover',
-              'data-title': 'Painel Inicial',
-              'data-content': 'Acompanhe seu saldo e insira novas entradas',
-              'data-placement': 'bottom',
-              'aria-label': 'Painel inicial' %>
-            <%= link_to '', expenses_path(current_user),
-              class: 'ls-ico-cart',
-              'data-ls-module': 'popover',
-              'data-trigger': 'hover',
-              'data-title': 'Painel de despesas',
-              'data-content': 'Veja de perto para onde está indo seu dinheiro',
-              'data-placement': 'bottom',
-              'aria-label': 'Painel de despesas' %>
-            <%= link_to '', revenues_path(current_user),
-              class: 'ls-ico-chart-bar-up',
-              'data-ls-module': 'popover',
-              'data-trigger': 'hover',
-              'data-title': 'Painel de receitas',
-              'data-content': 'Gerencie e otimize seus ganhos',
-              'data-placement': 'bottom',
-              'aria-label': 'Painel de receitas' %>
-            <%= link_to '', user_goals_path(current_user),
-              class: 'ls-ico-trophy',
-              'data-ls-module': 'popover',
-              'data-trigger': 'hover',
-              'data-title': 'Painel de objetivos',
-              'data-content': 'Cadastre novos objetivos e realize seus sonhos',
-              'data-placement': 'bottom',
-              'aria-label': 'Painel de objetivos' %>
-            </nav>
-            <!-- Dropdown com detalhes da conta de usuário -->
-            <% if logged_in? %>
-              <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-                <a href="#" class="ls-ico-user">
-                  <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>
-                </a>
-                <nav class="ls-dropdown-nav ls-user-menu">
-                  <ul>
-                    <li><%= link_to 'Sair', logout_path, method: :delete %></li>
-                  </ul>
-                </nav>
-              </div>
-            <% else %>
-              <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-                <a href="#" class="ls-ico-user">
-                </a>
-                <nav class="ls-dropdown-nav ls-user-menu">
-                  <ul>
-                    <li><%= link_to 'Cadastre-se', signup_path %></li>
-                    <li><%= link_to 'Entre', login_path %></li>
-                  </ul>
-                </nav>
-              </div>
-            <% end %>
-          </div>
-
-          <span class="ls-show-sidebar ls-ico-menu"></span>
-
-          <!-- Nome do produto/marca -->
-          <h1 class="ls-brand-name ls-xs-space">
-            <%= link_to root_path, class: 'ls-display-block' do %>
-            <image src="<%= image_url('million-logo.svg') %>">
-          <% end %>
-        </h1>
+  <body>
+    <nav class="toolbar">
+      <div id="logo">
+        <a href="<%= root_path %>">
+          <img src="<%= image_url('million-logo.svg') %>">
+        </a>
       </div>
+      <ul class="menu-inline">
+        <li class="menu-item"><a href="<%= dashboard_path(current_user) %>">Painel</a></li>
+        <li class="menu-item"><a href="<%= expenses_path(current_user) %>">Despesas</a></li>
+        <li class="menu-item"><a href="<%= revenues_path(current_user) %>">Receitas</a></li>
+        <%# <li class="menu-item"><a href="<%= wallets_path(current_user) %1>">Carteiras</a></li> %>
+        <li class="menu-item"><a href="<%= user_goals_path(current_user) %>">Objetivos</a></li>
+      </ul>
+    </nav>
 
-      <main class="ls-main ls-no-margin-left" style="min-height: calc(100vh);">
-        <div class="container-fluid">
-          <% if @intro.present? %>
-            <intro :params="<%= @intro %>"></intro>
-          <% end %>
-          <alert :is-alert="isAlert" :is-notice="isNotice" :message="message" @close="closeAlert()"></alert>
+    <main id="main">
+      <%= yield %>
+    </main>
 
-          <%= yield %>
-        </div>
-      </main>
+    <footer id="footer">
+      <p>Million ® 2019 Hobbyright</p>
+    </footer>
 
-        <footer class="ls-footer" style="height: 120px">
-          <nav class="ls-footer-menu">
-            <h2 class="ls-title-footer">CONTATO</h2>
-            <ul class="ls-footer-list">
-              <li><a class="bg-customer-support"
-                  href="#"
-                  data-ls-module="popover"
-                  data-title="Escreva para"
-                  data-content="<p><a href='mailto:dev.joaogustavo@gmail.com'>João Gustavo de Paula</a></li>">Críticas e sugestões</a></li>
-            </ul>
-          </nav>
-          <div class="ls-footer-info">
-            <p class="ls-copy-right">Hobbyright © 2018-2018 Million personal finance manager.</p>
-          </div>
-        </footer>
-
-      <aside class="ls-sidebar hidden-md hidden-lg">
-        <% if logged_in? %>
-          <div data-ls-module="dropdown" class="ls-dropdown ls-user-account ls-active">
-            <a href="#" class="ls-ico-user">
-              <%= content_tag(:span, current_user.presentation_name, class: 'ls-name') %>
-            </a>
-            <nav class="ls-dropdown-nav ls-user-menu" aria-hidden="true">
-              <ul>
-                <li><%= link_to 'Painel',    dashboard_path(current_user),  class: 'ls-ico-dashboard',    'aria-label': 'Painel inicial' %></li>
-                <li><%= link_to 'Despesas',  expenses_path(current_user),   class: 'ls-ico-cart',         'aria-label': 'Painel de despesas' %></li>
-                <li><%= link_to 'Receitas',  revenues_path(current_user),   class: 'ls-ico-chart-bar-up', 'aria-label': 'Painel de receitas' %></li>
-                <li><%= link_to 'Objetivos', user_goals_path(current_user), class: 'ls-ico-trophy',       'aria-label': 'Painel de objetivos' %></li>
-              </ul>
-              <%= link_to 'Sair', logout_path, method: :delete, class: 'ls-btn-logout', role: 'combobox', 'aria-expanded': 'false' %>
-            </nav>
-          </div>
-        <% else %>
-          <div data-ls-module="dropdown" class="ls-dropdown ls-user-account">
-            <a href="#" class="ls-ico-user"></a>
-            <nav class="ls-dropdown-nav ls-user-menu">
-              <ul>
-                <li><%= link_to 'Cadastre-se', signup_path %></li>
-                <li><%= link_to 'Entre', login_path %></li>
-              </ul>
-            </nav>
-          </div>
-        <% end %>
-      </aside>
-    </div>
-    <%= javascript_pack_tag 'application' %>
-    <%= javascript_include_tag 'application' %>
-    <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script>
-    <%= yield :google_chart %>
+    <%= javascript_include_tag 'application', media: 'all' %>
   </body>
 </html>

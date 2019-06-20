@@ -24,13 +24,13 @@ module Million
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    config.action_mailer.default_url_options = { host: ENV['APP_URL'] }
+    config.action_mailer.default_url_options = { host: ENV.fetch('APP_URL', 'http://lvh.me:3000') }
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
       port:      587,
       address:   'smtp.mailgun.org',
-      password:  ENV['SMTP_PASSWORD'],
-      user_name: ENV['SMTP_USER_NAME']
+      password:  ENV.fetch('SMTP_PASSWORD', 'postmaster@sandbox35effa733de044e0aae9b287ea732d24.mailgun.org'),
+      user_name: ENV.fetch('SMTP_USER_NAME', 'a4e5fdec3955fe513a856a8b48252e5c')
     }
 
     config.generators do |g|

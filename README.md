@@ -5,13 +5,14 @@ A simple personal patrimonial manager.
 Things you may want to cover:
 
 * Ruby version
-  - 2.5.0
+  - 2.6.3
 
 * Rails version
-  - 5.1.4
+  - 5.1.7
 
 * System dependencies
-  - Postgresql 9.4+
+  - Postgresql 11.3
+  - Redis 5.0.5 (Not used yet)
 
 * Configuration
 

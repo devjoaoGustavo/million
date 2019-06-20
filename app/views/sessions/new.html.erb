@@ -1,30 +1,32 @@
-<div class="ls-login-box">
-  <div class="ls-login-logo">
-    <image src="<%= image_url('million-logo.svg') %>">
-    <h3>Acesso Million</h3>
-  </div>
+<%= form_tag sessions_path do %>
+  <div class="row">
+    <div class="logo col s6 offset-s3 center-align">
+      <image src="<%= image_url("million-logo.svg") %>">
+      <h4>Acesso Million</h4>
+    </div>
 
-  <%= form_tag sessions_path, class: 'ls-form ls-login-form' do %>
-    <fieldset>
-      <div class="ls-label">
-        <%= content_tag :b, 'Usuário', class: 'ls-label-text ls-hidden-accessible' %>
-        <%= text_field_tag :access, params[:access], class: 'ls-login-bg-user ls-field-lg', placeholder: 'Usuário', autofocus: true %>
-      </div>
+    <div class="input-field col s12">
+      <%= content_tag :label, "Usuário", for: "access" %>
+      <%= text_field_tag :access, params[:access], class: "validate" %>
+    </div>
 
-      <div class="field">
-        <%= content_tag :b, 'Senha', class: 'ls-label-text ls-hidden-accessible' %>
-        <div class="ls-prefix-group ls-field-lg">
-          <%= password_field_tag :password, params[:password], class: 'ls-login-bg-password', placeholder: 'Senha' %>
-          <%= link_to "", "#", class: 'ls-label-text-prefix ls-toggle-pass ls-ico-eye', 'data-target': '#password' %>
-        </div>
+    <div class="col s12">
+      <div class="input-field">
+        <%= content_tag :label, "Senha", for: "password" %>
+        <%= password_field_tag :password, params[:password], class: "validate" %>
       </div>
-      <%= submit_tag "Entrar", class: 'ls-btn-primary ls-btn-block ls-btn-lg ls-xs-margin-bottom' %>
-      <p class="ls-txt-center"><small><%= link_to 'Esqueci minha senha', recover_password_path %></small></p>
-      <p class="ls-txt-center ls-login-signup">
-        Ainda não possui cadastro no Million?
-        <%= link_to 'Cadastre-se agora', signup_path %> ou
-        <%= link_to 'volte ao início', root_path %>
+    </div>
+
+    <div class="col s12 center-align">
+      <%= submit_tag "Entrar", class: "btn waves-effect waves-light btn-small" %>
+      <p><%= link_to "Esqueci minha senha", recover_password_path %></p>
+
+      <p>
+      Ainda não possui cadastro no Million?<br>
+      <%= link_to "Cadastre-se agora", signup_path -%>
+      ou
+      <%= link_to "volte ao início", root_path -%>
       </p>
-    </fieldset>
-  <% end %>
-</div>
+    </div>
+  </div>
+<% end %>

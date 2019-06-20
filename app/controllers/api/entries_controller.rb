@@ -9,18 +9,17 @@ module Api
     end
 
     def entries_by_month
-      render_json_ok(UserDecorator
-        .decorate(current_user).entries_by_month)
+      render_json_ok(UserDecorator.decorate(current_user).monthly_entries)
     end
 
     def expense_by_category
       render_json_ok(UserDecorator
-        .decorate(current_user).expense_by_category)
+        .decorate(current_user).expenses_by_category)
     end
 
     def revenue_by_category
       render_json_ok(UserDecorator
-        .decorate(current_user).revenue_by_category)
+        .decorate(current_user).revenues_by_category)
     end
 
     def daily_balance

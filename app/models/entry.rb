@@ -4,24 +4,23 @@ class Entry < ApplicationRecord
   include StringEnum
 
   belongs_to :user
-  belongs_to :category
-  has_many :entries_tags, class_name: EntryTag.to_s
-  has_many :tags, through: :entries_tags
+  belongs_to :category, default: -> { Category.find_by(name: 'Categoria genérica') }
 
   # Relation for deal with installment entries
   # Useful when there are more than one entry to form an entire expense or revenue
   has_one :next_entry, class_name: self.name
 
+  validate :validate_amount_format
   validates :type, :amount, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 0.00 }
-  validate :validate_amount_format
+
   scope :in_range, ->(user_id, range) do
     where(user_id: user_id, entry_date: range)
       .order(entry_date: :desc, created_at: :desc)
   end
   scope :by_user, ->(user_id) do
     where(user_id: user_id)
-      .where('entry_date <= ?', Time.current.at_end_of_day.utc)
+      .where('entry_date <= ?', Time.current.at_end_of_day)
       .order(entry_date: :desc, created_at: :desc)
   end
 
@@ -74,13 +73,13 @@ class Entry < ApplicationRecord
   end
 
   def entries_forward
-    ([self] << next_entry&.entries_forward)
+    (Array(self) << next_entry&.entries_forward)
       .compact
       .flatten
   end
 
   def entries_backward
-    [previous_entry]
+    Array(previous_entry)
       .unshift(previous_entry&.entries_backward)
       .compact
       .flatten

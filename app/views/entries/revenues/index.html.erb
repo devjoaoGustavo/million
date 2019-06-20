@@ -1,0 +1,25 @@
+<%= content_for :title do %>
+  <div class="col s12">
+    <h2>Receitas</h2>
+  </div>
+<% end %>
+
+<table class="highlight">
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Valor</th>
+      <th>Data</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @revenues.each do |revenue| %>
+      <tr>
+        <%= content_tag(:td, revenue.description) %>
+        <%= content_tag(:td, number_to_currency(revenue.amount)) %>
+        <%= content_tag(:td, revenue.entry_date.strftime('%d/%m/%Y')) %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

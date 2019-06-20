@@ -1,27 +1,64 @@
-<div class="col-md-6 col-sm-12 col-xs-12">
-  <%= render 'total_balance' %>
-</div>
+<%= content_for :css do %>
+    <%= stylesheet_link_tag 'dashboard', media: 'all' %>
+<% end %>
 
-<div class="col-md-6 col-sm-12 col-xs-12">
-  <%= render 'new_entry' %>
-</div>
+<div class="container">
+  <%= form_for(@new_entry, html: { class: 'form-container' }) do |f| %>
+    <div class="form-group entry-date">
+      <%= label :entry_date, 'Data', class: 'invisible' %>
+      <%= f.date_field :entry_date %>
+    </div>
+    <div class="form-group entry-type">
+      <div id="radio-expense">
+        <%= f.radio_button :type, 'expense', checked: true %>
+        <%= label :type, 'Gasto' %>
+      </div>
+      <div id="radio-revenue">
+        <%= f.radio_button :type, 'revenue' %>
+        <%= label :type, 'Ganho' %>
+      </div>
+    </div>
+    <div class="form-group entry-category">
+      <%= label :category_id, 'Categoria', class: 'invisible' %>
+      <%= f.select :category_id, @categories.collect { |category| [category.name, category.id] }, include_blank: "Selecione a categoria" %>
+    </div>
+    <div class="form-group entry-description">
+      <%= label :entry_description, 'Descrição', class: 'invisible' %>
+      <%= f.text_field :description, placeholder: 'Descrição' %>
+    </div>
+    <div class="form-group entry-amount">
+      <%= label :amount, 'Valor', class: 'invisible' %>
+      <%= f.number_field :amount, min: 0.00, step: 0.01, placeholder: 'Valor' %>
+    </div>
+    <div class="action-group">
+      <%= f.submit 'Salvar nova entrada', class: 'button' %>
+    </div>
+  <% end %>
 
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'entries/graphs/month' %>
-</div>
+  <div class="balance-container">
+    <!-- Saldo geral -->
+    <section id="total-balance">
+        <h3>Saldo geral</h3>
+        <span><%= number_to_currency(@balance) %></span>
+    </section>
 
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'balance_month' %>
-</div>
+    <!-- Saldo do mês -->
+    <section id="monthly-balance">
+        <p>Saldo do mês</p>
+        <span><%= number_to_currency(@monthly_balance) %></span>
+    </section>
+  </div>
 
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'entries/graphs/category' %>
-</div>
+  <div class="entries-container">
+    <!-- Despesas -->
+    <section id="expenses">
+      <h3>Despesas do mês</h3>
+      <span><%= number_to_currency(@expense) %></span>
+    </section>
 
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'balance_seven_days' %>
-</div>
-
-<div class="col-md-12 col-sm-12 col-xs-12">
-  <%= render 'balance_of_day' %>
+    <!-- Receitas -->
+    <section id="revenues">
+      <h3>Receitas do mês</h3>
+      <span><%= number_to_currency(@revenue) %></span>
+    </section>
 </div>

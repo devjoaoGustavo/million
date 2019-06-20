@@ -11,6 +11,5 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require jquery.min
 //= require_tree .
 //= require rails.validations

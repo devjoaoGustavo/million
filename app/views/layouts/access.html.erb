@@ -1,39 +1,26 @@
 <!DOCTYPE html>
-<html class="ls-theme-yellow-gold">
+<html>
   <head>
     <title>Million</title>
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta name="description" content="O melhor e mais simples gerenciador pessoal de finanças.">
-    <link rel="icon" sizes="192x192" href="/locawebstyle/assets/images/ico-boilerplate.png">
-    <link rel="apple-touch-icon" href="/locawebstyle/assets/images/ico-boilerplate.png">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <link rel="stylesheet" type="text/css" href="//assets.locaweb.com.br/locastyle/3.10.1/stylesheets/locastyle.css">
   </head>
 
   <body>
-    <div class="ls-login-parent">
-      <div class="ls-login-inner">
-        <div class="ls-login-container">
-          <div id="app" class="ls-height-inherit">
-            <alert
-              :is-alert="<%= flash[:alert].present? %>"
-              :is-notice="<%= flash[:notice].present? %>"
-              :message="<%= (flash[:notice] || flash[:alert]).to_json %>">
-            </alert>
-
-            <%= yield %>
-          </div>
+    <div class="container">
+      <div class="row valign-wrapper">
+        <div class="card col s6 offset-s3 hoverable">
+          <%= yield %>
         </div>
       </div>
     </div>
   </body>
 
   <footer>
-    <%= javascript_include_tag 'application' %>
-    <script src="//assets.locaweb.com.br/locastyle/3.10.1/javascripts/locastyle.js"></script>
-    <%= javascript_pack_tag 'application' %>
+    <%= javascript_include_tag 'application', media: 'all' %>
   </footer>
 </html>

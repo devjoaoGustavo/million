@@ -26,3 +26,5 @@ yarn-debug.log*
 Procfile
 .env
 .DS_Store
+
+tags

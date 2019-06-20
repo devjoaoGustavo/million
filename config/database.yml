@@ -2,8 +2,8 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: <%= ENV.fetch('MILLION_DATABASE_USERNAME', 'million') %>
-  password: <%= ENV.fetch('MILLION_DATABASE_PASSWORD', '12321') %>
+  username: <%= ENV.fetch('DATABASE_USERNAME', 'million') %>
+  password: <%= ENV.fetch('DATABASE_PASSWORD', '12321') %>
   host: <%= ENV.fetch('DATABASE_URL', 'localhost') %>
   port: 5432
   # For details on connection pooling, see Rails configuration guide

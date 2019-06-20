@@ -32,7 +32,7 @@ class Entry < ApplicationRecord
       end
     end
 
-    def class_type(type) 
+    def class_type(type)
       "Entry::#{type.capitalize}"
     end
 

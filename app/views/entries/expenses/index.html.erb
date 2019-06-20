@@ -1,27 +1,28 @@
-<%= content_for :title do %>
-  <div class="col s12">
-    <h2>Despesas</h2>
-  </div>
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'expense_index', media: 'all' %>
 <% end %>
 
-<table class="highlight">
-  <thead>
-    <tr>
-      <th>Descrição</th>
-      <th>Valor</th>
-      <th>Data</th>
-    </tr>
-  </thead>
+<section class="container">
+  <h1>Despesas</h1>
 
-  <tbody>
-    <% @expenses.each do |expense| %>
+  <table class="highlight">
+    <thead>
       <tr>
-        <%= content_tag(:td, expense.description) %>
-        <%= content_tag(:td, number_to_currency(expense.amount)) %>
-        <%= content_tag(:td, expense.entry_date.strftime('%d/%m/%Y')) %>
+        <th>Descrição</th>
+        <th>Valor</th>
+        <th>Data</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @expenses.each do |expense| %>
+        <tr>
+          <%= content_tag(:td, expense.description) %>
+          <%= content_tag(:td, number_to_currency(expense.amount)) %>
+          <%= content_tag(:td, expense.entry_date.strftime('%d/%m/%Y')) %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
 

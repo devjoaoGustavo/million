@@ -24,7 +24,6 @@ CreateCategory	db/migrate/20180221005400_create_category.rb	/^class CreateCatego
 CreateDreams	db/migrate/20180407001942_create_dreams.rb	/^class CreateDreams < ActiveRecord::Migration[5.1]$/;"	c
 CreateEntry	db/migrate/20180221005621_create_entry.rb	/^class CreateEntry < ActiveRecord::Migration[5.1]$/;"	c
 CreateGoal	db/migrate/20180406233203_create_goal.rb	/^class CreateGoal < ActiveRecord::Migration[5.1]$/;"	c
-CreateSubCategory	db/migrate/20180221005410_create_sub_category.rb	/^class CreateSubCategory < ActiveRecord::Migration[5.1]$/;"	c
 CreateUser	db/migrate/20180121113841_create_user.rb	/^class CreateUser < ActiveRecord::Migration[5.1]$/;"	c
 Creator	app/commands/entry/creator.rb	/^  class Creator$/;"	c	class:Entry
 Creator	app/commands/goal/creator.rb	/^  class Creator$/;"	c	class:Goal
@@ -60,7 +59,6 @@ Million	config/application.rb	/^module Million$/;"	m
 Revenue	app/models/entry/revenue.rb	/^  class Revenue < Entry$/;"	c	class:Entry
 SessionsController	app/controllers/sessions_controller.rb	/^class SessionsController < ApplicationController$/;"	c
 StringEnum	app/models/concerns/string_enum.rb	/^module StringEnum$/;"	m
-SubCategory	app/models/sub_category.rb	/^class SubCategory < ApplicationRecord$/;"	c
 Timing	lib/helpers/timing.rb	/^module Timing$/;"	m
 Updater	app/commands/entry/updater.rb	/^  class Updater$/;"	c	class:Entry
 Updater	app/commands/goal/updater.rb	/^  class Updater$/;"	c	class:Goal
@@ -74,6 +72,7 @@ activate_bundler	bin/bundle	/^  def activate_bundler(bundler_version)$/;"	f
 activation_error_handling	bin/bundle	/^  def activation_error_handling$/;"	f
 allowed_params	app/controllers/users_controller.rb	/^  def allowed_params$/;"	f	class:UsersController
 amount_by_category	app/models/entry.rb	/^  def self.amount_by_category(user_id:, period:)$/;"	F	class:Entry
+app	app/controllers/home_controller.rb	/^  def app$/;"	f	class:HomeController
 assign_dashboard_values	app/controllers/entries_controller.rb	/^  def assign_dashboard_values$/;"	f	class:EntriesController
 balance	app/controllers/api/entries_controller.rb	/^    def balance$/;"	f	class:Api.EntriesController
 balance	app/decorators/user_decorator.rb	/^  def balance$/;"	f	class:UserDecorator
@@ -96,10 +95,10 @@ call	app/commands/goal/updater.rb	/^    def call(params = {})$/;"	f	class:Goal.U
 change	db/migrate/20180121010335_enable_pgcrypto_extension.rb	/^  def change$/;"	f	class:EnablePgcryptoExtension
 change	db/migrate/20180121113841_create_user.rb	/^  def change$/;"	f	class:CreateUser
 change	db/migrate/20180221005400_create_category.rb	/^  def change$/;"	f	class:CreateCategory
-change	db/migrate/20180221005410_create_sub_category.rb	/^  def change$/;"	f	class:CreateSubCategory
 change	db/migrate/20180221005621_create_entry.rb	/^  def change$/;"	f	class:CreateEntry
 change	db/migrate/20180406233203_create_goal.rb	/^  def change$/;"	f	class:CreateGoal
 change	db/migrate/20180407001942_create_dreams.rb	/^  def change$/;"	f	class:CreateDreams
+class_type	app/commands/entry/creator.rb	/^    def class_type(type)$/;"	f	class:Entry.Creator
 clear_entries_with_goal_id	app/commands/goal/destroyer.rb	/^    def clear_entries_with_goal_id(id)$/;"	f	class:Goal.Destroyer
 cli_arg_version	bin/bundle	/^  def cli_arg_version$/;"	f
 confirm	app/controllers/users_controller.rb	/^  def confirm$/;"	f	class:UsersController
@@ -139,6 +138,8 @@ entries_backward	app/models/entry.rb	/^  def entries_backward$/;"	f	class:Entry
 entries_by_month	app/controllers/api/entries_controller.rb	/^    def entries_by_month$/;"	f	class:Api.EntriesController
 entries_by_month	app/decorators/user_decorator.rb	/^  def entries_by_month$/;"	f	class:UserDecorator
 entries_forward	app/models/entry.rb	/^  def entries_forward$/;"	f	class:Entry
+entry_date	app/commands/entry/creator.rb	/^    def entry_date(entry_date:, **)$/;"	f	class:Entry.Creator
+entry_date	app/decorators/entry_decorator.rb	/^  def entry_date$/;"	f	class:EntryDecorator
 env_var_version	bin/bundle	/^  def env_var_version$/;"	f
 expense_by_category	app/controllers/api/entries_controller.rb	/^    def expense_by_category$/;"	f	class:Api.EntriesController
 expenses	app/controllers/entries_controller.rb	/^  def expenses$/;"	f	class:EntriesController
@@ -186,8 +187,6 @@ load_expenses	app/controllers/entries_controller.rb	/^  def load_expenses$/;"	f	
 load_revenues	app/controllers/entries_controller.rb	/^  def load_revenues$/;"	f	class:EntriesController
 lockfile	bin/bundle	/^  def lockfile$/;"	f
 lockfile_version	bin/bundle	/^  def lockfile_version$/;"	f
-made_at	app/commands/entry/creator.rb	/^    def made_at(made_at:, **)$/;"	f	class:Entry.Creator
-made_at	app/decorators/entry_decorator.rb	/^  def made_at$/;"	f	class:EntryDecorator
 monthly_balance	app/controllers/api/entries_controller.rb	/^    def monthly_balance$/;"	f	class:Api.EntriesController
 monthly_balance	app/decorators/user_decorator.rb	/^  def monthly_balance$/;"	f	class:UserDecorator
 monthly_entries	app/decorators/user_decorator.rb	/^  def monthly_entries$/;"	f	class:UserDecorator
@@ -197,11 +196,11 @@ monthly_revenue	app/controllers/api/entries_controller.rb	/^    def monthly_reve
 monthly_revenue	app/decorators/user_decorator.rb	/^  def monthly_revenue$/;"	f	class:UserDecorator
 new	app/controllers/sessions_controller.rb	/^  def new$/;"	f	class:SessionsController
 new	app/controllers/users_controller.rb	/^  def new$/;"	f	class:UsersController
-new_entry	app/controllers/entries_controller.rb	/^  def new_entry(type)$/;"	f	class:EntriesController
+new_entry	app/controllers/entries_controller.rb	/^  def new_entry(args = {})$/;"	f	class:EntriesController
 new_expense	app/controllers/entries_controller.rb	/^  def new_expense$/;"	f	class:EntriesController
 new_revenue	app/controllers/entries_controller.rb	/^  def new_revenue$/;"	f	class:EntriesController
 next_entry?	app/models/entry.rb	/^  def next_entry?$/;"	f	class:Entry
-next_made_at	app/commands/entry/creator.rb	/^    def next_made_at(date)$/;"	f	class:Entry.Creator
+next_entry_date	app/commands/entry/creator.rb	/^    def next_entry_date(date)$/;"	f	class:Entry.Creator
 number	app/models/entry.rb	/^  def number$/;"	f	class:Entry
 parse_amount	app/commands/entry/creator.rb	/^    def parse_amount(input)$/;"	f	class:Entry.Creator
 parse_date	app/commands/entry/creator.rb	/^    def parse_date(date)$/;"	f	class:Entry.Creator

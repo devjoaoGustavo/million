@@ -16,26 +16,28 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Noto Sans HK', sans-serif;
 }
 
 body {
   display: grid;
-  width: 100%;
   grid-template-areas: "nav" "main" "footer";
-  grid-template-rows: 64px 84.5vh 64px;
-  background-color: rgb(230, 230, 230);
+  grid-template-rows: 128px 70vh 64px;
+  background-color: #eeeeee;
+  /* background-color: rgb(230, 230, 230); */
 }
 
 .toolbar {
   grid-area: nav;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-areas: "logo" "menu";
+  grid-template-rows: 1fr 1fr;
   background-color: #ffb300; /* amber darken-1 */
 }
 
 .toolbar #logo {
-  flex: 1;
-  align-items: center;
+  text-align: center;
+  grid-area: logo;
 }
 
 .toolbar #logo img {
@@ -43,10 +45,11 @@ body {
 }
 
 .toolbar .menu-inline {
-  padding: 0;
+  grid-area: menu;
   display: flex;
-  width: 25vw;
-  flex: 1;
+  padding: 0;
+  width: 100vw;
+  border-top: 1px dotted black;
   align-items: center;
 }
 
@@ -64,7 +67,7 @@ body {
 
 .toolbar .menu-inline .menu-item a:hover {
   color: #e65100; /*  #e65100 orange darken-4 */
-  text-transform: uppercase;  
+  text-transform: uppercase;
 }
 
 #main {
@@ -85,36 +88,31 @@ body {
   font-style: bold;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   body {
-    display: grid;
-    width: 100%;
-    grid-template-areas: "nav" "main" "footer";
-    grid-template-rows: 128px 70vh 64px;
+    grid-template-rows: 64px 100% 64px;
   }
 
   .toolbar {
     display: grid;
-    grid-template-areas: "logo" "menu";
-    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "logo menu";
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr;
   }
 
   .toolbar #logo {
     grid-area: logo;
-    text-align: center;
+    text-align: start;
   }
 
   .toolbar .menu-inline {
     grid-area: menu;
     padding: 0;
     display: flex;
-    width: 100vw;
-    border-top: 1px dotted black;
+    border: 0px;
+    width: auto;
   }
 
   .toolbar .menu-inline .menu-item {
-    flex: 1;
-    list-style: none;
-    text-align: center;
   }
 }

@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'rails',        '~> 5.1.6'
+gem 'rails',        '~> 5.2.3'
 
 gem 'jquery-rails'
 gem 'pg',           '~> 0.18'

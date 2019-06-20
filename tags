@@ -134,6 +134,7 @@ destroyer	app/controllers/entries_controller.rb	/^  def destroyer$/;"	f	class:En
 destroyer	app/controllers/goals_controller.rb	/^  def destroyer$/;"	f	class:GoalsController
 edit	app/controllers/entries_controller.rb	/^  def edit$/;"	f	class:EntriesController
 edit	app/controllers/goals_controller.rb	/^  def edit$/;"	f	class:GoalsController
+encrypt	app/controllers/entries_controller.rb	/^  def encrypt$/;"	f	class:EntriesController
 entries_backward	app/models/entry.rb	/^  def entries_backward$/;"	f	class:Entry
 entries_by_month	app/controllers/api/entries_controller.rb	/^    def entries_by_month$/;"	f	class:Api.EntriesController
 entries_by_month	app/decorators/user_decorator.rb	/^  def entries_by_month$/;"	f	class:UserDecorator

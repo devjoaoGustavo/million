@@ -9,6 +9,10 @@ class EntriesController < ApplicationController
   before_action :assign_dashboard_values, only: %i[index create]
   rescue_from InvalidCurrencyFormat, with: :invalid_currency_format
 
+  def encrypt
+    render layout: false
+  end
+
   def index
   end
 

@@ -1,0 +1,34 @@
+.container {
+  grid-template-areas: "logo" "title" "button";
+  grid-template-rows: 1fr 1fr auto;
+  grid-row-gap: 5px;
+
+  justify-items: stretch;
+  align-items: stretch;
+  text-align: center;
+}
+
+.container .logo {
+  grid-area: logo;
+}
+
+.container .logo img {
+  vertical-align: middle;
+}
+
+.container .title {
+  grid-area: title;
+}
+
+.container .button {
+  grid-area: button;
+}
+
+.button {
+  padding: 25px;
+  background-color: white;
+  box-shadow: -1px 1px 3px var(--gray-font);
+  text-decoration: none;
+  color: var(--gray-font);
+}
+

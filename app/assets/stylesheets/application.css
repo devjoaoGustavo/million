@@ -24,6 +24,14 @@
   --gray-font: #666;
 }
 
+.button {
+  padding: 10px;
+  background-color: var(--amber-darken-4);
+  box-shadow: -1px 1px 3px var(--gray-font);
+  text-decoration: none;
+  color: white;
+}
+
 body {
   display: grid;
   grid-template-areas: "nav" "main" "footer";

@@ -8,7 +8,7 @@ Things you may want to cover:
   - 2.6.3
 
 * Rails version
-  - 5.1.7
+  - 5.2.3
 
 * System dependencies
   - Postgresql 11.3
@@ -26,4 +26,4 @@ Things you may want to cover:
 
 * Deployment instructions
 
-* ...
+* Integration with Google drive API

@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'rails',        '~> 5.1.6'
+gem 'rails',        '~> 5.2.3'
 
 gem 'jquery-rails'
 gem 'pg',           '~> 0.18'
@@ -26,6 +26,8 @@ gem 'sentry-raven'
 gem 'client_side_validations'
 gem 'draper'
 gem 'groupdate'
+
+gem 'omniauth-google-oauth2'
 
 group :development, :test do
   gem 'pry-byebug'

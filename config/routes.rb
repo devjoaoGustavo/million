@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   get '/.well-known/acme-challenge/b3uOjES-NWjtHUpEZdyC_xIk_UOO4S7bT938YTSD1qQ', to: 'entries#encrypt'
 
+  # Routes for Google authentication
+  get 'auth/google_oauth2/callback', to: 'sessions#google_auth'
+  get 'auth/failure', to: redirect('sessions/new')
+
   namespace :api do
     resources :users, only: [] do
       resources :goals,   only: %i(index create)
@@ -33,16 +37,10 @@ Rails.application.routes.draw do
     get '/categories', to: 'categories#index'
   end
 
-  resources :users, only: %i(create) do
+  resources :users do
     resources :goals, only: %i(index)
   end
   resources :goals, only: %i(edit show destroy)
-  get  '/signup',                 to: 'users#new',               as: 'signup'
-  get  '/users/:id/confirmation', to: 'users#confirm',           as: 'confirmation'
-  get  '/recover',                to: 'users#recover',           as: 'recover_password'
-  post '/recover',                to: 'users#send_email_for_recover'
-  get  '/users/:id/redefine',     to: 'users#redefine_password', as: 'redefine_password'
-  put  '/users/:id/redefine',     to: 'users#redefine',          as: 'redefine'
 
   resources :sessions, only: %i(create)
   get    '/login',  to: 'sessions#new',     as: 'login'

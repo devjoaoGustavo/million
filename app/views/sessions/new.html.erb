@@ -1,32 +1,13 @@
-<%= form_tag sessions_path do %>
-  <div class="row">
-    <div class="logo col s6 offset-s3 center-align">
-      <image src="<%= image_url("million-logo.svg") %>">
-      <h4>Acesso Million</h4>
-    </div>
-
-    <div class="input-field col s12">
-      <%= content_tag :label, "Usuário", for: "access" %>
-      <%= text_field_tag :access, params[:access], class: "validate" %>
-    </div>
-
-    <div class="col s12">
-      <div class="input-field">
-        <%= content_tag :label, "Senha", for: "password" %>
-        <%= password_field_tag :password, params[:password], class: "validate" %>
-      </div>
-    </div>
-
-    <div class="col s12 center-align">
-      <%= submit_tag "Entrar", class: "btn waves-effect waves-light btn-small" %>
-      <p><%= link_to "Esqueci minha senha", recover_password_path %></p>
-
-      <p>
-      Ainda não possui cadastro no Million?<br>
-      <%= link_to "Cadastre-se agora", signup_path -%>
-      ou
-      <%= link_to "volte ao início", root_path -%>
-      </p>
-    </div>
-  </div>
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'login', media: 'all' %>
 <% end %>
+
+<div class="container">
+  <%= link_to root_path, class: 'logo' do %>
+    <img src="<%= image_url("million-logo.svg") %>">
+  <% end %>
+
+  <h1 class="title">Acesso Million</h1>
+
+  <%= link_to 'Entre usando sua conta Google', 'auth/google_oauth2', class: 'button' %>
+</div>

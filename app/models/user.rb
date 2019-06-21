@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_secure_password
+  # has_secure_password
   has_many :entries, dependent: :destroy
   validates :email, :username, presence: true
   validates :username, uniqueness: true
@@ -7,19 +7,15 @@ class User < ApplicationRecord
   has_many :goals, through: :dreams
 
   validates_with UserValidator, fields: [:email]
-  validate do |record|
-    if record.password_confirmation.blank?
-      record.errors.add(:password_confirmation, :blank) if record.new_record?
+
+  def self.from_omniauth(access_token)
+    where(email: access_token.info.email).first_or_initialize do |user|
+      user.name = access_token.info.name
+      user.email = access_token.info.email
     end
   end
 
   def presentation_name
     name || username || email
-  end
-
-  def activate!
-    # return false unless self.persisted?
-    self.active = true
-    self.save
   end
 end

@@ -47,4 +47,8 @@ module Million
 
     config.filter_parameters << :password
   end
+
+  def self.credentials
+    Application.credentials
+  end
 end

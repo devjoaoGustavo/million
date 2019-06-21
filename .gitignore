@@ -28,3 +28,6 @@ Procfile
 .DS_Store
 
 tags
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key

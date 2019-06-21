@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
+    puts "verificar sessão: #{session[:user_id]} #{@current_user}"
     @current_user ||= UserDecorator.decorate(User.find(session[:user_id])) if session[:user_id]
   end
   alias_method :logged_in?, :current_user

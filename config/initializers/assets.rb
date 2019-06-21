@@ -16,6 +16,8 @@ Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'image
 Rails.application.config.assets.precompile += %w(
   expense_index.css
   dashboard.css
+  access.css
+  login.css
   homepage.js
   homepage.css
 )

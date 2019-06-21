@@ -29,8 +29,8 @@ module Million
     config.action_mailer.smtp_settings = {
       port:      587,
       address:   'smtp.mailgun.org',
-      password:  ENV.fetch('SMTP_PASSWORD', 'postmaster@sandbox35effa733de044e0aae9b287ea732d24.mailgun.org'),
-      user_name: ENV.fetch('SMTP_USER_NAME', 'a4e5fdec3955fe513a856a8b48252e5c')
+      password:  ENV.fetch('SMTP_PASSWORD', 'a4e5fdec3955fe513a856a8b48252e5c'),
+      user_name: ENV.fetch('SMTP_USER_NAME', 'postmaster@sandbox35effa733de044e0aae9b287ea732d24.mailgun.org')
     }
 
     config.generators do |g|

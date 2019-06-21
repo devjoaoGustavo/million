@@ -3,7 +3,7 @@
 <% end %>
 
 <div class="container">
-  <%= form_for(@new_entry, html: { class: 'form-container' }) do |f| %>
+  <%= form_for(@new_entry, html: { class: 'form-container shadow' }) do |f| %>
     <div class="form-group entry-date">
       <%= label :entry_date, 'Data', class: 'invisible' %>
       <%= f.date_field :entry_date %>
@@ -30,12 +30,10 @@
       <%= label :amount, 'Valor', class: 'invisible' %>
       <%= f.number_field :amount, min: 0.00, step: 0.01, placeholder: 'Valor' %>
     </div>
-    <div class="action-group">
-      <%= f.submit 'Salvar nova entrada', class: 'button' %>
-    </div>
+    <%= f.submit 'Salvar nova entrada', class: 'action-group button' %>
   <% end %>
 
-  <div class="balance-container">
+  <div class="balance-container shadow">
     <!-- Saldo geral -->
     <section id="total-balance">
         <h3>Saldo geral</h3>
@@ -49,7 +47,7 @@
     </section>
   </div>
 
-  <div class="entries-container">
+  <div class="entries-container shadow">
     <!-- Despesas -->
     <section id="expenses">
       <h3>Despesas do mês</h3>

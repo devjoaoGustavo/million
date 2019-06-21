@@ -68,8 +68,6 @@ UserMailer	app/mailers/user_mailer.rb	/^class UserMailer < ApplicationMailer$/;"
 UserValidator	app/validators/user_validator.rb	/^class UserValidator < ActiveModel::Validator$/;"	c
 UsersController	app/controllers/users_controller.rb	/^class UsersController < ApplicationController$/;"	c
 activate!	app/models/user.rb	/^  def activate!$/;"	f	class:User
-activate_bundler	bin/bundle	/^  def activate_bundler(bundler_version)$/;"	f
-activation_error_handling	bin/bundle	/^  def activation_error_handling$/;"	f
 allowed_params	app/controllers/users_controller.rb	/^  def allowed_params$/;"	f	class:UsersController
 amount_by_category	app/models/entry.rb	/^  def self.amount_by_category(user_id:, period:)$/;"	F	class:Entry
 app	app/controllers/home_controller.rb	/^  def app$/;"	f	class:HomeController
@@ -82,7 +80,6 @@ build_expense_from_params	app/controllers/entries_controller.rb	/^  def build_ex
 build_response	app/commands/entry/finder.rb	/^    def build_response(entries)$/;"	f	class:Entry.Finder
 build_response	app/commands/goal/finder.rb	/^    def build_response(goals)$/;"	f	class:Goal.Finder
 build_revenue_from_params	app/controllers/entries_controller.rb	/^  def build_revenue_from_params$/;"	f	class:EntriesController
-bundler_version	bin/bundle	/^  def bundler_version$/;"	f
 by_category	app/decorators/user_decorator.rb	/^  def by_category(klass)$/;"	f	class:UserDecorator
 call	app/commands/entry/creator.rb	/^    def call(params = {})$/;"	f	class:Entry.Creator
 call	app/commands/entry/destroyer.rb	/^    def call(params = {})$/;"	f	class:Entry.Destroyer
@@ -100,7 +97,6 @@ change	db/migrate/20180406233203_create_goal.rb	/^  def change$/;"	f	class:Creat
 change	db/migrate/20180407001942_create_dreams.rb	/^  def change$/;"	f	class:CreateDreams
 class_type	app/commands/entry/creator.rb	/^    def class_type(type)$/;"	f	class:Entry.Creator
 clear_entries_with_goal_id	app/commands/goal/destroyer.rb	/^    def clear_entries_with_goal_id(id)$/;"	f	class:Goal.Destroyer
-cli_arg_version	bin/bundle	/^  def cli_arg_version$/;"	f
 confirm	app/controllers/users_controller.rb	/^  def confirm$/;"	f	class:UsersController
 count	app/commands/entry/creator.rb	/^    def count(n)$/;"	f	class:Entry.Creator
 create	app/commands/goal/creator.rb	/^    def create(params)$/;"	f	class:Goal.Creator
@@ -141,7 +137,6 @@ entries_by_month	app/decorators/user_decorator.rb	/^  def entries_by_month$/;"	f
 entries_forward	app/models/entry.rb	/^  def entries_forward$/;"	f	class:Entry
 entry_date	app/commands/entry/creator.rb	/^    def entry_date(entry_date:, **)$/;"	f	class:Entry.Creator
 entry_date	app/decorators/entry_decorator.rb	/^  def entry_date$/;"	f	class:EntryDecorator
-env_var_version	bin/bundle	/^  def env_var_version$/;"	f
 expense_by_category	app/controllers/api/entries_controller.rb	/^    def expense_by_category$/;"	f	class:Api.EntriesController
 expenses	app/controllers/entries_controller.rb	/^  def expenses$/;"	f	class:EntriesController
 expenses	app/decorators/user_decorator.rb	/^  def expenses$/;"	f	class:UserDecorator
@@ -159,7 +154,6 @@ finder	app/controllers/api/entries_controller.rb	/^    def finder$/;"	f	class:Ap
 finder	app/controllers/api/goals_controller.rb	/^    def finder$/;"	f	class:Api.GoalsController
 finder	app/controllers/goals_controller.rb	/^  def finder$/;"	f	class:GoalsController
 fn.navList	app/assets/javascripts/homepage/util.js	/^(function($) {$/;"	f
-gemfile	bin/bundle	/^  def gemfile$/;"	f
 goal	app/models/entry/expense.rb	/^    def goal$/;"	f	class:Entry.Expense
 goal_params	app/controllers/api/goals_controller.rb	/^    def goal_params$/;"	f	class:Api.GoalsController
 home	app/controllers/home_controller.rb	/^  def home$/;"	f	class:HomeController
@@ -177,17 +171,13 @@ intro	app/controllers/entries_controller.rb	/^  def intro(message:, ico_class:, 
 intro	app/controllers/goals_controller.rb	/^  def intro(message:, ico_class:, href:)$/;"	f	class:GoalsController
 invalid_currency_format	app/controllers/api/entries_controller.rb	/^    def invalid_currency_format$/;"	f	class:Api.EntriesController
 invalid_currency_format	app/controllers/entries_controller.rb	/^  def invalid_currency_format$/;"	f	class:EntriesController
-invoked_as_script?	bin/bundle	/^  def invoked_as_script?$/;"	f
 last_days	lib/helpers/timing.rb	/^  def last_days(n)$/;"	f	class:Timing
 list	app/commands/entry/finder.rb	/^    def list(params)$/;"	f	class:Entry.Finder
 list	app/commands/goal/finder.rb	/^    def list(params)$/;"	f	class:Goal.Finder
 list	app/controllers/api/entries_controller.rb	/^    def list$/;"	f	class:Api.EntriesController
-load_bundler!	bin/bundle	/^  def load_bundler!$/;"	f
 load_categories	app/controllers/entries_controller.rb	/^  def load_categories$/;"	f	class:EntriesController
 load_expenses	app/controllers/entries_controller.rb	/^  def load_expenses$/;"	f	class:EntriesController
 load_revenues	app/controllers/entries_controller.rb	/^  def load_revenues$/;"	f	class:EntriesController
-lockfile	bin/bundle	/^  def lockfile$/;"	f
-lockfile_version	bin/bundle	/^  def lockfile_version$/;"	f
 monthly_balance	app/controllers/api/entries_controller.rb	/^    def monthly_balance$/;"	f	class:Api.EntriesController
 monthly_balance	app/decorators/user_decorator.rb	/^  def monthly_balance$/;"	f	class:UserDecorator
 monthly_entries	app/decorators/user_decorator.rb	/^  def monthly_entries$/;"	f	class:UserDecorator

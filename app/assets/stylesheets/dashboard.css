@@ -3,7 +3,9 @@ h1 {
   margin: 10px auto;
 }
 
-/*------------------container------------------*/
+/*---------------------------------------------*/
+/*------------start-container------------------*/
+/*---------------------------------------------*/
 .container {
   padding: 20px;
   display: grid;
@@ -12,17 +14,20 @@ h1 {
   grid-row-gap: 20px;
 }
 
-.form-container, .balance-container, .entries-container {
-  /* offset-x | offset-y | blur-radius | color */
+.shadow {
+  /* box-shadow: offset-x | offset-y | blur-radius | color */
   box-shadow: -2px 2px 5px #555;
 }
+/*---------------------------------------------*/
+/*--------------end-container------------------*/
+/*---------------------------------------------*/
 
-/*------------------container------------------*/
-
+/*----------------------------------------*/
 /*------------------form------------------*/
+/*----------------------------------------*/
 .form-container {
   background-color: #fff;
-  padding: 2px;
+  padding: 10px;
 
   grid-area: form;
 
@@ -37,7 +42,8 @@ h1 {
     "amount . actions";
 
   grid-gap: 10px 5px;
-  justify-items: stretch;
+  justify-content: stretch;
+  align-content: stretch;
 }
 
 .form-container .entry-date {
@@ -45,7 +51,6 @@ h1 {
 }
 
 .form-container .entry-date input {
-  height: 100%;
   color: #666;
 }
 
@@ -71,8 +76,7 @@ h1 {
 }
 
 .form-container .entry-category select {
-  height: 100%;
-  color: #666;
+  color: var(--gray-font);
   background-color: inherit;
 }
 
@@ -80,32 +84,18 @@ h1 {
   grid-area: description;
 }
 
-.form-container .entry-description input {
-  height: 100%;
-}
-
 .form-container .entry-amount {
   grid-area: amount;
-}
-
-.form-container .entry-amount input {
-  height: 100%;
 }
 
 .form-container .action-group {
   grid-area: actions;
 }
 
-.form-container .entry-category select, .form-container .entry-category select, .form-container .entry-description input[type="text"], .form-container .entry-date input[type="date"], .form-container .entry-amount input[type="number"] {
-  padding-left: 8px;
-  width: 100%;
-}
-
-.form-container .action-group input.button {
+.form-container input.action-group.button {
   padding: 10px;
-  background-color: #ff8a30; /* #ff6f00 amber darken-4 */
-  border: 0;
-  border-radius: 0px;
+  background-color: var(--amber-darken-4);
+  box-shadow: -1px 1px 3px var(--gray-font);
 }
 
 .form-container .invisible {
@@ -116,8 +106,9 @@ h1 {
   border: none;
   border-radius: 0px;
 }
-
+/*----------------------------------------*/
 /*------------------form------------------*/
+/*----------------------------------------*/
 
 
 /*------------------Balance------------------*/

@@ -19,6 +19,11 @@
   font-family: 'Noto Sans HK', sans-serif;
 }
 
+:root {
+  --amber-darken-4: #ff8a30;
+  --gray-font: #666;
+}
+
 body {
   display: grid;
   grid-template-areas: "nav" "main" "footer";

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  # has_secure_password
-  has_many :entries, dependent: :destroy
+  has_many :entries
+  has_many :wallets, dependent: :destroy
   validates :email, :username, presence: true
   validates :username, uniqueness: true
   has_many :dreams, dependent: :destroy
@@ -17,5 +17,9 @@ class User < ApplicationRecord
 
   def presentation_name
     name || username || email
+  end
+
+  def default_wallet
+    wallets.find_or_create_by(default: true)
   end
 end

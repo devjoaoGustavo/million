@@ -23,7 +23,7 @@ class EntriesController < ApplicationController
       f[:category_id] = params[:category_id] if params[:category_id].present?
       f[:entry_date]  = search_range
     end
-    @entries = Entry.where(user_id: current_user.id, type: params[:type], **filters)
+    @entries = Entry.where(wallet_id: current_user.default_wallet.id, type: params[:type], **filters)
       .order(entry_date: :desc, created_at: :desc)
 
     if @entry.expense?
@@ -154,7 +154,7 @@ class EntriesController < ApplicationController
   end
 
   def find_entry
-    Entry.find_by(user_id: current_user.id, id: params[:id])
+    Entry.find_by(wallet_id: current_user.default_wallet.id, id: params[:id])
   end
 
   def new_entry(args = {})
@@ -163,12 +163,14 @@ class EntriesController < ApplicationController
 
   def new_expense
     @new_expense = current_user
+      .default_wallet
       .entries
       .build(type: Entry::Expense.to_s)
   end
 
   def new_revenue
     @new_revenue = current_user
+      .default_wallet
       .entries
       .build(type: Entry::Revenue.to_s)
   end
@@ -198,7 +200,7 @@ class EntriesController < ApplicationController
   def create_params
     params.require(:entry)
       .permit(:category_id, :description, :amount, :entry_date, :goal_id, :type)
-      .merge(user_id: current_user.id)
+      .merge(wallet_id: current_user.default_wallet.id)
       .merge(installments: params[:installments])
   end
 
@@ -207,11 +209,11 @@ class EntriesController < ApplicationController
     params.require(key)
       .permit(:category_id, :description, :amount, :entry_date, :goal_id)
       .merge(id: params[:id])
-      .merge(user_id: current_user.id)
+      .merge(wallet_id: current_user.default_wallet.id)
   end
 
   def destroy_params
-    params.permit(:mode, :id).merge(user_id: current_user.id)
+    params.permit(:mode, :id).merge(wallet_id: current_user.default_wallet.id)
   end
 
   def css_color_class(amount)

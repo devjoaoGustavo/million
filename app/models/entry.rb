@@ -3,7 +3,10 @@
 class Entry < ApplicationRecord
   include StringEnum
 
-  belongs_to :user
+  belongs_to :wallet
+  delegate :user_id, to: :wallet
+
+  has_one :user, through: :wallet
   belongs_to :category, default: -> { Category.find_by(name: 'Categoria genérica') }
 
   # Relation for deal with installment entries
@@ -14,12 +17,13 @@ class Entry < ApplicationRecord
   validates :type, :amount, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 0.00 }
 
-  scope :in_range, ->(user_id, range) do
-    where(user_id: user_id, entry_date: range)
+
+  scope :in_range, ->(wallet_id, range) do
+    where(wallet_id: wallet_id, entry_date: range)
       .order(entry_date: :desc, created_at: :desc)
   end
-  scope :by_user, ->(user_id) do
-    where(user_id: user_id)
+  scope :by_default_wallet, ->(wallet_id) do
+    where(wallet_id: wallet_id)
       .where('entry_date <= ?', Time.current.at_end_of_day)
       .order(entry_date: :desc, created_at: :desc)
   end
@@ -39,16 +43,16 @@ class Entry < ApplicationRecord
     sprintf("%.2f", amount).gsub('.', ',') if amount.present?
   end
 
-  def self.total_balance(user_id)
-    (Revenue.total_amount(user_id) - Expense.total_amount(user_id)).to_f
+  def self.total_balance(wallet_id)
+    (Revenue.total_amount(wallet_id) - Expense.total_amount(wallet_id)).to_f
   end
 
-  def self.total_amount(user_id)
-    by_user(user_id).sum(&:amount)
+  def self.total_amount(wallet_id)
+    by_default_wallet(wallet_id).sum(&:amount)
   end
 
-  def self.amount_by_category(user_id:, period:)
-    in_range(user_id, period).group_by(&:category_id).map do |k, v|
+  def self.amount_by_category(wallet_id:, period:)
+    in_range(wallet_id, period).group_by(&:category_id).map do |k, v|
       { category: Category.find(k).name, amount: v.sum(&:amount) }
     end
   end

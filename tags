@@ -8,6 +8,8 @@ $.fn.panel	app/assets/javascripts/homepage/util.js	/^	$.fn.panel = function(user
 $.fn.placeholder	app/assets/javascripts/homepage/util.js	/^	$.fn.placeholder = function() {$/;"	f
 $.prioritize	app/assets/javascripts/homepage/util.js	/^	$.prioritize = function($elements, condition) {$/;"	f
 $this	app/assets/javascripts/homepage/util.js	/^			var	$this = $(this),$/;"	v
+AddGoogleAttrsToUsers	db/migrate/20190621123508_add_google_attrs_to_users.rb	/^class AddGoogleAttrsToUsers < ActiveRecord::Migration[5.2]$/;"	c
+AddWalletReferenceToEntries	db/migrate/20190624230616_add_wallet_reference_to_entries.rb	/^class AddWalletReferenceToEntries < ActiveRecord::Migration[5.2]$/;"	c
 Api	app/controllers/api/categories_controller.rb	/^module Api$/;"	m
 Api	app/controllers/api/entries_controller.rb	/^module Api$/;"	m
 Api	app/controllers/api/goals_controller.rb	/^module Api$/;"	m
@@ -25,6 +27,7 @@ CreateDreams	db/migrate/20180407001942_create_dreams.rb	/^class CreateDreams < A
 CreateEntry	db/migrate/20180221005621_create_entry.rb	/^class CreateEntry < ActiveRecord::Migration[5.1]$/;"	c
 CreateGoal	db/migrate/20180406233203_create_goal.rb	/^class CreateGoal < ActiveRecord::Migration[5.1]$/;"	c
 CreateUser	db/migrate/20180121113841_create_user.rb	/^class CreateUser < ActiveRecord::Migration[5.1]$/;"	c
+CreateWallets	db/migrate/20190624230255_create_wallets.rb	/^class CreateWallets < ActiveRecord::Migration[5.2]$/;"	c
 Creator	app/commands/entry/creator.rb	/^  class Creator$/;"	c	class:Entry
 Creator	app/commands/goal/creator.rb	/^  class Creator$/;"	c	class:Goal
 Destroyer	app/commands/entry/destroyer.rb	/^  class Destroyer$/;"	c	class:Entry
@@ -56,6 +59,9 @@ HomeController	app/controllers/home_controller.rb	/^class HomeController < Appli
 HomeHelper	app/helpers/home_helper.rb	/^module HomeHelper$/;"	m
 InvalidCurrencyFormat	app/errors/invalid_currency_format.rb	/^class InvalidCurrencyFormat < StandardError; end$/;"	c
 Million	config/application.rb	/^module Million$/;"	m
+RemoveActiveColumnFromUsers	db/migrate/20190624234503_remove_active_column_from_users.rb	/^class RemoveActiveColumnFromUsers < ActiveRecord::Migration[5.2]$/;"	c
+RemovePasswordDigestFromUsers	db/migrate/20190624234218_remove_password_digest_from_users.rb	/^class RemovePasswordDigestFromUsers < ActiveRecord::Migration[5.2]$/;"	c
+RemoveUserReferenceFromEntries	db/migrate/20190624233652_remove_user_reference_from_entries.rb	/^class RemoveUserReferenceFromEntries < ActiveRecord::Migration[5.2]$/;"	c
 Revenue	app/models/entry/revenue.rb	/^  class Revenue < Entry$/;"	c	class:Entry
 SessionsController	app/controllers/sessions_controller.rb	/^class SessionsController < ApplicationController$/;"	c
 StringEnum	app/models/concerns/string_enum.rb	/^module StringEnum$/;"	m
@@ -66,9 +72,8 @@ User	app/models/user.rb	/^class User < ApplicationRecord$/;"	c
 UserDecorator	app/decorators/user_decorator.rb	/^class UserDecorator < ApplicationDecorator$/;"	c
 UserMailer	app/mailers/user_mailer.rb	/^class UserMailer < ApplicationMailer$/;"	c
 UserValidator	app/validators/user_validator.rb	/^class UserValidator < ActiveModel::Validator$/;"	c
-UsersController	app/controllers/users_controller.rb	/^class UsersController < ApplicationController$/;"	c
-allowed_params	app/controllers/users_controller.rb	/^  def allowed_params$/;"	f	class:UsersController
-amount_by_category	app/models/entry.rb	/^  def self.amount_by_category(user_id:, period:)$/;"	F	class:Entry
+Wallet	app/models/wallet.rb	/^class Wallet < ApplicationRecord$/;"	c
+amount_by_category	app/models/entry.rb	/^  def self.amount_by_category(wallet_id:, period:)$/;"	F	class:Entry
 app	app/controllers/home_controller.rb	/^  def app$/;"	f	class:HomeController
 assign_dashboard_values	app/controllers/entries_controller.rb	/^  def assign_dashboard_values$/;"	f	class:EntriesController
 balance	app/controllers/api/entries_controller.rb	/^    def balance$/;"	f	class:Api.EntriesController
@@ -94,16 +99,20 @@ change	db/migrate/20180221005400_create_category.rb	/^  def change$/;"	f	class:C
 change	db/migrate/20180221005621_create_entry.rb	/^  def change$/;"	f	class:CreateEntry
 change	db/migrate/20180406233203_create_goal.rb	/^  def change$/;"	f	class:CreateGoal
 change	db/migrate/20180407001942_create_dreams.rb	/^  def change$/;"	f	class:CreateDreams
+change	db/migrate/20190621123508_add_google_attrs_to_users.rb	/^  def change$/;"	f	class:AddGoogleAttrsToUsers
+change	db/migrate/20190624230255_create_wallets.rb	/^  def change$/;"	f	class:CreateWallets
+change	db/migrate/20190624230616_add_wallet_reference_to_entries.rb	/^  def change$/;"	f	class:AddWalletReferenceToEntries
+change	db/migrate/20190624233652_remove_user_reference_from_entries.rb	/^  def change$/;"	f	class:RemoveUserReferenceFromEntries
+change	db/migrate/20190624234218_remove_password_digest_from_users.rb	/^  def change$/;"	f	class:RemovePasswordDigestFromUsers
+change	db/migrate/20190624234503_remove_active_column_from_users.rb	/^  def change$/;"	f	class:RemoveActiveColumnFromUsers
 class_type	app/commands/entry/creator.rb	/^    def class_type(type)$/;"	f	class:Entry.Creator
 clear_entries_with_goal_id	app/commands/goal/destroyer.rb	/^    def clear_entries_with_goal_id(id)$/;"	f	class:Goal.Destroyer
-confirm	app/controllers/users_controller.rb	/^  def confirm$/;"	f	class:UsersController
 count	app/commands/entry/creator.rb	/^    def count(n)$/;"	f	class:Entry.Creator
 create	app/commands/goal/creator.rb	/^    def create(params)$/;"	f	class:Goal.Creator
 create	app/controllers/api/entries_controller.rb	/^    def create$/;"	f	class:Api.EntriesController
 create	app/controllers/api/goals_controller.rb	/^    def create$/;"	f	class:Api.GoalsController
 create	app/controllers/entries_controller.rb	/^  def create$/;"	f	class:EntriesController
 create	app/controllers/sessions_controller.rb	/^  def create$/;"	f	class:SessionsController
-create	app/controllers/users_controller.rb	/^  def create$/;"	f	class:UsersController
 create!	app/commands/entry/creator.rb	/^    def create!(params)$/;"	f	class:Entry.Creator
 create_params	app/controllers/entries_controller.rb	/^  def create_params$/;"	f	class:EntriesController
 creation_params	app/controllers/api/entries_controller.rb	/^    def creation_params$/;"	f	class:Api.EntriesController
@@ -117,6 +126,7 @@ current_user	app/controllers/application_controller.rb	/^  def current_user$/;"	
 daily_balance	app/controllers/api/entries_controller.rb	/^    def daily_balance$/;"	f	class:Api.EntriesController
 daily_expense	app/controllers/api/entries_controller.rb	/^    def daily_expense$/;"	f	class:Api.EntriesController
 daily_revenue	app/controllers/api/entries_controller.rb	/^    def daily_revenue$/;"	f	class:Api.EntriesController
+default_wallet	app/models/user.rb	/^  def default_wallet$/;"	f	class:User
 destroy	app/commands/entry/destroyer.rb	/^    def destroy$/;"	f	class:Entry.Destroyer
 destroy	app/controllers/api/goals_controller.rb	/^    def destroy$/;"	f	class:Api.GoalsController
 destroy	app/controllers/entries_controller.rb	/^  def destroy$/;"	f	class:EntriesController
@@ -188,7 +198,6 @@ monthly_expense	app/decorators/user_decorator.rb	/^  def monthly_expense$/;"	f	c
 monthly_revenue	app/controllers/api/entries_controller.rb	/^    def monthly_revenue$/;"	f	class:Api.EntriesController
 monthly_revenue	app/decorators/user_decorator.rb	/^  def monthly_revenue$/;"	f	class:UserDecorator
 new	app/controllers/sessions_controller.rb	/^  def new$/;"	f	class:SessionsController
-new	app/controllers/users_controller.rb	/^  def new$/;"	f	class:UsersController
 new_entry	app/controllers/entries_controller.rb	/^  def new_entry(args = {})$/;"	f	class:EntriesController
 new_expense	app/controllers/entries_controller.rb	/^  def new_expense$/;"	f	class:EntriesController
 new_revenue	app/controllers/entries_controller.rb	/^  def new_revenue$/;"	f	class:EntriesController
@@ -201,10 +210,7 @@ per_month	app/decorators/user_decorator.rb	/^  def per_month(entry)$/;"	f	class:
 presentation_name	app/models/user.rb	/^  def presentation_name$/;"	f	class:User
 previous_entry	app/models/entry.rb	/^  def previous_entry$/;"	f	class:Entry
 reached	app/commands/goal/finder.rb	/^    def reached(goal)$/;"	f	class:Goal.Finder
-recover	app/controllers/users_controller.rb	/^  def recover$/;"	f	class:UsersController
 recover_email	app/mailers/user_mailer.rb	/^  def recover_email(user)$/;"	f	class:UserMailer
-redefine	app/controllers/users_controller.rb	/^  def redefine$/;"	f	class:UsersController
-redefine_password	app/controllers/users_controller.rb	/^  def redefine_password$/;"	f	class:UsersController
 redirect_to_login	app/controllers/application_controller.rb	/^  def redirect_to_login$/;"	f	class:ApplicationController
 render_json_ok	app/controllers/api/entries_controller.rb	/^    def render_json_ok(result)$/;"	f	class:Api.EntriesController
 render_ok	app/controllers/api/goals_controller.rb	/^    def render_ok(result)$/;"	f	class:Api.GoalsController
@@ -225,7 +231,6 @@ revenues_of_today	app/decorators/user_decorator.rb	/^  def revenues_of_today$/;"
 revenues_till_now	app/decorators/user_decorator.rb	/^  def revenues_till_now$/;"	f	class:UserDecorator
 search	app/controllers/entries_controller.rb	/^  def search$/;"	f	class:EntriesController
 search_range	app/controllers/entries_controller.rb	/^  def search_range$/;"	f	class:EntriesController
-send_email_for_recover	app/controllers/users_controller.rb	/^  def send_email_for_recover$/;"	f	class:UsersController
 set_raven_context	app/controllers/application_controller.rb	/^  def set_raven_context$/;"	f	class:ApplicationController
 show	app/controllers/entries_controller.rb	/^  def show$/;"	f	class:EntriesController
 show	app/controllers/goals_controller.rb	/^  def show$/;"	f	class:GoalsController
@@ -235,8 +240,8 @@ system!	bin/update	/^def system!(*args)$/;"	f
 this_month	lib/helpers/timing.rb	/^  def this_month$/;"	f	class:Timing
 this_year	lib/helpers/timing.rb	/^  def this_year$/;"	f	class:Timing
 today	lib/helpers/timing.rb	/^  def today$/;"	f	class:Timing
-total_amount	app/models/entry.rb	/^  def self.total_amount(user_id)$/;"	F	class:Entry
-total_balance	app/models/entry.rb	/^  def self.total_balance(user_id)$/;"	F	class:Entry
+total_amount	app/models/entry.rb	/^  def self.total_amount(wallet_id)$/;"	F	class:Entry
+total_balance	app/models/entry.rb	/^  def self.total_balance(wallet_id)$/;"	F	class:Entry
 update	app/commands/goal/updater.rb	/^    def update(params)$/;"	f	class:Goal.Updater
 update	app/controllers/api/goals_controller.rb	/^    def update$/;"	f	class:Api.GoalsController
 update	app/controllers/entries_controller.rb	/^  def update$/;"	f	class:EntriesController

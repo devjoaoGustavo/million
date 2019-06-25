@@ -16,7 +16,7 @@ class Entry < ApplicationRecord
       @count -= 1
       Entry.create(
         type:        class_type(params[:type]),
-        user_id:     params[:user_id],
+        wallet_id:   params[:wallet_id],
         category_id: params[:category_id],
         description: params[:description],
         entry_date:  entry_date(Hash(params).symbolize_keys),

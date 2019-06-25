@@ -32,7 +32,7 @@ class UserDecorator < ApplicationDecorator
 
   def entries_by_month
     [].tap do |result|
-      grouped = Entry.where(user_id: id, entry_date: this_year).order(entry_date: :asc).group_by(&method(:per_month))
+      grouped = Entry.where(wallet_id: default_wallet.id, entry_date: this_year).order(entry_date: :asc).group_by(&method(:per_month))
       I18n.t('date')[:abbr_month_names].compact.each_with_index do |month, idx|
         values = grouped[idx + 1] || []
         revs = values.select(&:revenue?).sum(&:amount)
@@ -51,13 +51,13 @@ class UserDecorator < ApplicationDecorator
 
   def expenses_till_now
     @expenses_till_now ||= Entry::Expense
-      .by_user(id)
+      .by_default_wallet(default_wallet.id)
       .order(entry_date: :desc)
   end
 
   def revenues_till_now
     @revenues_till_now ||= Entry::Revenue
-      .by_user(id)
+      .by_default_wallet(default_wallet.id)
       .order(entry_date: :desc)
   end
 
@@ -94,13 +94,13 @@ class UserDecorator < ApplicationDecorator
   end
 
   def expenses
-    @expenses ||= entries
+    @expenses ||= default_wallet.entries
       .where(type: Entry::Expense.to_s)
       .order(entry_date: :desc)
   end
 
   def revenues
-    @revenues ||= entries.where(type: Entry::Revenue.to_s)
+    @revenues ||= default_wallet.entries.where(type: Entry::Revenue.to_s)
   end
 
   def expenses_by_category
@@ -113,7 +113,7 @@ class UserDecorator < ApplicationDecorator
 
   def by_category(klass)
     klass
-      .amount_by_category(user_id: id, period: this_month)
+      .amount_by_category(wallet_id: default_wallet.id, period: this_month)
       .map(&:values)
       .to_h
   end

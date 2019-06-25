@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_21_123508) do
+ActiveRecord::Schema.define(version: 2019_06_24_234503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 2019_06_21_123508) do
 
   create_table "entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "description"
-    t.uuid "user_id", null: false
     t.uuid "category_id", null: false
     t.string "type", null: false
     t.decimal "amount", null: false
@@ -44,10 +43,11 @@ ActiveRecord::Schema.define(version: 2019_06_21_123508) do
     t.datetime "entry_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.uuid "entry_id"
     t.uuid "goal_id"
+    t.uuid "wallet_id"
     t.index ["category_id"], name: "index_entries_on_category_id"
     t.index ["entry_id"], name: "index_entries_on_entry_id"
     t.index ["goal_id"], name: "index_entries_on_goal_id"
-    t.index ["user_id"], name: "index_entries_on_user_id"
+    t.index ["wallet_id"], name: "index_entries_on_wallet_id"
   end
 
   create_table "entries_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -80,16 +80,25 @@ ActiveRecord::Schema.define(version: 2019_06_21_123508) do
     t.string "name"
     t.string "username"
     t.string "email", null: false
-    t.boolean "active", default: false
-    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "google_token"
     t.string "google_refresh_token"
   end
 
+  create_table "wallets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", default: "Carteira principal", null: false
+    t.string "icon", default: "icons/wallet_icon.svg", null: false
+    t.boolean "default", default: false, null: false
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wallets_on_user_id"
+  end
+
   add_foreign_key "entries", "categories"
-  add_foreign_key "entries", "users"
+  add_foreign_key "entries", "wallets"
   add_foreign_key "entries_tags", "entries"
   add_foreign_key "entries_tags", "tags"
+  add_foreign_key "wallets", "users"
 end

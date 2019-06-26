@@ -11,6 +11,7 @@ class User < ApplicationRecord
   def self.from_omniauth(access_token)
     where(email: access_token.info.email).first_or_initialize do |user|
       user.name = access_token.info.name
+      user.username = access_token.info.first_name
       user.email = access_token.info.email
     end
   end

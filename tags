@@ -73,11 +73,14 @@ UserDecorator	app/decorators/user_decorator.rb	/^class UserDecorator < Applicati
 UserMailer	app/mailers/user_mailer.rb	/^class UserMailer < ApplicationMailer$/;"	c
 UserValidator	app/validators/user_validator.rb	/^class UserValidator < ActiveModel::Validator$/;"	c
 Wallet	app/models/wallet.rb	/^class Wallet < ApplicationRecord$/;"	c
+WalletDecorator	app/decorators/wallet_decorator.rb	/^class WalletDecorator < ApplicationDecorator$/;"	c
+WalletsController	app/controllers/wallets_controller.rb	/^class WalletsController < ApplicationController$/;"	c
 amount_by_category	app/models/entry.rb	/^  def self.amount_by_category(wallet_id:, period:)$/;"	F	class:Entry
 app	app/controllers/home_controller.rb	/^  def app$/;"	f	class:HomeController
 assign_dashboard_values	app/controllers/entries_controller.rb	/^  def assign_dashboard_values$/;"	f	class:EntriesController
 balance	app/controllers/api/entries_controller.rb	/^    def balance$/;"	f	class:Api.EntriesController
 balance	app/decorators/user_decorator.rb	/^  def balance$/;"	f	class:UserDecorator
+balance	app/decorators/wallet_decorator.rb	/^  def balance$/;"	f	class:WalletDecorator
 balance_of_last_days	app/decorators/user_decorator.rb	/^  def balance_of_last_days(days)$/;"	f	class:UserDecorator
 balance_of_today	app/decorators/user_decorator.rb	/^  def balance_of_today$/;"	f	class:UserDecorator
 build_expense_from_params	app/controllers/entries_controller.rb	/^  def build_expense_from_params$/;"	f	class:EntriesController
@@ -154,7 +157,7 @@ expenses_by_category	app/decorators/user_decorator.rb	/^  def expenses_by_catego
 expenses_of_last_days	app/decorators/user_decorator.rb	/^  def expenses_of_last_days(days)$/;"	f	class:UserDecorator
 expenses_of_this_month	app/decorators/user_decorator.rb	/^  def expenses_of_this_month$/;"	f	class:UserDecorator
 expenses_of_today	app/decorators/user_decorator.rb	/^  def expenses_of_today$/;"	f	class:UserDecorator
-expenses_till_now	app/decorators/user_decorator.rb	/^  def expenses_till_now$/;"	f	class:UserDecorator
+expenses_till_now	app/decorators/wallet_decorator.rb	/^  def expenses_till_now$/;"	f	class:WalletDecorator
 final_date	app/controllers/entries_controller.rb	/^  def final_date$/;"	f	class:EntriesController
 find_entry	app/commands/entry/destroyer.rb	/^    def find_entry(params)$/;"	f	class:Entry.Destroyer
 find_entry	app/commands/entry/updater.rb	/^    def find_entry(params)$/;"	f	class:Entry.Updater
@@ -174,6 +177,7 @@ index	app/controllers/api/categories_controller.rb	/^    def index$/;"	f	class:A
 index	app/controllers/api/goals_controller.rb	/^    def index$/;"	f	class:Api.GoalsController
 index	app/controllers/entries_controller.rb	/^  def index$/;"	f	class:EntriesController
 index	app/controllers/goals_controller.rb	/^  def index$/;"	f	class:GoalsController
+index	app/controllers/wallets_controller.rb	/^  def index$/;"	f	class:WalletsController
 initial_date	app/controllers/entries_controller.rb	/^  def initial_date$/;"	f	class:EntriesController
 installment_label	app/models/entry.rb	/^  def installment_label$/;"	f	class:Entry
 installments	app/controllers/entries_controller.rb	/^  def installments$/;"	f	class:EntriesController
@@ -228,7 +232,7 @@ revenues_by_category	app/decorators/user_decorator.rb	/^  def revenues_by_catego
 revenues_of_last_days	app/decorators/user_decorator.rb	/^  def revenues_of_last_days(days)$/;"	f	class:UserDecorator
 revenues_of_this_month	app/decorators/user_decorator.rb	/^  def revenues_of_this_month$/;"	f	class:UserDecorator
 revenues_of_today	app/decorators/user_decorator.rb	/^  def revenues_of_today$/;"	f	class:UserDecorator
-revenues_till_now	app/decorators/user_decorator.rb	/^  def revenues_till_now$/;"	f	class:UserDecorator
+revenues_till_now	app/decorators/wallet_decorator.rb	/^  def revenues_till_now$/;"	f	class:WalletDecorator
 search	app/controllers/entries_controller.rb	/^  def search$/;"	f	class:EntriesController
 search_range	app/controllers/entries_controller.rb	/^  def search_range$/;"	f	class:EntriesController
 set_raven_context	app/controllers/application_controller.rb	/^  def set_raven_context$/;"	f	class:ApplicationController

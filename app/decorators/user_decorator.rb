@@ -5,7 +5,9 @@ class UserDecorator < ApplicationDecorator
   delegate_all
 
   def balance
-    @balance ||= revenues_till_now.sum(&:amount) - expenses_till_now.sum(&:amount)
+    @balance ||= WalletDecorator
+      .decorate_collection(wallets)
+      .sum(&:balance)
   end
 
   def monthly_expense
@@ -47,18 +49,6 @@ class UserDecorator < ApplicationDecorator
 
   def monthly_balance
     @monthly_balance ||= monthly_revenue - monthly_expense
-  end
-
-  def expenses_till_now
-    @expenses_till_now ||= Entry::Expense
-      .by_default_wallet(default_wallet.id)
-      .order(entry_date: :desc)
-  end
-
-  def revenues_till_now
-    @revenues_till_now ||= Entry::Revenue
-      .by_default_wallet(default_wallet.id)
-      .order(entry_date: :desc)
   end
 
   def expenses_of_this_month

@@ -17,6 +17,7 @@ Rails.application.config.assets.precompile += %w(
   expense_index.css
   dashboard.css
   access.css
+  wallets.css
   login.css
   homepage.js
   homepage.css

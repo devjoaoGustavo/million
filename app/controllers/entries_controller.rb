@@ -50,12 +50,17 @@ class EntriesController < ApplicationController
   end
 
   def expenses
-    @expenses = current_user.expenses_till_now
+    @expenses = WalletDecorator
+      .decorate_collection(current_user.wallets)
+      .sum(&:expenses_till_now)
+
     render template: 'entries/expenses/index'
   end
 
   def revenues
-    @revenues = current_user.revenues_till_now
+    @revenues = WalletDecorator
+      .decorate_collection(current_user.wallets)
+      .sum(&:revenues_till_now)
     render template: 'entries/revenues/index'
   end
 

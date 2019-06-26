@@ -22,7 +22,7 @@ class Entry < ApplicationRecord
     where(wallet_id: wallet_id, entry_date: range)
       .order(entry_date: :desc, created_at: :desc)
   end
-  scope :by_default_wallet, ->(wallet_id) do
+  scope :by_wallet, ->(wallet_id) do
     where(wallet_id: wallet_id)
       .where('entry_date <= ?', Time.current.at_end_of_day)
       .order(entry_date: :desc, created_at: :desc)

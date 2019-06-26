@@ -1,0 +1,13 @@
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'wallets', media: 'all' %>
+<% end %>
+
+<div class="container">
+  <h2>Carteiras</h2>
+
+  <ul class="grid">
+    <% @wallets.each do |wallet| %>
+      <li><%= wallet.name %> = <%= number_to_currency(wallet.balance) %></li>
+    <% end %>
+  </ul>
+</div>

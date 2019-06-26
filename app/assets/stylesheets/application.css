@@ -75,7 +75,6 @@ body {
 .toolbar .menu-inline .menu-item a {
   text-decoration: none;
   color: black;
-  height: 100%;
 }
 
 .toolbar .menu-inline .menu-item a:hover {

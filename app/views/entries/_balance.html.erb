@@ -1,0 +1,19 @@
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'balance', media: 'all' %>
+<% end %>
+
+<div class="balance-container shadow">
+  <!-- Saldo geral -->
+  <section id="total-balance">
+    <h3>Saldo geral</h3>
+    <img src="<%= image_url('icons/balance.svg') %>" alt="Imagem representando o saldo">
+    <span><%= number_to_currency(@balance) %></span>
+  </section>
+
+  <!-- Saldo do mês -->
+  <section id="monthly-balance">
+    <p>Saldo do mês</p>
+    <span><%= number_to_currency(@monthly_balance) %></span>
+  </section>
+</div>
+

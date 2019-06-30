@@ -1,0 +1,20 @@
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'entries', media: 'all' %>
+<% end %>
+
+<div class="entries-container shadow">
+  <!-- Despesas -->
+  <section id="expenses">
+    <h3>Despesas do mês</h3>
+    <img src="<%= image_url('icons/expense.svg') %>" alt="Imagem representando despesa">
+    <span><%= number_to_currency(@expense) %></span>
+  </section>
+
+  <!-- Receitas -->
+  <section id="revenues">
+    <h3>Receitas do mês</h3>
+    <img src="<%= image_url('icons/revenue.svg') %>" alt="Imagem representando receita">
+    <span><%= number_to_currency(@revenue) %></span>
+  </section>
+</div>
+

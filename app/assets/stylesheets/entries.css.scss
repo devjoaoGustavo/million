@@ -1,0 +1,36 @@
+/*------------------Report------------------*/
+.entries-container {
+  display: grid;
+  grid-template-areas: "expense revenue";
+  grid-template-columns: 1fr 1fr;
+  background-color: #fff;
+  justify-items: center;
+  align-items: center;
+}
+
+#revenues {
+  grid-area: revenue;
+}
+
+#expenses {
+  grid-area: expense;
+}
+
+#revenues>img, #expenses>img {
+  width: 32px;
+  margin: 10px auto;
+  display: block;
+}
+
+#revenues>span, #expenses>span {
+  font-size: 150%;
+  display: block;
+  margin: 10px 0;
+}
+
+#revenues>h3, #expenses>h3 {
+  font-size: 110%;
+  display: block;
+  margin: 10px 0;
+}
+/*------------------Report------------------*/

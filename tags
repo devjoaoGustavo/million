@@ -194,6 +194,7 @@ list	app/controllers/api/entries_controller.rb	/^    def list$/;"	f	class:Api.En
 load_categories	app/controllers/entries_controller.rb	/^  def load_categories$/;"	f	class:EntriesController
 load_expenses	app/controllers/entries_controller.rb	/^  def load_expenses$/;"	f	class:EntriesController
 load_revenues	app/controllers/entries_controller.rb	/^  def load_revenues$/;"	f	class:EntriesController
+load_wallets	app/controllers/entries_controller.rb	/^  def load_wallets$/;"	f	class:EntriesController
 monthly_balance	app/controllers/api/entries_controller.rb	/^    def monthly_balance$/;"	f	class:Api.EntriesController
 monthly_balance	app/decorators/user_decorator.rb	/^  def monthly_balance$/;"	f	class:UserDecorator
 monthly_entries	app/decorators/user_decorator.rb	/^  def monthly_entries$/;"	f	class:UserDecorator

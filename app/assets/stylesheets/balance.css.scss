@@ -1,0 +1,59 @@
+/*------------------Balance------------------*/
+.balance-container {
+  display: grid;
+  grid-template-areas: "total monthly";
+  grid-template-columns: 1fr 1fr;
+  background-color: #fff;
+  justify-items: center;
+  align-items: center;
+}
+
+#total-balance {
+  grid-area: total;
+  text-align: center;
+}
+
+#total-balance>h3 {
+  font-size: 110%;
+  display: block;
+  margin: 10px 0;
+}
+
+#total-balance>img {
+  margin: auto;
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+#total-balance>span {
+  font-size: 150%;
+  display: block;
+  margin: 10px 0;
+}
+
+#monthly-balance {
+  grid-area: monthly;
+}
+
+#monthly-balance>span {
+  display: block;
+  margin: 10px 0;
+  text-align: center;
+  font-size: 120%;
+}
+/*------------------Balance------------------*/
+
+@media screen and (min-width: 500px) {
+  .balance-container {
+    grid-template-areas: "total monthly";
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .balance-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}

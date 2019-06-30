@@ -6,6 +6,7 @@ class EntriesController < ApplicationController
   before_action :new_expense
   before_action :new_revenue
   before_action :load_categories
+  before_action :load_wallets
   before_action :assign_dashboard_values, only: %i[index create]
   rescue_from InvalidCurrencyFormat, with: :invalid_currency_format
 
@@ -133,7 +134,7 @@ class EntriesController < ApplicationController
     @expense = current_user.monthly_expense
     @revenue = current_user.monthly_revenue
     @monthly_balance = current_user.monthly_balance
-    @new_entry = new_entry(entry_date: Time.zone.today)
+    @new_entry = new_entry(entry_date: Time.zone.today, wallet_id: current_user.default_wallet.id)
   end
 
   def invalid_currency_format
@@ -156,6 +157,10 @@ class EntriesController < ApplicationController
 
   def load_categories
     @categories = Category.ordered
+  end
+
+  def load_wallets
+    @wallets= current_user.wallets
   end
 
   def find_entry

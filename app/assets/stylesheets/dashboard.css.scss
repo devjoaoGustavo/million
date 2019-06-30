@@ -1,0 +1,43 @@
+.shadow {
+  /* box-shadow: offset-x | offset-y | blur-radius | color */
+  box-shadow: -2px 2px 5px #555;
+}
+
+/*---------------------------------------------*/
+/*------------start-container------------------*/
+/*---------------------------------------------*/
+.container {
+  padding: 20px;
+  max-width: 960px;
+  margin: auto;
+}
+/*---------------------------------------------*/
+/*--------------end-container------------------*/
+/*---------------------------------------------*/
+
+.balance-container {
+  margin: 20px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .form-container {
+    float: right;
+    width: 49%;
+  }
+
+  .balance-container {
+    margin: 0;
+    margin-bottom: 4px;
+    float: left;
+    width: 49%;
+  }
+
+  .entries-container {
+    float: left;
+    clear: left;
+    width: 49%;
+  }
+  .clear {
+    clear: both;
+  }
+}

@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require reset
  *= require_self
  */
 * {
@@ -17,6 +18,7 @@
   margin: 0;
   box-sizing: border-box;
   font-family: 'Noto Sans HK', sans-serif;
+  font-size: .75em;
 }
 
 :root {
@@ -27,7 +29,7 @@
 .button {
   padding: 10px;
   background-color: var(--amber-darken-4);
-  box-shadow: -1px 1px 3px var(--gray-font);
+  /* box-shadow: -1px 1px 3px var(--gray-font); */
   text-decoration: none;
   color: white;
 }
@@ -91,14 +93,21 @@ body {
   grid-area: footer;
   display: grid;
   grid-template-rows: 1fr;
-  background-color: #9e6f00;
-  color: #f4f4f4;
+  background-color: #ffb300; /* amber darken-1 */
+  color: #333;
 
+  text-align: center;
   place-items: center;
 }
 
 #footer p {
   grid-rows: 1 / 1;
+}
+
+#footer p small {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 80%;
 }
 
 @media (min-width: 768px) {

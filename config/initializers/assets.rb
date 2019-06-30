@@ -14,9 +14,13 @@ Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'image
 # application.js, application.css, and all non-JS/CSS in the app/assets
 # folder are already added.
 Rails.application.config.assets.precompile += %w(
+  reset.css
   expense_index.css
   dashboard.css
+  entry-form.css
+  balance.css
   access.css
+  entries.css
   wallets.css
   login.css
   homepage.js

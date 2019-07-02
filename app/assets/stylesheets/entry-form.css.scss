@@ -69,7 +69,7 @@ label[for="entry_type_expense"], label[for="entry_type_revenue"] {
   vertical-align: middle;
   background-repeat: no-repeat;
   display: inline-block;
-  height: 24px;
+  height: 32px;
 }
 
 #entry_type_revenue, #entry_type_expense {
@@ -86,7 +86,7 @@ label[for="entry_type_expense"] {
 
 #entry_type_expense:checked + label[for="entry_type_expense"] {
   background-image: image-url('icons/menos-on.svg');
-  height: 34px;
+  transform: scale(2);
 }
 
 label[for="entry_type_revenue"] {
@@ -95,7 +95,7 @@ label[for="entry_type_revenue"] {
 
 #entry_type_revenue:checked + label[for="entry_type_revenue"] {
   background-image: image-url('icons/mais-on.svg');
-  height: 34px;
+  transform: scale(2);
 }
 
 .form-container .entry-category {

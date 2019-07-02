@@ -143,6 +143,7 @@ destroyer	app/controllers/entries_controller.rb	/^  def destroyer$/;"	f	class:En
 destroyer	app/controllers/goals_controller.rb	/^  def destroyer$/;"	f	class:GoalsController
 edit	app/controllers/entries_controller.rb	/^  def edit$/;"	f	class:EntriesController
 edit	app/controllers/goals_controller.rb	/^  def edit$/;"	f	class:GoalsController
+edit	app/controllers/wallets_controller.rb	/^  def edit$/;"	f	class:WalletsController
 encrypt	app/controllers/entries_controller.rb	/^  def encrypt$/;"	f	class:EntriesController
 entries_backward	app/models/entry.rb	/^  def entries_backward$/;"	f	class:Entry
 entries_by_month	app/controllers/api/entries_controller.rb	/^    def entries_by_month$/;"	f	class:Api.EntriesController
@@ -250,9 +251,11 @@ total_balance	app/models/entry.rb	/^  def self.total_balance(wallet_id)$/;"	F	cl
 update	app/commands/goal/updater.rb	/^    def update(params)$/;"	f	class:Goal.Updater
 update	app/controllers/api/goals_controller.rb	/^    def update$/;"	f	class:Api.GoalsController
 update	app/controllers/entries_controller.rb	/^  def update$/;"	f	class:EntriesController
+update	app/controllers/wallets_controller.rb	/^  def update$/;"	f	class:WalletsController
 update!	app/commands/entry/updater.rb	/^    def update!(params)$/;"	f	class:Entry.Updater
 update_entry	app/commands/entry/updater.rb	/^    def update_entry(params)$/;"	f	class:Entry.Updater
 update_params	app/controllers/entries_controller.rb	/^  def update_params$/;"	f	class:EntriesController
+update_params	app/controllers/wallets_controller.rb	/^  def update_params$/;"	f	class:WalletsController
 updater	app/controllers/api/goals_controller.rb	/^    def updater$/;"	f	class:Api.GoalsController
 updater	app/controllers/entries_controller.rb	/^  def updater$/;"	f	class:EntriesController
 validate	app/validators/user_validator.rb	/^  def validate(record)$/;"	f	class:UserValidator

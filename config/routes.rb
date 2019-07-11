@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :goals, only: %i(index)
 
-    resources :wallets, only: %i(index)
+    resources :wallets, only: %i(index new create edit update)
   end
   resources :goals, only: %i(edit show destroy)
 

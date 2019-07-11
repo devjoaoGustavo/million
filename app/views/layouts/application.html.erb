@@ -12,6 +12,7 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= yield :css %>
+    <%= javascript_include_tag 'application', media: 'all' %>
   </head>
 
   <body>
@@ -31,6 +32,12 @@
     </nav>
 
     <main id="main">
+      <% if flash[:notice] %>
+        <%= content_tag :span, flash[:notice], class: 'notice' %>
+      <% elsif flash[:alert] %>
+        <%= content_tag :span, flash[:alert], class: 'alert' %>
+      <% end %>
+
       <%= yield %>
     </main>
 
@@ -42,7 +49,5 @@
         </small>
       </p>
     </footer>
-
-    <%= javascript_include_tag 'application', media: 'all' %>
   </body>
 </html>

@@ -24,11 +24,40 @@
 :root {
   --amber-darken-4: #ff8a30;
   --gray-font: #666;
+  --first-color: #96ceb4;
+  --second-color: #ffeead;
+  --third-color: #ff6f69;
+  --fourth-color: #ffcc5c;
+  --fifth-color: #88d8b0;
+}
+
+
+/*---------------------------------------------*/
+/*------------start-container------------------*/
+/*---------------------------------------------*/
+.container {
+  padding: 20px;
+  max-width: 1024px;
+  margin: auto;
+}
+
+.container h2 {
+  padding: 20px 0px;
+  font-size: 1.5rem;
+  color: var(--fifth-color);
+}
+
+/*---------------------------------------------*/
+/*--------------end-container------------------*/
+/*---------------------------------------------*/
+
+.clear {
+  clear: both;
 }
 
 .button {
-  padding: 10px;
-  background-color: var(--amber-darken-4);
+  padding: 5px 10px;
+  background-color: var(--first-color);
   /* box-shadow: -1px 1px 3px var(--gray-font); */
   text-decoration: none;
   color: white;

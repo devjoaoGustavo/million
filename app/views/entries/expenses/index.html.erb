@@ -1,11 +1,12 @@
 <%= content_for :css do %>
-  <%= stylesheet_link_tag 'expense_index', media: 'all' %>
+  <%= stylesheet_link_tag 'entry_index', media: 'all' %>
+  <%= stylesheet_link_tag 'table', media: 'all' %>
 <% end %>
 
 <section class="container">
-  <h1>Despesas</h1>
+  <h2>Despesas</h2>
 
-  <table class="highlight">
+  <table>
     <thead>
       <tr>
         <th>Descrição</th>
@@ -16,10 +17,10 @@
 
     <tbody>
       <% @expenses.each do |expense| %>
-        <tr>
-          <%= content_tag(:td, expense.description) %>
-          <%= content_tag(:td, number_to_currency(expense.amount)) %>
-          <%= content_tag(:td, expense.entry_date.strftime('%d/%m/%Y')) %>
+        <tr class="entry">
+          <%= content_tag(:td, expense.description, class: 'description') %>
+          <%= content_tag(:td, number_to_currency(expense.amount), class: 'amount') %>
+          <%= content_tag(:td, expense.entry_date.strftime('%d/%m/%Y'), class: 'entry-date') %>
         </tr>
       <% end %>
     </tbody>

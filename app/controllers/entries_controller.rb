@@ -54,6 +54,8 @@ class EntriesController < ApplicationController
     @expenses = WalletDecorator
       .decorate_collection(current_user.wallets)
       .sum(&:expenses_till_now)
+      .sort_by(&:entry_date)
+      .reverse
 
     render template: 'entries/expenses/index'
   end
@@ -209,8 +211,7 @@ class EntriesController < ApplicationController
 
   def create_params
     params.require(:entry)
-      .permit(:category_id, :description, :amount, :entry_date, :goal_id, :type)
-      .merge(wallet_id: current_user.default_wallet.id)
+      .permit(:category_id, :description, :amount, :entry_date, :goal_id, :type, :wallet_id)
       .merge(installments: params[:installments])
   end
 

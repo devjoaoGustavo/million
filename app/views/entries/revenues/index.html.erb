@@ -1,25 +1,28 @@
-<%= content_for :title do %>
-  <div class="col s12">
-    <h2>Receitas</h2>
-  </div>
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'entry_index', media: 'all' %>
+  <%= stylesheet_link_tag 'table', media: 'all' %>
 <% end %>
 
-<table class="highlight">
-  <thead>
-    <tr>
-      <th>Descrição</th>
-      <th>Valor</th>
-      <th>Data</th>
-    </tr>
-  </thead>
+<div class="container">
+  <h2>Receitas</h2>
 
-  <tbody>
-    <% @revenues.each do |revenue| %>
+  <table>
+    <thead>
       <tr>
-        <%= content_tag(:td, revenue.description) %>
-        <%= content_tag(:td, number_to_currency(revenue.amount)) %>
-        <%= content_tag(:td, revenue.entry_date.strftime('%d/%m/%Y')) %>
+        <th>Descrição</th>
+        <th>Valor</th>
+        <th>Data</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @revenues.each do |revenue| %>
+        <tr class="entry">
+          <%= content_tag(:td, revenue.description, class: 'description') %>
+          <%= content_tag(:td, number_to_currency(revenue.amount), class: 'amount') %>
+          <%= content_tag(:td, revenue.entry_date.strftime('%d/%m/%Y'), class: 'entry-date') %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,13 +1,33 @@
 <%= content_for :css do %>
   <%= stylesheet_link_tag 'wallets', media: 'all' %>
+  <%= stylesheet_link_tag 'table', media: 'all' %>
 <% end %>
 
-<div class="container">
+<section class="container">
   <h2>Carteiras</h2>
 
-  <ul class="grid">
-    <% @wallets.each do |wallet| %>
-      <li><%= wallet.name %> = <%= number_to_currency(wallet.balance) %></li>
-    <% end %>
-  </ul>
-</div>
+  <section class="action">
+    <%= link_to('Nova carteira', new_user_wallet_path(current_user), class: 'button') %>
+    <div class="clear"></div>
+  </section>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Valor</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @wallets.each do |wallet| %>
+        <tr class="wallet">
+          <%= content_tag(:td, wallet.name, class: 'name') %>
+          <%= content_tag(:td, number_to_currency(wallet.balance), class: 'balance') %>
+          <td class="action"><%= link_to 'Editar', edit_user_wallet_path(current_user, wallet), class: 'button' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

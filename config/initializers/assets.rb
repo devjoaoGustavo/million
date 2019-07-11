@@ -15,10 +15,11 @@ Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'image
 # folder are already added.
 Rails.application.config.assets.precompile += %w(
   reset.css
-  expense_index.css
+  entry_index.css
   dashboard.css
   entry-form.css
   balance.css
+  table.css
   access.css
   entries.css
   wallets.css

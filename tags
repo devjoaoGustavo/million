@@ -116,8 +116,10 @@ create	app/controllers/api/entries_controller.rb	/^    def create$/;"	f	class:Ap
 create	app/controllers/api/goals_controller.rb	/^    def create$/;"	f	class:Api.GoalsController
 create	app/controllers/entries_controller.rb	/^  def create$/;"	f	class:EntriesController
 create	app/controllers/sessions_controller.rb	/^  def create$/;"	f	class:SessionsController
+create	app/controllers/wallets_controller.rb	/^  def create$/;"	f	class:WalletsController
 create!	app/commands/entry/creator.rb	/^    def create!(params)$/;"	f	class:Entry.Creator
 create_params	app/controllers/entries_controller.rb	/^  def create_params$/;"	f	class:EntriesController
+create_params	app/controllers/wallets_controller.rb	/^  def create_params$/;"	f	class:WalletsController
 creation_params	app/controllers/api/entries_controller.rb	/^    def creation_params$/;"	f	class:Api.EntriesController
 creator	app/controllers/api/entries_controller.rb	/^    def creator$/;"	f	class:Api.EntriesController
 creator	app/controllers/api/goals_controller.rb	/^    def creator$/;"	f	class:Api.GoalsController
@@ -204,6 +206,7 @@ monthly_expense	app/decorators/user_decorator.rb	/^  def monthly_expense$/;"	f	c
 monthly_revenue	app/controllers/api/entries_controller.rb	/^    def monthly_revenue$/;"	f	class:Api.EntriesController
 monthly_revenue	app/decorators/user_decorator.rb	/^  def monthly_revenue$/;"	f	class:UserDecorator
 new	app/controllers/sessions_controller.rb	/^  def new$/;"	f	class:SessionsController
+new	app/controllers/wallets_controller.rb	/^  def new$/;"	f	class:WalletsController
 new_entry	app/controllers/entries_controller.rb	/^  def new_entry(args = {})$/;"	f	class:EntriesController
 new_expense	app/controllers/entries_controller.rb	/^  def new_expense$/;"	f	class:EntriesController
 new_revenue	app/controllers/entries_controller.rb	/^  def new_revenue$/;"	f	class:EntriesController

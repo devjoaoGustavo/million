@@ -1,0 +1,15 @@
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'wallets', media: 'all' %>
+<% end %>
+
+<div class="container">
+  <h2>Editar <em><%= @wallet.name %></em></h2>
+
+  <%= form_with model: @wallet, url: user_wallet_path(current_user, @wallet), method: :patch do |f| %>
+    <%= f.hidden_field :user_id, auto_focus: true %>
+    <%= f.label :name, 'Nome', for: 'wallet[name]' %>
+    <%= f.text_field :name, autofocus: true %>
+    <%= f.submit 'Salvar' %>
+    <%= link_to 'Cancelar', user_wallets_path(current_user) %>
+  <% end %>
+</div>

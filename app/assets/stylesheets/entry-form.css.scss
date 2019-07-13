@@ -14,9 +14,12 @@ select {
   background-color: rgb(248, 248, 248);
 }
 
+/* Begin of line 1 */
+
 .form-container .entry-date {
   float: left;
   width: 50%;
+  margin-bottom: 10px;
 }
 
 .form-container .entry-date input {
@@ -29,18 +32,16 @@ select {
   float: right;
   width: 50%;
   color: #666;
-  border: 0;
-  text-align: center;
-  padding: 3px 0px;
+  padding: 4px 0px;
 }
 
 #radio-expense {
-  float: left;
+  float: right;
   width: 50%;
 }
 
 #radio-revenue {
-  float: right;
+  float: left;
   width: 50%;
 }
 
@@ -49,7 +50,7 @@ label[for="entry_type_expense"], label[for="entry_type_revenue"] {
   vertical-align: middle;
   background-repeat: no-repeat;
   display: inline-block;
-  height: 32px;
+  height: 1.6rem;
 }
 
 #entry_type_revenue, #entry_type_expense {
@@ -63,7 +64,7 @@ label[for="entry_type_expense"] {
 
 #entry_type_expense:checked + label[for="entry_type_expense"] {
   background-image: image-url('icons/menos-on.svg');
-  transform: scale(2);
+  transform: scale(1.6);
 }
 
 label[for="entry_type_revenue"] {
@@ -72,19 +73,33 @@ label[for="entry_type_revenue"] {
 
 #entry_type_revenue:checked + label[for="entry_type_revenue"] {
   background-image: image-url('icons/mais-on.svg');
-  transform: scale(2);
+  transform: scale(1.6);
 }
+
+/* end of line 1 */
 
 .form-container .entry-wallet {
   clear: both;
+  margin-bottom: 10px;
 }
 
 .form-container .entry-wallet select {
+  height: 2.375rem;
+  color: var(--gray-font);
   font-weight: 700;
 }
 
+.form-container .entry-category {
+  margin-bottom: 10px;
+}
+
 .form-container .entry-category select {
+  height: 2.375rem;
   color: var(--gray-font);
+}
+
+.form-container .entry-description {
+  margin-bottom: 10px;
 }
 
 .form-container .entry-description input {
@@ -94,7 +109,7 @@ label[for="entry_type_revenue"] {
 
 .form-container .entry-amount {
   float: left;
-  width: 50%;
+  width: calc(100% / 2 - 5px);
 }
 
 .form-container .entry-amount input {
@@ -104,7 +119,8 @@ label[for="entry_type_revenue"] {
 
 .form-container .action-group {
   float: right;
-  width: 50%;
+  padding: 10px;
+  width: calc(100% / 2 - 5px);
 }
 
 .form-container .invisible {
@@ -113,9 +129,36 @@ label[for="entry_type_revenue"] {
 
 .form-container input, .form-container select {
   border: none;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 
 .clear {
   clear: both;
+}
+
+@media all and (min-width: 425px) {
+  .form-container .entry-type {
+      text-align: center;
+  }
+}
+
+@media all and (max-width: 299px) {
+  .form-container .entry-date {
+     width: 100%;
+  }
+
+  .form-container .entry-type {
+     width: 100%;
+     text-align: center;
+     margin-bottom: 10px;
+  }
+
+  .form-container .entry-amount {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .form-container .action-group {
+    width: 100%;
+  }
 }

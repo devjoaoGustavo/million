@@ -6,6 +6,11 @@
 <div class="container">
   <h2>Receitas</h2>
 
+  <section class="action">
+    <%= link_to('Nova receita', new_entry_path(current_user, type: 'revenue'), class: 'button') %>
+    <div class="clear"></div>
+  </section>
+
   <table>
     <thead>
       <tr>

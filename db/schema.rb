@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_24_234503) do
+ActiveRecord::Schema.define(version: 2019_07_11_095840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 2019_06_24_234503) do
 
   create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
   end
 
   create_table "dreams", force: :cascade do |t|
@@ -35,28 +35,19 @@ ActiveRecord::Schema.define(version: 2019_06_24_234503) do
 
   create_table "entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "description"
-    t.uuid "category_id", null: false
     t.string "type", null: false
-    t.decimal "amount", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "entry_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.uuid "category_id", null: false
     t.uuid "entry_id"
     t.uuid "goal_id"
+    t.decimal "amount", null: false
+    t.datetime "entry_date", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.uuid "wallet_id"
     t.index ["category_id"], name: "index_entries_on_category_id"
     t.index ["entry_id"], name: "index_entries_on_entry_id"
     t.index ["goal_id"], name: "index_entries_on_goal_id"
     t.index ["wallet_id"], name: "index_entries_on_wallet_id"
-  end
-
-  create_table "entries_tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "entry_id", null: false
-    t.uuid "tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["entry_id"], name: "index_entries_tags_on_entry_id"
-    t.index ["tag_id"], name: "index_entries_tags_on_tag_id"
   end
 
   create_table "goals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -70,15 +61,10 @@ ActiveRecord::Schema.define(version: 2019_06_24_234503) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "tags", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "username"
+    t.string "photo"
     t.string "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -98,7 +84,5 @@ ActiveRecord::Schema.define(version: 2019_06_24_234503) do
 
   add_foreign_key "entries", "categories"
   add_foreign_key "entries", "wallets"
-  add_foreign_key "entries_tags", "entries"
-  add_foreign_key "entries_tags", "tags"
   add_foreign_key "wallets", "users"
 end

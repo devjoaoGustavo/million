@@ -6,6 +6,11 @@
 <section class="container">
   <h2>Despesas</h2>
 
+  <section class="action">
+    <%= link_to('Nova despesa', new_entry_path(current_user, type: 'expense'), class: 'button') %>
+    <div class="clear"></div>
+  </section>
+
   <table>
     <thead>
       <tr>

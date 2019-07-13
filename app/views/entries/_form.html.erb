@@ -8,13 +8,13 @@
     <%= f.date_field :entry_date %>
   </div>
   <div class="form-group entry-type">
-    <div id="radio-expense">
-      <%= f.radio_button :type, 'expense', checked: true %>
-      <%= label :type, 'Gasto', for: 'entry_type_expense' %>
-    </div>
     <div id="radio-revenue">
-      <%= f.radio_button :type, 'revenue' %>
+      <%= f.radio_button :type, Entry::Revenue.to_s, id: 'entry_type_revenue' %>
       <%= label :type, 'Ganho', for: 'entry_type_revenue' %>
+    </div>
+    <div id="radio-expense">
+      <%= f.radio_button :type, Entry::Expense.to_s, id: 'entry_type_expense' %>
+      <%= label :type, 'Gasto', for: 'entry_type_expense' %>
     </div>
   </div>
   <div class="form-group entry-wallet">
@@ -31,7 +31,7 @@
   </div>
   <div class="form-group entry-amount">
     <%= label :amount, 'Valor', class: 'invisible' %>
-    <%= f.number_field :amount, min: 0.00, step: 0.01, placeholder: 'Valor' %>
+    <%= f.number_field :amount, min: 0.00, step: 0.01, placeholder: 'Valor (R$ 1234,56)' %>
   </div>
   <%= f.submit 'Salvar nova entrada', class: 'action-group button' %>
   <div class="clear"></div>

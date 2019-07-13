@@ -14,12 +14,18 @@ class EntriesController < ApplicationController
     render layout: false
   end
 
+  def new
+    @new_entry = (params[:type] == 'expense' ? @new_expense : @new_revenue).tap do |entry|
+      entry.entry_date = Time.zone.today
+    end
+  end
+
   def index
   end
 
   def search
     @goals = current_user.goals
-    new_entry(params[:type])
+    new_entry(params.slice(:type))
     filters = {}.tap do |f|
       f[:category_id] = params[:category_id] if params[:category_id].present?
       f[:entry_date]  = search_range
@@ -136,7 +142,7 @@ class EntriesController < ApplicationController
     @expense = current_user.monthly_expense
     @revenue = current_user.monthly_revenue
     @monthly_balance = current_user.monthly_balance
-    @new_entry = new_entry(entry_date: Time.zone.today, wallet_id: current_user.default_wallet.id)
+    @new_entry = new_entry(entry_date: Time.zone.today)
   end
 
   def invalid_currency_format
@@ -170,14 +176,14 @@ class EntriesController < ApplicationController
   end
 
   def new_entry(args = {})
-    @entry = Entry.new(args)
+    @entry = new_expense(args)
   end
 
-  def new_expense
+  def new_expense(args = {})
     @new_expense = current_user
       .default_wallet
       .entries
-      .build(type: Entry::Expense.to_s)
+      .build(args.reverse_merge(type: Entry::Expense.to_s))
   end
 
   def new_revenue
@@ -210,7 +216,9 @@ class EntriesController < ApplicationController
   end
 
   def create_params
-    params.require(:entry)
+    required = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
+
+    params.require(required)
       .permit(:category_id, :description, :amount, :entry_date, :goal_id, :type, :wallet_id)
       .merge(installments: params[:installments])
   end

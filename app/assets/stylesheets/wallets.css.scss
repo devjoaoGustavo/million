@@ -1,11 +1,7 @@
-.button, .wallets li span {
+.button, .wallet li span {
   font-size: 1rem;
 }
 
 .wallets li:nth-child(odd) {
   background-color: #ddd;
-}
-
-section.action a {
-  float: right;
 }

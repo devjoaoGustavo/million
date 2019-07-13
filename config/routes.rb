@@ -8,40 +8,12 @@ Rails.application.routes.draw do
   get 'auth/google_oauth2/callback', to: 'sessions#google_auth'
   get 'auth/failure', to: redirect('sessions/new')
 
-  namespace :api do
-    resources :users, only: [] do
-      resources :goals,   only: %i(index create)
-      resources :entries, only: %i(index create)
-
-      get '/entries/by_month', to: 'entries#entries_by_month'
-
-      get '/balance', to: 'entries#balance'
-      get '/balance/monthly', to: 'entries#monthly_balance'
-      get '/expense/monthly', to: 'entries#monthly_expense'
-      get '/revenue/monthly', to: 'entries#monthly_revenue'
-
-      get '/balance/weekly', to: 'entries#weekly_balance'
-      get '/expense/weekly', to: 'entries#weekly_expense'
-      get '/revenue/weekly', to: 'entries#weekly_revenue'
-
-      get '/balance/daily', to: 'entries#daily_balance'
-      get '/expense/daily', to: 'entries#daily_expense'
-      get '/revenue/daily', to: 'entries#daily_revenue'
-
-      get '/expense/by_category', to: 'entries#expense_by_category'
-      get '/revenue/by_category', to: 'entries#revenue_by_category'
-    end
-    resources :goals, only: %i(update) do
-      get '/expenses', to: 'entries#list'
-    end
-    get '/categories', to: 'categories#index'
-  end
-
   resources :users do
     resources :goals, only: %i(index)
 
     resources :wallets, only: %i(index new create edit update)
   end
+
   resources :goals, only: %i(edit show destroy)
 
   resources :sessions, only: %i(create)
@@ -50,7 +22,9 @@ Rails.application.routes.draw do
 
   get   '/users/:user_id/search',   to: 'entries#search',   as: 'search'
 
-  resources :entries, only: [:create]
+  resources :entries, only: %i(new create)
+  post '/entry/expenses', to: 'entries#create'
+  post '/entry/revenues', to: 'entries#create'
 
   get   '/users/:user_id/expenses', to: 'entries#expenses', as: 'expenses'
   get   '/users/:user_id/revenues', to: 'entries#revenues', as: 'revenues'

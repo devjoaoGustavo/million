@@ -15,7 +15,7 @@ class Entry < ApplicationRecord
       return if count(params[:installments].to_i).zero?
       @count -= 1
       Entry.create(
-        type:        class_type(params[:type]),
+        type:        params[:type],
         wallet_id:   params[:wallet_id],
         category_id: params[:category_id],
         description: params[:description],
@@ -30,10 +30,6 @@ class Entry < ApplicationRecord
           .merge(entry_id: previous_entry.id)
         )
       end
-    end
-
-    def class_type(type)
-      "Entry::#{type.capitalize}"
     end
 
     def count(n)

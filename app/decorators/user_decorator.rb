@@ -6,7 +6,7 @@ class UserDecorator < ApplicationDecorator
 
   def balance
     @balance ||= WalletDecorator
-      .decorate_collection(wallets)
+      .decorate_collection(wallets_and_sharings)
       .sum(&:balance)
   end
 
@@ -34,7 +34,7 @@ class UserDecorator < ApplicationDecorator
 
   def entries_by_month
     [].tap do |result|
-      grouped = Entry.where(wallet_id: wallets.map(&:id), entry_date: this_year).order(entry_date: :asc).group_by(&method(:per_month))
+      grouped = Entry.where(wallet_id: wallets_and_sharings.map(&:id), entry_date: this_year).order(entry_date: :asc).group_by(&method(:per_month))
       I18n.t('date')[:abbr_month_names].compact.each_with_index do |month, idx|
         values = grouped[idx + 1] || []
         revs = values.select(&:revenue?).sum(&:amount)
@@ -84,7 +84,7 @@ class UserDecorator < ApplicationDecorator
   end
 
   def expenses
-    @expenses ||= wallets
+    @expenses ||= wallets_and_sharings
       .flat_map(&:entries)
       .select(&:expense?)
       .sort_by(&:entry_date)
@@ -92,7 +92,7 @@ class UserDecorator < ApplicationDecorator
   end
 
   def revenues
-    @revenues ||= wallets
+    @revenues ||= wallets_and_sharings
       .flat_map(&:entries)
       .select(&:revenue?)
   end
@@ -107,9 +107,13 @@ class UserDecorator < ApplicationDecorator
 
   def by_category(klass)
     klass
-      .amount_by_category(wallet_id: wallets.map(&:id), period: this_month)
+      .amount_by_category(wallet_id: wallets_and_sharings.map(&:id), period: this_month)
       .map(&:values)
       .to_h
+  end
+
+  def wallets_and_sharings
+    wallets + sharings.flat_map(&:wallet)
   end
 
   private

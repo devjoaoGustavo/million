@@ -4,6 +4,10 @@ class WalletDecorator < ApplicationDecorator
   include Timing
   delegate_all
 
+  def shared
+    sharings.any? ? 'Sim' : 'Não'
+  end
+
   def balance
     @balance ||= revenues_till_now.sum(&:amount) - expenses_till_now.sum(&:amount)
   end

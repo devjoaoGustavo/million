@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     resources :wallets, only: %i(index new create edit update)
   end
 
+  resources :wallets do
+    resources :sharings, only: %i(new create destroy)
+  end
+
   resources :goals, only: %i(edit show destroy)
 
   resources :sessions, only: %i(create)

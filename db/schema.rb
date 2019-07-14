@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_11_095840) do
+ActiveRecord::Schema.define(version: 2019_07_13_143235) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -19,9 +19,9 @@ ActiveRecord::Schema.define(version: 2019_07_11_095840) do
 
   create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "description"
   end
 
   create_table "dreams", force: :cascade do |t|
@@ -61,6 +61,15 @@ ActiveRecord::Schema.define(version: 2019_07_11_095840) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sharings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "wallet_id"
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sharings_on_user_id"
+    t.index ["wallet_id"], name: "index_sharings_on_wallet_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "username"
@@ -84,5 +93,7 @@ ActiveRecord::Schema.define(version: 2019_07_11_095840) do
 
   add_foreign_key "entries", "categories"
   add_foreign_key "entries", "wallets"
+  add_foreign_key "sharings", "users"
+  add_foreign_key "sharings", "wallets"
   add_foreign_key "wallets", "users"
 end

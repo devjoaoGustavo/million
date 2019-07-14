@@ -2,6 +2,10 @@
   <%= stylesheet_link_tag 'login', media: 'all' %>
 <% end %>
 
+<% if flash[:alert].present? %>
+  <span class="error-message"><%= flash[:alert] %></span>
+<% end %>
+
 <div class="container">
   <%= link_to root_path, class: 'logo' do %>
     <img src="<%= image_url("million-logo.svg") %>">
@@ -9,5 +13,7 @@
 
   <h1 class="title">Acesso Million</h1>
 
-  <%= link_to 'Entre usando sua conta Google', 'auth/google_oauth2', class: 'button' %>
+  <%= form_tag 'auth/google_oauth2' do %>
+    <%= submit_tag 'Entre usando sua conta Google', class: 'button' %>
+  <% end %>
 </div>

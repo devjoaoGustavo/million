@@ -26,11 +26,10 @@ th, td {
 }
 
 table tr:hover {
-  background-color: var(--first-color);
+  background-color: var(--second-color);
 }
 
 table tbody .action a {
   background-color: var(--fourth-color);
   color: black;
 }
-

@@ -16,6 +16,7 @@
       <tr>
         <th>Nome</th>
         <th>Valor</th>
+        <th>Compartilhada?</th>
         <th></th>
       </tr>
     </thead>
@@ -25,9 +26,41 @@
         <tr class="wallet">
           <%= content_tag(:td, wallet.name, class: 'name') %>
           <%= content_tag(:td, number_to_currency(wallet.balance), class: 'balance') %>
-          <td class="action"><%= link_to 'Editar', edit_user_wallet_path(current_user, wallet), class: 'button' %></td>
+          <%= content_tag(:td, wallet.shared, class: 'shared') %>
+          <td class="action">
+            <%= link_to 'editar', edit_user_wallet_path(current_user, wallet), class: 'button' %>
+            <%= link_to 'compartilhar', new_wallet_sharing_path(wallet), class: 'button share' %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   </table>
+
+  <% if @sharings.present? %>
+    <div class="sharings">
+      <h3>Carteiras compartilhadas</h3>
+
+      <table>
+        <thead>
+          <tr>
+            <th>nome</th>
+            <th>valor</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @sharings.each do |sharing| %>
+            <tr class="wallet">
+              <%= content_tag(:td, sharing.name, class: 'name') %>
+              <%= content_tag(:td, number_to_currency(sharing.balance), class: 'balance') %>
+              <td class="action">
+                <%= link_to 'Cancelar compartilhamento', wallet_sharing_path(sharing.wallet, sharing), method: :delete, class: 'button' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
 </section>

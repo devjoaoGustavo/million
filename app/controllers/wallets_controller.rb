@@ -1,6 +1,7 @@
 class WalletsController < ApplicationController
   def index
     @wallets = WalletDecorator.decorate_collection current_user.wallets
+    @sharings = SharingDecorator.decorate_collection current_user.sharings
   end
 
   def new

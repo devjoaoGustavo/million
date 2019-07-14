@@ -19,7 +19,10 @@
   </div>
   <div class="form-group entry-wallet">
     <%= label :wallet_id, 'Carteira', class: 'invisible' %>
-    <%= f.select :wallet_id, @wallets.collect { |wallet| [wallet.name, wallet.id] } %>
+    <%=
+      f.select :wallet_id,
+        @wallets.collect { |wallet| [wallet.name, wallet.id] } + @sharings.collect { |sharing| [sharing.name, sharing.id] }
+    %>
   </div>
   <div class="form-group entry-category">
     <%= label :category_id, 'Categoria', class: 'invisible' %>

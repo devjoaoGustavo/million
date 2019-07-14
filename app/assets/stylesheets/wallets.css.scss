@@ -1,7 +1,19 @@
+.button.share {
+  background-color: var(--fifth-color);
+}
 .button, .wallet li span {
   font-size: 1rem;
 }
 
 .wallets li:nth-child(odd) {
   background-color: #ddd;
+}
+
+.sharings {
+  margin-top: 40px;
+  padding: 10px 0px;
+}
+
+.container h3 {
+  font-size: 1rem;
 }

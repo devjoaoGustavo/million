@@ -28,6 +28,7 @@ gem 'draper'
 gem 'groupdate'
 
 gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   gem 'pry-byebug'

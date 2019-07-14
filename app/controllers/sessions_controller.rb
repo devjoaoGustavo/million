@@ -7,17 +7,17 @@ class SessionsController < ApplicationController
 
   def google_auth
     access_token = request.env['omniauth.auth']
-    user = User.from_omniauth(access_token)
-    user.google_token = access_token.credentials.token
+    @user = User.from_omniauth(access_token)
+    @user.google_token = access_token.credentials.token
     refresh_token = access_token.credentials.refresh_token
-    user.google_refresh_token = refresh_token if refresh_token.present?
+    @user.google_refresh_token = refresh_token if refresh_token.present?
 
-    if user.save
-      session[:user_id] = user.id
-      redirect_to dashboard_path(user.id), notice: 'Acesso iniciado. É bom te ver por aqui!'
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to dashboard_path(@user.id), notice: 'Acesso iniciado. É bom te ver por aqui!'
     else
-      flash.now[:alert] = 'Não foi possível fazer o login'
-      render :new,  layout: 'access'
+      cookies.delete :_million_session
+      redirect_to login_url, alert: @user.errors.full_messages.join("; \n")
     end
   end
 

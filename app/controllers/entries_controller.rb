@@ -58,7 +58,7 @@ class EntriesController < ApplicationController
 
   def expenses
     @expenses = WalletDecorator
-      .decorate_collection(current_user.wallets)
+      .decorate_collection(current_user.wallets_and_sharings)
       .sum(&:expenses_till_now)
       .sort_by(&:entry_date)
       .reverse
@@ -68,7 +68,7 @@ class EntriesController < ApplicationController
 
   def revenues
     @revenues = WalletDecorator
-      .decorate_collection(current_user.wallets)
+      .decorate_collection(current_user.wallets_and_sharings)
       .sum(&:revenues_till_now)
     render template: 'entries/revenues/index'
   end
@@ -168,7 +168,8 @@ class EntriesController < ApplicationController
   end
 
   def load_wallets
-    @wallets= current_user.wallets
+    @wallets = current_user.wallets
+    @sharings = SharingDecorator.decorate_collection current_user.sharings
   end
 
   def find_entry

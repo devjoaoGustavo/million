@@ -1,0 +1,15 @@
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'sharings', media: 'all' %>
+<% end %>
+
+<div class="container">
+  <h2>Compartilhe sua carteira <em><%= @wallet.name %></em></h2>
+
+  <%= form_tag wallet_sharings_path(@wallet) do |f| %>
+    <%= label_tag :contact, 'Contato' %>
+    <%= text_field_tag :contact, nil, placeholder: 'Digite o nome do usuário ou seu email', autofocus: true %>
+    <%= submit_tag 'Compartilhar', class: 'button' %>
+    <%= link_to 'Cancelar', user_wallets_path(current_user) %>
+  <% end %>
+</div>
+

@@ -23,6 +23,7 @@ Rails.application.config.assets.precompile += %w(
   access.css
   entries.css
   wallets.css
+  sharings.css
   login.css
   homepage.js
   homepage.css

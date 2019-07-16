@@ -16,6 +16,7 @@ Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'image
 Rails.application.config.assets.precompile += %w(
   reset.css
   entry_index.css
+  entry_show.css
   dashboard.css
   entry-form.css
   balance.css

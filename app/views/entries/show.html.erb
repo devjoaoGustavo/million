@@ -1,0 +1,17 @@
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'entry_index', media: 'all' %>
+  <%= stylesheet_link_tag 'entry_show', media: 'all' %>
+<% end %>
+
+<div class="container">
+  <h2><%= @entry.presentation_name %></h2>
+
+  <ul>
+    <li><%= @entry.description %></li>
+    <li><%= @entry.category.name %></li>
+    <li><%= @entry.wallet.name %></li>
+    <li><%= number_to_currency(@entry.amount) %></li>
+    <li class="action"><%= link_to 'Editar', edit_entry_path(@entry), class: 'button' %></li>
+    <li class="action"><%= link_to 'Deletar', delete_entry_path(@entry), method: :delete, class: 'button delete' %></li>
+  </ul>
+</div>

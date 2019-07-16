@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Nova <%= @new_entry.expense? ? 'despesa' : 'receita' %></h2>
+  <h2>Nova <%= @entry.expense? ? 'despesa' : 'receita' %></h2>
 
   <%= render partial: 'form' %>
 </div>

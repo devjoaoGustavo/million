@@ -2,6 +2,14 @@ tr.entry:nth-child(odd) {
   background-color: #ddd;
 }
 
+.entry a {
+  text-decoration: none;
+}
+
+.entry a:visited {
+  color: inherit;
+}
+
 td.description {
   max-width: 150px;
 }

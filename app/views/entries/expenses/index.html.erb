@@ -24,8 +24,12 @@
       <% @expenses.each do |expense| %>
         <tr class="entry">
           <%= content_tag(:td, expense.description, class: 'description') %>
-          <%= content_tag(:td, number_to_currency(expense.amount), class: 'amount') %>
-          <%= content_tag(:td, expense.entry_date.strftime('%d/%m/%Y'), class: 'entry-date') %>
+          <td class="amount">
+            <%= link_to(number_to_currency(expense.amount), entry_path(expense)) %>
+          </td>
+          <td class="entry-date">
+            <%= link_to(expense.entry_date.strftime('%d/%m/%Y'), entry_path(expense)) %>
+          </td>
         </tr>
       <% end %>
     </tbody>

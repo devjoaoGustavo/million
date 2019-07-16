@@ -26,7 +26,8 @@ Rails.application.routes.draw do
 
   get   '/users/:user_id/search',   to: 'entries#search',   as: 'search'
 
-  resources :entries, only: %i(new create)
+  resources :entries, only: %i(new create show)
+
   post '/entry/expenses', to: 'entries#create'
   post '/entry/revenues', to: 'entries#create'
 
@@ -37,7 +38,6 @@ Rails.application.routes.draw do
   put   '/entries/:id',             to: 'entries#update'
   put   '/entries/:id',             to: 'entries#update'
 
-  get    '/entries/:id',              to: 'entries#show',         as: 'entry'
   get    '/entries/:id/installments', to: 'entries#installments', as: 'installments'
   get    '/entries/:id/edit',         to: 'entries#edit',         as: 'edit_entry'
   get    '/users/:user_id/entries',   to: 'entries#index',        as: 'dashboard'

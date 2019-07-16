@@ -3,10 +3,10 @@
 class EntriesController < ApplicationController
   include Timing
   before_action :validate_session!
-  before_action :new_expense
-  before_action :new_revenue
-  before_action :load_categories
-  before_action :load_wallets
+  before_action :new_expense, except: :show
+  before_action :new_revenue, except: :show
+  before_action :load_categories, except: :show
+  before_action :load_wallets, except: :show
   before_action :assign_dashboard_values, only: %i[index create]
   rescue_from InvalidCurrencyFormat, with: :invalid_currency_format
 
@@ -15,7 +15,7 @@ class EntriesController < ApplicationController
   end
 
   def new
-    @new_entry = (params[:type] == 'expense' ? @new_expense : @new_revenue).tap do |entry|
+    @entry = (params[:type] == 'expense' ? @new_expense : @new_revenue).tap do |entry|
       entry.entry_date = Time.zone.today
     end
   end
@@ -75,9 +75,6 @@ class EntriesController < ApplicationController
 
   def show
     @entry = find_entry
-    intro(message:   'Detalhes de ' + (@entry.expense? ? 'despesa' : 'receita'),
-          ico_class: (@entry.expense? ? 'ls-ico-cart' : 'ls-ico-bar-up'),
-          href:      (@entry.expense? ? expenses_path(current_user.id) : revenues_path(current_user.id)))
   end
 
   def installments
@@ -89,11 +86,7 @@ class EntriesController < ApplicationController
   end
 
   def edit
-    @goals = current_user.goals
-    @entry = find_entry
-    intro(message:   @entry.expense? ? 'Despesas' : 'Receitas',
-          ico_class: @entry.expense? ? 'ls-ico-cart' : 'ls-ico-chart-bar-up',
-          href:      entry_path(@entry.id))
+    @entry = find_entry.object
   end
 
   def update
@@ -142,7 +135,7 @@ class EntriesController < ApplicationController
     @expense = current_user.monthly_expense
     @revenue = current_user.monthly_revenue
     @monthly_balance = current_user.monthly_balance
-    @new_entry = new_entry(entry_date: Time.zone.today)
+    @entry = new_entry(entry_date: Time.zone.today)
   end
 
   def invalid_currency_format
@@ -173,7 +166,9 @@ class EntriesController < ApplicationController
   end
 
   def find_entry
-    Entry.find_by(wallet_id: current_user.default_wallet.id, id: params[:id])
+    Entry
+      .find(params[:id])
+      .then(&EntryDecorator.method(:decorate))
   end
 
   def new_entry(args = {})
@@ -227,13 +222,12 @@ class EntriesController < ApplicationController
   def update_params
     key = params.key?(:entry_expense) ? :entry_expense : :entry_revenue
     params.require(key)
-      .permit(:category_id, :description, :amount, :entry_date, :goal_id)
+      .permit(:category_id, :description, :amount, :entry_date, :goal_id, :wallet_id)
       .merge(id: params[:id])
-      .merge(wallet_id: current_user.default_wallet.id)
   end
 
   def destroy_params
-    params.permit(:mode, :id).merge(wallet_id: current_user.default_wallet.id)
+    params.permit(:mode, :id, :wallet_id)
   end
 
   def css_color_class(amount)

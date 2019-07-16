@@ -1,1 +1,4 @@
-<%= render 'form_inline', form_title: 'Edite sua ' + (@entry.expense? ? 'despesa' : 'receita') %>
+<div class="container">
+  <h2>Editar entrada</h2>
+  <%= render partial: 'form' %>
+</div>

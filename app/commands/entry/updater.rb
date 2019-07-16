@@ -25,7 +25,7 @@ class Entry < ApplicationRecord
     end
 
     def find_entry(params)
-      @entry = Entry.find_by(wallet_id: params[:wallet_id], id: params[:id])
+      @entry = Entry.find_by(id: params[:id])
     end
   end
 end

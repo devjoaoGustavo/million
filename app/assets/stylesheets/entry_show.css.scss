@@ -1,0 +1,11 @@
+ul li {
+  line-height: 1.5rem;
+}
+
+li.action {
+  display: inline-block;
+}
+
+.button.delete {
+  background-color: var(--third-color);
+}

@@ -33,3 +33,7 @@ table tbody .action a {
   background-color: var(--fourth-color);
   color: black;
 }
+
+tr a {
+  color: inherit;
+}

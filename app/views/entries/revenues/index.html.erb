@@ -21,11 +21,15 @@
     </thead>
 
     <tbody>
-      <% @revenues.each do |revenue| %>
+      <% @revenues.each do |entry| %>
         <tr class="entry">
-          <%= content_tag(:td, revenue.description, class: 'description') %>
-          <%= content_tag(:td, number_to_currency(revenue.amount), class: 'amount') %>
-          <%= content_tag(:td, revenue.entry_date.strftime('%d/%m/%Y'), class: 'entry-date') %>
+          <%= content_tag(:td, entry.description, class: 'description') %>
+          <td class="amount">
+            <%= link_to(number_to_currency(entry.amount), entry_path(entry)) %>
+          </td>
+          <td class="entry-date">
+            <%= link_to(entry.entry_date.strftime('%d/%m/%Y'), entry_path(entry)) %>
+          </td>
         </tr>
       <% end %>
     </tbody>

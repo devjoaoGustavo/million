@@ -32,7 +32,7 @@ gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   gem 'pry-byebug'
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 3.28'
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 3.7'
   gem 'selenium-webdriver'

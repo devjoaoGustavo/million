@@ -164,7 +164,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.10)
     public_suffix (3.1.0)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.8)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -290,7 +290,7 @@ DEPENDENCIES
   omniauth-rails_csrf_protection
   pg (~> 1.2)
   pry-byebug
-  puma (~> 3.7)
+  puma (~> 3.12)
   rails (~> 5.2.3)
   rspec-rails (~> 3.7)
   sass-rails (~> 5.0)

@@ -11,7 +11,7 @@ gem 'rails',        '~> 5.2.3'
 
 gem 'jquery-rails'
 gem 'pg',           '~> 1.2'
-gem 'puma',         '~> 3.7'
+gem 'puma',         '~> 3.12'
 gem 'sass-rails',   '~> 5.0'
 gem 'therubyracer', platforms: :ruby
 gem 'turbolinks',   '~> 5.1.0'

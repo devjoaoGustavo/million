@@ -3,28 +3,30 @@
   box-shadow: -2px 2px 5px #555;
 }
 
-.balance-container {
+.entries-container, .balance-container {
   margin: 20px 0;
 }
 
 @media screen and (min-width: 768px) {
   .form-container {
-    float: right;
-    width: 49%;
+    clear: both;
+    margin-top: 20px;
+  }
+
+  .balance-container, .entries-container {
+    margin-bottom: 20px;
   }
 
   .balance-container {
-    margin: 0;
-    margin-bottom: 4px;
     float: left;
-    width: 49%;
+    width: calc(100% / 2 - 10px);
   }
 
   .entries-container {
-    float: left;
-    clear: left;
-    width: 49%;
+    float: right;
+    width: calc(100% / 2 - 10px);
   }
+
   .clear {
     clear: both;
   }

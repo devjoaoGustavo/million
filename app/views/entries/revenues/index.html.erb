@@ -1,6 +1,5 @@
 <%= content_for :css do %>
   <%= stylesheet_link_tag 'entry_index', media: 'all' %>
-  <%= stylesheet_link_tag 'table', media: 'all' %>
 <% end %>
 
 <div class="container">
@@ -11,27 +10,5 @@
     <div class="clear"></div>
   </section>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Descrição</th>
-        <th>Valor</th>
-        <th>Data</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @revenues.each do |entry| %>
-        <tr class="entry">
-          <%= content_tag(:td, entry.description, class: 'description') %>
-          <td class="amount">
-            <%= link_to(number_to_currency(entry.amount), entry_path(entry)) %>
-          </td>
-          <td class="entry-date">
-            <%= link_to(entry.entry_date.strftime('%d/%m/%Y'), entry_path(entry)) %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render partial: 'table' %>
 </div>

@@ -29,6 +29,12 @@
   --third-color: #ff6f69;
   --fourth-color: #ffcc5c;
   --fifth-color: #88d8b0;
+
+  --primary-color: #E9D985;
+  --secondary-color: #BCD8C1;
+  --tertiary-color: #439A86;
+  --quartiary-color: #007991;
+  --quintary-color: #222E50;
 }
 
 
@@ -37,7 +43,7 @@
 /*---------------------------------------------*/
 .container {
   padding: 20px;
-  max-width: 1024px;
+  max-width: 768px;
   margin: auto;
 }
 
@@ -56,11 +62,18 @@
 }
 
 .button {
-  padding: 5px 10px;
-  background-color: var(--first-color);
+  padding: 10px;
+  background-color: white;
   /* box-shadow: -1px 1px 3px var(--gray-font); */
   text-decoration: none;
-  color: white;
+  font-size: .8rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+}
+
+.button:hover {
+  background-color: var(--primary-color);
 }
 
 body {
@@ -76,7 +89,8 @@ body {
   display: grid;
   grid-template-areas: "logo" "menu";
   grid-template-rows: 1fr 1fr;
-  background-color: #ffb300; /* amber darken-1 */
+  background-color: white;
+  /* background-color: #ffb300; amber darken-1 */
 }
 
 .toolbar #logo {
@@ -122,7 +136,8 @@ body {
   grid-area: footer;
   display: grid;
   grid-template-rows: 1fr;
-  background-color: #ffb300; /* amber darken-1 */
+  background-color: white;
+  /* background-color: #ffb300; amber darken-1 */
   color: #333;
 
   text-align: center;

@@ -62,20 +62,19 @@ label[for="entry_type_expense"] {
   background-image: image-url('icons/menos-off.svg');
 }
 
-#entry_type_expense:checked + label[for="entry_type_expense"] {
-  background-image: image-url('icons/menos-on.svg');
-  transform: scale(1.6);
-}
-
 label[for="entry_type_revenue"] {
   background-image: image-url('icons/mais-off.svg');
 }
 
-#entry_type_revenue:checked + label[for="entry_type_revenue"] {
-  background-image: image-url('icons/mais-on.svg');
-  transform: scale(1.6);
+#entry_type_expense:checked + label[for="entry_type_expense"] {
+  background-image: image-url('icons/menos-on.svg');
+  transform: scale(2);
 }
 
+#entry_type_revenue:checked + label[for="entry_type_revenue"] {
+  background-image: image-url('icons/mais-on.svg');
+  transform: scale(2);
+}
 /* end of line 1 */
 
 .form-container .entry-wallet {
@@ -119,8 +118,8 @@ label[for="entry_type_revenue"] {
 
 .form-container .action-group {
   float: right;
-  padding: 10px;
   width: calc(100% / 2 - 5px);
+  border: 1px solid black;
 }
 
 .form-container .invisible {

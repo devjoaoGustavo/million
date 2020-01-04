@@ -13,7 +13,6 @@ table {
 }
 
 thead tr {
-  background-color: var(--second-color);
   font-size: 1rem;
 }
 
@@ -25,15 +24,35 @@ th, td {
   padding: 8px;
 }
 
+td a {
+  text-decoration: none;
+}
+
 table tr:hover {
-  background-color: var(--second-color);
+  background-color: var(--secondary-color);
 }
 
 table tbody .action a {
-  background-color: var(--fourth-color);
   color: black;
 }
 
 tr a {
   color: inherit;
+}
+
+td.action {
+  text-align: center;
+}
+
+td.action a {
+  padding: 3px;
+  border-radius: 4px;
+}
+
+td.action .icon-edit-entry {
+  background-color: var(--fifth-color);
+}
+
+td.action .icon-remove-entry {
+  background-color: var(--third-color);
 }

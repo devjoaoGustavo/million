@@ -13,7 +13,7 @@ gem 'jquery-rails'
 gem 'pg',           '~> 1.2'
 gem 'puma',         '~> 3.12'
 gem 'sass-rails',   '~> 6.0'
-gem 'therubyracer', platforms: :ruby
+gem 'mini_racer'
 gem 'turbolinks',   '~> 5.2.1'
 gem 'uglifier',     '>= 1.3.0'
 
@@ -29,6 +29,8 @@ gem 'groupdate'
 
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
+
+gem 'autoprefixer-rails'
 
 group :development, :test do
   gem 'pry-byebug'

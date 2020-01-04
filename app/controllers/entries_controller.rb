@@ -57,7 +57,7 @@ class EntriesController < ApplicationController
   end
 
   def expenses
-    @expenses = WalletDecorator
+    @entries = WalletDecorator
       .decorate_collection(current_user.wallets_and_sharings)
       .sum(&:expenses_till_now)
       .sort_by(&:entry_date)
@@ -67,7 +67,7 @@ class EntriesController < ApplicationController
   end
 
   def revenues
-    @revenues = WalletDecorator
+    @entries = WalletDecorator
       .decorate_collection(current_user.wallets_and_sharings)
       .sum(&:revenues_till_now)
     render template: 'entries/revenues/index'

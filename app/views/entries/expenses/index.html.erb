@@ -11,28 +11,6 @@
     <div class="clear"></div>
   </section>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Descrição</th>
-        <th>Valor</th>
-        <th>Data</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @expenses.each do |expense| %>
-        <tr class="entry">
-          <%= content_tag(:td, expense.description, class: 'description') %>
-          <td class="amount">
-            <%= link_to(number_to_currency(expense.amount), entry_path(expense)) %>
-          </td>
-          <td class="entry-date">
-            <%= link_to(expense.entry_date.strftime('%d/%m/%Y'), entry_path(expense)) %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render partial: 'table' %>
 </section>
 

@@ -1,24 +1,18 @@
 <tr>
-  <td class="ls-txt-center hidden-xs"><%= entry.category.name %></td>
-  <td class="ls-txt-center"><%= entry.description %></td>
-  <td class="ls-txt-center">
+  <td class="category"><%= entry.category.name %></td>
+  <td class="description"><%= entry.description %></td>
+  <td class="amount">
     <a href="<%= entry_path(entry.id) %>"
-      class="ls-tooltip-top"
       aria-label="Ver detalhes da <%= entry.expense? ? 'despesa' : 'receita' %>" >
       <%= number_to_currency(entry.amount) %>
       <% if entry.installments? %>
-        <%= content_tag :span, entry.installment_label, class: 'ls-tag' %>
+        <%= content_tag :span, entry.installment_label, class: 'installment-tag' %>
       <% end %>
     </a>
   </td>
-  <td class="ls-txt-center"><%= entry.entry_date.strftime('%d/%m/%Y') %></td>
-  <td class="ls-txt-center hidden-xs">
-    <%= link_to '', edit_entry_path(entry.id), class: 'ls-btn-sm ls-ico-cog' %>
-    <%= link_to '', '#', class: 'ls-btn-sm ls-btn-primary-danger ls-ico-remove',
-      'data-custom-class': 'ls-color-danger',
-      'data-title':        'Confirmar deleção?',
-      'data-content':      render(partial: 'delete_popover', locals: { entry: entry }),
-      'data-ls-module':    'popover',
-      'data-placement':    'left' %>
+  <td class="entry-date"><%= entry.entry_date.strftime('%d/%m/%Y') %></td>
+  <td class="action">
+    <%= link_to 'Editar', edit_entry_path(entry.id), class: 'icon-edit-entry' %>
+    <%= link_to 'Deletar', delete_entry_path(entry.id), method: :delete, class: 'icon-remove-entry' %>
   </td>
 </tr>

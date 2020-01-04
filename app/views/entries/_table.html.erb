@@ -1,14 +1,22 @@
-<table class="ls-table ls-table-striped ls-table-bordered ls-bg-header">
+<%= content_for :css do %>
+  <%= stylesheet_link_tag 'table', media: 'all' %>
+<% end %>
+
+<table>
   <thead>
     <tr>
-      <th class="ls-ico-envelop ls-txt-center hidden-xs">Envelope</th>
-      <th class="ls-ico-pencil2 ls-txt-center ls-no-padding-left ls-no-padding-right">Descrição</th>
-      <th class="ls-ico-origins ls-txt-center">Valor</th>
-      <th class="ls-ico-calendar ls-txt-center">Data</th>
-      <th class="ls-ico-menu ls-txt-center hidden-xs">Ações</th>
+      <th>Categoria</th>
+      <th>Descrição</th>
+      <th>Valor</th>
+      <th>Data</th>
+      <th>Ações</th>
     </tr>
   </thead>
+
   <tbody>
-    <%= render partial: 'entry', collection: @entries %>
+    <% @entries.each do |entry| %>
+      <%= render partial: 'entry', locals: { entry: entry } %>
+    <% end %>
   </tbody>
 </table>
+

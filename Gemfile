@@ -36,7 +36,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'capybara', '~> 3.30'
   gem 'factory_bot_rails'
-  gem 'rspec-rails', '~> 3.7'
+  gem 'rspec-rails', '~> 4.1'
   gem 'selenium-webdriver'
 end
 

@@ -11,7 +11,7 @@ gem 'rails',        '~> 5.2.3'
 
 gem 'jquery-rails'
 gem 'pg',           '~> 1.2'
-gem 'puma',         '~> 3.12'
+gem 'puma',         '~> 4.3'
 gem 'sass-rails',   '~> 6.0'
 gem 'mini_racer'
 gem 'turbolinks',   '~> 5.2.1'
